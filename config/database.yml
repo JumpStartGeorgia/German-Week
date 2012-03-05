@@ -2,7 +2,7 @@
 
 development:
     adapter:  mysql 
-    database: german-week
+    database: german-week-dev
     username: german-week
     password: german-week
     encoding: utf8
@@ -15,7 +15,7 @@ development:
 
 production:
     adapter:  mysql
-    database: german-week
+    database: german-week-prod
     username: german-week
     password: german-week
     encoding: utf8

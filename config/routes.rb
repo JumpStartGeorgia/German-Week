@@ -1,4 +1,8 @@
 GermanWeek::Application.routes.draw do
+  resources :event_tags
+
+  resources :tags
+
   resources :event_sponsors
 
   resources :sponsors
