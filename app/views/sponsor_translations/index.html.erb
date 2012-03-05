@@ -1,0 +1,31 @@
+<h1>Listing sponsor_translations</h1>
+
+<table>
+  <tr>
+    <th>Sponsor</th>
+    <th>Locale</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Address</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sponsor_translations.each do |sponsor_translation| %>
+  <tr>
+    <td><%= sponsor_translation.sponsor_id %></td>
+    <td><%= sponsor_translation.locale %></td>
+    <td><%= sponsor_translation.title %></td>
+    <td><%= sponsor_translation.description %></td>
+    <td><%= sponsor_translation.address %></td>
+    <td><%= link_to 'Show', sponsor_translation %></td>
+    <td><%= link_to 'Edit', edit_sponsor_translation_path(sponsor_translation) %></td>
+    <td><%= link_to 'Destroy', sponsor_translation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sponsor translation', new_sponsor_translation_path %>

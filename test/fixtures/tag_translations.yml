@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tag_id: 1
+  locale: MyString
+  title: MyString
+
+two:
+  tag_id: 1
+  locale: MyString
+  title: MyString

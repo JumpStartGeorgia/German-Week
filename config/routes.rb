@@ -1,4 +1,14 @@
 GermanWeek::Application.routes.draw do
+  get "german_week/index"
+
+  resources :tag_translations
+
+  resources :sponsor_translations
+
+  resources :event_translations
+
+  resources :locales
+
   resources :event_tags
 
   resources :tags
@@ -58,7 +68,7 @@ GermanWeek::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'german_week#index'
 
   # See how all your routes lay out with "rake routes"
 

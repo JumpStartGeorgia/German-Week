@@ -1,0 +1,29 @@
+<h1>Listing event_translations</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Locale</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_translations.each do |event_translation| %>
+  <tr>
+    <td><%= event_translation.event_id %></td>
+    <td><%= event_translation.locale %></td>
+    <td><%= event_translation.title %></td>
+    <td><%= event_translation.description %></td>
+    <td><%= link_to 'Show', event_translation %></td>
+    <td><%= link_to 'Edit', edit_event_translation_path(event_translation) %></td>
+    <td><%= link_to 'Destroy', event_translation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event translation', new_event_translation_path %>

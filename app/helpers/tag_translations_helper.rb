@@ -1,0 +1,2 @@
+module TagTranslationsHelper
+end

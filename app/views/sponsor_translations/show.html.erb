@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sponsor:</b>
+  <%= @sponsor_translation.sponsor_id %>
+</p>
+
+<p>
+  <b>Locale:</b>
+  <%= @sponsor_translation.locale %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @sponsor_translation.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @sponsor_translation.description %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @sponsor_translation.address %>
+</p>
+
+
+<%= link_to 'Edit', edit_sponsor_translation_path(@sponsor_translation) %> |
+<%= link_to 'Back', sponsor_translations_path %>

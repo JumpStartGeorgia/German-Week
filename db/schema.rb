@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305101948) do
+ActiveRecord::Schema.define(:version => 20120305125500) do
 
   create_table "event_sponsors", :force => true do |t|
     t.integer  "event_id"
@@ -26,9 +26,16 @@ ActiveRecord::Schema.define(:version => 20120305101948) do
     t.datetime "updated_at"
   end
 
-  create_table "events", :force => true do |t|
+  create_table "event_translations", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "locale"
     t.string   "title"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
     t.date     "event_date"
     t.time     "start_time"
     t.time     "end_time"
@@ -36,19 +43,40 @@ ActiveRecord::Schema.define(:version => 20120305101948) do
     t.datetime "updated_at"
   end
 
-  create_table "sponsors", :force => true do |t|
+  create_table "locales", :force => true do |t|
+    t.string   "language"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sponsor_translations", :force => true do |t|
+    t.integer  "sponsor_id"
+    t.string   "locale"
     t.string   "title"
     t.text     "description"
-    t.string   "type"
-    t.string   "url"
-    t.string   "phone"
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tags", :force => true do |t|
+  create_table "sponsors", :force => true do |t|
+    t.string   "type"
+    t.string   "url"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tag_translations", :force => true do |t|
+    t.integer  "tag_id"
+    t.string   "locale"
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

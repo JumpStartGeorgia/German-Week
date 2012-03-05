@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sponsor_id: 1
+  locale: MyString
+  title: MyString
+  description: MyText
+  address: MyString
+
+two:
+  sponsor_id: 1
+  locale: MyString
+  title: MyString
+  description: MyText
+  address: MyString

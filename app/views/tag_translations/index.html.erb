@@ -1,0 +1,27 @@
+<h1>Listing tag_translations</h1>
+
+<table>
+  <tr>
+    <th>Tag</th>
+    <th>Locale</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tag_translations.each do |tag_translation| %>
+  <tr>
+    <td><%= tag_translation.tag_id %></td>
+    <td><%= tag_translation.locale %></td>
+    <td><%= tag_translation.title %></td>
+    <td><%= link_to 'Show', tag_translation %></td>
+    <td><%= link_to 'Edit', edit_tag_translation_path(tag_translation) %></td>
+    <td><%= link_to 'Destroy', tag_translation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tag translation', new_tag_translation_path %>
