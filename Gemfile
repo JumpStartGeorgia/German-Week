@@ -5,7 +5,7 @@ gem 'mysql', '2.8.1'
 gem 'jquery-rails', '1.0.19'
 
 # for debugging
-gem 'ruby-debug', '0.10.4'
+gem 'ruby-debug19' # have to use 19 with ruby 1.9.x
 gem 'columnize', '0.3.6'
 
 # To use ActiveModel has_secure_password
