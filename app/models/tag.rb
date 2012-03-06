@@ -1,4 +1,6 @@
 class Tag < ActiveRecord::Base
+  translates :title
+
   attr_accessible :title, :locale
   attr_accessor :locale
 

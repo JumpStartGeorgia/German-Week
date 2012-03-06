@@ -3,6 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 gem 'mysql', '2.8.1'
 gem 'jquery-rails', '1.0.19'
+gem 'devise', '2.0.4'
+gem 'formtastic', '2.1.1'
+gem 'globalize3', '0.2.0'
+
 
 # for debugging
 gem 'ruby-debug19' # have to use 19 with ruby 1.9.x

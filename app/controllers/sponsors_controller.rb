@@ -1,4 +1,6 @@
 class SponsorsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   # GET /sponsors
   # GET /sponsors.json
   def index

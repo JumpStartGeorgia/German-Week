@@ -1,21 +1,8 @@
-<%= form_for(@tag) do |f| %>
-  <% if @tag.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
-
-      <ul>
-      <% @tag.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= semantic_form_for @tag do |f| %>
+  	<%= f.inputs do %>
+  		<%= f.input :title %>
+  		<%= f.hidden_field :locale , :value => I18n.locale %>
+  	<% end %>
+	<%= f.actions :submit, :cancel %>
 <% end %>
+

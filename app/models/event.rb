@@ -1,8 +1,10 @@
 class Event < ActiveRecord::Base
+  translates :title, :description
+
   attr_accessible :title, :locale
   attr_accessor :locale
 
-  has_many :event_sponsors, :dependent => destroy
+  has_many :event_sponsors
   has_many :event_tags
   has_many :sponsors, :through => :event_tags
   has_many :tags, :through => :event_tags

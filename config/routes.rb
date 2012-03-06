@@ -1,4 +1,7 @@
 GermanWeek::Application.routes.draw do
+
+  devise_for :users
+
   get "german_week/index"
 
   resources :tag_translations

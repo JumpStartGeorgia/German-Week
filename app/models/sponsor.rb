@@ -1,4 +1,6 @@
 class Sponsor < ActiveRecord::Base
+  translates :title, :description, :address
+
   attr_accessible :title, :locale
   attr_accessor :locale
 
