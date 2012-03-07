@@ -33,7 +33,7 @@
     <ul>
     <% @locales.each do |locale| %>
       <% unless locale.language.to_s == I18n.locale.to_s %> 
-        <li><%= link_to locale.name, request.path.sub(/\/\w\w\//,'/' + locale.language + '/'), action: :set_locale %></li>
+        <li><%= link_to locale.name, url_for(locale.language), action: :set_locale %></li>
       <% end %>
     <% end %>
     </ul>

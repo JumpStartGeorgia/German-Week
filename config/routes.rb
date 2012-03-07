@@ -1,21 +1,33 @@
 GermanWeek::Application.routes.draw do
 
   devise_for :users
+    
+  match '/german_week/index' => 'german_week#index', via: :get
 
-  get "german_week/index"
-
-  resources :category_translations
-
-  resources :sponsor_translations
-
-  resources :event_translations
-
-  resources :locales
-
-  resources :event_categories
-
-  resources :categories
-
+  scope "/:locale" do
+    resources :category_translations
+  end
+  
+  scope "/:locale" do
+    resources :sponsor_translations
+  end
+  
+  scope "/:locale" do
+    resources :event_translations
+  end
+  
+  scope "/:locale" do
+    resources :locales
+  end
+  
+  scope "/:locale" do
+    resources :event_categories
+  end
+  
+  scope ":/locale" do
+    resources :categories
+  end
+  
   scope "/:locale" do
     resources :event_sponsors
   end
@@ -79,8 +91,10 @@ GermanWeek::Application.routes.draw do
   # just remember to delete public/index.html.
   
    match '/:locale' => "german_week#index"
+   
    root :to => 'german_week#index'
 
+   
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
