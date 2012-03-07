@@ -16,12 +16,18 @@ GermanWeek::Application.routes.draw do
 
   resources :tags
 
-  resources :event_sponsors
-
-  resources :sponsors
-
-  resources :events
-
+  scope "/:locale" do
+    resources :event_sponsors
+  end
+  
+  scope "/:locale" do
+    resources :sponsors
+  end
+  
+  scope "/:locale" do
+    resources :events
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -71,6 +77,8 @@ GermanWeek::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+  
+   match '/:locale' => "german_week#index"
    root :to => 'german_week#index'
 
   # See how all your routes lay out with "rake routes"
