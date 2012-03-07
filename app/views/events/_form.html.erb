@@ -5,6 +5,8 @@
   		<%= f.input :event_date %>
   		<%= f.input :start_time %>
   		<%= f.input :end_time %>
+  		<%= f.input :sponsors %>
+  		<%= f.input :categories %>
   		<%= f.hidden_field :locale , :value => I18n.locale %>
   	<% end %>
 	<%= f.actions :submit, :cancel %>

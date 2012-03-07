@@ -11,18 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306100953) do
+ActiveRecord::Schema.define(:version => 20120307091600) do
 
-  create_table "event_sponsors", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "sponsor_id"
+  create_table "categories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "event_tags", :force => true do |t|
+  create_table "category_translations", :force => true do |t|
+    t.integer  "category_id"
+    t.string   "locale"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_categories", :force => true do |t|
     t.integer  "event_id"
-    t.integer  "tag_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_sponsors", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "sponsor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -65,19 +78,6 @@ ActiveRecord::Schema.define(:version => 20120306100953) do
     t.string   "type"
     t.string   "url"
     t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tag_translations", :force => true do |t|
-    t.integer  "tag_id"
-    t.string   "locale"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tags", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
