@@ -33,7 +33,7 @@
     <ul>
     <% @locales.each do |locale| %>
       <% unless locale.language.to_s == I18n.locale.to_s %> 
-        <li><%= link_to locale.name, url_for(locale.language), action: :set_locale %></li>
+        <li><%= link_to locale.name, url_for(locale: locale.language) %></li>
       <% end %>
     <% end %>
     </ul>

@@ -2,7 +2,7 @@ GermanWeek::Application.routes.draw do
 
   devise_for :users
     
-  match '/german_week/index' => 'german_week#index', via: :get
+  match '/:locale' => 'german_week#index', via: :get
 
   scope "/:locale" do
     resources :category_translations
@@ -24,7 +24,7 @@ GermanWeek::Application.routes.draw do
     resources :event_categories
   end
   
-  scope ":/locale" do
+  scope "/:locale" do
     resources :categories
   end
   
