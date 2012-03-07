@@ -4,7 +4,7 @@ GermanWeek::Application.routes.draw do
 
   get "german_week/index"
 
-  resources :tag_translations
+  resources :category_translations
 
   resources :sponsor_translations
 
@@ -12,9 +12,9 @@ GermanWeek::Application.routes.draw do
 
   resources :locales
 
-  resources :event_tags
+  resources :event_categories
 
-  resources :tags
+  resources :categories
 
   resources :event_sponsors
 
