@@ -1,5 +1,7 @@
 GermanWeek::Application.routes.draw do
 
+  root :to => 'german_week#index'
+
   devise_for :users
     
   match '/:locale' => 'german_week#index', via: :get
@@ -86,13 +88,6 @@ GermanWeek::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  
-   match '/:locale' => "german_week#index"
-   
-   root :to => 'german_week#index'
 
    
   # See how all your routes lay out with "rake routes"

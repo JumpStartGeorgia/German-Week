@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Locales **************************************************************************
 
 ActiveRecord::Base.connection.execute("TRUNCATE locales") 
