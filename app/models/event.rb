@@ -1,7 +1,9 @@
 class Event < ActiveRecord::Base
   translates :title, :description
 
-  attr_accessible :title, :description, :event_date, :start_time, :end_time, :locale, :sponsor_ids, :category_ids
+  has_many :event_translations
+  accepts_nested_attributes_for :event_translations
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes
   attr_accessor :locale
 
   has_many :event_sponsors
@@ -9,18 +11,24 @@ class Event < ActiveRecord::Base
   has_many :sponsors, :through => :event_sponsors
   has_many :categories, :through => :event_categories
 
-  has_many :event_translations
+  validates :start, :end, :presence => true
+#TODO - need to get this function working
+#  validate :date_comparison_validator
+  validates_associated :event_translations
   
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
-  after_initialize :set_default_values
-
+ private
   
-  
-  private
-
-  def set_default_values
-    self.event_date ||= '2012-05-14'
+  # make sure the start date is < end date  
+  def date_comparison_validator
+    if (!self.start.blank? && !self.end.blank?) then
+      errors.add(:start, 'is not a valid date/time') if ((DateTime.parse(self.start) rescue ArgumentError) == ArgumentError)
+      errors.add(:end, 'is not a valid date/time') if ((DateTime.parse(self.end) rescue ArgumentError) == ArgumentError)
+      errors.add(:end, 'must be after the Start date/time') if (DateTime.parse(self.start) >= DateTime.parse(self.end))
+    end
   end
 end
+
+

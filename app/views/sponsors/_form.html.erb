@@ -1,12 +1,24 @@
 <%= semantic_form_for @sponsor do |f| %>
+	<%= f.semantic_errors %>
+	<%= f.inputs :for => :sponsor_translations do |sponsor_translation, i| %>
+		
+		<% I18n.locale = @locales[i-1].language %>
+		
+		<div id="form-<%= I18n.locale %>" class="multilanguage" style="<%= 'display:none;' if I18n.locale.to_s != params[:locale] %>">
+			<%= sponsor_translation.input :title %>
+			<%= sponsor_translation.input :description, :as => :text %>
+  		<%= sponsor_translation.input :address %>
+			<%= sponsor_translation.hidden_field :locale , :value => I18n.locale %>
+		</div>
+
+  <% end %>
+  	
   	<%= f.inputs do %>
-  		<%= f.input :title %>
-  		<%= f.input :description, :as => :text %>
-  		<%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2']%>
-  		<%= f.input :url, :as => :url %>
   		<%= f.input :phone, :as => :phone %>
-  		<%= f.input :address %>
+  		<%= f.input :url, :as => :url %>
+  		<%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2']%>
   		<%= f.hidden_field :locale , :value => I18n.locale %>
   	<% end %>
 	<%= f.actions :submit, :cancel %>
 <% end %>
+

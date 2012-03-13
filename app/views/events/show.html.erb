@@ -11,18 +11,13 @@
 </p>
 
 <p>
-  <b>Event date:</b>
-  <%= @event.event_date %>
+  <b>Start:</b>
+  <%= format_datetime(@event.start) %>
 </p>
 
 <p>
-  <b>Start time:</b>
-  <%= format_time(@event.start_time) %>
-</p>
-
-<p>
-  <b>End time:</b>
-  <%= format_time(@event.end_time) %>
+  <b>End:</b>
+  <%= format_datetime(@event.end) %>
 </p>
 
 

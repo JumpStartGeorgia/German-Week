@@ -1,8 +1,15 @@
 <%= semantic_form_for @category do |f| %>
-  	<%= f.inputs do %>
-  		<%= f.input :title %>
-  		<%= f.hidden_field :locale , :value => I18n.locale %>
-  	<% end %>
+	<%= f.semantic_errors %>
+	<%= f.inputs :for => :category_translations do |category_translation, i| %>
+		
+		<% I18n.locale = @locales[i-1].language %>
+		
+		<div id="form-<%= I18n.locale %>" class="multilanguage" style="<%= 'display:none;' if I18n.locale.to_s != params[:locale] %>">
+			<%= category_translation.input :title %>
+			<%= category_translation.hidden_field :locale , :value => I18n.locale %>
+		</div>
+
+  <% end %>
+  	
 	<%= f.actions :submit, :cancel %>
 <% end %>
-
