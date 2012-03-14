@@ -38,6 +38,15 @@
     <% end %>
     </ul>
   </div>
+  
+  <div id="event_menu">
+  	<ul>
+  		<% (1..6).each do |i| %>
+  			<li><%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", "#" %></li>
+  		<% end %>
+  	</ul>
+    <br class="clear"/>
+  </div>
 
 	<h2><%= yield(:title) %></h2>
 

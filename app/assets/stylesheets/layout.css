@@ -1,0 +1,7 @@
+div#event_menu ul { list-style-type: none; padding: 0; margin: 0;float: left;width: 100%;color: #fff;background-color: #036;}
+div#event_menu ul li {display: inline;}
+div#event_menu ul li a {float: left; color: #fff;background-color: #036; padding: 0.2em 1em; text-decoration: none;border-right: 1px solid #fff;}
+div#event_menu ul li a:hover {background-color: #369;color: #fff;}
+
+br.clear{clear:all;}
+
