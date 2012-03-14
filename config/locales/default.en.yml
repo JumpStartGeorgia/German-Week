@@ -199,6 +199,13 @@ en:
       long: ! '%B %d, %Y %H:%M'
       short: ! '%d %b %H:%M'
     pm: pm
+
+  formtastic:
+    create: "Create"
+    update: "Update"
+    submit: "Submit"
+
+
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:

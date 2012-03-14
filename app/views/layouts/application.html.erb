@@ -42,7 +42,7 @@
   <div id="event_menu">
   	<ul>
   		<% (1..6).each do |i| %>
-  			<li><%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", "#" %></li>
+  			<li><%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", events_day_path(:date => "2012-05-#{i+13}") %></li>
   		<% end %>
   	</ul>
     <br class="clear"/>
@@ -53,6 +53,7 @@
 
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
+
 
   <%= yield %>
 </div>

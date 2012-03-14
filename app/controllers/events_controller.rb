@@ -12,10 +12,21 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/day/date
+  # GET /events/day/date.json
+  def day
+    @events = Event.where("date(start)=?", params[:date]).order("start ASC")
+
+    respond_to do |format|
+      format.html # day.html.erb
+      format.json { render :json => @events }
+    end
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
+    @event = Event.where("date(start)=?", params[:id]).order("start ASC")
 
     respond_to do |format|
       format.html # show.html.erb

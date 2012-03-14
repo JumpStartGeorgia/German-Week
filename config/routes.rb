@@ -7,31 +7,11 @@ GermanWeek::Application.routes.draw do
   match '/:locale' => 'german_week#index', via: :get
 
   scope "/:locale" do
-    resources :category_translations
-  end
-  
-  scope "/:locale" do
-    resources :sponsor_translations
-  end
-  
-  scope "/:locale" do
-    resources :event_translations
-  end
-  
-  scope "/:locale" do
     resources :locales
   end
   
   scope "/:locale" do
-    resources :event_categories
-  end
-  
-  scope "/:locale" do
     resources :categories
-  end
-  
-  scope "/:locale" do
-    resources :event_sponsors
   end
   
   scope "/:locale" do
@@ -41,6 +21,8 @@ GermanWeek::Application.routes.draw do
   scope "/:locale" do
     resources :events
   end
+  # create route to load events for a particular date
+  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -4,8 +4,12 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
   
-  def format_datetime(time)
-    time.strftime('%Y/%m/%d %H:%M')
+  def format_date(date)
+    date.strftime('%Y/%m/%d')
+  end
+
+  def format_datetime(dt)
+    dt.strftime('%Y/%m/%d %H:%M')
   end
 
   def format_time(time)
