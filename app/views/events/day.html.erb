@@ -1,0 +1,27 @@
+<% title "Events on #{params[:date]}" %>
+
+<% if @events.length == 0 %>
+	<p>No events exist for this day.
+
+<% else %>
+
+	<table>
+	  <tr>
+	    <th>Title</th>
+	    <th>Description</th>
+	    <th>Start</th>
+	    <th>End</th>
+	  </tr>
+	
+	<% @events.each do |event| %>
+	  <tr>
+	    <td><%= event.title %></td>
+	    <td><%= event.description %></td>
+	    <td><%= format_datetime(event.start) %></td>
+	    <td><%= format_datetime(event.end) %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+<% end %>
+
