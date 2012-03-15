@@ -12,6 +12,9 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_categories
 
   validates :start, :end, :presence => true
+  
+  # will_paginate will get this many records per page
+  self.per_page = 20
 #TODO - need to get this function working
 #  validate :date_comparison_validator
   validates_associated :event_translations

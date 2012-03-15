@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :day]
 
   # GET /events
   # GET /events.json
@@ -13,12 +13,14 @@ class EventsController < ApplicationController
   end
 
   # GET /events/day/date
+  # GET /events/day/date.js  - called when loading the menu pop-up
   # GET /events/day/date.json
   def day
-    @events = Event.where("date(start)=?", params[:date]).order("start ASC")
+    @events = Event.where("date(start)=?", params[:date]).paginate(:page => params[:page]).order("start ASC")
 
     respond_to do |format|
       format.html # day.html.erb
+      format.js
       format.json { render :json => @events }
     end
   end
@@ -26,7 +28,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.where("date(start)=?", params[:id]).order("start ASC")
+    @event = Event.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

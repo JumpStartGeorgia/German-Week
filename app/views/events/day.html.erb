@@ -7,21 +7,23 @@
 
 	<table>
 	  <tr>
+			<th>View Details</th>
+			<th>Time</th>
 	    <th>Title</th>
 	    <th>Description</th>
-	    <th>Start</th>
-	    <th>End</th>
 	  </tr>
 	
 	<% @events.each do |event| %>
 	  <tr>
+	    <td><%= link_to 'More', event %></td>
+	    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
 	    <td><%= event.title %></td>
-	    <td><%= event.description %></td>
-	    <td><%= format_datetime(event.start) %></td>
-	    <td><%= format_datetime(event.end) %></td>
+	    <td><%= truncate(event.description, :length => 100) %></td>
 	  </tr>
 	<% end %>
 	</table>
+
+	<%= will_paginate @events %>
 
 <% end %>
 
