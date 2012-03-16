@@ -8,15 +8,3 @@
  *= require vendor
  *= require jquery.megamenu
 */
-
-/* style for map box */
-#map {
-	width: 500px;
-	height: 300px;
-	border: 1px solid #ccc;
-	margin-bottom: 20px;
-
-	/*box-shadow: 0px 0px 10px #ccc;
-	-moz-box-shadow: 0px 0px 10px #ccc;
-	-webkit-box-shadow: 0px 0px 10px #ccc;*/
-}

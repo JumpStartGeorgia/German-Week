@@ -12,6 +12,10 @@ div.event_menu_popup ul li.event_menu_popup_item {
 	border-bottom: 1px dashed #666;
 }
 
+div.event_menu_popup ul li.event_menu_popup_item p.event_menu_popup_item_categories {
+	font-size: smaller;
+}
+
 .clearfix:after {
     content: ".";
     display: block;

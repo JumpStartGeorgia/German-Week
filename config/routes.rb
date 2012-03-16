@@ -21,13 +21,11 @@ GermanWeek::Application.routes.draw do
   scope "/:locale" do
     resources :events do
       collection do
-        # have this to catch if user changes url to /locale/events/day without a date listed
-        get :day, :to => 'events#index'
+        get :category
+        get :day
       end
     end
   end
-  # create route to load events for a particular date
-  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -22,6 +22,22 @@ class Event < ActiveRecord::Base
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
+
+  # get all events for a date
+  def self.find_by_date(date, page)
+    where("date(start)=?", date).paginate(:page => page).order("start ASC")
+  end
+
+  # get all events for a category
+  def self.find_by_category(category_title, page)
+    joins(:event_translations, :categories => :category_translations)
+      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+        category_title, I18n.locale, I18n.locale)
+      .paginate(:page => page)
+      .order('events.start asc, event_translations.title asc')
+  end
+
+
  private
   
   # make sure the start date is < end date  
@@ -32,6 +48,7 @@ class Event < ActiveRecord::Base
       errors.add(:end, 'must be after the Start date/time') if (DateTime.parse(self.start) >= DateTime.parse(self.end))
     end
   end
+  
 end
 
 
