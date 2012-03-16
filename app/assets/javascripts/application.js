@@ -6,5 +6,29 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require vendor
 //= require_tree .
+
+
+$(document).ready(function(){
+	// load the megamenu script
+	$(".megamenu").megamenu();
+	// on mouseover, get the events for the date in the link and load it 
+	// into megamenu
+  $("a.event_menu_link").mouseover(submitWithAjax);
+
+	function submitWithAjax() {
+    $.get(this.href, $(this).serialize(), null, "script");
+	};
+
+	$.ajaxSetup({
+	  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+	});
+
+});
+
+
+
+
 

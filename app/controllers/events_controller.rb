@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category]
 
   # GET /events
   # GET /events.json
@@ -13,9 +13,23 @@ class EventsController < ApplicationController
   end
 
   # GET /events/day/date
+  # GET /events/day/date.js  - called when loading the menu pop-up
   # GET /events/day/date.json
   def day
-    @events = Event.where("date(start)=?", params[:date]).order("start ASC")
+    @events = Event.find_by_date(params[:date],params[:page])
+
+    respond_to do |format|
+      format.html # day.html.erb
+      format.js
+      format.json { render :json => @events }
+    end
+  end
+
+  # GET /events/category/cat
+  # GET /events/category/cat.json
+  def category
+    @events = Event.find_by_category(params[:cat], params[:page])
+    @categories = Category.all
 
     respond_to do |format|
       format.html # day.html.erb
@@ -26,7 +40,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.where("date(start)=?", params[:id]).order("start ASC")
+    @event = Event.find(params[:id])
+
+    # load the lat and lon so the map shows
+    gon.lat = @event.lat
+    gon.lon = @event.lon
+    gon.popup = @event.title
 
     respond_to do |format|
       format.html # show.html.erb

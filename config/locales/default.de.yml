@@ -198,11 +198,6 @@ de:
       short: ! '%d. %B, %H:%M Uhr'
     pm: nachmittags
 
-  formtastic:
-    create: "Schaffen"
-    update: "Aktualisieren"
-    submit: "Einreichen"
-
 
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

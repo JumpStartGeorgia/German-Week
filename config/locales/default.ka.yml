@@ -138,11 +138,6 @@ ka:
       update: 'განახლება %{model}'
       submit: 'შენახვა %{model}'  
   
-  formtastic:
-    create: "შექმნა"
-    update: "შენახვა"
-    submit: "შენახვა"
-
   errors:
     format: "%{attribute} %{message}"
 

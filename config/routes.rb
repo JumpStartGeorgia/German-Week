@@ -21,8 +21,8 @@ GermanWeek::Application.routes.draw do
   scope "/:locale" do
     resources :events do
       collection do
-        # have this to catch if user changes url to /locale/events/day without a date listed
-        get :day, :to => 'events#index'
+        get :category
+        get :day
       end
     end
   end

@@ -8,5 +8,5 @@ class EventTranslation < ActiveRecord::Base
 #  validates :event_id, :presence => true  
   validates :title, :uniqueness => { :scope => :locale, :message => 'already exists'}
 
-  default_scope order('locale ASC')
+  default_scope order('locale ASC, title ASC')
 end
