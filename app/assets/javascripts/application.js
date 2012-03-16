@@ -6,7 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.megamenu
+//= require jquery-ui
+//= require vendor
 //= require_tree .
 
 

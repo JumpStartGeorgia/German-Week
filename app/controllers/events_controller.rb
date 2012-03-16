@@ -30,6 +30,11 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
 
+    # load the lat and lon so the map shows
+    gon.lat = @event.lat
+    gon.lon = @event.lon
+    gon.popup = @event.title
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }

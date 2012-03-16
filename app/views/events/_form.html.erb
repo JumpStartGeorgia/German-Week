@@ -13,10 +13,12 @@
   <% end %>
   	
 	<%= f.inputs do %>
-  		<%= f.input :start, :as => :time_picker %>
-  		<%= f.input :end, :as => :time_picker %>
-  		<%= f.input :sponsors %>
-  		<%= f.input :categories %>
+		<%= f.input :start, :as => :time_picker %>
+		<%= f.input :end, :as => :time_picker %>
+		<%= f.input :lat %>
+		<%= f.input :lon %>
+		<%= f.input :sponsors %>
+		<%= f.input :categories %>
   <% end %>
 
 	<%= f.actions :submit, :reset, :cancel %>

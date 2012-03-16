@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Deutschen Woche 2012 - <%= yield (:title) || "German Week" %></title>
+	<%= include_gon %>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->

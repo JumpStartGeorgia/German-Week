@@ -14,6 +14,8 @@
   <% end %>
   	
 	<%= f.inputs do %>
+		<%= f.input :lat %>
+		<%= f.input :lon %>
 		<%= f.input :phone, :as => :phone %>
 		<%= f.input :url, :as => :url %>
 		<%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2']%>

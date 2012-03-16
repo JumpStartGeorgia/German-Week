@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
 
   has_many :event_translations
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes, :lat, :lon
   attr_accessor :locale
 
   has_many :event_sponsors
