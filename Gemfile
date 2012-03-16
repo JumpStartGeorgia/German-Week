@@ -8,6 +8,7 @@ gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
 gem 'globalize3', '0.2.0'
 gem 'psych', '1.2.2' # yaml parser - default psych in rails has issues
+gem 'htmlentities', '4.1.0'
 
 
 # for debugging
@@ -26,5 +27,6 @@ gem 'psych', '1.2.2' # yaml parser - default psych in rails has issues
 
 # Deploy with Capistrano
 # gem 'capistrano'
+
 
 

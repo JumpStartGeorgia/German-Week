@@ -19,8 +19,20 @@ class Event < ActiveRecord::Base
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
+  def self.search(search, category = false)
+    if search && search.length > 0
+      if category
+        joins(:categories => :category_translations).where("category_translations.title = ?", search)
+      else
+        joins(:event_translations).where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%').uniq
+      end
+    else
+      nil
+    end
+  end
+
  private
-  
+
   # make sure the start date is < end date  
   def date_comparison_validator
     if (!self.start.blank? && !self.end.blank?) then

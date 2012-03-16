@@ -28,6 +28,8 @@ GermanWeek::Application.routes.draw do
   end
   # create route to load events for a particular date
   match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
+
+  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
