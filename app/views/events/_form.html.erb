@@ -2,12 +2,12 @@
 	<%= f.semantic_errors %>
 	<%= f.inputs :for => :event_translations do |event_translation, i| %>
 		
-		<% I18n.locale = @locales[i-1].language %>
+		<% formLocale = @locales[i-1].language %>
 		
-		<div id="form-<%= I18n.locale %>" class="multilanguage" style="<%= 'display:none;' if I18n.locale.to_s != params[:locale] %>">
+		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
 			<%= event_translation.input :title %>
 			<%= event_translation.input :description, :as => :text %>
-			<%= event_translation.hidden_field :locale , :value => I18n.locale %>
+			<%= event_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
   <% end %>
@@ -19,6 +19,6 @@
   		<%= f.input :categories %>
   <% end %>
 
-	<%= f.actions :submit, :cancel %>
+	<%= f.actions :submit, :reset, :cancel %>
 <% end %>
 
