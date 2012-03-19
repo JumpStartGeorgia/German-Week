@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   validates :start, :end, :presence => true
   
   # will_paginate will get this many records per page
-  self.per_page = 20
+  self.per_page = 5
 #TODO - need to get this function working
 #  validate :date_comparison_validator
   validates_associated :event_translations
@@ -22,31 +22,42 @@ class Event < ActiveRecord::Base
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
-  def self.search(search, category = false)
+  # search 
+  def self.search(search, category = false, page)
     if search && search.length > 0
       if category
         joins(:categories => :category_translations).where("category_translations.title = ?", search)
+          .paginate(:page => page).order("start ASC")
       else
-        joins(:event_translations).where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%').uniq
+        joins(:event_translations)
+          .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
+          .order("start ASC").uniq
       end
     else
       nil
     end
   end
 
-
   # get all events for a date
   def self.find_by_date(date, page)
-    where("date(start)=?", date).paginate(:page => page).order("start ASC")
+    if date
+      where("date(start)=?", date).paginate(:page => page).order("start ASC")
+    else
+      nil
+    end
   end
 
   # get all events for a category
   def self.find_by_category(category_title, page)
-    joins(:event_translations, :categories => :category_translations)
-      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
-        category_title, I18n.locale, I18n.locale)
-      .paginate(:page => page)
-      .order('events.start asc, event_translations.title asc')
+    if category_title
+      joins(:event_translations, :categories => :category_translations)
+        .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+          category_title, I18n.locale, I18n.locale)
+        .paginate(:page => page)
+        .order('events.start asc, event_translations.title asc')
+    else
+      nil
+    end
   end
 
 

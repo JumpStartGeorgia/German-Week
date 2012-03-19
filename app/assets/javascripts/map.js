@@ -8,23 +8,28 @@ $(document).ready(function(){
 	// make sure lat and lon exist
 	if (gon.lat && gon.lon)
 	{ 
-			var cloudmadeUrl = gon.tile_url,
-				cloudmadeAttribution = gon.attribution,
-				cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: gon.max_zoom, attribution: cloudmadeAttribution});
+		var cloudmadeUrl = gon.tile_url,
+			cloudmadeAttribution = gon.attribution,
+			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: gon.max_zoom, attribution: cloudmadeAttribution});
 
 
-			var map = new L.Map(gon.map_id);
-			map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(cloudmade);
+		// clear map box and update map style
+		$("#map").empty();
+		$("#map").attr("id", "map");
 
-			var marker = new L.Marker(new L.LatLng(gon.lat, gon.lon));
-			map.addLayer(marker);
+		var map = new L.Map(gon.map_id);
+		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(cloudmade);
 
-			marker.bindPopup(gon.popup).openPopup();
+		var marker = new L.Marker(new L.LatLng(gon.lat, gon.lon));
+		map.addLayer(marker);
+
+		marker.bindPopup(gon.popup).openPopup();
 	}
 	else 
 	{
 		// hide the map
 		$("#map").empty();
-		$("#map").html("<p>You must enter the latitude and longitude for the map to load.</p>");
+		$("#map").attr("id", "nomap");
+
 	}
 });

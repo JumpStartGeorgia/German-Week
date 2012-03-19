@@ -9,9 +9,10 @@
 <% end %>
 
 
-<% if @events.length == 0 %>
-	<p>No events exist for this category.
-
+<% if @events.nil? || @events.length == 0 %>
+	<% if !params[:cat].nil? %>
+		<p>No events exist for this category.</p>
+	<% end %>
 <% else %>
 
 	<table>
