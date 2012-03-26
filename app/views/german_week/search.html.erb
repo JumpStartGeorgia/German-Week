@@ -1,4 +1,4 @@
-<% title t('.title') %>
+<% title "Search" %>
 
 <%= form_tag search_path, :method => 'get' do %>
   <p>
@@ -15,7 +15,19 @@
   <% end %>
 </div>
 
-<% if !@events.nil? && @events.length > 0 %>
+<hr />
+
+<% if !params[:search].nil?%>
+	<p id="search_results_label">Search results for: <%= params[:search]%></p>  
+<% elsif !params[:category].nil?%>
+	<p id="search_results_label">Search results for Category: <%= params[:category]%></p>  
+<% end %>
+
+<% if @events.nil? || @events.length == 0 %>
+	<% if !params[:search].nil? || !params[:category].nil?%>
+		<p>0 results found.</p>
+	<% end %>
+<% else %>
   <table>
     <tr>
       <th>Title</th>
@@ -35,6 +47,6 @@
     </tr>
   <% end %>
   </table>
-<% else %>
-  no results
+  
+	<%# will_paginate @events %>
 <% end %>

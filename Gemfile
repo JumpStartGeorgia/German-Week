@@ -19,15 +19,3 @@ gem 'gon', '2.2.2' # push data into js
 #gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/ruby-debug-base19-0.11.26/"
 #gem 'ruby-debug19', :require => 'ruby-debug'
 #gem 'columnize', '0.3.6'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-
-

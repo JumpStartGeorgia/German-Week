@@ -11,7 +11,7 @@ class GermanWeekController < ApplicationController
       isset_category = true
     end
 
-    @events = Event.search(search, isset_category)
+    @events = Event.search(search, isset_category, params[:page])
 
     if !isset_category
       boldpart = "<b>" + search + "</b>"
