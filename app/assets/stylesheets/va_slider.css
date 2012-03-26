@@ -35,7 +35,7 @@
     position: absolute;
     top: 200px;
     padding: 6px 10px;
-    padding-bottom: 10px !important;
+    font: normal normal normal 25px/25px Times New Roman;
     background: rgba(0, 0, 0, .7);
     cursor: pointer;
     font-size: 25px;
