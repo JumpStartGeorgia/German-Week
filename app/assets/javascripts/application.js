@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require vendor
+//= require timer
 //= require_tree .
 
 
