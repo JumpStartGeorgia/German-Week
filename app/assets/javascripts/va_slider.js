@@ -213,3 +213,16 @@ function Timer (callback, delay)
   };
 
 
+  var options =
+  {
+	slider_w : 650,
+	slider_h : 450,
+	delay : 5000,
+	animation_timeout : 1000,
+	slideshow_mode : true,
+  };
+
+$(function ()
+{
+  $('#slider').va_slider(options);
+});
