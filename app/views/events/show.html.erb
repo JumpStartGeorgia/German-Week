@@ -20,6 +20,15 @@
   <%= format_datetime(@event.end) %>
 </p>
 
+<p>
+	<% if (defined?(@event) != nil) %>
+	<div id="countdown">
+  	<div id="time"></div>
+  	<div id="time-abr" class="time-abr"></div>
+  </div>
+  <% end %>
+</p>
+
 <div id='map'></div>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

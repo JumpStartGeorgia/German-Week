@@ -20,6 +20,10 @@ GermanWeek::Application.routes.draw do
   
   scope "/:locale" do
     resources :events do
+    	collection do
+        get :category
+        get :day
+      end
     end
   end
   
@@ -30,14 +34,9 @@ GermanWeek::Application.routes.draw do
   
   # create route to load events for a particular date
   match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
-=begin 
-      collection do
-        get :category
-        get :day
-      end
-    end
-  end
-=end
+
+
+
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 

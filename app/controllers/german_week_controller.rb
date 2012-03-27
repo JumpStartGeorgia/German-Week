@@ -1,7 +1,6 @@
 class GermanWeekController < ApplicationController
   def index  
-<<<<<<< HEAD
-=======
+
   end
 
   def search
@@ -27,7 +26,6 @@ class GermanWeekController < ApplicationController
     end
 
     @categories = Category.all
->>>>>>> 35da09c3b932b2a92b4696cec1a98a75898f50b4
 
   end
 

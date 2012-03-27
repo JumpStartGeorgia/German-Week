@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
-<<<<<<< HEAD
+
   before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate]
-=======
-  before_filter :authenticate_user!, :except => [:index, :show, :day, :category]
->>>>>>> 35da09c3b932b2a92b4696cec1a98a75898f50b4
+
+
+
 
   # GET /events
   # GET /events.json

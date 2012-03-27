@@ -9,6 +9,8 @@
 //= require jquery-ui
 //= require vendor
 //= require timer
+//= require jquery.countdown.min
+//= require id_countdown
 //= require_tree .
 
 
