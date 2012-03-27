@@ -6,7 +6,5 @@
  *= require_tree . 
  *= require formtastic
  *= require vendor
- *= require jquery.countdown
  *= require id_countdown
- *= require jquery.megamenu
 */

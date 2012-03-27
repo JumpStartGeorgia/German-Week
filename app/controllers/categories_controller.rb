@@ -5,7 +5,6 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
-	<%= "irakli" %>
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @categories }
