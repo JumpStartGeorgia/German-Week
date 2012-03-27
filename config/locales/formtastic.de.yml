@@ -1,0 +1,12 @@
+# encoding: utf-8
+
+de:
+  formtastic:
+    :yes: 'Ja'
+    :no: 'Nicht'
+    :create: 'Erstellen %{model}'
+    :update: 'Aktualisieren %{model}'
+    :submit: 'Speichern %{model}'
+    :cancel: 'Stornieren %{model}'
+    :reset: 'Zurücksetzen %{model}'
+    :required: 'Erforderlich'    

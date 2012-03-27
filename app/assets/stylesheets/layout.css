@@ -1,7 +1,33 @@
-div#event_menu ul { list-style-type: none; padding: 0; margin: 0;float: left;width: 100%;color: #fff;background-color: #036;}
-div#event_menu ul li {display: inline;}
-div#event_menu ul li a {float: left; color: #fff;background-color: #036; padding: 0.2em 1em; text-decoration: none;border-right: 1px solid #fff;}
-div#event_menu ul li a:hover {background-color: #369;color: #fff;}
+/* styles for menu item pop-up */
+div.event_menu_popup ul {
+list-style-type: none; 
+}
 
-br.clear{clear:all;}
+div.event_menu_popup ul li.event_menu_popup_item {
+	float: left;
+	width: 30%;
+	margin-left: 1em;
+	margin-bottom: -1px;
+	border-right: 1px dashed #666;
+	border-bottom: 1px dashed #666;
+}
 
+div.event_menu_popup ul li.event_menu_popup_item p.event_menu_popup_item_categories {
+	font-size: smaller;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+.clearfix {
+	zoom: 1;
+}

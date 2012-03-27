@@ -2,10 +2,9 @@
 
 <table>
   <tr>
+		<th>Time</th>
     <th>Title</th>
     <th>Description</th>
-    <th>Start</th>
-    <th>End</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,10 +12,9 @@
 
 <% @events.each do |event| %>
   <tr>
+    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
     <td><%= event.title %></td>
-    <td><%= event.description %></td>
-    <td><%= format_datetime(event.start) %></td>
-    <td><%= format_datetime(event.end) %></td>
+    <td><%= truncate(event.description, :length => 100) %></td>
     <td><%= link_to 'Show', event %></td>
     <td><%= link_to 'Edit', edit_event_path(event) %></td>
     <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>

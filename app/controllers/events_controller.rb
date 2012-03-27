@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
+<<<<<<< HEAD
   before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate]
+=======
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category]
+>>>>>>> 35da09c3b932b2a92b4696cec1a98a75898f50b4
 
   # GET /events
   # GET /events.json
@@ -12,10 +16,24 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/day/date
-  # GET /events/day/date.json
+  # GET /events/day?date
+  # GET /events/day.js?date  - called when loading the menu pop-up
+  # GET /events/day.json?date
   def day
-    @events = Event.where("date(start)=?", params[:date]).order("start ASC")
+    @events = Event.find_by_date(params[:date],params[:page])
+
+    respond_to do |format|
+      format.html # day.html.erb
+      format.js
+      format.json { render :json => @events }
+    end
+  end
+
+  # GET /events/category?cat
+  # GET /events/category.json?cat
+  def category
+    @events = Event.find_by_category(params[:cat], params[:page])
+    @categories = Category.all
 
     respond_to do |format|
       format.html # day.html.erb
@@ -26,7 +44,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.where("date(start)=?", params[:id]).order("start ASC")
+    @event = Event.find(params[:id])
+
+    # load the lat and lon so the map shows
+    gon.lat = @event.lat
+    gon.lon = @event.lon
+    gon.popup = @event.title
 
     respond_to do |format|
       format.html # show.html.erb

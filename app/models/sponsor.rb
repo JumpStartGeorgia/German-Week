@@ -3,7 +3,7 @@ class Sponsor < ActiveRecord::Base
 
   has_many :sponsor_translations
   accepts_nested_attributes_for :sponsor_translations
-  attr_accessible :sponsor_translations_attributes, :url, :phone, :type, :event_ids
+  attr_accessible :sponsor_translations_attributes, :url, :phone, :type, :event_ids, :lat, :lon
   attr_accessor :locale
 
   has_many :event_sponsors

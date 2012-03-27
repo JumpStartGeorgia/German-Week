@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Deutschen Woche 2012 - <%= yield (:title) || "German Week" %></title>
+	<%= include_gon %>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
@@ -27,6 +28,8 @@
 		
 		<%= link_to 'Event Categories', categories_path %>
 
+		<%= link_to 'Search', search_path %>
+
 	</div>
 
   <div id="language-form">
@@ -40,12 +43,7 @@
   </div>
   
   <div id="event_menu">
-  	<ul>
-  		<% (1..6).each do |i| %>
-  			<li><%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", events_day_path(:date => "2012-05-#{i+13}") %></li>
-  		<% end %>
-  	</ul>
-    <br class="clear"/>
+		<%= render "shared/menu" %>
   </div>
 
 	<h2><%= yield(:title) %></h2>
