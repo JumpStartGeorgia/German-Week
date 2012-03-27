@@ -1,12 +1,6 @@
 <% title "Search" %>
 
-<%= form_tag search_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= select_tag :search_in, options_for_select([['all','all']] + @categories.map {|c| [c.title, c.id]}, params[:search_in]) %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+<%= render 'german_week/search' %>
 
 <div style="margin-bottom: 20px;">
   <% @categories.each do |category| %>
