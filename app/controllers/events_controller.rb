@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate]
 
   # GET /events
   # GET /events.json
@@ -96,4 +96,79 @@ class EventsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  
+  # Events export to ICS by ID
+  def exportICSById
+  	# define calendar 
+	calendar = Icalendar::Calendar.new 
+	
+	# create calendar event
+	event = Icalendar::Event.new
+	
+	# get all event data from database
+	data = Event.find params[:id]
+
+	# fill the calendar event with data	
+	event.dtstart = data.start.to_s
+	event.dtend = data.end.to_s				
+	event.categories = []	
+	# Components for event categories
+	data.categories.each do |category|				
+		event.categories.push Icalendar::Component.new category.title
+	end	
+	
+	event.klass = "PUBLISH"
+	
+	# add event to calendar  	
+  	calendar.add event
+  	
+  	# final calendar data output  	
+  	@data = calendar.to_ical
+  	
+  	# the respond 
+  	render :text => @data, :content_type => "text/calendar; charset=UTF-8" 
+  	
+  end
+  
+  
+  # Events export to ICS by Date
+  def exportICSByDate	
+  	# define calendar
+  	calendar = Icalendar::Calendar.new  	
+  	
+  	# get all event data from database
+  	data = Event.where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:date]}','%Y-%m-%d') AND 
+  						 DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:date]}','%Y-%m-%d')")  	
+  						 
+  	# fill calendar with events and event data
+	data.each do |event_each|
+		# create calendar event
+  		event = Icalendar::Event.new
+  		
+		# fill event with data
+		event.dtstart = event_each.start.to_s
+		event.dtend = event_each.end.to_s
+		event.categories = []
+		event_each.categories.each do |event_each_category|
+			event.categories.push Icalendar::Component.new event_each_category.title
+		end
+		event.klass = "PUBLISH"
+		
+		# add event to calendar
+		calendar.add event
+		
+	end
+	
+	# final calendar data output
+	@data = calendar.to_ical	
+	
+	# the respond 
+	render :text => @data, :content_type => "text/calendar; charset=UTF-8" 
+	
+  end
+  
 end
+
+
+

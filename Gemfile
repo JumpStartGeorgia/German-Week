@@ -8,7 +8,7 @@ gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
 gem 'globalize3', '0.2.0'
 gem 'psych', '1.2.2' # yaml parser - default psych in rails has issues
-
+gem 'icalendar', '1.1.6' # icalendar for events export
 
 # for debugging
 # to get debugging to work, follow directions at:
