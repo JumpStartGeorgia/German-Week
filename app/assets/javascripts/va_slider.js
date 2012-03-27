@@ -224,5 +224,9 @@ function Timer (callback, delay)
 
 $(function ()
 {
-  $('#slider').va_slider(options);
+  var element = $('#slider');
+  if (element.length > 0)
+  {
+    element.va_slider(options);
+  }
 });

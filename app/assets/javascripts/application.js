@@ -8,7 +8,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require vendor
-//= require timer
 //= require_tree .
 
 
@@ -26,6 +25,15 @@ $(document).ready(function(){
 	$.ajaxSetup({
 	  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 	});
+
+
+  // search button click event
+  document.getElementById('search_show_button').onclick = function () {
+    var form_container = $('#search_form_container');
+    form_container.slideToggle();
+    form_container.find('input[type="text"]').focus();
+  }
+
 
 });
 
