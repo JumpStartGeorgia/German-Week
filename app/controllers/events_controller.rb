@@ -9,6 +9,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @events }
+      format.pdf do
+        render :pdf			=> 'events',
+               :template		=> 'events/index.pdf.erb',
+               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+      end
     end
   end
 
@@ -22,6 +27,11 @@ class EventsController < ApplicationController
       format.html # day.html.erb
       format.js
       format.json { render :json => @events }
+      format.pdf do
+        render :pdf			=> 'events',
+               :template		=> 'events/day.pdf.erb',
+               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+      end
     end
   end
 
@@ -34,6 +44,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # day.html.erb
       format.json { render :json => @events }
+      format.pdf do
+        render :pdf			=> 'events',
+               :template		=> 'events/category.pdf.erb',
+               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+      end
     end
   end
 
@@ -50,6 +65,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }
+      format.pdf do
+        render :pdf			=> 'events',
+               :template		=> 'events/show.pdf.erb',
+               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+      end
     end
   end
 
