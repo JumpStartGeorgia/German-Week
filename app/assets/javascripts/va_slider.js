@@ -222,6 +222,7 @@ function Timer (callback, delay)
 	slideshow_mode : true,
   };
 
+
 $(function ()
 {
   var element = $('#slider');

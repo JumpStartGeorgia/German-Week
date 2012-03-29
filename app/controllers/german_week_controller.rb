@@ -1,5 +1,6 @@
 class GermanWeekController < ApplicationController
   def index  
+
   end
 
   def search

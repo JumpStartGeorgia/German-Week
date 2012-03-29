@@ -20,14 +20,26 @@ GermanWeek::Application.routes.draw do
   
   scope "/:locale" do
     resources :events do
-      collection do
+    	collection do
         get :category
         get :day
       end
     end
   end
+  
+  # create route to export events to ICS By ID
+  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
+  # create route to export events to ICS By Date
+  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
+  
+  # create route to load events for a particular date
+  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
+
+
+
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

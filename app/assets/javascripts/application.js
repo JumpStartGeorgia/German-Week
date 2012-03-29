@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require vendor
+//= require id_countdown
 //= require_tree .
 
 
