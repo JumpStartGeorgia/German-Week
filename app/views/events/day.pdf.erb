@@ -7,7 +7,6 @@
 
 	<table>
 	  <tr>
-			<th>View Details</th>
 			<th>Time</th>
 	    <th>Title</th>
 	    <th>Description</th>
@@ -15,7 +14,6 @@
 	
 	<% @events.each do |event| %>
 	  <tr>
-	    <td><%= link_to 'More', event %></td>
 	    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
 	    <td><%= event.title %></td>
 	    <td><%= truncate(event.description, :length => 100) %></td>
