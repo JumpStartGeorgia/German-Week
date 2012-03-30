@@ -1,4 +1,14 @@
+<% is_html = ((defined? html) && html) ? true : false %>
+
 <% title "#{params[:cat]} Events" %>
+
+<% if is_html && @categories.count > 0 %>
+	<%= form_tag "/#{I18n.locale}/events/category", :method => :get do -%>
+		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title"), :include_blank => true%>
+		<%= submit_tag 'Search' %>
+
+	<% end -%>
+<% end %>
 
 
 <% if @events.nil? || @events.length == 0 %>
@@ -9,6 +19,9 @@
 
 	<table>
 	  <tr>
+	    <% if is_html %>
+			<th>View Details</th>
+	    <% end %>
 			<th>Time</th>
 	    <th>Title</th>
 	    <th>Description</th>
@@ -16,6 +29,9 @@
 	
 	<% @events.each do |event| %>
 	  <tr>
+	    <% if is_html %>
+	      <td><%= link_to 'More', event %></td>
+	    <% end %>
 	    <td><%= format_date(event.start) %><br /><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
 	    <td><%= event.title %></td>
 	    <td><%= truncate(event.description, :length => 100) %></td>
@@ -26,4 +42,3 @@
 	<%= will_paginate @events %>
 
 <% end %>
-

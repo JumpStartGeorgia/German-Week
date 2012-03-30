@@ -1,0 +1,35 @@
+<% is_html = ((defined? html) && html) ? true : false %>
+
+<% title 'Listing events' %>
+
+<table>
+  <tr>
+		<th>Time</th>
+    <th>Title</th>
+    <th>Description</th>
+    <% if is_html %>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+
+<% @events.each do |event| %>
+  <tr>
+    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
+    <td><%= event.title %></td>
+    <td><%= truncate(event.description, :length => 100) %></td>
+    <% if is_html %>
+      <td><%= link_to 'Show', event %></td>
+      <td><%= link_to 'Edit', edit_event_path(event) %></td>
+      <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if is_html %>
+  <%= link_to 'New Event', new_event_path %>
+<% end %>

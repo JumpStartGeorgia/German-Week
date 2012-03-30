@@ -1,45 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render 'show', :html => true %>
 
-<p>
-  <b>Title:</b>
-  <%= @event.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
-
-<p>
-  <b>Start:</b>
-  <%= format_datetime(@event.start) %>
-</p>
-
-<p>
-  <b>End:</b>
-  <%= format_datetime(@event.end) %>
-</p>
-
-<p>
-	<div id="countdown">
-  	<div id="time"></div>
-  	<div id="time-abr" class="time-abr"></div>
-  </div>
-</p>
-
-<p>
-	<a href="/<%= locale %>/events/exportICS/event/<%= @event.id %>">Export Calendar File</a>
-</p>
-
-<div id='map'></div>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
-<<<<<<< HEAD
 
 <br />
 <%= link_to 'Download PDF', event_path(@event, :format => 'pdf') %>
-=======
+
 <script>
 	var theEvent = {
 		end: { 
@@ -52,4 +16,3 @@
 		}
 	};
 </script>
->>>>>>> e5f7cf4ca61baa5dba4d77f89820e7bf4d39b28c
