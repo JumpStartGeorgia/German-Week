@@ -1,27 +1,4 @@
-<% title 'Listing events' %>
-
-<table>
-  <tr>
-		<th>Time</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @events.each do |event| %>
-  <tr>
-    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
-    <td><%= event.title %></td>
-    <td><%= truncate(event.description, :length => 100) %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render 'index', :html => true %>
 
 <br />
-
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'Download PDF', events_path(:format => 'pdf') %>

@@ -107,7 +107,7 @@ GEM
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
-    wisepdf (1.0.0)
+    wisepdf (1.0.1)
       rails (>= 3.0.0)
 
 PLATFORMS

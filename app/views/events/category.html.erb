@@ -1,39 +1,4 @@
-<% title "#{params[:cat]} Events" %>
+<%= render 'category', :html => true %>
 
-<% if @categories.count > 0 %>
-	<%= form_tag "/#{I18n.locale}/events/category", :method => :get do -%>
-		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title"), :include_blank => true%>
-		<%= submit_tag 'Search' %>
-
-	<% end -%>
-<% end %>
-
-
-<% if @events.nil? || @events.length == 0 %>
-	<% if !params[:cat].nil? %>
-		<p>No events exist for this category.</p>
-	<% end %>
-<% else %>
-
-	<table>
-	  <tr>
-			<th>View Details</th>
-			<th>Time</th>
-	    <th>Title</th>
-	    <th>Description</th>
-	  </tr>
-	
-	<% @events.each do |event| %>
-	  <tr>
-	    <td><%= link_to 'More', event %></td>
-	    <td><%= format_date(event.start) %><br /><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
-	    <td><%= event.title %></td>
-	    <td><%= truncate(event.description, :length => 100) %></td>
-	  </tr>
-	<% end %>
-	</table>
-
-	<%= will_paginate @events %>
-
-<% end %>
-
+<br />
+<%= link_to 'Download PDF', category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf') %>

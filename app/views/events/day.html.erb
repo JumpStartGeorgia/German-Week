@@ -1,29 +1,4 @@
-<% title "Events on #{params[:date]}" %>
+<%= render 'day', :html => true %>
 
-<% if @events.length == 0 %>
-	<p>No events exist for this day.
-
-<% else %>
-
-	<table>
-	  <tr>
-			<th>View Details</th>
-			<th>Time</th>
-	    <th>Title</th>
-	    <th>Description</th>
-	  </tr>
-	
-	<% @events.each do |event| %>
-	  <tr>
-	    <td><%= link_to 'More', event %></td>
-	    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
-	    <td><%= event.title %></td>
-	    <td><%= truncate(event.description, :length => 100) %></td>
-	  </tr>
-	<% end %>
-	</table>
-
-	<%= will_paginate @events %>
-
-<% end %>
-
+<br />
+<%= link_to 'Download PDF', day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf') %>

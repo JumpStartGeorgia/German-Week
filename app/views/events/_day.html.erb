@@ -1,0 +1,34 @@
+<% is_html = ((defined? html) && html) ? true : false %>
+
+<% title "Events on #{params[:date]}" %>
+
+<% if @events.length == 0 %>
+	<p>No events exist for this day.
+
+<% else %>
+
+	<table>
+	  <tr>
+	    <% if is_html %>
+			<th>View Details</th>
+	    <% end %>
+			<th>Time</th>
+	    <th>Title</th>
+	    <th>Description</th>
+	  </tr>
+	
+	<% @events.each do |event| %>
+	  <tr>
+	    <% if is_html %>
+	      <td><%= link_to 'More', event %></td>
+	    <% end %>
+	    <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
+	    <td><%= event.title %></td>
+	    <td><%= truncate(event.description, :length => 100) %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<%= will_paginate @events %>
+
+<% end %>
