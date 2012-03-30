@@ -36,7 +36,7 @@ GermanWeek::Application.routes.draw do
   match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
 
 
-
+	match '/:locale/map', :to => 'map#index'
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 

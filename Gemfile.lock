@@ -40,6 +40,7 @@ GEM
     erubis (2.7.0)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    geocoder (1.1.1)
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -115,6 +116,7 @@ PLATFORMS
 DEPENDENCIES
   devise (= 2.0.4)
   formtastic (= 2.1.1)
+  geocoder (~> 1.1.1)
   globalize3 (= 0.2.0)
   gon (= 2.2.2)
   icalendar (= 1.1.6)

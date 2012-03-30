@@ -15,6 +15,8 @@ gem 'will_paginate', '3.0.3'
 gem 'gon', '2.2.2' # push data into js
 gem 'wisepdf'
 
+gem "geocoder", "~> 1.1.1"
+
 
 
 # for debugging

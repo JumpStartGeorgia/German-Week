@@ -3,8 +3,13 @@ class Event < ActiveRecord::Base
 
   has_many :event_translations
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes, :lat, :lon
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes, :lat, :lon, :address
   attr_accessor :locale
+  
+  # reverse geocoding by lon & lat
+  geocoded_by :address
+  reverse_geocoded_by :lat, :lon
+  before_save  :reverse_geocode
 
   has_many :event_sponsors
   has_many :event_categories
@@ -80,6 +85,11 @@ class Event < ActiveRecord::Base
     end
   end
   
+  
+  
 end
+
+
+
 
 

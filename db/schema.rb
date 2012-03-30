@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316114108) do
+ActiveRecord::Schema.define(:version => 20120330125158) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20120316114108) do
     t.datetime "updated_at"
     t.decimal  "lat",        :precision => 15, :scale => 12
     t.decimal  "lon",        :precision => 15, :scale => 12
+    t.text     "address"
   end
 
   create_table "locales", :force => true do |t|
