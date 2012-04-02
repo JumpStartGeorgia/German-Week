@@ -1,18 +1,4 @@
 <%= render 'show', :html => true %>
 
-
 <br />
 <%= link_to 'Download PDF', event_path(@event, :format => 'pdf') %>
-
-<script>
-	var theEvent = {
-		end: { 
-		 year: <%= @event.end.strftime("%Y") %>,
-		 month: <%= @event.end.strftime("%m").to_i-1 %>,
-		 day: <%= @event.end.strftime("%d") %>,
-		 hour: <%= @event.end.strftime("%H") %>,
-		 minute: <%= @event.end.strftime("%M") %>,
-		 second: <%= @event.end.strftime("%S") %>
-		}
-	};
-</script>
