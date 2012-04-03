@@ -1,8 +1,9 @@
 
 
 $(function(){	
-	if( typeof(theEvent) !== 'undefined' ){
-		var abr = $("#time-abr"),time = $("#time"),ts = new Date(theEvent['end']['year'],theEvent['end']['month'],theEvent['end']['day'],theEvent['end']['hour'],theEvent['end']['minute'],theEvent['end']['second']),i=0;    						
+
+	if( gon.end_year !== '' ){
+		var abr = $("#time-abr"),time = $("#time"),ts = new Date(gon.end_year, gon.end_month, gon.end_day, gon.end_hour, gon.end_minute, gon.end_second),i=0;    						
 		time.countdown({
 				timestamp: ts
 			});
