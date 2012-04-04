@@ -1,0 +1,17 @@
+.map_page {
+	background-color:#CCC;
+}
+
+.map_page li:first{	
+	color:#FFF;
+	font-size:15px;
+	margin-top:8px;
+	padding-right:10px;
+	border-right:1px solid #FFF;
+	margin-right:10px;
+}
+
+#map_map_page {
+	width:100%;
+	height:500px;
+}

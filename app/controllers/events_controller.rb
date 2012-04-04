@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate]
+
+  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate, :getEventsByDay]
+
 
   # GET /events
   # GET /events.json
@@ -13,9 +15,9 @@ class EventsController < ApplicationController
       format.pdf do
         render :pdf			=> 'events',
                :template		=> 'events/_index.html.erb',
-               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
-    end
+     end
   end
 
   # GET /events/day?date
@@ -31,7 +33,7 @@ class EventsController < ApplicationController
       format.pdf do
         render :pdf			=> 'events',
                :template		=> 'events/_day.html.erb',
-               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
   end
@@ -48,7 +50,7 @@ class EventsController < ApplicationController
       format.pdf do
         render :pdf			=> 'events',
                :template		=> 'events/_category.html.erb',
-               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
   end
@@ -62,6 +64,13 @@ class EventsController < ApplicationController
     gon.lat = @event.lat
     gon.lon = @event.lon
     gon.popup = @event.title
+		gon.end_year = @event.end.strftime("%Y")
+    gon.end_month = @event.end.strftime("%m")
+    gon.end_day = @event.end.strftime("%d") 
+    gon.end_hour = @event.end.strftime("%H")
+    gon.end_minute = @event.end.strftime("%M")
+    gon.end_second = @event.end.strftime("%S")
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -69,7 +78,8 @@ class EventsController < ApplicationController
       format.pdf do
         render :pdf			=> 'events',
                :template		=> 'events/_show.html.erb',
-               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
+               
       end
     end
   end
@@ -233,6 +243,12 @@ class EventsController < ApplicationController
 		redirect_to "/assets/#{params[:date]}.ics"
   end
   
+  # get events by day AJAX request
+  def getEventsByDay
+  		#data = Event.first
+  		data = Event.where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:day]}','%Y-%m-%d') AND DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:day]}','%Y-%m-%d')")
+  		render :inline => data.to_s
+  end
 end
 
 
