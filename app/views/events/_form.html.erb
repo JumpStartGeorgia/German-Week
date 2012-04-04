@@ -1,45 +1,72 @@
-<%= form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
+<%= semantic_form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
-    <legend><%= controller.action_name.capitalize %> /Event</legend>
+	<%= f.semantic_errors %>
+	<%= f.inputs :for => :event_translations do |event_translation, i| %>
 
-    <div class="control-group">
-      <%= f.label :start, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.datetime_select :start, :class => 'datetime_select' %>
-      </div>
-    </div>
+		<% formLocale = @locales[i-1].language %>
 
-    <div class="control-group">
-      <%= f.label :end, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.datetime_select :end, :class => 'datetime_select' %>
-      </div>
-    </div>
+		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
+			<div class="control-group">
+			  <%= event_translation.label :title, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= event_translation.text_field :title, :class => 'text_field' %>
+			  </div>
+			</div>
+			<div class="control-group">
+			  <%= event_translation.label :description, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= event_translation.input :description, :as => :text, :label => false %>
+			  </div>
+			</div>
+			<%= event_translation.hidden_field :locale , :value => formLocale %>
+		</div>
 
-    <div class="control-group">
-      <%= f.label :lat, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :lat, :class => 'text_field' %>
-      </div>
-    </div>
+  <% end %>
 
-    <div class="control-group">
-      <%= f.label :lon, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :lon, :class => 'text_field' %>
-      </div>
-    </div>
+	<%= f.inputs do %>
+		<div class="control-group">
+		  <%= f.label :start, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.text_field :start, :as => :time_picker, :class => 'text_field' %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :end, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.text_field :end, :as => :time_picker, :class => 'text_field' %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :lat, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.text_field :lat, :class => 'text_field', :type => :number %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :lon, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.text_field :lon, :class => 'text_field', :type => :number %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :Sponsors, :for => 'event_sponsor_ids', :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :sponsors, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :categories, :label => false %>
+		  </div>
+		</div>
+  <% end %>
 
-    <div class="control-group">
-      <%= f.label :address, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :address, :class => 'text_area' %>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to 'Cancel', events_path, :class => 'btn' %>
-    </div>
+	<div class="form-actions">
+	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
+	  <%= link_to 'Cancel', events_path, :class => 'btn' %>
+	</div>
   </fieldset>
 <% end %>
+
