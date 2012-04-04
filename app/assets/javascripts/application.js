@@ -18,7 +18,7 @@ $(document).ready(function(){
 	// on mouseover, get the events for the date in the link and load it 
 	// into megamenu
   $("a.event_menu_link").mouseover(submitWithAjax);
-
+	
 	function submitWithAjax() {
     $.get(this.href, $(this).serialize(), null, "script");
 	};
@@ -34,7 +34,6 @@ $(document).ready(function(){
     form_container.slideToggle();
     form_container.find('input[type="text"]').focus();
   }
-
 
 });
 
