@@ -38,6 +38,9 @@
 <div id='map'></div>
 
 <% if is_html %>
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Back', events_path %>
+  <div class="form-actions">
+    <%= link_to 'Back', events_path, :class => 'btn'  %>
+    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn' %>
+    <%= link_to 'Delete', event_path(@event), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  </div>
 <% end %>

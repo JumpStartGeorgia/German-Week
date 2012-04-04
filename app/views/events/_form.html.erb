@@ -1,26 +1,45 @@
-<%= semantic_form_for @event do |f| %>
-	<%= f.semantic_errors %>
-	<%= f.inputs :for => :event_translations do |event_translation, i| %>
-		
-		<% formLocale = @locales[i-1].language %>
-		
-		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
-			<%= event_translation.input :title %>
-			<%= event_translation.input :description, :as => :text %>
-			<%= event_translation.hidden_field :locale , :value => formLocale %>
-		</div>
+<%= form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Event</legend>
 
-  <% end %>
-  	
-	<%= f.inputs do %>
-		<%= f.input :start, :as => :time_picker %>
-		<%= f.input :end, :as => :time_picker %>
-		<%= f.input :lat %>
-		<%= f.input :lon %>
-		<%= f.input :sponsors %>
-		<%= f.input :categories %>
-  <% end %>
+    <div class="control-group">
+      <%= f.label :start, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.datetime_select :start, :class => 'datetime_select' %>
+      </div>
+    </div>
 
-	<%= f.actions :submit, :reset, :cancel %>
+    <div class="control-group">
+      <%= f.label :end, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.datetime_select :end, :class => 'datetime_select' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :lat, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :lat, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :lon, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :lon, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :address, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :address, :class => 'text_area' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', events_path, :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>
-

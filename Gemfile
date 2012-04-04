@@ -27,3 +27,18 @@ gem "geocoder", "~> 1.1.1"
 #gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/ruby-debug-base19-0.11.26/"
 #gem 'ruby-debug19', :require => 'ruby-debug'
 #gem 'columnize', '0.3.6'
+
+
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer'
+
+  gem 'uglifier'
+  gem 'twitter-bootstrap-rails'
+end

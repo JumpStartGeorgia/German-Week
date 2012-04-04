@@ -3,10 +3,9 @@
 <% title "#{params[:cat]} Events" %>
 
 <% if is_html && @categories.count > 0 %>
-	<%= form_tag "/#{I18n.locale}/events/category", :method => :get do -%>
+	<%= form_tag "/#{I18n.locale}/events/category", :method => :get, :html => { :class => 'form-horizontal' } do -%>
 		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title"), :include_blank => true%>
 		<%= submit_tag 'Search' %>
-
 	<% end -%>
 <% end %>
 
@@ -17,27 +16,32 @@
 	<% end %>
 <% else %>
 
-	<table>
-	  <tr>
-	    <% if is_html %>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <% if is_html %>
 			<th>View Details</th>
-	    <% end %>
+	      <% end %>
 			<th>Time</th>
-	    <th>Title</th>
-	    <th>Description</th>
-	  </tr>
-	
-	<% @events.each do |event| %>
-	  <tr>
-	    <% if is_html %>
-	      <td><%= link_to 'More', event %></td>
+	      <th>Title</th>
+	      <th>Description</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @events.each do |event| %>
+	      <tr>
+	        <% if is_html %>
+	          <td><%= link_to 'More', event %></td>
+	        <% end %>
+	        <td><%= format_date(event.start) %><br /><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
+	        <td><%= event.title %></td>
+	        <td><%= truncate(event.description, :length => 100) %></td>
+	      </tr>
 	    <% end %>
-	    <td><%= format_date(event.start) %><br /><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
-	    <td><%= event.title %></td>
-	    <td><%= truncate(event.description, :length => 100) %></td>
-	  </tr>
-	<% end %>
+	  </tbody>
 	</table>
+
 
 	<%= will_paginate @events %>
 
