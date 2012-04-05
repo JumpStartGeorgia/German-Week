@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<h1>
   <b>Title:</b>
   <%= @sponsor.title %>
-</p>
+</h1>
 
 <p>
   <b>Description:</b>
@@ -32,6 +31,8 @@
 
 <div id='map'></div>
 
-
-<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
-<%= link_to 'Back', sponsors_path %>
+<div class="form-actions">
+  <%= link_to 'Back', sponsors_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_sponsor_path(@sponsor), :class => 'btn' %>
+  <%= link_to 'Delete', sponsor_path(@sponsor), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

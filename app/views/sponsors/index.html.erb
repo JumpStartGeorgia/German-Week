@@ -1,33 +1,32 @@
-<% title 'Listing sponsors' %>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Type</th>
-    <th>Url</th>
-    <th>Phone</th>
-    <th>Address</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sponsors.each do |sponsor| %>
-  <tr>
-    <td><%= sponsor.title %></td>
-    <td><%= sponsor.description %></td>
-    <td><%= sponsor.type %></td>
-    <td><%= sponsor.url %></td>
-    <td><%= sponsor.phone %></td>
-    <td><%= sponsor.address %></td>
-    <td><%= link_to 'Show', sponsor %></td>
-    <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>
-    <td><%= link_to 'Destroy', sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<h1>Listing Sponsors</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Url</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sponsors.each do |sponsor| %>
+      <tr>
+        <td><%= link_to sponsor.title, sponsor_path(sponsor) %></td>
+        <td><%= sponsor.description %></td>
+        <td><%= sponsor.type %></td>
+        <td><%= sponsor.url %></td>
+        <td><%= sponsor.phone %></td>
+        <td><%= sponsor.address %></td>
+        <td>
+          <%= link_to 'Edit', edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', sponsor_path(sponsor), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Sponsor', new_sponsor_path %>
+<%= link_to 'New', new_sponsor_path, :class => 'btn btn-primary' %>

@@ -23,7 +23,8 @@
 		<p>0 results found.</p>
 	<% end %>
 <% else %>
-  <table>
+  <table class="table table-striped">
+   <thead>
     <tr>
       <th>Title</th>
       <th>Description</th>
@@ -31,17 +32,20 @@
       <th>End</th>
       <th></th>
     </tr>
+   </thead>
 
+ <tbody>
   <% @events.each do |event| %>
     <tr>
-      <td><%= event.title %></td>
+      <td><%= link_to event.title, event_path(event) %></td>
       <td><%= event.description %></td>
       <td><%= format_datetime(event.start) %></td>
       <td><%= format_datetime(event.end) %></td>
-      <td><%= link_to 'Show', event %></td>
     </tr>
   <% end %>
+ </tbody>
   </table>
+
   
 	<%# will_paginate @events %>
 <% end %>

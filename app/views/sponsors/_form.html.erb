@@ -1,27 +1,72 @@
-<%= semantic_form_for @sponsor do |f| %>
+<%= semantic_form_for @sponsor, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
 	<%= f.semantic_errors %>
 	<%= f.inputs :for => :sponsor_translations do |sponsor_translation, i| %>
 		
 		<% formLocale = @locales[i-1].language %>
 		
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
-			<%= sponsor_translation.input :title %>
-			<%= sponsor_translation.input :description, :as => :text %>
-  		<%= sponsor_translation.input :address %>
+			<div class="control-group">
+			  <%= sponsor_translation.label :title, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= sponsor_translation.text_field :title, :class => 'text_field' %>
+			  </div>
+			</div>
+			<div class="control-group">
+			  <%= sponsor_translation.label :description, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= sponsor_translation.input :description, :as => :text, :label => false %>
+			  </div>
+			</div>
+			<div class="control-group">
+			  <%= sponsor_translation.label :address, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= sponsor_translation.input :address, :label => false, :class => 'text_field' %>
+			  </div>
+			</div>
 			<%= sponsor_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
   <% end %>
-  	
+
 	<%= f.inputs do %>
-		<%= f.input :lat %>
-		<%= f.input :lon %>
-		<%= f.input :phone, :as => :phone %>
-		<%= f.input :url, :as => :url %>
-		<%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2']%>
+		<div class="control-group">
+		  <%= f.label :lat, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :lat, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :lon, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :lon, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :phone, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :phone, :as => :phone, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :url, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :url, :as => :url, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :type, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2'], :label => false %>
+		  </div>
+		</div>
 		<%= f.hidden_field :locale , :value => I18n.locale %>
 	<% end %>
 
-	<%= f.actions :submit, :reset, :cancel %>
+	<div class="form-actions">
+	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
+	  <%= link_to 'Cancel', sponsors_path, :class => 'btn' %>
+	</div>
+  </fieldset>
 <% end %>
-

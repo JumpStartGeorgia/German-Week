@@ -36,6 +36,9 @@ $(document).ready(function(){
     form_container.find('input[type="text"]').focus();
   }
 
+
+  // hide the alert and notice containers if they are empty
+  $('p.notice, p.alert').each(function(){ ($.trim($(this).html()).length == 0) && $(this).hide(); });
 });
 
 
