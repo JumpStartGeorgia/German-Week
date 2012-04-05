@@ -2,3 +2,12 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+ul#search_results { list-style-type: none; width: 44%; }
+ul#search_results > li { margin-bottom: 20px; }
+ul#search_results h3 { font-weight: normal; }
+ul#search_results h3 > a { text-decoration: underline; color: #000666; }
+ul#search_results h3 > a:visited { color: #3F448C; }
+.search_results_edr { color: #006633; } /* edr = event date range */
+.search_results_edr > span { color: #333; }
+.search_results_edesc { max-height: 35px; overflow: hidden; } /* edesc = event description */

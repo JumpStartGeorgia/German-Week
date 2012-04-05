@@ -1,0 +1,21 @@
+ <ul id="search_results">
+  <% @events.each do |event| %>
+    <li>
+      <div>
+        <h3>
+          <%= link_to event.title, event_path(event) %>
+        </h3>
+        <div>
+          <div class="search_results_edr">
+            <%= format_datetime(event.start) %>
+            <span>-</span>
+            <%= format_datetime(event.end) %>
+          </div>
+          <div class="search_results_edesc">
+            <%= event.description %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+ </ul>
