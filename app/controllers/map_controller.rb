@@ -19,16 +19,23 @@ class MapController < ApplicationController
 		gon.event_descriptions = []
 		gon.event_paths = []
 		gon.events_day_exists = false
-		
+		gon.only_day = false
+		gon.only_category = false
+		gon.day_and_category = false
 		if !params[:dayorcategory].nil?	
 			gon.events_day_exists = true		
 			data = []
-			if params[:type] == "day"			
-				data = Event.where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:dayorcategory]}','%Y-%m-%d')) AND 
-							 (DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:dayorcategory]}','%Y-%m-%d'))")  					 
+			if params[:type] == "day"	
+				gon.only_day = true		
+				data = Event.where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:dayorcategory]}','%Y-%m-%d')) AND (DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:dayorcategory]}','%Y-%m-%d'))")  					 
 			elsif params[:type] == "category" 		
+				gon.only_category = true
 				data = Event.joins(:event_translations, :categories => :category_translations)
 										.where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', params[:dayorcategory], I18n.locale, I18n.locale)				        
+			elsif params[:type] == "daycategory"
+				gon.day_and_category = true
+				data = Event.joins(:event_translations, :categories => :category_translations)
+										.where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and (DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:day]}','%Y-%m-%d')) AND (DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:day]}','%Y-%m-%d'))", params[:dayorcategory], I18n.locale, I18n.locale)
 			end
 
 			# process data from sql to gon js			

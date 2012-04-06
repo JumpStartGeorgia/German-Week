@@ -64,8 +64,18 @@ $(function(){
 					no_events_div.__("</div>");
 					no_events_div.__("<div style=\"position:absolute;left:40%;top:20%;width:270px;height:130px;background:#000;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;opacity:0.70;\">");
 							no_events_div.__("<center>");
-								no_events_div.__("<p style=\"color:#FFF;margin-top:30px;font-size:17px;\">");
-									no_events_div.__("No events for these day!!!");
+								no_events_div.__("<p style=\"padding-left:5px;padding-right:5px;color:#FFF;margin-top:30px;font-size:17px;\">");
+									no_events_div.__("No events for these ");
+									if (gon.day_and_category){
+										no_events_div.__("day and category");
+									}
+									else if(gon.only_day){
+										no_events_div.__("day");
+									}
+									else if(gon.only_category){
+										no_events_div.__("category");
+									}
+									no_events_div.__("!!!");
 								no_events_div.__("</p>");
 								no_events_div.__("<button id=\"no_events_button\" style=\"width:80px;height:20px;margin-top:25px;opacity:10;filter:alpha(opacity=10);-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;-moz-box-shadow: 5px 5px 5px #000;-webkit-box-shadow: 5px 5px 5px #000;box-shadow: 5px 5px 5px #000;\">");
 									no_events_div.__("<strong>Ok</strong>");
