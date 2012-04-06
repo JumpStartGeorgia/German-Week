@@ -1,15 +1,26 @@
-<%= semantic_form_for @category do |f| %>
+<%= semantic_form_for @category, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
 	<%= f.semantic_errors %>
 	<%= f.inputs :for => :category_translations do |category_translation, i| %>
-		
+
 		<% formLocale = @locales[i-1].language %>
-		
+
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
-			<%= category_translation.input :title %>
+			<div class="control-group">
+			  <%= category_translation.label :title, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= category_translation.input :title, :label => false, :class => :text_field %>
+			  </div>
+			</div>
 			<%= category_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
   <% end %>
-  	
-	<%= f.actions :submit, :reset, :cancel %>
+
+	<div class="form-actions">
+	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
+	  <%= link_to 'Cancel', categories_path, :class => 'btn' %>
+	</div>
+  </fieldset>
 <% end %>

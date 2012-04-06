@@ -13,21 +13,9 @@ gem 'icalendar', '1.1.6' # icalendar for events export
 
 gem 'will_paginate', '3.0.3'
 gem 'gon', '2.2.2' # push data into js
-
 gem 'wisepdf'
 
 gem "geocoder", "~> 1.1.1"
-
-
-
-# for debugging
-# to get debugging to work, follow directions at:
-#  http://rails.vandenabeele.com/blog/2011/12/21/installing-ruby-debug19-with-ruby-1-dot-9-3-on-rvm/
-#gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/linecache19-0.5.13/"
-#gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/ruby-debug-base19-0.11.26/"
-#gem 'ruby-debug19', :require => 'ruby-debug'
-#gem 'columnize', '0.3.6'
-
 
 
 # Gems used only for assets and not required
@@ -42,3 +30,13 @@ group :assets do
   gem 'uglifier'
   gem 'twitter-bootstrap-rails'
 end
+
+
+
+# for debugging
+# to get debugging to work, follow directions at:
+#  http://rails.vandenabeele.com/blog/2011/12/21/installing-ruby-debug19-with-ruby-1-dot-9-3-on-rvm/
+#gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/linecache19-0.5.13/"
+#gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/ruby-debug-base19-0.11.26/"
+#gem 'ruby-debug19', :require => 'ruby-debug'
+#gem 'columnize', '0.3.6'

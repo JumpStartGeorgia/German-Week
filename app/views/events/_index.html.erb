@@ -4,9 +4,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
       <th>Start</th>
-      <th>Created at</th>
+      <th>End</th>
       <% if is_html %>
         <th>Actions</th>
       <% end %>
@@ -15,9 +16,10 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.id %></td>
-        <td><%= link_to event.start, event_path(event) %></td>
-        <td><%= event.created_at %></td>
+        <td><%= link_to event.title, event_path(event) %></td>
+        <td><%= event.description %></td>
+        <td><%= format_datetime(event.start) %></td>
+        <td><%= format_datetime(event.end) %></td>
 	<% if is_html %>
           <td>
             <%= link_to 'Edit', edit_event_path(event), :class => 'btn btn-mini' %>
