@@ -11,6 +11,16 @@
             <span>-</span>
             <%= format_datetime(event.end) %>
           </div>
+          <% ecc = event.categories.count; %>
+          <% if ecc > 0 %>
+            <div class="search_results_ecs">
+              <span>Categories:</span>
+              <% event.categories.each_with_index do |c, i| %>
+                <% separator = ((ecc - 1) != i) ? ', ' : '' %>
+                <%= link_to c.title, category_path(c) %><%= separator %>
+              <% end %>
+            </div>
+          <% end %>
           <div class="search_results_edesc">
             <%= event.description %>
           </div>

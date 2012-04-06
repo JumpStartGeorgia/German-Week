@@ -7,31 +7,7 @@
 
 <% else %>
 
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <% if is_html %>
-			  <th>View Details</th>
-	      <% end %>
- 			  <th>Time</th>
-	      <th>Title</th>
-	      <th>Description</th>
-	    </tr>
-	  </thead>
-
-	  <tbody>
-	    <% @events.each do |event| %>
-	      <tr>
-	        <% if is_html %>
-	          <td><%= link_to 'More', event %></td>
-	        <% end %>
-	        <td><%= format_time(event.start) %> - <%= format_time(event.end) %></td>
-	        <td><%= event.title %></td>
-	        <td><%= truncate(event.description, :length => 100) %></td>
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+	<%= render 'german_week/search_results', :is_html => is_html %>
 
 	<%= will_paginate @events %>
 
