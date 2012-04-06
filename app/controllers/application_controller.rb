@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     gon.map_id = 'map'
     gon.zoom = 16
     gon.max_zoom = 18
+    gon.locale = params[:locale]
   end
 
   def set_categories_for_partial

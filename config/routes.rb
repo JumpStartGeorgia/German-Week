@@ -35,10 +35,8 @@ GermanWeek::Application.routes.draw do
   # create route to load events for a particular date
   match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
 
-
-	match '/:locale/map', :to => 'map#index'
-	# get events by day AJAX request
-	match '/:locale/map/events/:day', :to => 'events#getEventsByDay', :as => :events_getEventsByDay, :via => 'get'
+	# map page routes
+	match '/:locale/map(/:type(/:dayorcategory(/:category)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 

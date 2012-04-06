@@ -30,6 +30,5 @@ $(document).ready(function(){
 		// hide the map
 		$("#map").empty();
 		$("#map").attr("id", "nomap");
-
 	}
 });
