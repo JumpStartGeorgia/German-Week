@@ -49,7 +49,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_category.html.erb',
+               :template		=> 'german_week/_search_results.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
