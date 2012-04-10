@@ -1,6 +1,6 @@
 
 $(function(){
-	console.log(gon);
+
 	if (gon.map_page ){
 			
 		var map = new L.Map(gon.map_id);				
@@ -37,26 +37,78 @@ $(function(){
 					gon.event_lons.length !== 0) &&
 				gon.event_lats.length == gon.event_lons.length)
 		{
-			var marker = null;
+			var marker = null, event_latlng = null, marker_popups = new Array, i = 0;
 			$.each(gon.event_lats,function(index,value){
-					marker = new L.Marker(new L.LatLng(gon.event_lats[index],gon.event_lons[index]));
+			
+					event_latlng = new L.LatLng(gon.event_lats[index],gon.event_lons[index]);
+					marker = new L.Marker(event_latlng);
 					map.addLayer(marker);
-						
-					var popup = new Array;						
-					popup.__("<a href=\""+gon.event_paths[index]+"\"><center><font style=\"font-weight:bold;font-size:15px;\">"+gon.event_popups[index]+"</font></center></a>");					
-					popup.__("<center>");
-					popup.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_starts[index]+"</font>");
-					popup.__(" - ");
-					popup.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_ends[index]+"</font>");		
-					popup.__("</center>");
-					popup.__("<br />");			
-					popup.__("<center>");
-					popup.__("<font style=\"font-size:13px;\">"+gon.event_descriptions[index]+"</font>");
-					popup.__("</center>");
-					popup.__("<br />");
-					marker.bindPopup(popup.join('')).openPopup();
-			});
-			map.setView(new L.LatLng(gon.event_lats[gon.event_lats.length-1], gon.event_lons[gon.event_lons.length-1]),11);
+											
+					var popup_content = new Array;						
+					popup_content.__("<a href=\""+gon.event_paths[index]+"\"><center><font style=\"font-weight:bold;font-size:15px;\">"+gon.event_popups[index]+"</font></center></a>");					
+					popup_content.__("<center>");
+					popup_content.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_starts[index]+"</font>");
+					popup_content.__(" - ");
+					popup_content.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_ends[index]+"</font>");		
+					popup_content.__("</center>");
+					popup_content.__("<br />");			
+					popup_content.__("<center>");
+					popup_content.__("<font style=\"font-size:13px;\">"+gon.event_descriptions[index]+"</font>");
+					popup_content.__("</center>");
+					popup_content.__("<br />");
+					
+					
+					map.addLayer(marker.bindPopup(popup_content[0])._popup.setLatLng(event_latlng));
+
+					var default_popup_zindex = 10, old_marker_zindex = null;					
+					
+					
+					$(marker).mouseenter(function(e){											
+						var target_popup = e.target._popup;				
+						old_marker_zindex = $(e.target._icon).css('z-index');														
+						$(e.target._icon).css('z-index', 9999);
+						$(target_popup._container).css('z-index', 9999);
+						target_popup.setContent(popup_content.join(''));
+					}).mouseleave(function(e){
+						var target_popup = e.target._popup;
+						$(e.target._icon).css('z-index', old_marker_zindex);
+						$(target_popup._container).css('z-index', default_popup_zindex);
+						target_popup.setContent(popup_content[0]);
+					});
+					
+					
+					
+					var index = i++;
+					$(".leaflet-marker-pane").children("img:last").attr('id','marker_'+index);
+					marker_popups.push(marker._popup);										
+					$(marker._popup._container).attr("index", index);
+										
+					var last_popup = $(".leaflet-popup-pane").children("div.leaflet-popup:last")
+					
+					last_popup.mouseenter(function(){
+						var target = marker_popups[$(last_popup).attr('index')];
+						old_marker_zindex = $("#marker_"+$(last_popup).attr('index')).css('z-index');						
+						$("#marker_"+$(last_popup).attr('index')).css('z-index', 9999);
+						$(last_popup).css('z-index', 9999);
+						target.setContent(popup_content.join(''));						
+					}).mouseleave(function(){
+						var target = marker_popups[$(last_popup).attr('index')];
+						$("#marker_"+$(last_popup).attr('index')).css('z-index', old_marker_zindex);
+						$(last_popup).css('z-index', default_popup_zindex);
+						target.setContent(popup_content[0]);
+					});
+					
+					
+			});	
+			
+				
+			
+			
+			
+			
+			
+			map.setView(new L.LatLng(gon.event_lats[gon.event_lats.length-1], gon.event_lons[gon.event_lons.length-1]),12);
+			
 		}
 		else if(gon.events_day_exists){
 			var no_events_div = new Array;
