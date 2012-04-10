@@ -30,20 +30,20 @@ class Event < ActiveRecord::Base
   # search 
   def self.search(search, category, page)
     if search && search.length > 0
-      if category && category.length > 0
+      if category && category.length > 0 && category != 'all'
         joins({:categories => :category_translations}, :event_translations)
-          .where("category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", category, '%' + search + '%', '%' + search + '%')
-          .paginate(:page => page).order("start ASC").uniq
-      else
+          .where("event_translations.locale = ? AND category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, category, '%' + search + '%', '%' + search + '%')
+          .paginate(:page => page).order("start ASC")
+      elsif !category || category == 'all'
         joins(:event_translations)
-          .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
-          .paginate(:page => page).order("start ASC").uniq
+          .where("event_translations.locale = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, '%' + search + '%', '%' + search + '%')
+          .paginate(:page => page).order("start ASC")
       end
     else
-      if category && category.length > 0
-        joins(:categories => :category_translations)
-          .where("category_translations.title = ?", category)
-          .paginate(:page => page).order("start ASC").uniq
+      if category && category.length > 0 && category != 'all'
+        joins({:categories => :category_translations}, :event_translations)
+          .where("event_translations.locale = ? AND category_translations.title = ?", I18n.locale, category)
+          .paginate(:page => page).order("start ASC")
       else
         nil
       end
