@@ -28,26 +28,27 @@ class Event < ActiveRecord::Base
   scope :by_title , order('title').l10n
 
   # search 
-  def self.search(search, search_in, category = false, page)
+  def self.search(search, category, page)
     if search && search.length > 0
-      if category
-        joins(:categories => :category_translations).where("category_translations.title = ?", search)
-          .paginate(:page => page).order("start ASC")
+      if category && category.length > 0
+        joins(:categories => :category_translations)
+        .joins(:event_translations)
+        .where("category_translations.title = ?", category)
+        .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
+          .paginate(:page => page).order("start ASC").uniq
       else
-	if search_in == 'all'
-          joins(:event_translations)
-            .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
-            .order("start ASC").uniq
-	else
-          joins(:event_translations)
-          .joins(:categories)
-            .where("categories.id = ?", search_in)
-            .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
-            .order("start ASC").uniq
-	end
+        joins(:event_translations)
+        .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
+          .paginate(:page => page).order("start ASC").uniq
       end
     else
-      nil
+      if category && category.length > 0
+        joins(:categories => :category_translations)
+          .where("category_translations.title = ?", category)
+          .paginate(:page => page).order("start ASC").uniq
+      else
+        nil
+      end
     end
   end
 

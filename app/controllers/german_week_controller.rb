@@ -4,18 +4,12 @@ class GermanWeekController < ApplicationController
   end
 
   def search
-    if params[:category].nil?
-      search = params[:search].nil? ? '' : params[:search]
-      search_in = params[:search_in].nil? ? '' : params[:search_in]
-      isset_category = false
-    else
-      search = params[:category]
-      isset_category = true
-    end
+    search = params[:search].nil? ? false : params[:search]
+    category = params[:category].nil? ? false : params[:category]
 
-    @events = Event.search(search, search_in, isset_category, params[:page])
+    @events = Event.search(search, category, params[:page])
 
-    if !isset_category
+    if search
       boldpart = "<b>" + search + "</b>"
       if !@events.nil?
         @events.each { |event|
@@ -25,7 +19,7 @@ class GermanWeekController < ApplicationController
       end
     end
 
-    @categories = Category.all
+  # @categories = Category.all
 
   end
 
