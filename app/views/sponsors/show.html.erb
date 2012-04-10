@@ -33,6 +33,8 @@
 
 <div class="form-actions">
   <%= link_to 'Back', sponsors_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_sponsor_path(@sponsor), :class => 'btn' %>
-  <%= link_to 'Delete', sponsor_path(@sponsor), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% if user_signed_in? %>
+    <%= link_to 'Edit', edit_sponsor_path(@sponsor), :class => 'btn' %>
+    <%= link_to 'Delete', sponsor_path(@sponsor), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
 </div>
