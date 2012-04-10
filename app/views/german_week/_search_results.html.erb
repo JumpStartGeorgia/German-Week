@@ -17,7 +17,7 @@
               <span>Categories:</span>
               <% event.categories.each_with_index do |c, i| %>
                 <% separator = ((ecc - 1) != i) ? ', ' : '' %>
-                <%= link_to c.title, category_path(c) %><%= separator %>
+                <%= link_to c.title, category_events_path(:cat => c.title) %><%= separator %>
               <% end %>
             </div>
           <% end %>
