@@ -31,10 +31,8 @@ class Event < ActiveRecord::Base
   def self.search(search, category, page)
     if search && search.length > 0
       if category && category.length > 0
-        joins(:categories => :category_translations)
-          .joins(:event_translations)
-          .where("category_translations.title = ?", category)
-          .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
+        joins({:categories => :category_translations}, :event_translations)
+          .where("category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", category, '%' + search + '%', '%' + search + '%')
           .paginate(:page => page).order("start ASC").uniq
       else
         joins(:event_translations)
