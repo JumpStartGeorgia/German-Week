@@ -32,7 +32,7 @@ class Event < ActiveRecord::Base
     if search && search.length > 0
       if category && category.length > 0 && category != 'all'
         joins({:categories => :category_translations}, :event_translations)
-          .where("event_translations.locale = ? AND category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, category, '%' + search + '%', '%' + search + '%')
+          .where("category_translations.locale = ? AND event_translations.locale = ? AND category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, I18n.locale, category, '%' + search + '%', '%' + search + '%')
           .paginate(:page => page).order("start ASC")
       elsif !category || category == 'all'
         joins(:event_translations)
@@ -42,7 +42,7 @@ class Event < ActiveRecord::Base
     else
       if category && category.length > 0 && category != 'all'
         joins({:categories => :category_translations}, :event_translations)
-          .where("event_translations.locale = ? AND category_translations.title = ?", I18n.locale, category)
+          .where("category_translations.locale = ? AND event_translations.locale = ? AND category_translations.title = ?", I18n.locale, I18n.locale, category)
           .paginate(:page => page).order("start ASC")
       else
         nil

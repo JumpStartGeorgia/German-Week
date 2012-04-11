@@ -4,7 +4,7 @@
 
 <% if is_html && @categories.count > 0 %>
 	<%= form_tag "/#{I18n.locale}/events/category", :method => :get, :html => { :class => 'form-horizontal' } do -%>
-		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title"), :include_blank => true%>
+		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title", params[:cat]), :include_blank => true%>
 		<%= submit_tag 'Search' %>
 	<% end -%>
 <% end %>
