@@ -1,6 +1,6 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<% title "#{params[:cat]} Events" %>
+<% title "Events by Category" %>
 
 <% if is_html && @categories.count > 0 %>
 	<%= form_tag "/#{I18n.locale}/events/category", :method => :get, :html => { :class => 'form-horizontal' } do -%>
