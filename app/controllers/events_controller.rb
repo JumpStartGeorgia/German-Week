@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate, :getEventsByDay]
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICSById, :exportICSByDate, :getEventsByDay]
 
 
   # GET /events
