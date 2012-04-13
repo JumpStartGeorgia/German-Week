@@ -6,6 +6,22 @@ GermanWeek::Application.routes.draw do
     
   match '/:locale' => 'german_week#index', via: :get
 
+  # event category with optional cat param
+  match '/:locale/events/category(/:cat)', :to => 'events#category', :as => :category_events, :via => 'get'
+
+  # event day with day param
+  match '/:locale/events/day/:date(/:menu_item)', :to => 'events#day', :as => :day_events, :via => 'get'
+	
+  # create route to export events to ICS By ID
+  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
+  # create route to export events to ICS By Date
+  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
+  
+	# map page routes
+	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
+
+  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
+
   scope "/:locale" do
     resources :locales
   end
@@ -19,26 +35,9 @@ GermanWeek::Application.routes.draw do
   end
   
   scope "/:locale" do
-    resources :events do
-    	collection do
-        get :category
-        get :day
-      end
-    end
+    resources :events
   end
   
-  # create route to export events to ICS By ID
-  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
-  # create route to export events to ICS By Date
-  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
-  
-  # create route to load events for a particular date
-  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
-
-	# map page routes
-	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
-
-  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 
   
   # The priority is based upon order of creation:

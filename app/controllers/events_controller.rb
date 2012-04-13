@@ -20,9 +20,9 @@ class EventsController < ApplicationController
      end
   end
 
-  # GET /events/day?date
-  # GET /events/day.js?date  - called when loading the menu pop-up
-  # GET /events/day.json?date
+  # GET /events/day/date
+  # GET /events/day.js/date  - called when loading the menu pop-up
+  # GET /events/day.json/date
   def day
     @events = Event.find_by_date(params[:date],params[:page])
 
