@@ -1,7 +1,7 @@
 class EventSponsor < ActiveRecord::Base
   belongs_to :event
-  belongs_to :sponsor
+  attr_accessible :event_id, :name, :logo_path, :url
 
-  validates :event_id, :sponsor_id, :presence => true
+  validates :name, :logo_path, :url,  :presence => true
 
 end

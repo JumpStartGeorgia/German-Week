@@ -2,21 +2,21 @@ class Event < ActiveRecord::Base
   translates :title, :description
 
   has_many :event_translations
+  has_many :event_sponsors
+  has_many :event_categories
+  has_many :categories, :through => :event_categories
+
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes, :lat, :lon, :address
-  attr_accessor :locale
-  
+  accepts_nested_attributes_for :event_sponsors
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes, :event_sponsors_attributes
+  attr_accessor :locale  
+
+  validates :start, :end, :presence => true
+
   # reverse geocoding by lon & lat
   geocoded_by :address
   reverse_geocoded_by :lat, :lon
   before_save  :reverse_geocode
-
-  has_many :event_sponsors
-  has_many :event_categories
-  has_many :sponsors, :through => :event_sponsors
-  has_many :categories, :through => :event_categories
-
-  validates :start, :end, :presence => true
   
   # will_paginate will get this many records per page
   self.per_page = 5
