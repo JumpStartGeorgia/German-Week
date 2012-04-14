@@ -6,14 +6,15 @@
 		<% formLocale = @locales[i-1].language %>
 
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
+			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
-			  <%= event_translation.label :title, :class => 'control-label' %>
+			  <%= event_translation.label "#{@locales[i-1].name} #{:title}", :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.text_field :title, :class => 'text_field' %>
 			  </div>
 			</div>
 			<div class="control-group">
-			  <%= event_translation.label :description, :class => 'control-label' %>
+			  <%= event_translation.label "#{@locales[i-1].name} #{:description}", :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>

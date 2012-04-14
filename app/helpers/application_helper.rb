@@ -30,8 +30,8 @@ module ApplicationHelper
     html << '<ul class="select-form-language">'
     @locales.each do |locale|
       I18n.locale.to_s == locale.language ? ts = ' tab-selected' : ts = '' 
-      javascript_function =  "$('.multilanguage').hide();$('.multilanguage-menu').css('background-color','#FFF');"
-      javascript_function << "$('#form-#{locale.language}').show();$('#tab-#{locale.language}').css('background-color','#DDD')"
+      javascript_function =  "$('.multilanguage').hide();"
+      javascript_function << "$('#form-#{locale.language}').show();"
       html << "<li id=\"tab-#{locale.language}\" class=\"multilanguage-menu#{ts}\" >"
       html << link_to_function(locale.name, javascript_function)
       html << "</li>" 

@@ -6,8 +6,9 @@
 		<% formLocale = @locales[i-1].language %>
 
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
+			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
-			  <%= category_translation.label :title, :class => 'control-label' %>
+			  <%= category_translation.label "#{@locales[i-1].name} #{:title}", :class => 'control-label' %>
 			  <div class="controls">
 			    <%= category_translation.input :title, :label => false, :class => :text_field %>
 			  </div>
