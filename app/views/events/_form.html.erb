@@ -50,15 +50,9 @@
 		  </div>
 		</div>
 		<div class="control-group">
-		  <%= f.label :Sponsors, :for => 'event_sponsor_ids', :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :sponsors, :label => false %>
-		  </div>
-		</div>
-		<div class="control-group">
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
 		  <div class="controls">
-		    <%= f.input :categories, :label => false %>
+		    <%= f.input :categories, :as => :check_boxes, :label => false %>
 		  </div>
 		</div>
   <% end %>
