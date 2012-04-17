@@ -6,6 +6,7 @@
 		<% formLocale = @locales[i-1].language %>
 		
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
+			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
 			  <%= sponsor_translation.label :title, :class => 'control-label' %>
 			  <div class="controls">

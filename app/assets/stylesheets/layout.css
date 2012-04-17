@@ -16,6 +16,25 @@ div.event_menu_popup ul li.event_menu_popup_item p.event_menu_popup_item_categor
 	font-size: smaller;
 }
 
+div#category_menu_popup ul {
+list-style-type: none; 
+}
+
+div#category_menu_popup ul li.category_menu_popup_item {
+	float: left;
+	width: 20%;
+	margin-left: 1em;
+	margin-bottom: -1px;
+	border-right: 1px dashed #666;
+	border-bottom: 1px dashed #666;
+}
+
+div#category_menu_popup ul li.category_menu_popup_item a {
+	display: block;
+	width: 100%;
+	padding: 1em;
+}
+
 .clearfix:after {
     content: ".";
     display: block;

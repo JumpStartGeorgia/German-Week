@@ -2,16 +2,22 @@ class Event < ActiveRecord::Base
   translates :title, :description
 
   has_many :event_translations
-  accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :event_translations_attributes, :lat, :lon, :address
-  attr_accessor :locale
 
   has_many :event_sponsors
   has_many :event_categories
-  has_many :sponsors, :through => :event_sponsors
   has_many :categories, :through => :event_categories
 
+  accepts_nested_attributes_for :event_translations
+  accepts_nested_attributes_for :event_sponsors
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes, :event_sponsors_attributes
+  attr_accessor :locale  
+
   validates :start, :end, :presence => true
+
+  # reverse geocoding by lon & lat
+  geocoded_by :address
+  reverse_geocoded_by :lat, :lon
+  before_save  :reverse_geocode
   
   # will_paginate will get this many records per page
   self.per_page = 5
@@ -23,26 +29,25 @@ class Event < ActiveRecord::Base
   scope :by_title , order('title').l10n
 
   # search 
-  def self.search(search, search_in, category = false, page)
+  def self.search(search, category, page)
     if search && search.length > 0
-      if category
-        joins(:categories => :category_translations).where("category_translations.title = ?", search)
+      if category && category.length > 0 && category != 'all'
+        joins({:categories => :category_translations}, :event_translations)
+          .where("event_translations.locale = ? AND category_translations.title = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, category, '%' + search + '%', '%' + search + '%')
           .paginate(:page => page).order("start ASC")
-      else
-	if search_in == 'all'
-          joins(:event_translations)
-            .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
-            .order("start ASC").uniq
-	else
-          joins(:event_translations)
-          .joins(:categories)
-            .where("categories.id = ?", search_in)
-            .where("event_translations.title LIKE ? OR event_translations.description LIKE ?", '%' + search + '%', '%' + search + '%')
-            .order("start ASC").uniq
-	end
+      elsif !category || category == 'all'
+        joins(:event_translations)
+          .where("event_translations.locale = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", I18n.locale, '%' + search + '%', '%' + search + '%')
+          .paginate(:page => page).order("start ASC")
       end
     else
-      nil
+      if category && category.length > 0 && category != 'all'
+        joins({:categories => :category_translations}, :event_translations)
+          .where("event_translations.locale = ? AND category_translations.title = ?", I18n.locale, category)
+          .paginate(:page => page).order("start ASC")
+      else
+        nil
+      end
     end
   end
 

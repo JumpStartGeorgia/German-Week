@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate, :getEventsByDay]
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICSById, :exportICSByDate, :getEventsByDay]
 
 
   # GET /events
@@ -20,9 +20,9 @@ class EventsController < ApplicationController
      end
   end
 
-  # GET /events/day?date
-  # GET /events/day.js?date  - called when loading the menu pop-up
-  # GET /events/day.json?date
+  # GET /events/day/date
+  # GET /events/day.js/date  - called when loading the menu pop-up
+  # GET /events/day.json/date
   def day
     @events = Event.find_by_date(params[:date],params[:page])
 
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_category.html.erb',
+               :template		=> 'german_week/_search_results.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
@@ -89,7 +89,6 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
-    @sponsors = Sponsor.all
     # create the translation object for however many locales there are
     # so the form will properly create all of the nested form fields
     @locales.length.times {@event.event_translations.build}
