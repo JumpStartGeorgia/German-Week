@@ -23,6 +23,7 @@
         <td>
           <%= link_to 'Edit', edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', sponsor_path(sponsor), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to "Export", "/#{params[:locale]}/events/exportICS/sponsor/#{sponsor.id}", :class => "btn btn-mini" %>
         </td>
       </tr>
     <% end %>

@@ -23,7 +23,11 @@ $(document).ready(function(){
 		var marker = new L.Marker(new L.LatLng(gon.lat, gon.lon));
 		map.addLayer(marker);
 
-		marker.bindPopup(gon.popup).openPopup();
+		var popup = new Array;
+		popup.push("<strong>"+gon.popup+"</strong>");
+		popup.push("<br />");
+		popup.push("<center>"+gon.address+"</center>");
+		marker.bindPopup(popup.join('')).openPopup();
 	}
 	else 
 	{

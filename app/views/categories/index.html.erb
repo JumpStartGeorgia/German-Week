@@ -13,6 +13,7 @@
         <td>
           <%= link_to 'Edit', edit_category_path(category), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', category_path(category), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to "Export", "/#{params[:locale]}/events/exportICS/category/#{category.title.downcase!}", :class => "btn btn-mini" %>
         </td>
       </tr>
     <% end %>

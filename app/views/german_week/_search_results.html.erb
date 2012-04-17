@@ -11,6 +11,9 @@
             <span>-</span>
             <%= format_datetime(event.end) %>
           </div>
+          <% if !event.address.nil? %>
+          		<span style="color:#03F;">Location:</span> <%= event.address %>
+          <% end %>
           <% ecc = event.categories.count; %>
           <% if ecc > 0 %>
             <div class="search_results_ecs">

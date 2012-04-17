@@ -45,15 +45,20 @@ $(function(){
 					map.addLayer(marker);
 											
 					var popup_content = new Array;						
-					popup_content.__("<a href=\""+gon.event_paths[index]+"\"><center><font style=\"font-weight:bold;font-size:15px;\">"+gon.event_popups[index]+"</font></center></a>");					
+					popup_content.__("<a href=\""+gon.event_paths[index]+"\"><center><font class=\"event-popup-title\">"+gon.event_popups[index]+"</font></center></a>");					
 					popup_content.__("<center>");
-					popup_content.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_starts[index]+"</font>");
+					popup_content.__("<font class=\"event-popup-start\">"+gon.event_starts[index]+"</font>");
 					popup_content.__(" - ");
-					popup_content.__("<font style=\"font-weight:bold;font-size:10px;\">"+gon.event_ends[index]+"</font>");		
+					popup_content.__("<font class=\"event-popup-end\">"+gon.event_ends[index]+"</font>");							
 					popup_content.__("</center>");
+					popup_content.__("<center>");
+					popup_content.__("<font class=\"event-popup-location\">"+gon.event_locations[index]+"</font>");
+					popup_content.__("</center>");
+
+					
 					popup_content.__("<br />");			
 					popup_content.__("<center>");
-					popup_content.__("<font style=\"font-size:13px;\">"+gon.event_descriptions[index]+"</font>");
+					popup_content.__("<font class=\"event-popup-description\">"+gon.event_descriptions[index]+"</font>");
 					popup_content.__("</center>");
 					popup_content.__("<br />");
 					
@@ -75,8 +80,7 @@ $(function(){
 						$(target_popup._container).css('z-index', default_popup_zindex);
 						target_popup.setContent(popup_content[0]);
 					});
-					
-					
+										
 					
 					var index = i++;
 					$(".leaflet-marker-pane").children("img:last").attr('id','marker_'+index);
@@ -100,42 +104,26 @@ $(function(){
 					
 					
 			});	
-			
-				
-			
-			
-			
-			
-			
+						
 			map.setView(new L.LatLng(gon.event_lats[gon.event_lats.length-1], gon.event_lons[gon.event_lons.length-1]),12);
 			
 		}
 		else if(gon.events_day_exists){
 			var no_events_div = new Array;
-					no_events_div.__("<div style=\"position:absolute;width:100%;height:100%;left:0px;top:0px;background:#000;opacity:0.4;filter:alpha(opacity=40);\">");						
+					no_events_div.__("<div class=\"no-events-overlay\">");						
 					no_events_div.__("</div>");
-					no_events_div.__("<div style=\"position:absolute;left:40%;top:20%;width:270px;height:130px;background:#000;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;opacity:0.70;\">");
+					no_events_div.__("<div class=\"no-events-msgbox\">");
 							no_events_div.__("<center>");
-								no_events_div.__("<p style=\"padding-left:5px;padding-right:5px;color:#FFF;margin-top:30px;font-size:17px;\">");
-									no_events_div.__("No events for these ");
-									if (gon.day_and_category){
-										no_events_div.__("day and category");
-									}
-									else if(gon.only_day){
-										no_events_div.__("day");
-									}
-									else if(gon.only_category){
-										no_events_div.__("category");
-									}
-									no_events_div.__("!!!");
+								no_events_div.__("<p>");
+									no_events_div.__("Sorry, there are no events for the selected day and category.  Please select a different day or category.");									
 								no_events_div.__("</p>");
-								no_events_div.__("<button id=\"no_events_button\" style=\"width:80px;height:20px;margin-top:25px;opacity:10;filter:alpha(opacity=10);-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;-moz-box-shadow: 5px 5px 5px #000;-webkit-box-shadow: 5px 5px 5px #000;box-shadow: 5px 5px 5px #000;\">");
+								no_events_div.__("<button id=\"no-events-button\">");
 									no_events_div.__("<strong>Ok</strong>");
 								no_events_div.__("</button>");
 							no_events_div.__("</center>");
 						no_events_div.__("</div>");
 			$("#map_container").append(no_events_div.join(''));
-			$("#no_events_button").click(function(){
+			$("#no-events-button").click(function(){
 				$("#map_container").children("div").slice(1).each(function(){
 					$(this).fadeOut(500,function(){
 						$(this).remove();
@@ -143,7 +131,6 @@ $(function(){
 				});
 			});
 		}
-		
 		
 					 		
 	}

@@ -16,6 +16,7 @@ class MapController < ApplicationController
 		gon.event_popups = []
 		gon.event_starts = []
 		gon.event_ends = []
+		gon.event_locations = []
 		gon.event_descriptions = []
 		gon.event_paths = []
 		gon.events_day_exists = false
@@ -46,6 +47,7 @@ class MapController < ApplicationController
 					gon.event_popups.push event.title.to_s
 					gon.event_starts.push event.start.strftime("%d %B %Y %H:%M").to_s
 					gon.event_ends.push event.end.strftime("%d %B %Y %H:%M").to_s
+					gon.event_locations.push event.address.to_s
 					gon.event_paths.push event_path(event).to_s  									
 					begin						
 						if event.description.to_s.length > 100
