@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120414052030) do
+ActiveRecord::Schema.define(:version => 20120418193041) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -37,9 +37,7 @@ ActiveRecord::Schema.define(:version => 20120414052030) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "logo_path"
-    t.string   "url"
+    t.integer  "sponsor_id"
   end
 
   create_table "event_translations", :force => true do |t|
@@ -66,6 +64,28 @@ ActiveRecord::Schema.define(:version => 20120414052030) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sponsor_translations", :force => true do |t|
+    t.integer  "sponsor_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sponsor_translations", ["locale"], :name => "index_sponsor_translations_on_locale"
+  add_index "sponsor_translations", ["sponsor_id"], :name => "index_sponsor_translations_on_sponsor_id"
+
+  create_table "sponsors", :force => true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "users", :force => true do |t|

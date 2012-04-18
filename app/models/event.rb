@@ -3,12 +3,12 @@ class Event < ActiveRecord::Base
 
   has_many :event_translations
   has_many :event_sponsors
+  has_many :sponsors, :through => :event_sponsors
   has_many :event_categories
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations
-  accepts_nested_attributes_for :event_sponsors
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes, :event_sponsors_attributes
+  attr_accessible :start, :end, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes
   attr_accessor :locale  
 
   validates :start, :end, :presence => true

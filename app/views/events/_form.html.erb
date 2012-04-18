@@ -1,4 +1,4 @@
-<%= semantic_form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
+<%= semantic_form_for @event, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
   <fieldset>
 	<%= f.semantic_errors %>
 	<%= f.inputs :for => :event_translations do |event_translation, i| %>
@@ -53,6 +53,12 @@
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
 		  <div class="controls">
 		    <%= f.input :categories, :as => :check_boxes, :label => false %>
+		  </div>
+		</div>
+		<div class="control-group">
+		  <%= f.label :Sponsors, :for => 'event_sponsor_ids', :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :sponsors, :as => :check_boxes, :label => false %>
 		  </div>
 		</div>
   <% end %>

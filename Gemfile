@@ -17,7 +17,7 @@ gem 'gon', '2.2.2' # push data into js
 gem 'wisepdf'
 
 gem "geocoder", "~> 1.1.1"
-#gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 3.0" # upload images
 
 
 # Gems used only for assets and not required
