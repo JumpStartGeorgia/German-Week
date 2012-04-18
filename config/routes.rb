@@ -40,6 +40,9 @@ GermanWeek::Application.routes.draw do
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 
+  # gets images from slider_image folder, because javascript cannot access a directory
+  match '/:locale/slider_images', :to => 'events#slider_images', :as => :slider_image_files, :via => 'get'
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

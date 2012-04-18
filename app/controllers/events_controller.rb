@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate, :getEventsByDay]
+  before_filter :authenticate_user!, :except => [:index, :show, :exportICSById, :exportICSByDate, :getEventsByDay, :slider_images]
 
 
   # GET /events
@@ -241,6 +241,40 @@ class EventsController < ApplicationController
 		# the respond 
 		# render :file => url, :content_type => "text/calendar; charset=UTF-8" 	
 		redirect_to "/assets/#{params[:date]}.ics"
+  end
+
+  def slider_images
+    pathname = 'public/assets/images/header/';
+    extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    images = [];
+
+    Dir.foreach(pathname) do |f|
+      if !extensions.include? File.extname(f)[1..4]
+        next
+      end
+      images.push 'assets/images/header/' + f
+    end
+
+    max = images.count
+    randoms = Set.new();
+    loop do
+      randoms << Random.rand(max)
+      if randoms.size > 2
+        break
+      end
+    end
+
+    random_images = [];
+    images.each_with_index do |img, i|
+      if randoms.include? i
+        random_images.push img
+      end
+    end
+
+    respond_to do |format|
+      format.json { render :json => random_images }
+    end
+
   end
   
 end

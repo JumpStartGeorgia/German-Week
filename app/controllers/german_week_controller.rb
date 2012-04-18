@@ -10,7 +10,7 @@ class GermanWeekController < ApplicationController
     @events = Event.search(search, category, params[:page])
 
     if search
-      boldpart = "<b>" + search + "</b>"
+      boldpart = "<span class=\"matched_term\">" + search + "</span>"
       if !@events.nil?
         @events.each { |event|
           event.title = event.title.split(search).join(boldpart).html_safe
