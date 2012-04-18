@@ -1,5 +1,7 @@
 GermanWeek::Application.routes.draw do
 
+  resources :pages
+
   root :to => 'german_week#index'
 
   devise_for :users
@@ -23,11 +25,15 @@ GermanWeek::Application.routes.draw do
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 
   scope "/:locale" do
-    resources :locales
+    resources :categories
   end
   
   scope "/:locale" do
-    resources :categories
+    resources :events
+  end
+  
+  scope "/:locale" do
+    resources :locales
   end
   
   scope "/:locale" do
@@ -35,9 +41,10 @@ GermanWeek::Application.routes.draw do
   end
   
   scope "/:locale" do
-    resources :events
+    resources :pages
   end
-  
+  match '/:locale/pages/view/:name', :to => 'pages#view', :as => :view_pages, :via => :get
+
 
   
   # The priority is based upon order of creation:

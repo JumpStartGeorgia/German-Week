@@ -4,7 +4,7 @@ class Sponsor < ActiveRecord::Base
         :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
         :url => "/system/:attachment/:id/:style/:filename"
 
-  has_many :sponsor_translations
+  has_many :sponsor_translations, :dependent => :destroy
   accepts_nested_attributes_for :sponsor_translations
   attr_accessible :sponsor_translations_attributes, :url, :logo, :event_ids
   attr_accessor :locale

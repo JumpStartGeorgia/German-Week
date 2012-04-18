@@ -1,10 +1,10 @@
 class Event < ActiveRecord::Base
   translates :title, :description
 
-  has_many :event_translations
-  has_many :event_sponsors
+  has_many :event_translations, :dependent => :destroy
+  has_many :event_sponsors, :dependent => :destroy
   has_many :sponsors, :through => :event_sponsors
-  has_many :event_categories
+  has_many :event_categories, :dependent => :destroy
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations

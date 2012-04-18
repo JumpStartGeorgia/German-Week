@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
 #  attr_accessible :title, :locale
   attr_accessor :locale
 
-  has_many :category_translations
+  has_many :category_translations, :dependent => :destroy
   accepts_nested_attributes_for :category_translations
   attr_accessible :category_translations_attributes
 
