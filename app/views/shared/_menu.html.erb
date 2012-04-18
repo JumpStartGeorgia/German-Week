@@ -4,13 +4,27 @@
 			<li>
 				<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
 							day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
-
 							:class => "event_menu_link" %>					
 						<div id='<%="event_menu_popup#{i}"%>' style="width: 100%;" class="event_menu_popup">
-							<ul><%= render("shared/menu_item", :collection => @events) || '<li class="event_menu_popup_item">Loading...</li>' %></ul>
+							<ul>
+								<%= render("shared/event_menu_item", :collection => @events) || '<li class="event_menu_popup_item">Loading...</li>' %>
+							</ul>
 							<div class="clearfix"></div>
 						</div>
-
 			</li>
 		<% end %>
+		<li>
+			<%= link_to "Categories", category_events_path %>
+			<div id="category_menu_popup" style="width: 100%;" >
+				<ul>
+					<% @categories.each do |cat| %>
+					<li class="category_menu_popup_item">
+						<p><%= link_to cat.title, category_events_path(cat.title) %></p>
+					</li>
+					<% end %>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+		</li>
+		<li><%= link_to "Map", map_page_day_path %></li>
 	</ul>

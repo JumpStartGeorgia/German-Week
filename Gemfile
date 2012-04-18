@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 # gem 'mysql', '2.8.1'
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
-gem 'pg'
+#gem 'pg'
 gem 'jquery-rails', '1.0.19'
 gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
@@ -17,6 +17,7 @@ gem 'gon', '2.2.2' # push data into js
 gem 'wisepdf'
 
 gem "geocoder", "~> 1.1.1"
+#gem "paperclip", "~> 3.0"
 
 
 # Gems used only for assets and not required

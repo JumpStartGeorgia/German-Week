@@ -6,14 +6,15 @@
 		<% formLocale = @locales[i-1].language %>
 
 		<div id="form-<%= formLocale %>" class="multilanguage" style="<%= 'display:none;' if formLocale.to_s != params[:locale] %>">
+			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
-			  <%= event_translation.label :title, :class => 'control-label' %>
+			  <%= event_translation.label "#{@locales[i-1].name} #{:title}", :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.text_field :title, :class => 'text_field' %>
 			  </div>
 			</div>
 			<div class="control-group">
-			  <%= event_translation.label :description, :class => 'control-label' %>
+			  <%= event_translation.label "#{@locales[i-1].name} #{:description}", :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
@@ -48,16 +49,24 @@
 		    <%= f.text_field :lon, :class => 'text_field', :type => :number %>
 		  </div>
 		</div>
+		
+		<div id="control-map" class="control-map"></div>
+		<br />
+		
 		<div class="control-group">
-		  <%= f.label :Sponsors, :for => 'event_sponsor_ids', :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :sponsors, :label => false %>
-		  </div>
+			<%= f.label :address, :class => "control-label" %>
+			<div class="controls">
+			  <%= f.text_field :address, :class => "text_field", :label => false %>
+			  <%= link_to "#", :id => "btn-getaddr", :class => "btn btn-getaddr" do %> 
+			  	 <div>Get lat/lon</div>
+			  <% end%>
+			</div>
 		</div>
+		
 		<div class="control-group">
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
 		  <div class="controls">
-		    <%= f.input :categories, :label => false %>
+		    <%= f.input :categories, :as => :check_boxes, :label => false %>
 		  </div>
 		</div>
   <% end %>

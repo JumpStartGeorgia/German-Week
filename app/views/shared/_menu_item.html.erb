@@ -5,6 +5,7 @@
 		<p><%= link_to menu_item.title, event_path(menu_item) %></p>
 		<p><%= format_time(menu_item.start) %> - <%= format_time(menu_item.end) %></p>
 		<p><%= truncate(menu_item.description, :length => 100) %></p>
+		<p><%= menu_item.address %></p>
 		<p class="event_menu_popup_item_categories">
 			<% if menu_item.categories.count > 0 %>
 				Categories: <% menu_item.categories.each do |cat| %><%= link_to "[#{cat.title}]", category_events_path(:cat => cat.title) %> <% end %>

@@ -21,10 +21,12 @@
         <td><%= sponsor.phone %></td>
         <td><%= sponsor.address %></td>
         <td>
+
 	  <% if user_signed_in? %>
             <%= link_to 'Edit', edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
             <%= link_to 'Destroy', sponsor_path(sponsor), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
 	  <% end %>
+
         </td>
       </tr>
     <% end %>

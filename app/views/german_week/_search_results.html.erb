@@ -11,13 +11,16 @@
             <span>-</span>
             <%= format_datetime(event.end) %>
           </div>
+          <% if !event.address.nil? %>
+          		<span style="color:#03F;">Location:</span> <%= event.address %>
+          <% end %>
           <% ecc = event.categories.count; %>
           <% if ecc > 0 %>
             <div class="search_results_ecs">
               <span>Categories:</span>
               <% event.categories.each_with_index do |c, i| %>
                 <% separator = ((ecc - 1) != i) ? ', ' : '' %>
-                <%= link_to c.title, category_events_path(:cat => c.title) %><%= separator %>
+                <%= link_to c.title, category_events_path(c.title) %><%= separator %>
               <% end %>
             </div>
           <% end %>

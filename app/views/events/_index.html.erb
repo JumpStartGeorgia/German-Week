@@ -27,6 +27,7 @@
 	      <%= link_to 'Destroy', event_path(event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
 	    <% end %>
 	<% end %>
+						<%= link_to "Export", "/#{params[:locale]}/events/exportICS/event/#{event.id}", :class => "btn btn-mini" %>
         </td>
       </tr>
     <% end %>
