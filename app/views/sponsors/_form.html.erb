@@ -19,12 +19,6 @@
 			    <%= sponsor_translation.input :description, :as => :text, :label => false %>
 			  </div>
 			</div>
-			<div class="control-group">
-			  <%= sponsor_translation.label :address, :class => 'control-label' %>
-			  <div class="controls">
-			    <%= sponsor_translation.input :address, :label => false, :class => 'text_field' %>
-			  </div>
-			</div>
 			<%= sponsor_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
@@ -32,33 +26,24 @@
 
 	<%= f.inputs do %>
 		<div class="control-group">
-		  <%= f.label :lat, :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :lat, :label => false %>
-		  </div>
-		</div>
-		<div class="control-group">
-		  <%= f.label :lon, :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :lon, :label => false %>
-		  </div>
-		</div>
-		<div class="control-group">
-		  <%= f.label :phone, :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :phone, :as => :phone, :label => false %>
-		  </div>
-		</div>
-		<div class="control-group">
 		  <%= f.label :url, :class => 'control-label' %>
 		  <div class="controls">
 		    <%= f.input :url, :as => :url, :label => false %>
 		  </div>
 		</div>
 		<div class="control-group">
-		  <%= f.label :type, :class => 'control-label' %>
+		  <%= f.label :logo, :class => 'control-label' %>
 		  <div class="controls">
-		    <%= f.input :type, :as => :radio, :collection => ['Type 1', 'Type 2'], :label => false %>
+				<% if !@sponsor.logo_file_name.nil? %>
+				Current logo on file: <%= image_tag @sponsor.logo.url %> 
+<%
+=begin %>				
+				<%= label_tag "delete_logo", "Delete the Logo?", %> <%= check_box_tag "delete_logo" %>
+<%
+=end %>
+				<br />
+				<% end %>
+		    <%= f.input :logo, :as => :file, :label => false %>
 		  </div>
 		</div>
 		<%= f.hidden_field :locale , :value => I18n.locale %>

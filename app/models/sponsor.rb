@@ -1,15 +1,18 @@
 class Sponsor < ActiveRecord::Base
-  translates :title, :description, :address
+  translates :title, :description
+  has_attached_file :logo,
+        :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+        :url => "/system/:attachment/:id/:style/:filename"
 
-  has_many :sponsor_translations
+  has_many :sponsor_translations, :dependent => :destroy
   accepts_nested_attributes_for :sponsor_translations
-  attr_accessible :sponsor_translations_attributes, :url, :phone, :type, :event_ids, :lat, :lon
+  attr_accessible :sponsor_translations_attributes, :url, :logo, :event_ids
   attr_accessor :locale
 
   has_many :event_sponsors
   has_many :events, :through => :event_sponsors
 
-#  validates :url, :phone, :type, :presence => true  # not required
+  validates :url, :logo, :presence => true 
   validates_associated :sponsor_translations
 
   

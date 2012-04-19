@@ -17,11 +17,6 @@ class SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
 
-    # load the lat and lon so the map shows
-    gon.lat = @sponsor.lat
-    gon.lon = @sponsor.lon
-    gon.popup = @sponsor.title
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @sponsor }
@@ -67,6 +62,11 @@ class SponsorsController < ApplicationController
   # PUT /sponsors/1.json
   def update
     @sponsor = Sponsor.find(params[:id])
+    
+    # if the delete logo is checked, reset the logo to nil
+#    if params[:delete_logo] = 1
+#      @sponsor.logo = nil
+#    end
 
     respond_to do |format|
       if @sponsor.update_attributes(params[:sponsor])

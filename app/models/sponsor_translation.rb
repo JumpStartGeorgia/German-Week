@@ -1,6 +1,6 @@
 class SponsorTranslation < ActiveRecord::Base
 
-  attr_accessible :sponsor_id, :title, :description, :address, :locale
+  attr_accessible :sponsor_id, :title, :description, :locale
   belongs_to :sponsor
 
   validates :title, :description, :locale, :presence => true

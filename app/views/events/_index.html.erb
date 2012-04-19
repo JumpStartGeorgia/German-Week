@@ -23,17 +23,17 @@
 	<% if is_html %>
           <td>
 	    <% if user_signed_in? %>
-              <%= link_to 'Edit', edit_event_path(event), :class => 'btn btn-mini' %>
+        <%= link_to 'Edit', edit_event_path(event), :class => 'btn btn-mini' %>
 	      <%= link_to 'Destroy', event_path(event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
 	    <% end %>
+			<%= link_to "Export", events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn btn-mini" %>
 	<% end %>
-						<%= link_to "Export", "/#{params[:locale]}/events/exportICS/event/#{event.id}", :class => "btn btn-mini" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<% if is_html %>
+<% if is_html && user_signed_in? %>
   <%= link_to 'New Event', new_event_path %>
 <% end %>
