@@ -17,6 +17,7 @@ gem 'gon', '2.2.2' # push data into js
 gem 'wisepdf'
 
 gem "geocoder", "~> 1.1.1"
+gem "twitter-bootstrap-rails"
 #gem "paperclip", "~> 3.0"
 
 
