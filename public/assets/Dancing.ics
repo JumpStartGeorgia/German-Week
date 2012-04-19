@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID:iCalendar-Ruby
+VERSION:2.0
+BEGIN:VEVENT
+DESCRIPTION:This is the event description.
+DTEND:20120531T180000Z
+DTSTAMP:20120419T141931
+DTSTART:20120514T130000Z
+CLASS:PUBLISH
+LOCATION:Barnov St\, Tbilisi\, Georgia
+SEQUENCE:0
+SUMMARY:German Beer Tasting
+UID:2012-04-19T14:19:31+04:00_90391045@jason-addies-macbook.local
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:sdfsdlfjjklsdhfjkhsdkjfhsdkjfhksdjfh\nsdfsdlfjjklsdhfjkhsdkjfhs
+ dkjfhksdjfh\nsdfsdlfjjklsdhfjkhsdkjfhsdkjfhksdjfh\nsdfsdlfjjklsdhfjkhsdkjfh
+ sdkjfhksdjfh\nsdfsdlfjjklsdhfjkhsdkjfhsdkjfhksdjfh
+DTEND:20120331T000000Z
+DTSTAMP:20120419T141931
+DTSTART:20120320T000000Z
+CLASS:PUBLISH
+LOCATION:
+SEQUENCE:0
+SUMMARY:New Event English
+UID:2012-04-19T14:19:31+04:00_859714948@jason-addies-macbook.local
+END:VEVENT
+END:VCALENDAR

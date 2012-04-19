@@ -23,6 +23,11 @@
 </p>
 
 <p>
+  <b>Location:</b>
+  <%= @event.address %>
+</p>
+
+<p>
   <b>Categories:</b>
 	<% @event.categories.each_with_index do |c, i| %>
   	<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
@@ -48,7 +53,8 @@
 
 <% if is_html %>
   <p>
-    <a href="/<%= locale %>/events/exportICS/event/<%= @event.id %>">Export Calendar File</a>
+		<%= link_to 'Download PDF', event_path(@event, :format => 'pdf'), :class => "btn btn-mini" %>
+		<%= link_to "Export Calendar File", events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn btn-mini" %>
   </p>
 <% end %>
 

@@ -11,14 +11,18 @@
       <tr>
         <td><%= link_to category.title, category %></td>
         <td>
+
 	  <% if user_signed_in? %>
             <%= link_to 'Edit', edit_category_path(category), :class => 'btn btn-mini' %>
             <%= link_to 'Destroy', category_path(category), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
 	  <% end %>
+
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<% if user_signed_in? %>
 <%= link_to 'New', new_category_path, :class => 'btn btn-primary' %>
+<% end %>

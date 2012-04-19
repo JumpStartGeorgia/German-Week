@@ -15,6 +15,7 @@
   <%= @page.description %>
 </p>
 
-
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_page_path(@page) %> |
+<% end %>
 <%= link_to 'Back', pages_path %>
