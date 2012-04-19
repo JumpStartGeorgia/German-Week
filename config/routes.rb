@@ -36,7 +36,7 @@ GermanWeek::Application.routes.draw do
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 	
 	# Get address by lat && lon route
-	match '/:locale/location', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
+	match '/:locale(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
 
 
   scope "/:locale" do

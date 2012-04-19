@@ -64,12 +64,12 @@ class EventsController < ApplicationController
     gon.lat = @event.lat
     gon.lon = @event.lon
     gon.popup = @event.title
-		gon.end_year = @event.end.strftime("%Y")
-    gon.end_month = @event.end.strftime("%m")
-    gon.end_day = @event.end.strftime("%d") 
-    gon.end_hour = @event.end.strftime("%H")
-    gon.end_minute = @event.end.strftime("%M")
-    gon.end_second = @event.end.strftime("%S")
+		gon.end_year = @event.start.strftime("%Y")
+    gon.end_month = @event.start.strftime("%m")
+    gon.end_day = @event.start.strftime("%d") 
+    gon.end_hour = @event.start.strftime("%H")
+    gon.end_minute = @event.start.strftime("%M")
+    gon.end_second = @event.start.strftime("%S")
     gon.address = @event.address
 
 
@@ -207,12 +207,22 @@ logger.debug "data has #{data.length} records"
   end
   
   def getLocation  	
-  	begin
-  		location = Geocoder.search("#{params[:address]}")
-  		render :inline => "#{location[0].latitude},#{location[0].longitude}"
-  	rescue
-  		render :inline => "0,0"
-  	end
+  	case params[:addrorlatlng]
+  		when "latlng"
+				begin
+					location = Geocoder.search("#{params[:address]}")
+					render :inline => "#{location[0].latitude},#{location[0].longitude}"
+				rescue
+					render :inline => "0,0"
+				end
+			when "addr"
+				begin
+					location = Geocoder.search("#{params[:lat]},#{params[:lng]}")
+					render :inline => "#{location[0].address}"
+				rescue
+					render :inline => "no address"
+				end
+		end
   end
   
 end
