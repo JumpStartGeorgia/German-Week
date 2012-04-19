@@ -3,8 +3,7 @@
 <head>
   <title>Deutschen Woche 2012 - <%= yield (:title) || "German Week" %></title>
 	<%= include_gon %>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag  "application" %>
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
   <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
   <%= csrf_meta_tags %>
@@ -39,13 +38,17 @@
 
 		<%= link_to 'Search', search_path %>
 
+		<%= link_to "Contact", view_pages_path(:name => "contact") %>
+
+		<%= link_to "Disclaimer", view_pages_path(:name => "disclaimer") %>
+
 	</div>
 
   <div id="language-form">
     <ul>
     <% @locales.each do |locale| %>
       <% unless locale.language.to_s == I18n.locale.to_s %> 
-        <li><%= link_to locale.name, url_for(locale: locale.language) %></li>
+        <li><%= link_to locale.name, params.merge(:locale => locale.language) %></li>
       <% end %>
     <% end %>
     </ul>
@@ -65,5 +68,6 @@
   <%= yield %>
 </div>
 
+<%= javascript_include_tag "application" %>
 </body>
 </html>

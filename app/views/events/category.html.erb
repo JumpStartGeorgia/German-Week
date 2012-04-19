@@ -1,4 +1,9 @@
 <%= render 'category', :html => true %>
 
-<br />
-<%= link_to 'Download PDF', category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf') %>
+<% if !@events.nil? && @events.length > 0 %>
+<div>
+	<%= link_to 'Download PDF', category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf'), :class => "btn btn-mini" %>
+
+	<%= link_to "Export Calendar File", events_exportICS_path(:type => "category", :typespec => params[:cat]), :class => "btn btn-mini" %>
+</div>
+<% end %>

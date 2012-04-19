@@ -28,6 +28,23 @@
 </p>
 
 <p>
+  <b>Categories:</b>
+	<% @event.categories.each_with_index do |c, i| %>
+  	<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
+  	<%= link_to c.title, category_events_path(c.title) %><%= separator %>
+	<% end %>
+</p>
+
+<p>
+  <b>Sponsors:</b>
+	<% @event.sponsors.each do |s| %>
+		<% if !s.logo_file_name.nil? %>
+	  	<%= link_to(image_tag(s.logo.url), s.url, :target => '_blank') %>
+		<% end %>
+	<% end %>
+</p>
+
+<p>
 	<div id="countdown">
   	<div id="time"></div>
   	<div id="time-abr" class="time-abr"></div>
@@ -36,7 +53,8 @@
 
 <% if is_html %>
   <p>
-    <a href="/<%= locale %>/events/exportICS/event/<%= @event.id %>">Export Calendar File</a>
+		<%= link_to 'Download PDF', event_path(@event, :format => 'pdf'), :class => "btn btn-mini" %>
+		<%= link_to "Export Calendar File", events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn btn-mini" %>
   </p>
 <% end %>
 

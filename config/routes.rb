@@ -1,5 +1,7 @@
 GermanWeek::Application.routes.draw do
 
+  resources :pages
+
   root :to => 'german_week#index'
 
   devise_for :users
@@ -13,31 +15,14 @@ GermanWeek::Application.routes.draw do
   match '/:locale/events/day/:date(/:menu_item)', :to => 'events#day', :as => :day_events, :via => 'get'
 	
   # create route to export events to ICS By ID
-  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
+#  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
   # create route to export events to ICS By Date
-  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
+#  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
   
 	# map page routes
 	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
 
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
-
-  scope "/:locale" do
-    resources :locales
-  end
-  
-  scope "/:locale" do
-    resources :categories
-  end
-  
-  scope "/:locale" do
-    resources :sponsors
-  end
-  
-  scope "/:locale" do
-    resources :events
-  end
-  
 
   # create route to export events to ICS By ID
   match '/:locale/events/exportICS/:type/:typespec', :to => 'events#exportICS', :as => :events_exportICS, :via => 'get'
@@ -52,6 +37,29 @@ GermanWeek::Application.routes.draw do
 	
 	# Get address by lat && lon route
 	match '/:locale(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
+
+
+  scope "/:locale" do
+    resources :categories
+  end
+  
+  scope "/:locale" do
+    resources :events
+  end
+  
+  scope "/:locale" do
+    resources :locales
+  end
+  
+  scope "/:locale" do
+    resources :sponsors
+  end
+  
+  scope "/:locale" do
+    resources :pages
+  end
+  match '/:locale/pages/view/:name', :to => 'pages#view', :as => :view_pages, :via => :get
+
 
   
   # The priority is based upon order of creation:

@@ -1,4 +1,7 @@
 <%= render 'index', :html => true %>
 
-<br />
-<%= link_to 'Download PDF', events_path(:format => 'pdf') %>
+<% if !@events.nil? && @events.length > 0 %>
+<div>
+	<%= link_to 'Download PDF', events_path(:format => 'pdf'), :class => "btn btn-mini" %>
+</div>
+<% end %>

@@ -1,4 +1,8 @@
 <%= render 'day', :html => true %>
 
-<br />
-<%= link_to 'Download PDF', day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf') %>
+<% if !@events.nil? && @events.length > 0 %>
+<div>
+	<%= link_to 'Download PDF', day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn btn-mini" %>
+	<%= link_to "Export", events_exportICS_path(:type => "day", :typespec => params[:date]), :class => "btn btn-mini" %>
+</div>
+<% end %>

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICSById, :exportICSByDate, :getEventsByDay]
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICS, :getEventsByDay]
 
 
   # GET /events
@@ -154,62 +154,56 @@ class EventsController < ApplicationController
   	
   	# get all event data from database
   	output_file_name = params[:typespec]
+    data = Event.find_for_ics(params[:type], params[:typespec])
+logger.debug "data has #{data.length} records"    
   	case params[:type]
   		when "event" 
-  			data = Event.find params[:typespec]
   			output_file_name = data.title.split.join('_')
   			data = [data]
-  		when "day" 
-  			data = Event.where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT('#{params[:typespec]}','%Y-%m-%d') AND 
-  						 DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT('#{params[:typespec]}','%Y-%m-%d')")  	  			
-  		when "category" 
-  			data = Event.joins(:event_translations, :categories => :category_translations)
-										.where("category_translations.title = ? and event_translations.locale = ? and
-										category_translations.locale = ?", params[:typespec], I18n.locale, I18n.locale)				
 			when "sponsor"
-				data = Event.joins(:event_translations, :sponsors => :sponsor_translations)
-										.where("sponsor_translations.sponsor_id = ? and event_translations.locale = ? and 
-										sponsor_translations.locale = ?", params[:typespec], I18n.locale, I18n.locale)
 				output_file_name = Sponsor.find(params[:typespec]).title.split.join('_')
-  		else redirect_to "/"
   	end
   									
 		# fill calendar with events and event data
-		data.each do |event_each|
-			# create calendar event
-  		event = Icalendar::Event.new
+		if data.nil? || data.length == 0
+		  redirect_to "/"
+	  else
+  		data.each do |event_each|
+  			# create calendar event
+    		event = Icalendar::Event.new
   		
-			# fill event with data
-			event.dtstart = event_each.start.strftime("%Y%m%dT%H%M%SZ")
-			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ")
-			event.description = event_each.description.to_s
-			event.summary = event_each.title.to_s
-			event.location = event_each.address.to_s
-			#event.categories = []
-			#event_each.categories.each do |event_each_category|
-			#	event.categories.push Icalendar::Component.new event_each_category.title
-			#end
-			event.klass = "PUBLISH"
+  			# fill event with data
+  			event.dtstart = event_each.start.strftime("%Y%m%dT%H%M%SZ")
+  			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ")
+  			event.description = event_each.description.to_s
+  			event.summary = event_each.title.to_s
+  			event.location = event_each.address.to_s
+  			#event.categories = []
+  			#event_each.categories.each do |event_each_category|
+  			#	event.categories.push Icalendar::Component.new event_each_category.title
+  			#end
+  			event.klass = "PUBLISH"
 		
-			# add event to calendar
-			calendar.add event								
-		end
-		
-		# final calendar data output
-		data = calendar.to_ical			
-		# delete all tmp iCalendar files in assets dir
-		Dir.entries(File.dirname(__FILE__)+"/../../public/assets").each do |entry|
-  		if entry[(entry.length-4)..(entry.length)] == ".ics"
-				File.delete(File.dirname(__FILE__)+"/../../public/assets/#{entry}")  			
+  			# add event to calendar
+  			calendar.add event								
   		end
-  	end
-  	# create new ics export file
-		ics_file = File.new(File.dirname(__FILE__)+"/../../public/assets/#{output_file_name}.ics","w")
-			ics_file.puts(data)
-		ics_file.close
-		# the respond 
-		# render :file => url, :content_type => "text/calendar; charset=UTF-8" 	
-		redirect_to "/assets/#{output_file_name}.ics"
+		
+  		# final calendar data output
+  		data = calendar.to_ical			
+  		# delete all tmp iCalendar files in assets dir
+  		Dir.entries(File.dirname(__FILE__)+"/../../public/assets").each do |entry|
+    		if entry[(entry.length-4)..(entry.length)] == ".ics"
+  				File.delete(File.dirname(__FILE__)+"/../../public/assets/#{entry}")  			
+    		end
+    	end
+    	# create new ics export file
+  		ics_file = File.new(File.dirname(__FILE__)+"/../../public/assets/#{output_file_name}.ics","w")
+  			ics_file.puts(data)
+  		ics_file.close
+  		# the respond 
+  		# render :file => url, :content_type => "text/calendar; charset=UTF-8" 	
+  		redirect_to "/assets/#{output_file_name}.ics"
+    end
   end
   
   def getLocation  	

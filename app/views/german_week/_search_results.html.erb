@@ -12,11 +12,13 @@
             <%= format_datetime(event.end) %>
           </div>
           <% if !event.address.nil? %>
-          		<span style="color:#03F;">Location:</span> <%= event.address %>
+          	<div class="search_results_sub_section">
+          		<span>Location:</span> <%= event.address %>
+						</div>
           <% end %>
           <% ecc = event.categories.count; %>
           <% if ecc > 0 %>
-            <div class="search_results_ecs">
+            <div class="search_results_sub_section">
               <span>Categories:</span>
               <% event.categories.each_with_index do |c, i| %>
                 <% separator = ((ecc - 1) != i) ? ', ' : '' %>

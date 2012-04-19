@@ -10,26 +10,16 @@
 </p>
 
 <p>
-  <b>Type:</b>
-  <%= @sponsor.type %>
-</p>
-
-<p>
   <b>Url:</b>
-  <%= @sponsor.url %>
+  <%= link_to @sponsor.url, @sponsor.url %>
 </p>
 
 <p>
-  <b>Phone:</b>
-  <%= @sponsor.phone %>
+  <b>Logo:</b>
+	<% if !@sponsor.logo_file_name.nil? %>
+  <%= image_tag @sponsor.logo.url %>
+	<% end %>
 </p>
-
-<p>
-  <b>Address:</b>
-  <%= @sponsor.address %>
-</p>
-
-<div id='map'></div>
 
 <div class="form-actions">
   <%= link_to 'Back', sponsors_path, :class => 'btn'  %>

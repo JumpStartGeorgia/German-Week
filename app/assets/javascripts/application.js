@@ -6,8 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require jquery-ui
+//= require twitter/bootstrap
 //= require vendor
 //= require id_countdown
 //= require_tree .
