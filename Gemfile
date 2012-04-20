@@ -25,7 +25,7 @@ gem "twitter-bootstrap-rails"
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-
+  gem 'execjs'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
