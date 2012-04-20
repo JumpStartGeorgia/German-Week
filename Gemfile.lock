@@ -156,6 +156,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails
   devise (= 2.0.4)
+  execjs
   formtastic (= 2.1.1)
   geocoder (~> 1.1.1)
   globalize3 (= 0.2.0)
