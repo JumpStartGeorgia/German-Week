@@ -9,7 +9,7 @@ Locale.create(:language => 'en' , :name => 'English')
 
 # Pages **************************************************************************
 
-Page.delete.all
+Page.delete_all
 
 page = Page.create(:name => 'contact')
 page.page_translations.create(:locale => 'de', :title => 'Kontakt', :description => '...')
