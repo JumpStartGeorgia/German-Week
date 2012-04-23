@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 # gem 'mysql', '2.8.1'
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
-#gem 'pg'
 gem 'jquery-rails', '1.0.19'
 gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
@@ -24,9 +23,9 @@ gem "twitter-bootstrap-rails"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
+  gem 'sass-rails', '3.1.4'
   gem 'coffee-rails'
-
+  gem 'execjs'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
@@ -34,7 +33,9 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-
+group :production do
+  gem 'pg'
+end
 
 # for debugging
 # to get debugging to work, follow directions at:
