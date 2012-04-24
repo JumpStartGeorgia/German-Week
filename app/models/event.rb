@@ -8,15 +8,15 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes
+  attr_accessible :start, :end, :email, :url, :phone, :fax, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes
   attr_accessor :locale  
 
   validates :start, :end, :presence => true
 
   # reverse geocoding by lon & lat
-  geocoded_by :address
-  reverse_geocoded_by :lat, :lon
-  before_save  :reverse_geocode
+#  geocoded_by :address
+#  reverse_geocoded_by :lat, :lon
+#  before_save  :reverse_geocode
   
   # will_paginate will get this many records per page
   self.per_page = 5

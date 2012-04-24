@@ -8,6 +8,11 @@
       <th>Description</th>
       <th>Start</th>
       <th>End</th>
+			<th>Address</th>
+			<th>Phone</th>
+			<th>Fax</th>
+			<th>Email</th>
+			<th>Website</th>
       <% if is_html %>
         <th>Actions</th>
       <% end %>
@@ -20,6 +25,11 @@
         <td><%= event.description %></td>
         <td><%= format_datetime(event.start) %></td>
         <td><%= format_datetime(event.end) %></td>
+        <td><%= event.address %></td>
+        <td><%= event.phone %></td>
+        <td><%= event.fax %></td>
+        <td><% if !event.email.nil? %><a href="<%= event.email %>" target="_blank"><%= event.email %></a><% end %></td>
+        <td><% if !event.url.nil? %><a href="<%= event.url %>" target="_blank"><%= event.url %></a><% end %></td>
 	<% if is_html %>
           <td>
 	    <% if user_signed_in? %>
