@@ -1,11 +1,43 @@
 <%= semantic_form_for @page do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :name %>
-    <%= f.input :title %>
-    <%= f.input :description %>
+  <fieldset>
+	<%= f.semantic_errors %>
+	<%= f.inputs do %>
+
+			<div class="control-group">
+			  <%= f.label :name, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= f.text_field :name, :class => 'text_field', :label => false  %>
+			  </div>
+			</div>
   <% end %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
+	<%= f.inputs :for => :page_translations do |page_translation, i| %>
+		<% formLocale = @locales[i-1].language %>
+		
+		
+		<div id="form-<%= formLocale %>" class="multilanguage">
+			<h3><%= @locales[i-1].name %></h3>
+			<div class="control-group">
+			  <%= page_translation.label :title, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= page_translation.text_field :title, :class => 'text_field', :label => false  %>
+			  </div>
+			</div>
+			<div class="control-group">
+			  <%= page_translation.label :description, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= page_translation.input :description, :as => :text, :label => false %>
+			  </div>
+			</div>
+			<%= page_translation.hidden_field :locale , :value => formLocale %>
+		</div>
+
   <% end %>
+
+	<div class="form-actions">
+	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
+	  <%= link_to 'Cancel', sponsors_path, :class => 'btn' %>
+	</div>
+  </fieldset>
 <% end %>

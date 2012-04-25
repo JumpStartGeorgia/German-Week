@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   attr_accessible :start, :end, :email, :url, :phone, :fax, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes
   attr_accessor :locale  
 
-  validates :start, :end, :presence => true
+  validates :start, :presence => true
 
   # reverse geocoding by lon & lat
 #  geocoded_by :address
@@ -77,7 +77,7 @@ class Event < ActiveRecord::Base
   def self.find_for_map(type, dayorcategory, day)
     if !type.nil? && !dayorcategory.nil? && !day.nil?
   		if type == "day"	
-  			where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d')) AND (DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT(?,'%Y-%m-%d'))",
+  			where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))",
   			  dayorcategory, dayorcategory)
   		elsif type == "category" 		
   			joins(:event_translations, :categories => :category_translations)
@@ -85,7 +85,7 @@ class Event < ActiveRecord::Base
   			    dayorcategory, I18n.locale, I18n.locale)				        
   		elsif type == "daycategory"
   			joins(:event_translations, :categories => :category_translations)
-  			  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and (DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d')) AND (DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT(?,'%Y-%m-%d'))", 
+  			  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and (DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))", 
   			    dayorcategory, I18n.locale, I18n.locale, day, day)
       else
         return nil
@@ -102,7 +102,7 @@ class Event < ActiveRecord::Base
     		when "event" 
     			find typespec
     		when "day" 
-    			where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d') AND DATE_FORMAT(end,'%Y-%m-%d') >= DATE_FORMAT(?,'%Y-%m-%d')",
+    			where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d')",
   				 typespec, typespec)  	  			
     		when "category" 
     			joins(:event_translations, :categories => :category_translations)
@@ -124,8 +124,10 @@ class Event < ActiveRecord::Base
 
   # make sure the start date is < end date  
   def date_comparison_validator
-    if (!self.start.blank? && !self.end.blank?) then
+    if (!self.start.blank?) then
       errors.add(:start, 'is not a valid date/time') if ((DateTime.parse(self.start) rescue ArgumentError) == ArgumentError)
+    end
+    if (!self.start.blank? && !self.end.blank?) then
       errors.add(:end, 'is not a valid date/time') if ((DateTime.parse(self.end) rescue ArgumentError) == ArgumentError)
       errors.add(:end, 'must be after the Start date/time') if (DateTime.parse(self.start) >= DateTime.parse(self.end))
     end

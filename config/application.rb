@@ -34,15 +34,15 @@ module GermanWeek
     config.i18n.default_locale = :de
 
     # rails will fallback to config.i18n.default_locale translation
-#    config.i18n.fallbacks = true
+    config.i18n.fallbacks = true
     
     # rails will fallback to en, no matter what is set as config.i18n.default_locale
-    config.i18n.fallbacks = [:en]
+    config.i18n.fallbacks = [:de]
     
     # fallbacks value can also be a hash - a map of fallbacks if you will
     # missing translations of es and fr languages will fallback to english
     # missing translations in german will fallback to french ('de' => 'fr')
-#    config.i18n.fallbacks = {'de' => 'en', 'ka' => 'en'}
+    config.i18n.fallbacks = {'ka' => 'de'}
 
     # look in nested folders for translation files
 #    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]

@@ -6,7 +6,7 @@ class Sponsor < ActiveRecord::Base
 
   has_many :sponsor_translations, :dependent => :destroy
   accepts_nested_attributes_for :sponsor_translations
-  attr_accessible :sponsor_translations_attributes, :url, :logo, :event_ids
+  attr_accessible :sponsor_translations_attributes, :url, :logo, :event_ids, :email, :phone, :fax, :address
   attr_accessor :locale
 
   has_many :event_sponsors

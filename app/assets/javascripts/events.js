@@ -9,6 +9,7 @@ $(document).ready(function(){
 			separator: ' ',
 		  onClose: function(dateText, inst) {
 		      var endDateTextBox = $('#event_end');
+/*
 		      if (endDateTextBox.val() != '') {
 		          var testStartDate = new Date(dateText);
 		          var testEndDate = new Date(endDateTextBox.val());
@@ -18,6 +19,7 @@ $(document).ready(function(){
 		      else {
 		          endDateTextBox.val(dateText);
 		      }
+*/
 		  },
 		  onSelect: function (selectedDateTime){
 		      var start = $(this).datetimepicker('getDate');

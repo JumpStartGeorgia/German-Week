@@ -28,8 +28,8 @@
         <td><%= event.address %></td>
         <td><%= event.phone %></td>
         <td><%= event.fax %></td>
-        <td><% if !event.email.nil? %><a href="<%= event.email %>" target="_blank"><%= event.email %></a><% end %></td>
-        <td><% if !event.url.nil? %><a href="<%= event.url %>" target="_blank"><%= event.url %></a><% end %></td>
+        <td><% if !event.email.nil? %><%= link_to event.email, event.email %><% end %></td>
+        <td><%= link_to event.url, event.url %></td>
 	<% if is_html %>
           <td>
 	    <% if user_signed_in? %>
