@@ -1,5 +1,6 @@
 #slider
 {
+ /*
     margin: 10px auto 0px;
     background: #d0d0d0;
     max-width: 100%;
@@ -7,6 +8,7 @@
     position: relative;
     text-align: left;
     overflow: hidden;
+ */
 }
 
 #slider_content_container { display: none; height: 100%; overflow: hidden; position: relative; text-align: center; }
