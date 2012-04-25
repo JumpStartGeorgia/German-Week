@@ -1,0 +1,514 @@
+/* RESET CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img {
+	height: auto;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+	vertical-align: middle;
+}
+
+
+.clearfix:after, .clear:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+
+* html .clearfix, * html .clear             		{ zoom: 1; } /* IE6 */
+
+*:first-child+html .clearfix, *:first-child+html .clear { zoom: 1; } /* IE7 */
+
+/* END OF RESET CSS */
+
+      @font-face
+      {
+        font-family: fightme;
+        font-style: normal;
+        font-weight: 400;
+        src: url(fonts/bpg_mrgvlovani_caps_2010.ttf);
+      }
+
+      #container
+      {
+        width: 100%;
+        background: url('images/bg.jpg');
+      }
+
+      #header, #content, #partners > .container, #footer > .r1, #footer > .r3
+      {
+        width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #header
+      {
+        padding: 10px 0 15px 0;
+      }
+
+      .def-font
+      {
+        font-family: fightme;
+      }
+
+      .upcase
+      {
+        text-transform: uppercase;
+      }
+
+      #header > div
+      {
+        float: left;
+      }
+
+      #header > .c2
+      {
+        margin-left: 150px;
+        position: relative;
+        height: 67px;
+      }
+
+      #header > .c2 > .logo
+      {
+        position: absolute;
+        bottom: 1px;
+      }
+
+      #header > .c3
+      {
+        float: right !important;
+        padding-top: 13px;
+        text-align: right;
+      }
+
+      #search_button_and_form
+      {
+        display: inline-block;
+      }
+
+      #search_show_button
+      {
+        cursor: pointer;
+      }
+
+      #search_form_container
+      {
+        display: none;
+        background: #ccc;
+      }
+
+      #languages
+      {
+        font-size: 11px;
+        display: inline-block;
+      }
+
+      #languages > a
+      {
+        margin-right: 13px;
+        color: #919191;
+        text-decoration: none;
+      }
+
+      #languages > a:hover
+      {
+        color: #636363;
+      }
+
+      .menu a
+      {
+        text-decoration: none;
+      }
+
+      #header .menu
+      {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 18px;
+      }
+
+      #header .menu > .item
+      {
+        margin-right: 10px;
+        color: #1F1F1F;
+      }
+
+      #header .menu > .header
+      {
+        display: none;
+      }
+
+      #header .menu > .item:last-child
+      {
+        margin-right: 0px !important;
+      }
+
+      #slider
+      {
+        width: 100%;
+        position: relative;
+      }
+
+      #slider > .overlay
+      {
+        position: absolute;
+        background: url('images/slider-overlay.png');
+        width: 100%;
+        height: 100%;
+      }
+
+      #slider > img
+      {
+        height: 329px;
+        float: left;
+      }
+
+      h3.hidden
+      {
+        visibility: hidden;
+        font-size: 0px;
+      }
+
+      #content
+      {
+        position: relative;
+        top: -44px;
+        margin-bottom: -44px;
+        padding: 10px;
+        padding-bottom: 0px;
+        background: rgba(255, 255, 255, .4);
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+      }
+
+      #content > .container
+      {
+        width: 100%;
+        height: 100%;
+      }
+
+      #content > .container > .top-row
+      {
+        text-transform: capitalize;
+        background: #f4f4f4;
+        font-style: italic;
+        color: #545454;
+        width: 100%;
+      }
+
+      #content > .container > .top-row > div
+      {
+        border-right: 1px dotted #B3B3B3;
+        float: left;
+        padding: 8px 0 9px 12px;
+      }
+
+      #content > .container > .top-row .menu-header
+      {
+        width: 172px;
+      }
+
+      #content > .container > .top-row .content-header
+      {
+        width: 344.5px;
+      }
+
+      #content > .container > .top-row .content-header:last-child
+      {
+        border-right-width: 0px !important;
+      }
+
+      #content .menu
+      {
+        width: 185px;
+        float: left;
+      }
+
+      #content .menu > .item
+      {
+        margin-top: 3px;
+        display: block;
+        font-size: 10px;
+        font-weight: bold;
+        color: #3F3F3F;
+        background: #f4f4f4;
+        cursor: pointer;
+        width: 173px;
+        padding: 12px 0 13px 12px;
+      }
+
+      #content .menu > a:first-child
+      {
+        margin-top: 0px !important;
+      }
+
+      #content .menu > .item:hover
+      {
+        background: #fff;
+      }
+
+      #content .menu > .selected
+      {
+        background: #fff;
+      }
+
+      #content-board
+      {
+        width: 663px;
+        padding: 0px 26px 26px 26px;
+        float: left;
+        background: #fff;
+      }
+
+      #content-board > table.grid
+      {
+        width: 100%;
+      }
+
+      #content-board > table tr
+      {
+        border-bottom: 1px dotted #b3b3b3;
+      }
+
+      #content-board > table tr > td
+      {
+        color: #4C4C4C;
+        font-family: Arial, Sans-serif;
+        font-size: 12px;
+        padding: 12px 13px 8px 1px;
+      }
+
+      #content-board > table tr > td.left
+      {
+        border-right: 1px dotted #B3B3B3;
+        width: 316.5px;
+      }
+
+      #content-board > table tr > td.right
+      {
+        padding-right: 20px;
+        padding-left: 24px;
+      }
+
+      #content-board > table tr:last-child
+      {
+        border-bottom-width: 0px !important;
+      }
+
+      #content-board > table td div.header
+      {
+        color: #8C8C8C;
+        font-size: 12px;
+        font-style: italic;
+        margin-bottom: 9px;
+      }
+
+      #content-board > table td div.body
+      {
+        width: 100%;
+        text-align: justify;
+      }
+
+      #partners
+      {
+        width: 100%;
+        background: rgba(0, 0, 0, .06);
+        padding: 25px 0px;
+      }
+
+      #partners .partner
+      {
+        float: left;
+        margin-right: 30px;
+      }
+
+      #partners .partner a
+      {
+        text-decoration: none;
+        display: block;
+        background: none;
+      }
+
+      #partners .partner a:hover
+      {
+        box-shadow: 2px 2px 1px rgba(0, 0, 0, .08);
+      }
+
+      #partners .partner:last-child
+      {
+        margin-right: 0px !important;
+      }
+
+      #footer
+      {
+        width: 100%;
+        background: rgba(0, 0, 0, .27);
+      }
+
+      #footer .r1 > div
+      {
+        float: left;
+        margin-right: 50px;
+      }
+
+      #footer .r1
+      {
+        padding-top: 20px;
+      }
+
+      #footer .r1 .c1, #footer .r1 .c2
+      {
+        width: 144px;
+      }
+
+      #footer .r1 .c3
+      {
+        margin-right: 70px;
+        color: #3d3d3d;
+      }
+
+      #footer .r1 .c3 .r2
+      {
+        margin-top: 35px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      #footer .r1 .c3 .r2 > div
+      {
+        display: inline-block;
+      }
+
+      #footer .r1 .c3 .r2 > div:last-child
+      {
+        margin-left: 50px;
+      }
+
+      #footer .r1 .c3 .r2 input
+      {
+        border: 0 none;
+        padding: 9px 11px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #494949;
+      }
+
+      #footer .menu
+      {
+        font-size: 12px;
+        width: 100%;
+      }
+
+      #footer .menu > .header
+      {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      #footer .menu > .header, #footer .menu > .item
+      {
+        display: block;
+        border-bottom: 1px solid #939393;
+        padding-bottom: 9px;
+        margin-bottom: 8px;
+        color: #3d3d3d;
+      }
+
+      #footer .menu > .item
+      {
+      }
+
+      #footer .menu > .item:hover
+      {
+        color: #202020;
+        cursor: pointer;
+      }
+
+      #footer .menu > .item:last-child
+      {
+        border-bottom-width: 0px !important;
+      }
+
+      #footer > .r2
+      {
+        width: 100%;
+        height: 1px;
+        background: #939393;
+      }
+
+      #footer > .r3
+      {
+        color: #fff;
+        font-size: 12px;
+        font-family: Arial, Sans-serif;
+        text-shadow: 1px 1px rgba(0, 0, 0, .2);
+        padding: 9px 0px 10px;
+      }
+
+      #footer .r3 a
+      {
+        color: #fff;
+        font-size: 12px;
+        text-decoration: none;
+      }
+
+      #footer .r3 a:hover
+      {
+        text-decoration: underline;
+      }
+
+      #footer > .r3 > .c1
+      {
+        float: left;
+      }
+
+      #footer > .r3 > .c2
+      {
+        float: right;
+      }
