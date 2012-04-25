@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1>
+<p>
   <b>Title:</b>
   <%= @sponsor.title %>
-</h1>
+</p>
 
 <p>
   <b>Description:</b>
@@ -10,7 +10,27 @@
 </p>
 
 <p>
-  <b>Url:</b>
+  <b>Address:</b>
+  <%= @sponsor.address %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @sponsor.phone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%= @sponsor.fax %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <% if !@sponsor.email.nil? %><%= link_to @sponsor.email, @sponsor.email %><% end %>
+</p>
+
+<p>
+  <b>Website:</b>
   <%= link_to @sponsor.url, @sponsor.url %>
 </p>
 

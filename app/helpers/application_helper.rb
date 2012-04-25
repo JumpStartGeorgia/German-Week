@@ -5,15 +5,15 @@ module ApplicationHelper
   end
   
   def format_date(date)
-    date.strftime('%Y/%m/%d')
+    date.strftime('%Y/%m/%d') if !date.nil?
   end
 
   def format_datetime(dt)
-    dt.strftime('%Y/%m/%d %H:%M')
+    dt.strftime('%Y/%m/%d %H:%M') if !dt.nil?
   end
 
   def format_time(time)
-    time.strftime('%H:%M')
+    time.strftime('%H:%M') if !time.nil?
   end
 
   def multi_language_form(destination)

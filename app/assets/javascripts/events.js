@@ -9,6 +9,7 @@ $(document).ready(function(){
 			separator: ' ',
 		  onClose: function(dateText, inst) {
 		      var endDateTextBox = $('#event_end');
+/*
 		      if (endDateTextBox.val() != '') {
 		          var testStartDate = new Date(dateText);
 		          var testEndDate = new Date(endDateTextBox.val());
@@ -18,6 +19,7 @@ $(document).ready(function(){
 		      else {
 		          endDateTextBox.val(dateText);
 		      }
+*/
 		  },
 		  onSelect: function (selectedDateTime){
 		      var start = $(this).datetimepicker('getDate');
@@ -50,7 +52,7 @@ $(document).ready(function(){
 $(function(){
 	$("#btn-getaddr").live({
 		'click': function(){
-			$.post("/"+gon.locale+"/latlng",{address:$("#event_address").val()},function(data){								
+			$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
 				data = data.split(',');
 				if(parseFloat(data[0]) == 0 && parseFloat(data[1]) == 0){				
 					$("#event_lat").val("");
@@ -69,7 +71,7 @@ $(function(){
 						});
 						marker.on("dragend",function(e){
 							var target = e.target;							
-							$.post("/"+gon.locale+"/addr",{lat:target._latlng.lat,lng:target._latlng.lng},function(data){								
+							$.post("/"+gon.locale+"/events/getLocation/addr",{lat:target._latlng.lat,lng:target._latlng.lng},function(data){								
 									$("#event_lat").val(target._latlng.lat);
 									$("#event_lon").val(target._latlng.lng);									
 									$("#event_address").val(data);

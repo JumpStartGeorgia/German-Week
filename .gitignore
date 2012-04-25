@@ -16,3 +16,6 @@
 
 # ignore the database.yml file
 /config/database.yml
+
+# ignore folder with all documents from embassy
+/embassy
