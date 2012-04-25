@@ -71,6 +71,7 @@ class EventsController < ApplicationController
     gon.end_minute = @event.start.strftime("%M")
     gon.end_second = @event.start.strftime("%S")
     gon.address = @event.address
+    gon.show_map = true
 
 
     respond_to do |format|
