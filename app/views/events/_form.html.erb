@@ -37,21 +37,20 @@
 		    <%= f.text_field :end, :as => :time_picker, :class => 'text_field' %>
 		  </div>
 		</div>
-		<div class="control-group">
+		<div class="control-group event-lat">
 		  <%= f.label :lat, :class => 'control-label' %>
 		  <div class="controls">
-		    <%= f.text_field :lat, :class => 'text_field', :type => :number %>
+		    <%= f.text_field :lat, :class => 'text_field', :type => :hidden %>
 		  </div>
 		</div>
-		<div class="control-group">
+		<div class="control-group event-lon">
 		  <%= f.label :lon, :class => 'control-label' %>
 		  <div class="controls">
-		    <%= f.text_field :lon, :class => 'text_field', :type => :number %>
+		    <%= f.text_field :lon, :class => 'text_field', :type => :hidden %>
 		  </div>
 		</div>
 		
-		<div id="control-map" class="control-map"></div>
-		<br />
+		
 		
 		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>
@@ -62,6 +61,9 @@
 			  <% end%>
 			</div>
 		</div>
+		
+		<div id="control-map" class="control-map"></div>
+		<br />
 		
 		<div class="control-group">
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>

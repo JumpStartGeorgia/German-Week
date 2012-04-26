@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     gon.max_zoom = 18
     gon.lat = 41.699504919895
 		gon.lon = 44.797002757205	
+		gon.show_map = false
     gon.locale = params[:locale]
   end
 
