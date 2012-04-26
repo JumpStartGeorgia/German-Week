@@ -1,5 +1,30 @@
 # encoding: utf-8
 de:
-  german_week:
+  layouts:
+    application:
+      menu: Menu
+      about: Über
+      comp: wettbewerb
+      contact: kontakt
+      admin: Admin
+      home: Home
+      map: Map
+      categories: Categories
+      events: Events
+      sponsors: Sponsors
+      sign_out: Sign Out
+      sign_in: Sign In
+      sign_up: Sign Up
+      copyright: Copyright © 2012  All Rights Reserved.
+      jumpstart_link: Created by JumpStart Georgia
+      no_events: There are no events for this date.
     index:
-      title: Deutsch Wochen
+      title: Deutsche Woche
+    search:
+      title: Search for Events
+      location: Location
+      categories: Categories
+  map:
+    index:
+      category: Category
+

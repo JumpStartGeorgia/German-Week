@@ -1,39 +1,37 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<h1>Events</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Start</th>
-      <th>End</th>
-      <% if is_html %>
-        <th>Actions</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= link_to event.title, event_path(event) %></td>
-        <td><%= event.description %></td>
-        <td><%= format_datetime(event.start) %></td>
-        <td><%= format_datetime(event.end) %></td>
-	<% if is_html %>
-          <td>
-	    <% if user_signed_in? %>
-        <%= link_to 'Edit', edit_event_path(event), :class => 'btn btn-mini' %>
-	      <%= link_to 'Destroy', event_path(event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
-	    <% end %>
-			<%= link_to "Export", events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn btn-mini" %>
-	<% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <% if is_html && user_signed_in? %>
-  <%= link_to 'New Event', new_event_path %>
+  <%= link_to 'New Event', new_event_path, :class => "btn btn-mini" %>
 <% end %>
+
+<table class="grid">
+
+  <% @events.each_with_index do |event, i| %>
+
+   <% if i % 2 == 0 %>
+    <tr>
+    <% attr = ' class="left"'.html_safe %>
+   <% else %>
+    <% attr = ' class="right"'.html_safe %>
+   <% end %>
+
+      <td<%= attr %>>
+        <div class="header">
+          <%= format_datetime(event.start) %>
+        </div>
+        <div class="body">
+          <%= link_to event.title, event_path(event) %>
+        </div>
+      </td>
+
+   <% if i % 2 == 1 %>
+    </tr>
+   <% end %>
+
+  <% end %>
+
+  <% if @events.count % 2 == 1 %>
+    </tr>
+  <% end; %>
+
+</table>

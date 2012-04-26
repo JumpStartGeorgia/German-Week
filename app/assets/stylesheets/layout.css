@@ -34,38 +34,3 @@ div#category_menu_popup ul li.category_menu_popup_item a {
 	width: 100%;
 	padding: 1em;
 }
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-.clearfix {
-	display: inline-block;
-}
-
-.clearfix {
-	zoom: 1;
-}
-
-#search_button_and_form {
-	position: absolute;
-	top: 0px;
-	right: 15px;
-	width: 320px;
-	text-align: center;
-}
-
-#search_show_button {
-	cursor: pointer;
-	width: 100%;
-	text-align: right;
-}
-
-#search_form_container {
-	display: none;
-	background: #ccc;
-}

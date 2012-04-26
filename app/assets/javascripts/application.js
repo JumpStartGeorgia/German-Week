@@ -12,7 +12,6 @@
 //= require id_countdown
 //= require_tree .
 
-
 $(document).ready(function(){
 	// load the megamenu script
 	$(".mega-menu").dcVerticalMegaMenu({

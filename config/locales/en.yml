@@ -1,5 +1,31 @@
 # encoding: utf-8
 en:
+  layouts:
+    application:
+      menu: Menu
+      about: About
+      comp: ???
+      contact: Contact
+      admin: Admin
+      home: Home
+      map: Map
+      categories: Categories
+      events: Events
+      sponsors: Sponsors
+      sign_out: Sign Out
+      sign_in: Sign In
+      sign_up: Sign Up
+      copyright: Copyright © 2012  All Rights Reserved.
+      jumpstart_link: Created by JumpStart Georgia
+      no_events: There are no events for this date.  ha ha!
   german_week:
     index:
       title: German Week
+    search:
+      title: Search for Events
+      location: Location
+      categories: Categories
+  map:
+    index:
+      category: Category
+

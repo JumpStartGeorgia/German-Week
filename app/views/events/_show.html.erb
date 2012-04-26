@@ -23,8 +23,28 @@
 </p>
 
 <p>
-  <b>Location:</b>
+  <b>Address:</b>
   <%= @event.address %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @event.phone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%= @event.fax %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <% if !@event.email.nil? %><%= link_to @event.email, @event.email %><% end %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%= link_to @event.url, @event.url %>
 </p>
 
 <p>
@@ -39,8 +59,11 @@
   <b>Sponsors:</b>
 	<% @event.sponsors.each do |s| %>
 		<% if !s.logo_file_name.nil? %>
-	  	<%= link_to(image_tag(s.logo.url), s.url, :target => '_blank') %>
+	  	<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
+		<% else %>
+	  	<%= link_to(s.title, sponsor_path(s)) %>
 		<% end %>
+
 	<% end %>
 </p>
 

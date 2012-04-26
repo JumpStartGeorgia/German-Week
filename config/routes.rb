@@ -1,7 +1,5 @@
 GermanWeek::Application.routes.draw do
 
-  resources :pages
-
   root :to => 'german_week#index'
 
   devise_for :users
@@ -36,7 +34,7 @@ GermanWeek::Application.routes.draw do
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 	
 	# Get address by lat && lon route
-	match '/:locale(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
+	match '/:locale/events/getLocation(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
 
 
   scope "/:locale" do
@@ -60,6 +58,9 @@ GermanWeek::Application.routes.draw do
   end
   match '/:locale/pages/view/:name', :to => 'pages#view', :as => :view_pages, :via => :get
 
+
+  # gets images from slider_image folder, because javascript cannot access a directory
+  match '/:locale/slider_images', :to => 'events#slider_images', :as => :slider_image_files, :via => 'get'
 
   
   # The priority is based upon order of creation:

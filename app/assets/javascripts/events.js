@@ -9,6 +9,7 @@ $(document).ready(function(){
 			separator: ' ',
 		  onClose: function(dateText, inst) {
 		      var endDateTextBox = $('#event_end');
+/*
 		      if (endDateTextBox.val() != '') {
 		          var testStartDate = new Date(dateText);
 		          var testEndDate = new Date(endDateTextBox.val());
@@ -18,6 +19,7 @@ $(document).ready(function(){
 		      else {
 		          endDateTextBox.val(dateText);
 		      }
+*/
 		  },
 		  onSelect: function (selectedDateTime){
 		      var start = $(this).datetimepicker('getDate');
@@ -48,6 +50,7 @@ $(document).ready(function(){
 });
 
 $(function(){
+
 	if(!gon.show_map){
 		var map = new L.Map("control-map"), tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
 				
@@ -84,6 +87,7 @@ $(function(){
 								$("#event_lat").val(target._latlng.lat);
 								$("#event_lon").val(target._latlng.lng);									
 						});																					
+
 					});
 					map.addLayer(marker);
 						

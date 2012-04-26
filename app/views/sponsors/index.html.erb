@@ -4,7 +4,11 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
-      <th>Url</th>
+			<th>Address</th>
+			<th>Phone</th>
+			<th>Fax</th>
+			<th>Email</th>
+			<th>Website</th>
       <th>Logo</th>
       <th>Actions</th>
     </tr>
@@ -14,6 +18,10 @@
       <tr>
         <td><%= link_to sponsor.title, sponsor_path(sponsor) %></td>
         <td><%= sponsor.description %></td>
+        <td><%= sponsor.address %></td>
+        <td><%= sponsor.phone %></td>
+        <td><%= sponsor.fax %></td>
+        <td><% if !sponsor.email.nil? %><%= link_to sponsor.email, sponsor.email %><% end %></td>
         <td><%= link_to sponsor.url, sponsor.url %></td>
         <td>
 					<% if !sponsor.logo_file_name.nil? %>

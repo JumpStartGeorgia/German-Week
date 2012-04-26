@@ -1,7 +1,7 @@
 # encoding: utf-8
 # Locales **************************************************************************
 
-ActiveRecord::Base.connection.execute("TRUNCATE locales") 
+Locale.delete_all
 
 Locale.create(:language => 'de' , :name => 'Deutsch')
 Locale.create(:language => 'ka' , :name => 'ქართული')
@@ -9,7 +9,7 @@ Locale.create(:language => 'en' , :name => 'English')
 
 # Pages **************************************************************************
 
-ActiveRecord::Base.connection.execute("TRUNCATE pages") 
+Page.delete_all
 
 page = Page.create(:name => 'contact')
 page.page_translations.create(:locale => 'de', :title => 'Kontakt', :description => '...')

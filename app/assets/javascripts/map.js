@@ -6,6 +6,7 @@ $(document).ready(function(){
 	// gon variables are either loaded in the application controller (default values)
 	//  or in the controller loading the map
 	// make sure lat and lon exist
+
 	if (gon.lat && gon.lon && !gon.map_page && gon.show_map)
 	{ 
 		var cloudmadeUrl = gon.tile_url,
@@ -13,26 +14,28 @@ $(document).ready(function(){
 			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: gon.max_zoom, attribution: cloudmadeAttribution});
 
 
-		// clear map box and update map style
-		$("#map").empty();
-		$("#map").attr("id", "map");
 
-		var map = new L.Map(gon.map_id);
-		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(cloudmade);
+			// clear map box and update map style
+			$("#map").empty();
+			$("#map").attr("id", "map");
 
-		var marker = new L.Marker(new L.LatLng(gon.lat, gon.lon));
-		map.addLayer(marker);
+			var map = new L.Map(gon.map_id);
+			map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(cloudmade);
 
-		var popup = new Array;
-		popup.push("<strong>"+gon.popup+"</strong>");
-		popup.push("<br />");
-		popup.push("<center>"+gon.address+"</center>");
-		marker.bindPopup(popup.join('')).openPopup();
-	}
-	else 
-	{
-		// hide the map
-		$("#map").empty();
-		$("#map").attr("id", "nomap");
+			var marker = new L.Marker(new L.LatLng(gon.lat, gon.lon));
+			map.addLayer(marker);
+
+			var popup = new Array;
+			popup.push("<strong>"+gon.popup+"</strong>");
+			popup.push("<br />");
+			popup.push("<center>"+gon.address+"</center>");
+			marker.bindPopup(popup.join('')).openPopup();
+		}
+		else 
+		{
+			// hide the map
+			$("#map").empty();
+			$("#map").attr("id", "nomap");
+		}
 	}
 });

@@ -1,5 +1,5 @@
 <% if event_menu_item.nil? %>
-	<li class="event_menu_popup_item"><br />There are no events for this date.<br /></li>
+	<li class="event_menu_popup_item"><br /><%= t('.no_events') %><br /></li>
 <% else %>
 	<li class="event_menu_popup_item">
 		<p><%= link_to event_menu_item.title, event_path(event_menu_item) %></p>
@@ -7,7 +7,7 @@
 		<p><%= truncate(event_menu_item.description, :length => 100) %></p>
 		<p class="event_menu_popup_item_categories">
 			<% if event_menu_item.categories.count > 0 %>
-				Categories: <% event_menu_item.categories.each do |cat| %><%= link_to "[#{cat.title}]", category_events_path(cat.title) %> <% end %>
+				<%= t('.categories') %> <% event_menu_item.categories.each do |cat| %><%= link_to "[#{cat.title}]", category_events_path(cat.title) %> <% end %>
 			<% else %>&nbsp;<% end %>
 		</p>
 		

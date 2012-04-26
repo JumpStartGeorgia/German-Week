@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICS, :getEventsByDay]
+  before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICS, :getEventsByDay, :slider_images]
 
 
   # GET /events
@@ -72,6 +72,7 @@ class EventsController < ApplicationController
     gon.end_second = @event.start.strftime("%S")
     gon.address = @event.address
 		gon.show_map = true
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -223,6 +224,40 @@ logger.debug "data has #{data.length} records"
 					render :inline => "no address"
 				end
 		end
+  end
+
+  def slider_images
+    pathname = 'public/assets/images/header/';
+    extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    images = [];
+
+    Dir.foreach(pathname) do |f|
+      if !extensions.include? File.extname(f)[1..4]
+        next
+      end
+      images.push 'assets/images/header/' + f
+    end
+
+    max = images.count
+    randoms = Set.new();
+    loop do
+      randoms << Random.rand(max)
+      if randoms.size > 2
+        break
+      end
+    end
+
+    random_images = [];
+    images.each_with_index do |img, i|
+      if randoms.include? i
+        random_images.push img
+      end
+    end
+
+    respond_to do |format|
+      format.json { render :json => random_images }
+    end
+
   end
   
 end

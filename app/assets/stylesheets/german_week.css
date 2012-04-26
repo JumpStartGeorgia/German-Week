@@ -11,4 +11,9 @@ ul#search_results h3 > a:visited { color: #3F448C; }
 .search_results_edr { color: #006633; } /* edr = event date range */
 .search_results_edr > span { color: #333; }
 .search_results_edesc { max-height: 35px; overflow: hidden; } /* edesc = event description */
+.search_results_ecs span { color: #0033FF; } /* ecs = event categories */
+.matched_term { font-weight: bold; }
+
+
+.pagination .disabled,.pagination .current{border:1px solid #ddd;border-left:0;line-height:34px;padding:0 14px;float:left;}
 .search_results_sub_section span { color: #0033FF; } /* color the headings of the sub sections */
