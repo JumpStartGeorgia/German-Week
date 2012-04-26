@@ -73,7 +73,7 @@ $(function(){
 					map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom-4);				
 				});
 			
-				$.post("/"+gon.locale+"/latlng",{address:$("#event_address").val()},function(data){								
+				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
 					data = data.split(',');
 																
 
@@ -83,11 +83,8 @@ $(function(){
 					});
 					marker.on("dragend",function(e){
 						var target = e.target;							
-						$.post("/"+gon.locale+"/addr",{lat:target._latlng.lat,lng:target._latlng.lng},function(data){								
-								$("#event_lat").val(target._latlng.lat);
-								$("#event_lon").val(target._latlng.lng);									
-						});																					
-
+						$("#event_lat").val(target._latlng.lat);
+						$("#event_lon").val(target._latlng.lng);						
 					});
 					map.addLayer(marker);
 						

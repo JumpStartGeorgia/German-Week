@@ -37,5 +37,5 @@ $(document).ready(function(){
 			$("#map").empty();
 			$("#map").attr("id", "nomap");
 		}
-	}
+	
 });
