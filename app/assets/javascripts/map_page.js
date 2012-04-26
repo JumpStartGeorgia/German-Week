@@ -1,7 +1,7 @@
 
 $(function(){
 
-	if (gon.map_page ){
+	if (gon.map_page && gon.show_map){
 			
 		var map = new L.Map(gon.map_id);				
 				map.addLayer(new L.TileLayer(gon.tile_url))

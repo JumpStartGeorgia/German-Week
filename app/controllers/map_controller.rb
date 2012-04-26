@@ -8,7 +8,8 @@ class MapController < ApplicationController
 		gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
 		gon.zoom = 7
 		gon.lat = 41.699504919895
-		gon.lon = 44.797002757205				
+		gon.lon = 44.797002757205		
+		gon.show_map = true		
 		
 		
 		gon.event_lats = []

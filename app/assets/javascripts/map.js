@@ -6,12 +6,13 @@ $(document).ready(function(){
 	// gon variables are either loaded in the application controller (default values)
 	//  or in the controller loading the map
 	// make sure lat and lon exist
-	if (gon.show_map ){
-		if (gon.lat && gon.lon)
-		{ 
-			var cloudmadeUrl = gon.tile_url,
-				cloudmadeAttribution = gon.attribution,
-				cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: gon.max_zoom, attribution: cloudmadeAttribution});
+
+	if (gon.lat && gon.lon && !gon.map_page && gon.show_map)
+	{ 
+		var cloudmadeUrl = gon.tile_url,
+			cloudmadeAttribution = gon.attribution,
+			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: gon.max_zoom, attribution: cloudmadeAttribution});
+
 
 
 			// clear map box and update map style
@@ -36,5 +37,5 @@ $(document).ready(function(){
 			$("#map").empty();
 			$("#map").attr("id", "nomap");
 		}
-	}
+	
 });

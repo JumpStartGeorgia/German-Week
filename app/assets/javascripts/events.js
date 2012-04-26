@@ -50,53 +50,51 @@ $(document).ready(function(){
 });
 
 $(function(){
-	$("#btn-getaddr").live({
-		'click': function(){
-			$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
-				data = data.split(',');
-				if(parseFloat(data[0]) == 0 && parseFloat(data[1]) == 0){				
-					$("#event_lat").val("");
-					$("#event_lon").val("");
-					$("#event_address").val("");
-					$("#control-map").show().animate({"opacity":1},1000,function(){						
-						var map = null, 
-								tile_layer = null,
-								marker = null;						
-						tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
-						map = new L.Map("control-map");
-						map._container._leaflet = false;
-						map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom-4).addLayer(tile_layer);						
-						marker = new L.Marker(new L.LatLng(gon.lat, gon.lon),{
-							draggable: true
-						});
-						marker.on("dragend",function(e){
-							var target = e.target;							
-							$.post("/"+gon.locale+"/events/getLocation/addr",{lat:target._latlng.lat,lng:target._latlng.lng},function(data){								
-									$("#event_lat").val(target._latlng.lat);
-									$("#event_lon").val(target._latlng.lng);									
-									$("#event_address").val(data);
-							});																					
-						});
-						map.addLayer(marker);
-						window.setTimeout(function(){
-							alert("Can't find coordinates! Select them on the map.");
-						},500);
-						
-					});					
-				}
-				else{					
-					$("#control-map").animate({"opacity":0},1000,function(){
-						$(this).empty().attr({
-							class: "control-map",
-							style: ""
-						}).hide();						
-					});
-					$("#event_lat").val(parseFloat(data[0]));
-					$("#event_lon").val(parseFloat(data[1]));
-				}
-			});
+
+	if(!gon.show_map){
+		var map = new L.Map("control-map"), tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
+				
+		map.attributionControl = false;
+		map.zoomControl = false;
+		$(".leaflet-control-attribution").parent().hide();
+		$(".leaflet-control-zoom").parent().hide();
+		map._container._leaflet = false;
+		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom-4).addLayer(tile_layer);
+	
+		$("#btn-getaddr").live({
+			'click': function(){
+				$("#control-map").animate({
+					width: '300px',
+					height: '250px',
+					opacity: 1
+				}, 1000,function(){
+					map.zoomControl = true;
+					map.attributionControl = true;
+					map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom-4);				
+				});
 			
-			return false;
-		}
-	});
+				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
+					data = data.split(',');
+																
+
+					map.setView(new L.LatLng(data[0], data[1]), gon.zoom+2);						
+					var marker = new L.Marker(new L.LatLng(data[0], data[1]),{
+						draggable: true
+					});
+					marker.on("dragend",function(e){
+						var target = e.target;							
+						$("#event_lat").val(target._latlng.lat);
+						$("#event_lon").val(target._latlng.lng);						
+					});
+					map.addLayer(marker);
+						
+
+				
+				
+				});
+			
+				return false;
+			}
+		});
+	}
 });
