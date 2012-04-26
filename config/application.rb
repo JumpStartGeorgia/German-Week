@@ -42,7 +42,7 @@ module GermanWeek
     # fallbacks value can also be a hash - a map of fallbacks if you will
     # missing translations of es and fr languages will fallback to english
     # missing translations in german will fallback to french ('de' => 'fr')
-    config.i18n.fallbacks = {'ka' => 'de'}
+    config.i18n.fallbacks = {'ka' => 'de', 'en' => 'de'}
 
     # look in nested folders for translation files
 #    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]

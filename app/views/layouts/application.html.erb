@@ -1,73 +1,228 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Deutschen Woche 2012 - <%= yield (:title) || "German Week" %></title>
-	<%= include_gon %>
-  <%= stylesheet_link_tag  "application" %>
-  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
-  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Deutsche Woche 2012 - <%= yield (:title) || "German Week" %></title>
+    <%= include_gon %>
+    <%= stylesheet_link_tag  "application" %>
+    <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+    <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<div id="search_button_and_form">
-  <div id="search_form_container">
-    <%= render 'german_week/search_form' %>
-  </div>
-  <div id="search_show_button">
-    search
-  </div>
-</div>
+    <div id="container">
 
-<div class="main">
-	<div id="user_nav">  
-	  <% if user_signed_in? %>  
-	    Signed in as <%= current_user.email %>. Not you?  
-	    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>  
-	  <% else %>  
-	    <%= link_to "Sign up", new_user_registration_path %> or  
-	    <%= link_to "Sign in", new_user_session_path %>  
-	  <% end %>  
-	</div>  
-	<div>
-		<%= link_to 'Sponsors', sponsors_path %>
+      <div id="header" class="clear">
 
-		<%= link_to 'Events', events_path %>
-		
-		<%= link_to 'Event Categories', categories_path %>
+        <div class="c1 def-font">
+          <img src="/assets/images/logo-german-week.png" />
+        </div><!--#header > .c1-->
 
-		<%= link_to 'Search', search_path %>
+        <div class="c2">
 
-		<%= link_to "Contact", view_pages_path(:name => "contact") %>
+          <div class="logo">
+            <img src="/assets/images/other-logo.png" />
+          </div>
 
-		<%= link_to "Disclaimer", view_pages_path(:name => "disclaimer") %>
+          <h3 class="hidden">გერმანიასა და საქართველოს შორის დიპლომატიური ურთიერთობების აღდგენის 20 წლისთავი. 20 jahre diplomatische Beziehungen zwischen Deutschland und Georgien </h3>
 
-	</div>
+        </div><!--#header > .c2-->
 
-  <div id="language-form">
-    <ul>
-    <% @locales.each do |locale| %>
-      <% unless locale.language.to_s == I18n.locale.to_s %> 
-        <li><%= link_to locale.name, params.merge(:locale => locale.language) %></li>
-      <% end %>
-    <% end %>
-    </ul>
-  </div>
+        <div class="c3">
 
-  <div id="event_menu">
-		<%= render "shared/menu" %>
-  </div>
+          <div class="top-row clear">
 
-	<h2><%= yield(:title) %></h2>
+            <div id="languages" class="def-font upcase">
+              <!--<a href="#">georgian</a>
+              <a href="#">english</a>-->
+              <% @locales.each do |locale| %>
+                <% unless locale.language.to_s == I18n.locale.to_s %> 
+                  <%= link_to locale.name, params.merge(:locale => locale.language) %>
+                <% end %>
+              <% end %>
+            </div><!--#languages-->
+          
+            <div id="search_button_and_form">
+              <div id="search_form_container">
+                <%= render 'german_week/search_form' %>
+              </div>
+              <div id="search_show_button">
+                <img src="/assets/images/search.png" />
+              </div>
+            </div><!--#search_button-->
+
+          </div><!--#header > .c3 .top-row-->
+
+          <div class="menu def-font upcase">
+            <span class="header"></span>
+            <a href="#" class="item"><%= t('.about') %></a>
+            <a href="#" class="item"><%= t('.comp') %></a>
+            <a href="#" class="item"><%= t('.contact') %></a>
+          </div><!--#header .menu-->
+
+        </div><!--#header > .c3-->
+
+      </div><!--#header-->
+
+      <div id="slider" class="clear">
+        <div class="overlay"></div>
+        <img src="/assets/images/header/header.jpg" width="10%" />
+        <img src="/assets/images/header/header1.jpg" width="80%" />
+        <img src="/assets/images/header/header.jpg" width="10%" />
+      </div><!--#slider-->
+
+      <div id="content" class="clear">
+
+        <div class="container clear">
+
+            <div class="top-row clear">
+              <div class="menu-header">day</div>
+              <div class="content-header">uhr</div>
+              <div class="content-header">uhr</div>
+            </div>
+
+          <div class="menu def-font upcase">
+
+						<%= link_to t('.home'), root_path, :class => "item" %>
+						<% (1..6).each do |i| %>
+								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
+											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
+											:class => "item" %>					
+						<% end %>
+            <%= link_to t('.categories'), category_events_path, :class => "item" %>
+            <%= link_to t('.map'), map_page_day_path, :class => "item" %>
+
+          </div>
+
+          <div id="content-board">
+
+						<h2><%= yield(:title) %></h2>
 
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+						<p class="notice"><%= notice %></p>
+						<p class="alert"><%= alert %></p>
 
 
-  <%= yield %>
-</div>
+						<%= yield %>
 
-<%= javascript_include_tag "application" %>
-</body>
+          </div><!--#content-board-->
+
+        </div><!--#content > .container-->
+
+      </div><!--#content-->
+
+      <div id="partners" class="clear">
+
+        <div class="container">
+
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
+          </div>
+          <div class="partner">
+            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
+          </div>
+
+        </div>
+
+      </div><!--#partners-->
+
+      <div id="footer">
+
+        <div class="r1 clear">
+
+          <div class="c1 def-font upcase">
+
+            <div class="menu">
+              <span class="header"><%= t('.menu') %></span>
+		          <a href="#" class="item"><%= t('.about') %></a>
+		          <a href="#" class="item"><%= t('.comp') %></a>
+		          <a href="#" class="item"><%= t('.contact') %></a>
+            </div><!--#footer .r1 .c1 .menu-->
+
+          </div><!--#footer .r1 .c1-->
+
+          <div class="c2 def-font upcase">
+
+            <div class="menu">
+              <span class="header"><%= t('.categories') %></span>
+              <a href="#" class="item">category</a>
+              <a href="#" class="item">simple text</a>
+              <a href="#" class="item">category</a>
+              <a href="#" class="item">simple text</a>
+            </div><!--#footer .r1 .c2 .menu-->
+
+          </div><!--#footer .r1 .c2-->
+
+          <div class="c2 def-font upcase">
+
+            <div class="menu">
+              <span class="header"><%= t('.admin') %></span>
+								<% if user_signed_in? %>  
+									<%= link_to t('.events'), events_path, :class => "item" %>
+									<%= link_to t('.categories'), categories_path, :class => "item" %>
+									<%= link_to t('.sponsors'), sponsors_path, :class => "item" %>
+									<%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>  
+								<% else %>  
+									<%= link_to t('.sign_up'), new_user_registration_path %> or  
+									<%= link_to t('.sign_in'), new_user_session_path %>  
+								<% end %>  
+            </div><!--#footer .r1 .c2 .menu-->
+
+          </div><!--#footer .r1 .c2-->
+
+          <div class="c3">
+
+            <div class="r1 clear">Share Tweet &nbsp;+1 &nbsp; &nbsp; Like Send 142.2k like this</div>
+            <div class="r2 clear def-font upcase">
+              <div>
+                ihre e-email:&nbsp;
+                <input type="text" class="upcase" />
+              </div>
+              <div>rss</div>
+            </div>
+
+          </div><!--#footer .r1 .c3-->
+
+        </div><!--#footer .r1-->
+
+        <div class="r2 clear"></div><!--#footer .r2-->
+
+        <div class="r3 clear">
+          <div class="c1"><%= t('.copyright') %></div>
+          <div class="c2">
+            <a href="#" href="http://jumpstart.ge/" target="_blank"><%= t('.jumpstart_link') %></a>
+          </div>
+        </div><!--#footer .r3-->
+
+      </div><!--#footer-->
+
+    </div><!--#container-->
+
+
+  </body>
 </html>

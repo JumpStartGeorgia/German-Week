@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deutschen Woche 2012 - <%= yield (:title) || "German Week" %></title>
+	<%= include_gon %>
+  <%= stylesheet_link_tag  "application" %>
+  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="search_button_and_form">
+  <div id="search_form_container">
+    <%= render 'german_week/search_form' %>
+  </div>
+  <div id="search_show_button">
+    search
+  </div>
+</div>
+
+<div class="main">
+	<div id="user_nav">  
+	  <% if user_signed_in? %>  
+	    Signed in as <%= current_user.email %>. Not you?  
+	    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>  
+	  <% else %>  
+	    <%= link_to "Sign up", new_user_registration_path %> or  
+	    <%= link_to "Sign in", new_user_session_path %>  
+	  <% end %>  
+	</div>  
+	<div>
+		<%= link_to 'Sponsors', sponsors_path %>
+
+		<%= link_to 'Events', events_path %>
+		
+		<%= link_to 'Event Categories', categories_path %>
+
+		<%= link_to 'Search', search_path %>
+
+		<%= link_to "Contact", view_pages_path(:name => "contact") %>
+
+		<%= link_to "Disclaimer", view_pages_path(:name => "disclaimer") %>
+
+	</div>
+
+  <div id="language-form">
+    <ul>
+    <% @locales.each do |locale| %>
+      <% unless locale.language.to_s == I18n.locale.to_s %> 
+        <li><%= link_to locale.name, params.merge(:locale => locale.language) %></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+
+  <div id="event_menu">
+		<%= render "shared/menu" %>
+  </div>
+
+	<h2><%= yield(:title) %></h2>
+
+
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+
+
+  <%= yield %>
+</div>
+
+<%= javascript_include_tag "application" %>
+</body>
+</html>

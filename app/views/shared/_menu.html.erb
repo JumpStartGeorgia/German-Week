@@ -1,5 +1,5 @@
 	<ul class="megamenu">
-		<li><%= link_to "Home", root_path %></li>
+		<li><%= link_to t('.home'), root_path %></li>
 		<% (1..6).each do |i| %>
 			<li>
 				<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
@@ -14,7 +14,7 @@
 			</li>
 		<% end %>
 		<li>
-			<%= link_to "Categories", category_events_path %>
+			<%= link_to t('.categories'), category_events_path %>
 			<div id="category_menu_popup" style="width: 100%;" >
 				<ul>
 					<% @categories.each do |cat| %>
@@ -26,5 +26,5 @@
 				<div class="clearfix"></div>
 			</div>
 		</li>
-		<li><%= link_to "Map", map_page_day_path %></li>
+		<li><%= link_to t('.map'), map_page_day_path %></li>
 	</ul>

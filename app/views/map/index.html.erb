@@ -1,7 +1,7 @@
 	<div class="select-events">
 		<br />
 		<form>
-			Day: &nbsp;
+			<%= t('day.prompts.day') %>
 			<select id="event-day">
 				<option></option>
 				<% (1..6).each do |i| %>
@@ -12,7 +12,7 @@
 				<% end %>
 			</select>
 			&nbsp;&nbsp;
-			Category: &nbsp;
+			<%= t('.category') %>
 			<select id="event-category">
 				<option></option>
 				<% @categories.each do |category| %>
