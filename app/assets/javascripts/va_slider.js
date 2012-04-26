@@ -1,3 +1,4 @@
+/*
 function microtime (get_as_float)
 {
     get_as_float = get_as_float || true;
@@ -175,3 +176,5 @@ $(function ()
   }
 
 });
+
+*/

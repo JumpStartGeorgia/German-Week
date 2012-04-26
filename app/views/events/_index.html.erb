@@ -1,7 +1,7 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
 <% if is_html && user_signed_in? %>
-  <%= link_to 'New Event', new_event_path, :class => "btn btn-mini" %>
+  <%= link_to t('app.buttons.new_event'), new_event_path, :class => "btn btn-mini" %>
 <% end %>
 
 <table class="grid">
@@ -22,6 +22,13 @@
         <div class="body">
           <%= link_to event.title, event_path(event) %>
         </div>
+				<div>
+					<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn btn-mini" %>
+				<% if user_signed_in? %>
+				        <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>
+				        <%= link_to t('app.buttons.delete'), event_path(event), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+				<% end %>
+				</div>
       </td>
 
    <% if i % 2 == 1 %>

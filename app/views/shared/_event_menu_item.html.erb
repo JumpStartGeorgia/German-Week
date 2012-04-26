@@ -1,5 +1,5 @@
 <% if event_menu_item.nil? %>
-	<li class="event_menu_popup_item"><br /><%= t('.no_events') %><br /></li>
+	<li class="event_menu_popup_item"><br /><%= t('app.msgs.no_events_for_date') %><br /></li>
 <% else %>
 	<li class="event_menu_popup_item">
 		<p><%= link_to event_menu_item.title, event_path(event_menu_item) %></p>

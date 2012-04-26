@@ -1,5 +1,26 @@
 # encoding: utf-8
 ka:
+  app:
+    buttons:
+      pdf: Download PDF
+      ics: Download Calendar
+      reset: Reset
+      cancel: Cancel
+      back: Back
+      edit: Edit
+      delete: Delete
+      new_category: New
+      new_event: New Category
+      new_page: New Page
+      new_sponsor: New Sponsor
+    msgs:
+      no_events_for_date: There are no events for this date.
+      no_events_for_cat: No events exist for this category.
+      delete_confirm: Are you sure?
+    common:
+      name: Name
+      title: Title
+      description: Description
   layouts:
     application:
       menu: Menu
@@ -17,10 +38,9 @@ ka:
       sign_up: Sign Up
       copyright: Copyright © 2012  All Rights Reserved.
       jumpstart_link: Created by JumpStart Georgia
-      no_events: There are no events for this date.
   german_week:
     index:
-      title: გერმანიის კვირაში
+      title: German Week
     search:
       title: Search for Events
       location: Location
@@ -28,4 +48,38 @@ ka:
   map:
     index:
       category: Category
+  events:
+    category:
+      title: Events by Category
+    day:
+      title: Events on %{date}
+    edit:
+      title: Edit Event
+    index:
+      title: Events 
+    new:
+      title: New Event
+  categories:
+    edit:
+      title: Edit Category
+    index:
+      title: Categories 
+    new:
+      title: New Category
+  pages:
+    edit:
+      title: Edit Page
+    index:
+      title: Pages 
+    new:
+      title: New Page
+  sponsors:
+    edit:
+      title: Edit Sponsor
+    index:
+      title: Sponsors
+    new:
+      title: New Sponsor
+
+
 

@@ -1,6 +1,9 @@
-<% title 'Editing sponsor' %>
+<% title t('.title') %>
+
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @sponsor %> |
-<%= link_to 'Back', sponsors_path %>
+<% if user_signed_in? %>
+	<%= link_to t('app.buttons.back'), sponsors_path, :class => "btn btn-mini"  %>
+<% end %>
+

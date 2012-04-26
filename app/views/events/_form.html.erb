@@ -8,13 +8,13 @@
 		<div id="form-<%= formLocale %>" class="multilanguage" >
 			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
-			  <%= event_translation.label "#{@locales[i-1].name} #{:title}", :class => 'control-label' %>
+			  <%= event_translation.label :title, :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.text_field :title, :class => 'text_field' %>
 			  </div>
 			</div>
 			<div class="control-group">
-			  <%= event_translation.label "#{@locales[i-1].name} #{:description}", :class => 'control-label' %>
+			  <%= event_translation.label :description, :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
@@ -61,20 +61,6 @@
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :fax, :class => "control-label" %>
-			<div class="controls">
-			  <%= f.text_field :fax, :as => :phone, :class => "text_field", :label => false %>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<%= f.label :email, :class => "control-label" %>
-			<div class="controls">
-			  <%= f.text_field :email, :as => :email, :class => "text_field", :label => false %>
-			</div>
-		</div>
-		
-		<div class="control-group">
 			<%= f.label :url, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :url, :as => :url, :class => "text_field", :label => false %>
@@ -97,8 +83,8 @@
 
 	<div class="form-actions">
 	  <%= f.submit nil, :class => 'btn btn-primary' %>
-	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
-	  <%= link_to 'Cancel', events_path, :class => 'btn' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), events_path, :class => 'btn' %>
 	</div>
   </fieldset>
 <% end %>
