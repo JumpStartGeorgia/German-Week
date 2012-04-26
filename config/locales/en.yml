@@ -2,13 +2,14 @@
 en:
   app:
     buttons:
-      pdf: Download PDF
-      ics: Download Calendar
+      pdf: Download Event Info
+      ics: Add to Your Calendar
       reset: Reset
       cancel: Cancel
       back: Back
       edit: Edit
       delete: Delete
+      list: View All
       new_category: New Category
       new_event: New Event
       new_page: New Page

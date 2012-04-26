@@ -15,6 +15,17 @@ module ApplicationHelper
   def format_time(time)
     time.strftime('%H:%M') if !time.nil?
   end
+  
+  def pretty_time(dt_start, dt_end)
+    if !dt_start.nil?
+      if dt_end.nil?
+        # only have start date
+        I18n.l dt_start, :format => :short
+      else
+        "#{I18n.l dt_start, :format => :short} - #{I18n.l dt_end, :format => :short}"
+      end
+    end
+  end
 
   def multi_language_form(destination)
      destination = controller.controller_name.to_s + '/' + destination 

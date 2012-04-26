@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
   # pre-load gon so js does not through errors on pages that do not use gon
   def init_gon
-    gon.tile_url = 'http://tile.mapspot.ge/en/{z}/{x}/{y}.png'
+    lang = I18n.locale.to_s == 'ka' ? 'ka' : 'en'
+    gon.tile_url = "http://tile.mapspot.ge/#{lang}/{z}/{x}/{y}.png"
     gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
     gon.map_id = 'map'
     gon.zoom = 16

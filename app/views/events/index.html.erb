@@ -1,7 +1,7 @@
 <%= render 'index', :html => true %>
 
 <% if !@events.nil? && @events.length > 0 %>
-<div>
+<div class="form-actions">
 	<%= link_to t('app.buttons.pdf'), events_path(:format => 'pdf'), :class => "btn btn-mini" %>
 </div>
 <% end %>

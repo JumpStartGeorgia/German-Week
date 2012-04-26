@@ -61,12 +61,12 @@ $(function(){
 		map._container._leaflet = false;
 		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(tile_layer);
 
-		if (gon.lat && gon.lon){
+		if (gon.lat && gon.lat.length > 0 && gon.lon && gon.lon.length > 0){
 			existing_marker = new L.Marker(new L.LatLng(gon.lat, gon.lon),{
 				draggable: true
 			});
 			existing_marker.on("dragend",function(e){
-				var target = e.target;							
+				var target = e.target;
 				$("#event_lat").val(target._latlng.lat);
 				$("#event_lon").val(target._latlng.lng);						
 			});
@@ -82,6 +82,11 @@ $(function(){
 					var marker = new L.Marker(new L.LatLng(data[0], data[1]),{
 						draggable: true
 					});
+
+          // save the lat/lon values
+					$("#event_lat").val(data[0]);
+					$("#event_lon").val(data[1]);						
+            
 					marker.on("dragend",function(e){
 						var target = e.target;							
 						$("#event_lat").val(target._latlng.lat);

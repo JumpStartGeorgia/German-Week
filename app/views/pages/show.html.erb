@@ -17,8 +17,8 @@
 
 
 <div class="form-actions">
-  <%= link_to 'Back', pages_path, :class => 'btn'  %>
   <% if user_signed_in? %>
+  	<%= link_to t('app.buttons.list'), pages_path, :class => 'btn'  %>
     <%= link_to t('app.buttons.edit'), edit_page_path(@page), :class => 'btn' %>
     <%= link_to t('app.buttons.delete'), page_path(@page), :method => 'delete', :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-danger' %>
   <% end %>

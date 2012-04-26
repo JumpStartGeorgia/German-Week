@@ -1,9 +1,9 @@
-/*
+	/*
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
 
-ul#search_results { list-style-type: none; width: 44%; }
+ul#search_results { list-style-type: none; width: 90%; }
 ul#search_results > li { margin-bottom: 20px; }
 ul#search_results h3 { font-weight: normal; }
 ul#search_results h3 > a { text-decoration: underline; color: #000666; }

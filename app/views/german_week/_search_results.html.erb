@@ -7,9 +7,7 @@
         </h3>
         <div>
           <div class="search_results_edr">
-            <%= format_datetime(event.start) %>
-            <span>-</span>
-            <%= format_datetime(event.end) %>
+            <%= pretty_time(event.start, event.end) %>
           </div>
           <% if !event.address.nil? %>
           	<div class="search_results_sub_section">
@@ -27,8 +25,15 @@
             </div>
           <% end %>
           <div class="search_results_edesc">
-            <%= event.description %>
+						<%= truncate(event.description, :length => 100, :separator => ' ') %>
           </div>
+					<div>
+						<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn btn-mini" %>
+					<% if user_signed_in? %>
+					        <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>
+					        <%= link_to t('app.buttons.delete'), event_path(event), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+					<% end %>
+					</div>
         </div>
       </div>
     </li>

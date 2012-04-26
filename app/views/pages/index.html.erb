@@ -1,5 +1,11 @@
 <% title t('.title') %>
 
+<% if user_signed_in? %>
+	<div class="form-actions">
+		<%= link_to t('.app.buttons.new_sponsor'), new_page_path, :class => 'btn btn-primary' %>
+	</div>
+<% end %>
+
 <table>
   <tr>
     <th><%= t('app.common.name') %></th>
@@ -25,6 +31,3 @@
 
 <br />
 
-<% if user_signed_in? %>
-<%= link_to t('app.buttons.new_page'), new_page_path, :class => 'btn btn-primary' %>
-<% end %>

@@ -75,18 +75,18 @@ class Event < ActiveRecord::Base
 
   # get events for map
   def self.find_for_map(type, dayorcategory, day)
-    if !type.nil? && !dayorcategory.nil? && !day.nil?
+    if !type.nil? && !dayorcategory.nil?
   		if type == "day"	
   			where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))",
-  			  dayorcategory, dayorcategory)
+  			  dayorcategory)
   		elsif type == "category" 		
   			joins(:event_translations, :categories => :category_translations)
   			  .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
   			    dayorcategory, I18n.locale, I18n.locale)				        
-  		elsif type == "daycategory"
+  		elsif type == "daycategory" && !day.nil?
   			joins(:event_translations, :categories => :category_translations)
   			  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and (DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))", 
-  			    dayorcategory, I18n.locale, I18n.locale, day, day)
+  			    dayorcategory, I18n.locale, I18n.locale, day)
       else
         return nil
   		end

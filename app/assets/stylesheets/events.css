@@ -27,3 +27,8 @@
 	width: 300px;
 	height: 250px;
 }
+
+/* show page styles */
+#time-container {	}
+#time-container #time-block {float: left; width: 60%;}
+#time-container #button-block {float: right; width: 40%; text-align: center;}
