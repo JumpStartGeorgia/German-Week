@@ -93,6 +93,7 @@ class EventsController < ApplicationController
     # create the translation object for however many locales there are
     # so the form will properly create all of the nested form fields
     @locales.length.times {@event.event_translations.build}
+		gon.edit_map = true
 
     respond_to do |format|
       format.html # new.html.erb
@@ -103,6 +104,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+		gon.edit_map = true
   end
 
   # POST /events

@@ -56,9 +56,9 @@
 
           <div class="menu def-font upcase">
             <span class="header"></span>
-            <a href="#" class="item"><%= t('.about') %></a>
+						<%= link_to t('.about'), root_path, :class => "item" %>
             <a href="#" class="item"><%= t('.comp') %></a>
-            <a href="#" class="item"><%= t('.contact') %></a>
+						<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
           </div><!--#header .menu-->
 
         </div><!--#header > .c3-->
@@ -159,9 +159,9 @@
 
             <div class="menu">
               <span class="header"><%= t('.menu') %></span>
-		          <a href="#" class="item"><%= t('.about') %></a>
-		          <a href="#" class="item"><%= t('.comp') %></a>
-		          <a href="#" class="item"><%= t('.contact') %></a>
+						<%= link_to t('.about'), root_path, :class => "item" %>
+            <a href="#" class="item"><%= t('.comp') %></a>
+						<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
             </div><!--#footer .r1 .c1 .menu-->
 
           </div><!--#footer .r1 .c1-->

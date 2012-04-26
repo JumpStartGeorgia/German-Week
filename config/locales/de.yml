@@ -9,8 +9,8 @@ de:
       back: Back
       edit: Edit
       delete: Delete
-      new_category: New
-      new_event: New Category
+      new_category: New Category
+      new_event: New Event
       new_page: New Page
       new_sponsor: New Sponsor
     msgs:
