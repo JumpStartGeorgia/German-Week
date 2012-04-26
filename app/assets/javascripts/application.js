@@ -15,10 +15,11 @@
 $(document).ready(function(){
 	// load the megamenu script
 	$(".mega-menu").dcVerticalMegaMenu({
-    rowItems: '3',
+    rowItems: '4',
     speed: 'slow',
     effect: 'fade',
-    direction: 'right'
+    direction: 'right',
+    arrow: 'false'
 	});
 	// on mouseover, get the events for the date in the link and load it
 	// into megamenu

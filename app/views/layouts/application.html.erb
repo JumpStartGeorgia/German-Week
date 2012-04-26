@@ -84,6 +84,9 @@
 
           <div class="menu def-font upcase">
 
+						<%= render "shared/menu" %>
+<%
+=begin %>
 						<%= link_to t('.home'), root_path, :class => "item" %>
 						<% (1..6).each do |i| %>
 								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
@@ -92,7 +95,8 @@
 						<% end %>
             <%= link_to t('.categories'), category_events_path, :class => "item" %>
             <%= link_to t('.map'), map_page_day_path, :class => "item" %>
-
+<%
+=end %>
           </div>
 
           <div id="content-board">

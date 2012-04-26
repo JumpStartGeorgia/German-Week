@@ -1,3 +1,3 @@
 // load the pop-up menu with the provide events
 $("#event_menu_popup<%= params[:menu_item]%>").empty();
-$("#event_menu_popup<%= params[:menu_item]%>").html('<%= escape_javascript("<ul>#{render(:partial => 'shared/event_menu_item', :collection => @events)  || '<li class=event_menu_popup_item><br /><%= t('app.msgs.no_events_for_date') %><br /></li>'}</ul><div class=\"clearfix\"></div>").html_safe %>');
+$("#event_menu_popup<%= params[:menu_item]%>").html('<%= escape_javascript("<ul>#{render(:partial => 'shared/event_menu_item', :collection => @events)  || '<li class=\"event_menu_popup_item\"><br />There are no events for this date.<br /></li>'}</ul><div class=\"clearfix\"></div>").html_safe %>');
