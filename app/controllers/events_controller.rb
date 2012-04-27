@@ -235,7 +235,7 @@ logger.debug "data has #{data.length} records"
       if !extensions.include? File.extname(f)[1..4]
         next
       end
-      images.push 'assets/images/header/' + f
+      images.push '/assets/images/header/' + f
     end
 
     max = images.count
