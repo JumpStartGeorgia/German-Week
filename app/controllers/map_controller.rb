@@ -49,11 +49,11 @@ class MapController < ApplicationController
 						else
 							gon.event_ends.push ""
 						end
-						if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0
+						if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0
 							gon.event_locations.push "#{event.building_name}, #{event.address}"
-						elsif !event.building_name.nil? && @event.building_name.length > 0 
+						elsif !event.building_name.nil? && event.building_name.length > 0 
 							gon.event_locations.push event.building_name.to_s
-						elsif !event.address.nil? && @event.address.length > 0 
+						elsif !event.address.nil? && event.address.length > 0 
 							gon.event_locations.push event.address.to_s
 						end
 
