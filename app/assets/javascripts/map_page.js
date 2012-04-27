@@ -48,8 +48,11 @@ $(function(){
 					popup_content.__("<a href=\""+gon.event_paths[index]+"\"><center><font class=\"event-popup-title\">"+gon.event_popups[index]+"</font></center></a>");					
 					popup_content.__("<center>");
 					popup_content.__("<font class=\"event-popup-start\">"+gon.event_starts[index]+"</font>");
-					popup_content.__(" - ");
-					popup_content.__("<font class=\"event-popup-end\">"+gon.event_ends[index]+"</font>");							
+alert("event ends = " + gon.event_ends[index])
+					if (gon.event_ends[index].length > 0){
+						popup_content.__(" - ");
+						popup_content.__("<font class=\"event-popup-end\">"+gon.event_ends[index]+"</font>");							
+					}
 					popup_content.__("</center>");
 					popup_content.__("<center>");
 					popup_content.__("<font class=\"event-popup-location\">"+gon.event_locations[index]+"</font>");
