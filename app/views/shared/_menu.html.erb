@@ -1,5 +1,5 @@
 
-
+	
 	<ul class="mega-menu">
 		<li><%= link_to "Home", root_path %></li>
 
@@ -9,11 +9,9 @@
 							day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
 							:class => "event_menu_link" %>					
 						
-						
-								
-			
+														
 						<ul>
-							<%= render("shared/menu_item", :partial => "menu_item", :collection => @events) %>
+							
 						</ul>			
 						
 			</li>
@@ -21,6 +19,20 @@
 		<li>
 
 			<%= link_to "Categories", category_events_path %>
+				<ul>
+					<li>
+						<ul>
+							<li style="margin-left:100px;width:100px;">irakli</li>
+							<li style="width:100px;">irakli</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li style="width:100px;">irakli</li>
+							<li style="width:100px;">irakli</li>
+						</ul>
+					</li>
+				</ul>
 			<!--<div id="category_menu_popup" style="width: 100%;" >
 
 				<ul>

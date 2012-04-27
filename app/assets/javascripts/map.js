@@ -6,7 +6,6 @@ $(document).ready(function(){
 	// gon variables are either loaded in the application controller (default values)
 	//  or in the controller loading the map
 	// make sure lat and lon exist
-
 	if (gon.lat && gon.lon && !gon.map_page && gon.show_map)
 	{ 
 		var cloudmadeUrl = gon.tile_url,

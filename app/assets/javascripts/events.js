@@ -51,7 +51,7 @@ $(document).ready(function(){
 
 $(function(){
 
-	if(!gon.show_map){
+	if(!gon.show_map && $("#control-map").length>0){
 		var map = new L.Map("control-map"), tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
 				
 		map.attributionControl = false;
