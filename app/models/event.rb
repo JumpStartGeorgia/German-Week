@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :email, :url, :phone, :fax, :sponsor_ids, :category_ids, :lat, :lon, :address, :event_translations_attributes
+  attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids, :lat, :lon, :building_name, :address, :event_translations_attributes
   attr_accessor :locale  
 
   validates :start, :presence => true

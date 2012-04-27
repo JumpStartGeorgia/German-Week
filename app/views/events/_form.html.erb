@@ -39,6 +39,13 @@
 		</div>
 		
 		<div class="control-group">
+			<%= f.label :building_name, :class => "control-label" %>
+			<div class="controls">
+			  <%= f.text_field :building_name, :class => "text_field", :label => false %>
+			</div>
+		</div>
+		
+		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :address, :class => "text_field", :label => false %>
@@ -64,6 +71,13 @@
 			<%= f.label :url, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :url, :as => :url, :class => "text_field", :label => false %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :url2, :class => "control-label" %>
+			<div class="controls">
+			  <%= f.text_field :url2, :as => :url2, :class => "text_field", :label => false %>
 			</div>
 		</div>
 		

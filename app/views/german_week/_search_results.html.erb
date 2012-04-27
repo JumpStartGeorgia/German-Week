@@ -11,7 +11,14 @@
           </div>
           <% if !event.address.nil? %>
           	<div class="search_results_sub_section">
-          		<span>Location:</span> <%= event.address %>
+          		<span>Location:</span> 
+							<% if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0 %>
+								<%= "#{event.building_name}, #{event.address}" %>
+							<% elsif !event.building_name.nil? && event.building_name.length > 0 %>
+								<%= event.building_name %>
+							<% elsif !event.address.nil? && event.address.length > 0 %>
+								<%= event.address %>
+							<% end %>
 						</div>
           <% end %>
           <% ecc = event.categories.count; %>
