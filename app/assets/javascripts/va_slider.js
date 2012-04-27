@@ -1,4 +1,3 @@
-/*
 function microtime (get_as_float)
 {
     get_as_float = get_as_float || true;
@@ -82,6 +81,11 @@ function adjust_dimensions (e_w, e_h, vertical_limit, max_w, max_h)
   };
 }
 
+function get_slide (index)
+{
+  return slider.container.getElementsByClassName('slider_img_' + index)[0];
+}
+
 function change_slide (index)
 {
 
@@ -136,9 +140,10 @@ $.prototype.va_slider = function (options)
       }
       images[i] = new Image();
       images[i].src = json[i];
+      images[i].style.display = "none";
+      slider.container.appendChild(images[i]);
       images[i].onload = function ()
       {
-      console.log(images[i]);
         new_ds = adjust_dimensions(this.width, this.height, false, slider.middle_size, slider.height);
         this.width  = this.style.width  = new_ds.width;
         this.height = this.style.height = new_ds.height;
@@ -152,13 +157,12 @@ $.prototype.va_slider = function (options)
             left = (slider.width - slider.middle_size) / 2;
           break;
           case 2:
-            left = slider.width + (this.width - (slider.width - slider.middle_size) / 2);
+            left = this.width + (slider.width - slider.middle_size) / 2;
           break;
         }
-        this.style.left = left;
+        this.style.left = left + PX;
+        images[j].style.display = "block";
         j ++;
-
-        slider.container.appendChild(images[i]);
       }
     }
   });
@@ -196,5 +200,3 @@ $(function ()
   }
 
 });
-
-*/
