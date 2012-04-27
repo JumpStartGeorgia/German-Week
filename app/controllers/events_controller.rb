@@ -165,7 +165,6 @@ class EventsController < ApplicationController
   	# get all event data from database
   	output_file_name = params[:typespec]
     data = Event.find_for_ics(params[:type], params[:typespec])
-logger.debug "data has #{data.length} records"    
   	case params[:type]
   		when "event" 
   			output_file_name = data.title.split.join('_')
