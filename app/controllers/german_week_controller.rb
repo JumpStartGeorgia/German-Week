@@ -1,6 +1,6 @@
 class GermanWeekController < ApplicationController
   def index  
-
+    @page = Page.find_by_name("ambassador")
   end
 
   def search
