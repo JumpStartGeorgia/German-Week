@@ -1,5 +1,10 @@
-<% title 'New event' %>
+<% title t('.title') %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', events_path %>
+<% if user_signed_in? %>
+<div class="form-actions">
+	<%= link_to t('app.buttons.list'), events_path, :class => "btn btn-mini"  %>
+</div>
+<% end %>
+

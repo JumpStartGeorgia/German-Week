@@ -8,13 +8,13 @@
 		<div id="form-<%= formLocale %>" class="multilanguage" >
 			<h3><%= @locales[i-1].name %></h3>
 			<div class="control-group">
-			  <%= event_translation.label "#{@locales[i-1].name} #{:title}", :class => 'control-label' %>
+			  <%= event_translation.label :title, :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.text_field :title, :class => 'text_field' %>
 			  </div>
 			</div>
 			<div class="control-group">
-			  <%= event_translation.label "#{@locales[i-1].name} #{:description}", :class => 'control-label' %>
+			  <%= event_translation.label :description, :class => 'control-label' %>
 			  <div class="controls">
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
@@ -37,9 +37,13 @@
 		    <%= f.text_field :end, :as => :time_picker, :class => 'text_field' %>
 		  </div>
 		</div>
-
-		<div id="control-map" class="control-map"></div>
-		<br />
+		
+		<div class="control-group">
+			<%= f.label :building_name, :class => "control-label" %>
+			<div class="controls">
+			  <%= f.text_field :building_name, :class => "text_field", :label => false %>
+			</div>
+		</div>
 		
 		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>
@@ -53,6 +57,9 @@
 			</div>
 		</div>
 		
+		<div id="control-map" class="control-map"></div>
+		<br />
+		
 		<div class="control-group">
 			<%= f.label :phone, :class => "control-label" %>
 			<div class="controls">
@@ -61,23 +68,16 @@
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :fax, :class => "control-label" %>
-			<div class="controls">
-			  <%= f.text_field :fax, :as => :phone, :class => "text_field", :label => false %>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<%= f.label :email, :class => "control-label" %>
-			<div class="controls">
-			  <%= f.text_field :email, :as => :email, :class => "text_field", :label => false %>
-			</div>
-		</div>
-		
-		<div class="control-group">
 			<%= f.label :url, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :url, :as => :url, :class => "text_field", :label => false %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :url2, :class => "control-label" %>
+			<div class="controls">
+			  <%= f.text_field :url2, :as => :url2, :class => "text_field", :label => false %>
 			</div>
 		</div>
 		
@@ -97,8 +97,8 @@
 
 	<div class="form-actions">
 	  <%= f.submit nil, :class => 'btn btn-primary' %>
-	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
-	  <%= link_to 'Cancel', events_path, :class => 'btn' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), events_path, :class => 'btn' %>
 	</div>
   </fieldset>
 <% end %>

@@ -12,13 +12,23 @@
 	margin-top:-4px;
 }
 
-.control-map {
-	margin-left:400px;
-	margin-top:-100px;	
-	background:transparent;
-	border:1px solid #CCC;
-	width:300px;
-	height:250px;
-	opacity:0;
+.event-lat {
 	display:none;
 }
+.event-lon {
+	display:none;
+}
+
+.control-map {
+	margin-left:150px;
+	margin-top:0px;	
+	background:transparent;
+	border:1px solid #CCC;
+	width: 300px;
+	height: 250px;
+}
+
+/* show page styles */
+#time-container {	}
+#time-container #time-block {float: left; width: 60%;}
+#time-container #button-block {float: right; width: 40%; text-align: center;}

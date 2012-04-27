@@ -56,9 +56,9 @@
 
           <div class="menu def-font upcase">
             <span class="header"></span>
-            <a href="#" class="item"><%= t('.about') %></a>
+						<%= link_to t('.about'), root_path, :class => "item" %>
             <a href="#" class="item"><%= t('.comp') %></a>
-            <a href="#" class="item"><%= t('.contact') %></a>
+						<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
           </div><!--#header .menu-->
 
         </div><!--#header > .c3-->
@@ -81,7 +81,11 @@
             <table><tr><td>
 
           <div class="menu def-font upcase" style="float: none;">
-
+<%
+=begin %>
+						<%= render "shared/menu" %>
+<%
+=end %>
 						<%= link_to t('.home'), root_path, :class => "item" %>
 						<% (1..6).each do |i| %>
 								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
@@ -95,7 +99,7 @@
 
             </td><td class="white-bg">
 
-          <div id="content-board" style="float: none;">
+          <div id="content-board">
 
 						<h2><%= yield(:title) %></h2>
 
@@ -161,9 +165,9 @@
 
             <div class="menu">
               <span class="header"><%= t('.menu') %></span>
-		          <a href="#" class="item"><%= t('.about') %></a>
-		          <a href="#" class="item"><%= t('.comp') %></a>
-		          <a href="#" class="item"><%= t('.contact') %></a>
+						  <%= link_to t('.about'), root_path, :class => "item" %>
+              <a href="#" class="item"><%= t('.comp') %></a>
+  						<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
             </div><!--#footer .r1 .c1 .menu-->
 
           </div><!--#footer .r1 .c1-->
@@ -172,10 +176,9 @@
 
             <div class="menu">
               <span class="header"><%= t('.categories') %></span>
-              <a href="#" class="item">category</a>
-              <a href="#" class="item">simple text</a>
-              <a href="#" class="item">category</a>
-              <a href="#" class="item">simple text</a>
+					    <% @categories.each do |cat| %>
+					      <%= link_to cat.title, category_events_path(cat.title), :class => "item" %>
+					    <% end %>
             </div><!--#footer .r1 .c2 .menu-->
 
           </div><!--#footer .r1 .c2-->
@@ -199,7 +202,10 @@
 
           <div class="c3">
 
-            <div class="r1 clear">Share Tweet &nbsp;+1 &nbsp; &nbsp; Like Send 142.2k like this</div>
+            <div class="r1 clear">
+							<%= render :inline => addthis_share_button %>
+						</div>
+
             <div class="r2 clear def-font upcase">
               <div>
                 ihre e-email:&nbsp;
@@ -225,7 +231,11 @@
 
     </div><!--#container-->
 
-    <%= javascript_include_tag "application" %>
+		<%= javascript_include_tag "application" %>
+		<%= javascript_tag do %>
+			I18n.defaultLocale = "<%= I18n.default_locale %>";
+			I18n.locale = "<%= I18n.locale %>";
+		<% end %>
 
   </body>
 </html>

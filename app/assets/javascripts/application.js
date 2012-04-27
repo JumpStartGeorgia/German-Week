@@ -4,6 +4,8 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+//= require i18n
+//= require i18n/translations
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
@@ -14,7 +16,13 @@
 
 $(document).ready(function(){
 	// load the megamenu script
-	$(".megamenu").megamenu();
+	$(".mega-menu").dcVerticalMegaMenu({
+    rowItems: '4',
+    speed: 'slow',
+    effect: 'fade',
+    direction: 'right',
+    arrow: 'false'
+	});
 	// on mouseover, get the events for the date in the link and load it
 	// into megamenu
   $("a.event_menu_link").mouseover(submitWithAjax);

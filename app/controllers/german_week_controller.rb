@@ -19,8 +19,6 @@ class GermanWeekController < ApplicationController
       end
     end
 
-  # @categories = Category.all
-
   end
 
 end

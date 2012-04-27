@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order("start asc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -70,8 +70,15 @@ class EventsController < ApplicationController
     gon.end_hour = @event.start.strftime("%H")
     gon.end_minute = @event.start.strftime("%M")
     gon.end_second = @event.start.strftime("%S")
-    gon.address = @event.address
-    gon.show_map = true
+    gon.building_name = @event.building_name
+		if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0
+			gon.address = "#{@event.building_name}, #{@event.address}"
+		elsif !@event.building_name.nil? && @event.building_name.length > 0
+			gon.address = @event.building_name.to_s
+		elsif !@event.address.nil? && @event.address.length > 0
+			gon.address = @event.address.to_s
+		end
+		gon.show_map = true
 
 
     respond_to do |format|
@@ -93,6 +100,7 @@ class EventsController < ApplicationController
     # create the translation object for however many locales there are
     # so the form will properly create all of the nested form fields
     @locales.length.times {@event.event_translations.build}
+		gon.edit_map = true
 
     respond_to do |format|
       format.html # new.html.erb
@@ -103,6 +111,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+		gon.edit_map = true
   end
 
   # POST /events

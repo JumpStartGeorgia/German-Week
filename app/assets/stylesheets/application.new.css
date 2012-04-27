@@ -305,10 +305,10 @@ img {
       #content .menu
       {
         width: 185px;
-        float: left;
+        float: none;
       }
 
-      #content .menu > .item
+      #content .menu  .item
       {
         margin-top: 3px;
         display: block;
@@ -321,17 +321,17 @@ img {
         padding: 12px 0 13px 12px;
       }
 
-      #content .menu > a:first-child
+      #content .menu  a:first-child
       {
         margin-top: 0px !important;
       }
 
-      #content .menu > .item:hover
+      #content .menu  .item:hover
       {
         background: #fff;
       }
 
-      #content .menu > .selected
+      #content .menu  .selected
       {
         background: #fff;
       }
@@ -342,7 +342,7 @@ img {
         /*
         padding: 0px 26px 26px 26px;
         */
-        float: left;
+        float: none;
         background: #fff;
       }
 

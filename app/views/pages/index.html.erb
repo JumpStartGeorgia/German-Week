@@ -1,29 +1,31 @@
-<h1>Listing pages</h1>
+<% title t('.title') %>
+
+<% if user_signed_in? %>
+	<div class="form-actions">
+		<%= link_to t('.app.buttons.new_sponsor'), new_page_path, :class => 'btn btn-primary' %>
+	</div>
+<% end %>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
+    <th><%= t('app.common.name') %></th>
+    <th><%= t('app.common.title') %></th>
+    <th><%= t('app.common.description') %></th>
     <th></th>
   </tr>
 
 <% @pages.each do |page| %>
   <tr>
-    <td><%= page.name %></td>
+    <td><%= link_to page.name, page %></td>
     <td><%= page.title %></td>
     <td><%= page.description %></td>
-    <td><%= link_to 'Show', page %></td>
-    <td><%= link_to 'Edit', edit_page_path(page) %></td>
-    <td><%= link_to 'Destroy', page, confirm: 'Are you sure?', method: :delete %></td>
+		<td>
+	  <% if user_signed_in? %>
+            <%= link_to t('app.buttons.edit'), edit_page_path(page), :class => 'btn btn-mini' %>
+            <%= link_to t('app.buttons.delete'), page_path(page), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+	  <% end %>
+		</td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<% if user_signed_in? %>
-<%= link_to 'New Page', new_page_path %>
-<% end %>

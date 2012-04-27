@@ -1,46 +1,47 @@
-<h1>Listing Sponsors</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-			<th>Address</th>
-			<th>Phone</th>
-			<th>Fax</th>
-			<th>Email</th>
-			<th>Website</th>
-      <th>Logo</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sponsors.each do |sponsor| %>
-      <tr>
-        <td><%= link_to sponsor.title, sponsor_path(sponsor) %></td>
-        <td><%= sponsor.description %></td>
-        <td><%= sponsor.address %></td>
-        <td><%= sponsor.phone %></td>
-        <td><%= sponsor.fax %></td>
-        <td><% if !sponsor.email.nil? %><%= link_to sponsor.email, sponsor.email %><% end %></td>
-        <td><%= link_to sponsor.url, sponsor.url %></td>
-        <td>
-					<% if !sponsor.logo_file_name.nil? %>
-				  <%= image_tag sponsor.logo.url %>
-					<% end %>
-				</td>
-        <td>
-
-	  <% if user_signed_in? %>
-            <%= link_to 'Edit', edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', sponsor_path(sponsor), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
-	  <% end %>
-
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% title t('.title') %>
 
 <% if user_signed_in? %>
-<%= link_to 'New', new_sponsor_path, :class => 'btn btn-primary' %>
+	<div class="form-actions">
+		<%= link_to t('.app.buttons.new_sponsor'), new_sponsor_path, :class => 'btn btn-primary' %>
+	</div>
 <% end %>
+
+
+<% @sponsors.each do |sponsor| %>
+	<h3><%= link_to sponsor.title, sponsor_path(sponsor) %></h3>
+
+	<p>
+		<% if !sponsor.logo_file_name.nil? %>
+			<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
+		<% end %>
+		<%= truncate(sponsor.description, :length => 50, :separator => ' ') %>
+	</p>
+	<p>
+		<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
+		  <%= sponsor.address %>
+		<% end %>
+		<br />
+		<% if !sponsor.phone.nil? && sponsor.phone.length > 0 %>
+			<%= sponsor.phone %>
+		<% end %>
+		<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+			<%= t('app.common.fax') %>: <%= sponsor.fax %>
+		<% end %>
+		<br />
+		<% if !sponsor.email.nil? && sponsor.email.length > 0 %>
+			<%= link_to sponsor.email, sponsor.email %>
+		<% end %>
+		<% if !sponsor.url.nil? && sponsor.url.length > 0 %>
+			<%= link_to sponsor.url, sponsor.url %>
+		<% end %>
+	</p>
+<% if user_signed_in? %>
+<p>
+      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
+      <%= link_to t('app.buttons.delete'), sponsor_path(sponsor), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+</p>
+<% end %>
+
+<% end %>
+
+

@@ -20,8 +20,8 @@
 
 	<div class="form-actions">
 	  <%= f.submit nil, :class => 'btn btn-primary' %>
-	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => 'Reset', :name => :reset %>
-	  <%= link_to 'Cancel', categories_path, :class => 'btn' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), categories_path, :class => 'btn' %>
 	</div>
   </fieldset>
 <% end %>
