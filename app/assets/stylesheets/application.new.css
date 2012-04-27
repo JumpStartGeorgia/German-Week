@@ -65,6 +65,8 @@ img {
 
 /* END OF RESET CSS */
 
+      td { vertical-align: top !important; }
+
       @font-face
       {
         font-family: fightme;
@@ -160,6 +162,11 @@ img {
         text-decoration: none;
       }
 
+      #languages > a:last-child
+      {
+        margin-right: 0px;
+      }
+
       #languages > a:hover
       {
         color: #636363;
@@ -224,7 +231,7 @@ img {
         margin: 0 auto;
         width: 100%;
         height: 100%;
-        padding-top: 115px;
+        padding-top: 120px;
       }
 
       #slider .container .loader > div
