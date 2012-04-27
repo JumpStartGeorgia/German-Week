@@ -1,7 +1,7 @@
 
 
 	<ul class="mega-menu">
-		<li><%= link_to "Home", root_path, :class => "item" %></li>
+		<li><%= link_to t('.home'), root_path, :class => "item" %></li>
 
 		<% (1..6).each do |i| %>
 			<li>
@@ -15,7 +15,7 @@
 			</li>
 		<% end %>
     <li>
-      <%= link_to "Categories", category_events_path, :class => "item" %>
+      <%= link_to t('.categories'), category_events_path, :class => "item" %>
         <ul>
           <% @categories.each do |cat| %>
           <li>

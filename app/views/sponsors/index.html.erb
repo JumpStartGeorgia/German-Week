@@ -12,30 +12,35 @@
 
 	<p>
 		<% if !sponsor.logo_file_name.nil? %>
-			<%= image_tag sponsor.logo.url, :style => "float: right; padding-left: 1em; padding-bottom: 1em;" %>
+			<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
 		<% end %>
 		<%= truncate(sponsor.description, :length => 50, :separator => ' ') %>
 	</p>
 	<p>
-		<% if !sponsor.address.nil? %>
+		<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
 		  <%= sponsor.address %>
 		<% end %>
 		<br />
-		<% if !sponsor.phone.nil? %>
+		<% if !sponsor.phone.nil? && sponsor.phone.length > 0 %>
 			<%= sponsor.phone %>
 		<% end %>
-		<% if !sponsor.fax.nil? %>
-			Fax: <%= sponsor.fax %>
+		<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+			<%= t('app.common.fax') %>: <%= sponsor.fax %>
 		<% end %>
 		<br />
-		<% if !sponsor.email.nil? %>
+		<% if !sponsor.email.nil? && sponsor.email.length > 0 %>
 			<%= link_to sponsor.email, sponsor.email %>
 		<% end %>
-		<% if !sponsor.url.nil? %>
+		<% if !sponsor.url.nil? && sponsor.url.length > 0 %>
 			<%= link_to sponsor.url, sponsor.url %>
 		<% end %>
-
 	</p>
+<% if user_signed_in? %>
+<p>
+      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
+      <%= link_to t('app.buttons.delete'), sponsor_path(sponsor), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+</p>
+<% end %>
 
 <% end %>
 

@@ -117,7 +117,7 @@ $(function(){
 					no_events_div.__("<div class=\"no-events-msgbox\">");
 							no_events_div.__("<center>");
 								no_events_div.__("<p>");
-									no_events_div.__("Sorry, there are no events for the selected day and category.  Please select a different day or category.");									
+									no_events_div.__(I18n.t("app.msgs.map_no_events"));									
 								no_events_div.__("</p>");
 								no_events_div.__("<button id=\"no-events-button\">");
 									no_events_div.__("<strong>Ok</strong>");

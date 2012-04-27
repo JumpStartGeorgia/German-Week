@@ -3,31 +3,31 @@
 <p id="notice"><%= notice %></p>
 
 	<% if !@sponsor.logo_file_name.nil? %>
-  	<%= image_tag @sponsor.logo.url, :style => "float: right; padding-left: 1em; padding-bottom: 1em;" %>
+  	<%= image_tag @sponsor.logo.url, :class => "sponsor_logo" %>
 	<% end %>
   <%= simple_format(@sponsor.description) %>
 
 <div class="clear">&nbsp;</div>
 
 <p>
-	<strong>Sponsor Contact Information</strong>
-	<% if !@sponsor.address.nil? %>
+	<strong><%= t('.contact_header') %></strong>
+	<% if !@sponsor.address.nil? && @sponsor.address.length > 0  %>
 		<br />
 	  <%= @sponsor.address %>
 	<% end %>
-	<% if !@sponsor.phone.nil? %>
+	<% if !@sponsor.phone.nil? && @sponsor.phone.length > 0  %>
 		<br />
 		<%= @sponsor.phone %>
 	<% end %>
-	<% if !@sponsor.fax.nil? %>
+	<% if !@sponsor.fax.nil? && @sponsor.fax.length > 0  %>
 		<br />
-		Fax: <%= @sponsor.fax %>
+		<%= t('app.common.fax') %>: <%= @sponsor.fax %>
 	<% end %>
-	<% if !@sponsor.email.nil? %>
+	<% if !@sponsor.email.nil? && @sponsor.email.length > 0  %>
 		<br />
 		<%= link_to @sponsor.email, @sponsor.email %>
 	<% end %>
-	<% if !@sponsor.url.nil? %>
+	<% if !@sponsor.url.nil? && @sponsor.url.length > 0  %>
 		<br />
 		<%= link_to @sponsor.url, @sponsor.url %>
 	<% end %>

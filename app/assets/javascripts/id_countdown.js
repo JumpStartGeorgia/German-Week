@@ -14,13 +14,13 @@ $(function(){
 				arr.push(text);
 			},html = new Array;
 		__(html,'<span class="tag">');
-			__(html,'TAG');
+			__(html,I18n.t("datetime.prompts.day"));
 		__(html,'</span>');
 		__(html,'<span class="stunden">');
-			__(html,'STUNDEN');
+			__(html,I18n.t("datetime.prompts.hour"));
 		__(html,'</span>');
 		__(html,'<span class="minuten">');
-			__(html,'MINUTEN');
+			__(html,I18n.t("datetime.prompts.minute"));
 		__(html,'</span>');
 		abr.append(html.join(''));
 	}

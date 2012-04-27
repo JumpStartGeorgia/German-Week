@@ -3,6 +3,8 @@
 <%= render 'form' %>
 
 <% if user_signed_in? %>
-	<%= link_to t('app.buttons.back'), events_path, :class => "btn btn-mini"  %>
+<div class="form-actions">
+	<%= link_to t('app.buttons.list'), events_path, :class => "btn btn-mini"  %>
+</div>
 <% end %>
 

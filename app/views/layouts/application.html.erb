@@ -229,5 +229,9 @@
     </div><!--#container-->
 
 		<%= javascript_include_tag "application" %>
+		<%= javascript_tag do %>
+			I18n.defaultLocale = "<%= I18n.default_locale %>";
+			I18n.locale = "<%= I18n.locale %>";
+		<% end %>
   </body>
 </html>

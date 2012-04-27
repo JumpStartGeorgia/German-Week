@@ -43,7 +43,7 @@
 <%= simple_format(@event.description) %>
 
 <p>
-	<strong>Event Contact Information</strong>
+	<strong><%= t('.contact_header') %></strong>
 	<% if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0 %>
 		<br />
 	  <%= "#{@event.building_name}, #{@event.address}" %>
@@ -75,7 +75,8 @@
 
 <% if !@event.categories.nil? && @event.categories.length > 0 %>
 <p>
-  <strong>Event Categories:</strong>
+  <strong><%= t('.category_header') %></strong>
+	<br />
 	<% @event.categories.each_with_index do |c, i| %>
   	<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
   	<%= link_to c.title, category_events_path(c.title) %><%= separator %>
@@ -85,7 +86,8 @@
 
 <% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
 <p>
-  <strong>Event Organizers:</strong>
+  <strong><%= t('.sponsor_header') %></strong>
+	<br />
 	<% @event.sponsors.each do |s| %>
 		<% if !s.logo_file_name.nil? %>
 	  	<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>

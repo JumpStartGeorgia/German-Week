@@ -11,7 +11,7 @@
           </div>
           <% if !event.address.nil? %>
           	<div class="search_results_sub_section">
-          		<span>Location:</span> 
+          		<span><%= t('app.common.loction') %>:</span> 
 							<% if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0 %>
 								<%= "#{event.building_name}, #{event.address}" %>
 							<% elsif !event.building_name.nil? && event.building_name.length > 0 %>
@@ -24,7 +24,7 @@
           <% ecc = event.categories.count; %>
           <% if ecc > 0 %>
             <div class="search_results_sub_section">
-              <span>Categories:</span>
+              <span><%= t('app.common.categories') %>:</span>
               <% event.categories.each_with_index do |c, i| %>
                 <% separator = ((ecc - 1) != i) ? ', ' : '' %>
                 <%= link_to c.title, category_events_path(c.title) %><%= separator %>

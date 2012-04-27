@@ -4,6 +4,8 @@
 <%= render 'form' %>
 
 <% if user_signed_in? %>
-	<%= link_to t('app.buttons.back'), sponsors_path, :class => "btn btn-mini"  %>
+<div class="form-actions">
+	<%= link_to t('app.buttons.list'), sponsors_path, :class => "btn btn-mini"  %>
+</div>
 <% end %>
 

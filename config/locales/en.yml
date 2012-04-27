@@ -10,6 +10,7 @@ en:
       edit: Edit
       delete: Delete
       list: View All
+      search: Search
       new_category: New Category
       new_event: New Event
       new_page: New Page
@@ -18,10 +19,14 @@ en:
       no_events_for_date: There are no events for this date.
       no_events_for_cat: No events exist for this category.
       delete_confirm: Are you sure?
+      map_no_events: "Sorry, there are no events for the selected day and category.  Please select a different day or category."
     common:
       name: Name
       title: Title
       description: Description
+      categories: Categories
+      location: Location
+      fax: Fax
   layouts:
     application:
       menu: Menu
@@ -60,6 +65,10 @@ en:
       title: Events 
     new:
       title: New Event
+    show:
+      contact_header: Event Contact Information
+      sponsor_header: Event Organizers
+      category_header: Event Categories 
   categories:
     edit:
       title: Edit Category
@@ -81,6 +90,8 @@ en:
       title: Sponsors
     new:
       title: New Sponsor
+    show:
+      contact_header: Sponsor Contact Information
 
 
 
