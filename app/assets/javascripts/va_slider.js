@@ -119,7 +119,7 @@ $.prototype.va_slider = function (options)
   }
   slider_html = '<div class="overlay"></div>' +
                 '<div id="switcher_circles">' + switcher_circles_html + '</div>' +
-                '<div class="container"></div>';
+                '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
 
   slider.element.prepend(slider_html);
   slider.container = slider.element[0].getElementsByClassName('container')[0];
@@ -163,6 +163,10 @@ $.prototype.va_slider = function (options)
         this.style.left = left + PX;
         images[j].style.display = "block";
         j ++;
+        if (j == 2)
+        {
+          slider.container.removeChild(slider.container.getElementsByClassName('loader')[0]);
+        }
       }
     }
   });

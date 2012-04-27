@@ -216,6 +216,27 @@ img {
         position: relative;
       }
 
+      #slider .container .loader
+      {
+        background: rgba(0, 0, 0, 1);
+        color: white;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        padding-top: 115px;
+      }
+
+      #slider .container .loader > div
+      {
+        /*
+        width: 32px;
+        height: 32px;
+        background: url('images/loader.gif');
+        */
+        margin: 0 auto;
+      }
+
       #slider .container img
       {
         float: left;
