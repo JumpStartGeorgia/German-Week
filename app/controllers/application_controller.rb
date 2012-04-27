@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_categories_for_partial
-    @categories = Category.all
+    @categories = Category.includes(:category_translations).order("category_translations.title")
   end
 
   def default_url_options(options={})

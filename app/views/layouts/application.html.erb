@@ -174,10 +174,9 @@
 
             <div class="menu">
               <span class="header"><%= t('.categories') %></span>
-              <a href="#" class="item">category</a>
-              <a href="#" class="item">simple text</a>
-              <a href="#" class="item">category</a>
-              <a href="#" class="item">simple text</a>
+					    <% @categories.each do |cat| %>
+					      <%= link_to cat.title, category_events_path(cat.title), :class => "item" %>
+					    <% end %>
             </div><!--#footer .r1 .c2 .menu-->
 
           </div><!--#footer .r1 .c2-->
