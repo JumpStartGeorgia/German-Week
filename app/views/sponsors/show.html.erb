@@ -1,4 +1,8 @@
-<% title @sponsor.title %>
+<% if @sponsor.sponsor_type.nil? %>
+	<% title "#{@sponsor.title}" %>
+<% else %>
+	<% title "#{@sponsor.sponsor_type.title} - #{@sponsor.title}" %>
+<% end %>
 
 <p id="notice"><%= notice %></p>
 
@@ -34,10 +38,13 @@
 
 </p>
 
-<% if user_signed_in? %>
-	<div class="form-actions">
-    	<%= link_to t('app.buttons.list'), sponsors_path, :class => 'btn' %>
-	    <%= link_to t('app.buttons.edit'), edit_sponsor_path(@sponsor), :class => 'btn' %>
-	    <%= link_to t('app.buttons.delete'), sponsor_path(@sponsor), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
-	</div>
-<% end %>
+<div class="form-actions">
+	<% @sponsor_types.each do |type| %>
+  	<%= link_to type.title, sponsor_by_type_path(type.title), :class => 'btn btn-mini' %>
+	<% end %>
+	<% if user_signed_in? %>
+  	<%= link_to t('app.buttons.list'), sponsors_path, :class => 'btn btn-mini' %>
+    <%= link_to t('app.buttons.edit'), edit_sponsor_path(@sponsor), :class => 'btn btn-mini' %>
+    <%= link_to t('app.buttons.delete'), sponsor_path(@sponsor), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+	<% end %>
+</div>

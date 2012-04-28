@@ -27,6 +27,13 @@
 	<%= f.inputs do %>
 
 		<div class="control-group">
+		  <%= f.label :sponsor_type, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :sponsor_type, :label => false %>
+		  </div>
+		</div>
+
+		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :address, :class => "text_field", :label => false %>

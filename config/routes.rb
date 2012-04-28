@@ -36,7 +36,6 @@ GermanWeek::Application.routes.draw do
 	# Get address by lat && lon route
 	match '/:locale/events/getLocation(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
 
-
   scope "/:locale" do
     resources :categories
   end
@@ -52,6 +51,7 @@ GermanWeek::Application.routes.draw do
   scope "/:locale" do
     resources :sponsors
   end
+	match '/:locale/sponsors/view/:type', :to => 'sponsors#view', :as => :sponsor_by_type, :via => 'get'
   
   scope "/:locale" do
     resources :pages

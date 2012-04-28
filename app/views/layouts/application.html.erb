@@ -109,36 +109,17 @@
 
         <div class="container">
 
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner2.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner3.png" /></a>
-          </div>
-          <div class="partner">
-            <a href="#" ><img src="/assets/images/sponsors/partner1.png" /></a>
-          </div>
+			    <% @organizations.each do |org| %>
+						<% if !org.logo_file_name.nil? %>
+		          <div class="partner">
+						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org)) %>
+		          </div>
+						<% else %>
+		          <div class="partner">
+						  	<%= link_to org.title, sponsor_path(org) %>
+		          </div>
+						<% end %>
+			    <% end %>
 
         </div>
 
@@ -153,6 +134,9 @@
             <div class="menu">
               <span class="header"><%= t('.menu') %></span>
 							<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
+					    <% @sponsor_types.each do |st| %>
+					      <%= link_to st.title, sponsor_by_type_path(st.title), :class => "item" %>
+					    <% end %>
             </div><!--#footer .r1 .c1 .menu-->
 
           </div><!--#footer .r1 .c1-->

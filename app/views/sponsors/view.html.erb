@@ -1,0 +1,59 @@
+<% title params[:type] %>
+
+
+<% if @sponsors.nil? || @sponsors.length == 0 %>
+	<p>
+		<%= t('.no_sponsor_by_type', :type => params[:type]) %>
+	</p>
+<% else %>
+
+
+	<% @sponsors.each do |sponsor| %>
+		<h3><%= link_to "#{sponsor.title}", sponsor_path(sponsor) %></h3>
+
+		<p>
+			<% if !sponsor.logo_file_name.nil? %>
+				<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
+			<% end %>
+			<%= truncate(sponsor.description, :length => 50, :separator => ' ') %>
+		</p>
+		<p>
+			<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
+			  <%= sponsor.address %>
+			<% end %>
+			<br />
+			<% if !sponsor.phone.nil? && sponsor.phone.length > 0 %>
+				<%= sponsor.phone %>
+			<% end %>
+			<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+				<%= t('app.common.fax') %>: <%= sponsor.fax %>
+			<% end %>
+			<br />
+			<% if !sponsor.email.nil? && sponsor.email.length > 0 %>
+				<%= link_to sponsor.email, sponsor.email %>
+			<% end %>
+			<% if !sponsor.url.nil? && sponsor.url.length > 0 %>
+				<%= link_to sponsor.url, sponsor.url %>
+			<% end %>
+		</p>
+		<% if user_signed_in? %>
+		<p>
+		      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
+		      <%= link_to t('app.buttons.delete'), sponsor_path(sponsor), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+		</p>
+		<% end %>
+
+	<% end %>
+<% end %>
+
+<div class="form-actions">
+		<% @sponsor_types.each do |type| %>
+	  	<%= link_to type.title, sponsor_by_type_path(type.title), :class => 'btn btn-mini' %>
+		<% end %>
+		<% if user_signed_in? %>
+			<%= link_to t('app.buttons.list'), sponsors_path, :class => 'btn btn-mini' %>
+			<%= link_to t('app.buttons.new_sponsor'), new_sponsor_path, :class => 'btn btn-mini' %>
+	<% end %>
+</div>
+
+

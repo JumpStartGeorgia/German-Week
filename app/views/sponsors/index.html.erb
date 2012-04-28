@@ -8,7 +8,13 @@
 
 
 <% @sponsors.each do |sponsor| %>
-	<h3><%= link_to sponsor.title, sponsor_path(sponsor) %></h3>
+	<h3>
+		<% if sponsor.sponsor_type.nil? %>
+			<%= link_to "#{sponsor.title}", sponsor_path(sponsor) %>
+		<% else %>
+			<%= link_to "#{sponsor.sponsor_type.title} - #{sponsor.title}", sponsor_path(sponsor) %>
+		<% end %>
+	</h3>
 
 	<p>
 		<% if !sponsor.logo_file_name.nil? %>

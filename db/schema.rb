@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428075133) do
+ActiveRecord::Schema.define(:version => 20120428093057) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -109,6 +109,22 @@ ActiveRecord::Schema.define(:version => 20120428075133) do
   add_index "sponsor_translations", ["locale"], :name => "index_sponsor_translations_on_locale"
   add_index "sponsor_translations", ["sponsor_id"], :name => "index_sponsor_translations_on_sponsor_id"
 
+  create_table "sponsor_type_translations", :force => true do |t|
+    t.integer  "sponsor_type_id"
+    t.string   "locale"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sponsor_type_translations", ["locale"], :name => "index_sponsor_type_translations_on_locale"
+  add_index "sponsor_type_translations", ["sponsor_type_id"], :name => "index_add91cb62dfd73a54b7d8186f1b3239716de71f5"
+
+  create_table "sponsor_types", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sponsors", :force => true do |t|
     t.string   "url"
     t.datetime "created_at"
@@ -121,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20120428075133) do
     t.string   "phone"
     t.string   "fax"
     t.string   "email"
+    t.integer  "sponsor_type_id"
   end
 
   create_table "users", :force => true do |t|
