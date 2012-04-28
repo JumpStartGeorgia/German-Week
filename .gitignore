@@ -17,5 +17,8 @@
 # ignore the database.yml file
 /config/database.yml
 
+# ignore folder with uploaded images
+/public/system
+
 # ignore folder with all documents from embassy
 /embassy

@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
-  translates :title, :description
+  translates :title, :description, :picture_text
+  has_attached_file :picture,
+        :path => ":rails_root/public/system/event/:attachment/:id/:style/:filename",
+        :url => "/system/event/:attachment/:id/:style/:filename"
 
   has_many :event_translations, :dependent => :destroy
   has_many :event_sponsors, :dependent => :destroy
@@ -8,7 +11,8 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids, :lat, :lon, :building_name, :address, :event_translations_attributes
+  attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids, 
+      :lat, :lon, :building_name, :address, :event_translations_attributes, :picture
   attr_accessor :locale  
 
   validates :start, :presence => true

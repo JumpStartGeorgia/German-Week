@@ -65,17 +65,11 @@
 		  <div class="controls">
 				<% if !@sponsor.logo_file_name.nil? %>
 				Current logo on file: <%= image_tag @sponsor.logo.url %> 
-<%
-=begin %>				
-				<%= label_tag "delete_logo", "Delete the Logo?", %> <%= check_box_tag "delete_logo" %>
-<%
-=end %>
 				<br />
 				<% end %>
 		    <%= f.input :logo, :as => :file, :label => false %>
 		  </div>
 		</div>
-		<%= f.hidden_field :locale , :value => I18n.locale %>
 	<% end %>
 
 	<div class="form-actions">

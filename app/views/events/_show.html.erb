@@ -42,6 +42,10 @@
 
 <%= simple_format(@event.description) %>
 
+<% if !@event.picture_file_name.nil? %>
+	<%= image_tag @event.picture.url, :id => "event_picture" ,:alt => @event.picture_text %>
+<% end %>
+
 <p>
 	<strong><%= t('.contact_header') %></strong>
 	<% if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0 %>

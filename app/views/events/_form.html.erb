@@ -19,6 +19,12 @@
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
 			</div>
+			<div class="control-group">
+			  <%= event_translation.label :picture_text, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= event_translation.input :picture_text, :label => false %>
+			  </div>
+			</div>
 			<%= event_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
@@ -81,6 +87,17 @@
 			</div>
 		</div>
 		
+		<div class="control-group">
+		  <%= f.label :picture, :class => 'control-label' %>
+		  <div class="controls">
+				<% if !@event.picture_file_name.nil? %>
+				Current picture on file: <%= image_tag @event.picture.url %> 
+				<br />
+				<% end %>
+		    <%= f.input :picture, :as => :file, :label => false %>
+		  </div>
+		</div>
+
 		<div class="control-group">
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
 		  <div class="controls">

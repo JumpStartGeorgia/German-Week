@@ -35,7 +35,6 @@ $(document).ready(function(){
 	  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 	});
 
-
   // search button click event
   document.getElementById('search_show_button').onclick = function () {
     var form_container = $('#search_form_container');
@@ -43,6 +42,14 @@ $(document).ready(function(){
     form_container.find('input[type="text"]').focus();
   }
 
+  // show image caption
+  if (gon.show_img_caption){
+    $(gon.img_caption_id).jcaption({
+      wrapperClass: gon.img_caption_class,
+      requireText: false
+    });
+  }
+  
 
   // hide the alert and notice containers if they are empty
   $('p.notice, p.alert').each(function(){ ($.trim($(this).html()).length == 0) && $(this).hide(); });

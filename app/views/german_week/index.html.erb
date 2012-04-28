@@ -1,5 +1,8 @@
+<% if @page.nil? %>
+	<% title t('.title') %>
+<% else %>
 <% title @page.title %>
 
 <%= simple_format(@page.description) %>
 
-
+<% end %>

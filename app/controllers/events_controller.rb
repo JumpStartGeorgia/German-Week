@@ -79,6 +79,9 @@ class EventsController < ApplicationController
 			gon.address = @event.address.to_s
 		end
 		gon.show_map = true
+		gon.show_img_caption = true
+		gon.img_caption_id = "#event_picture"
+		gon.img_caption_class = "event_picture_container"
 
 
     respond_to do |format|
