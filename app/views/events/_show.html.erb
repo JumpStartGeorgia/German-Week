@@ -1,3 +1,4 @@
+
 <% is_html = ((defined? html) && html) ? true : false %>
 
 <% title @event.title %>
@@ -6,104 +7,105 @@
 
 <div id="time-container">
 	<div id="time-block">
-		<p>
+		<p id="event_time">
       <%= pretty_time(@event.start, @event.end) %>
+		</p>		
+
+		<p>
+			<strong><%= t('.contact_header') %></strong>
+			<% if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0 %>
+				<br />
+				<%= "#{@event.building_name}, #{@event.address}" %>
+			<% elsif !@event.building_name.nil? && @event.building_name.length > 0 %>
+				<br />
+				<%= @event.building_name %>
+			<% elsif !@event.address.nil? && @event.address.length > 0 %>
+				<br />
+				<%= @event.address %>
+			<% end %>
+			<% if !@event.phone.nil? && @event.phone.length > 0 %>
+				<br />
+				<%= @event.phone %>
+			<% end %>
+			<% if !@event.url.nil? && @event.url.length > 0 && !@event.url2.nil?  && @event.url2.length > 0 %>
+				<br />
+				<%= link_to @event.url, @event.url %>
+				&nbsp;&nbsp;
+				<%= link_to @event.url2, @event.url2 %>
+			<% elsif !@event.url.nil? && @event.url.length > 0  %>
+				<br />
+				<%= link_to @event.url, @event.url %>
+			<% elsif !@event.url2.nil? && @event.url2.length > 0  %>
+				<br />
+				<%= link_to @event.url2, @event.url2 %>
+			<% end %>
+
 		</p>
+
+		<% if !@event.categories.nil? && @event.categories.length > 0 %>
+		<p>
+			<strong><%= t('.category_header') %></strong>
+			<br />
+			<% @event.categories.each_with_index do |c, i| %>
+				<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
+				<%= link_to c.title, category_events_path(c.title) %><%= separator %>
+			<% end %>
+		</p>
+		<% end %>
+
+		<% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
+		<p>
+			<strong><%= t('.sponsor_header') %></strong>
+			<br />
+			<% @event.sponsors.each do |s| %>
+				<% if !s.logo_file_name.nil? %>
+					<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
+				<% else %>
+					<%= link_to(s.title, sponsor_path(s)) %>
+				<% end %>
+			<% end %>
+		</p>
+	<% end %>	
+</div>
+<div id="button-block">
 		<% if @event.start > DateTime.now && is_html %>
 		<p>
-			<div id="countdown">
+			<div id="countdown" class="countdown">
 		  	<div id="time"></div>
 		  	<div id="time-abr" class="time-abr"></div>
 		  </div>
 		</p>
-		<% end %>
-	</div>
-	<div id="button-block">
-		<% if is_html %>
-			<p>
-				<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn btn-mini", :target => "_blank", :target => "_blank" %>
-			</p>
-			<p>
-				<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn btn-mini" %>
-			</p>
+	<% end %>
 
-			<% if user_signed_in? %>
-				<p>
-		    	<%= link_to t('app.buttons.list'), events_path, :class => 'btn' %>
-		     <%= link_to t('app.buttons.edit'), edit_event_path(@event), :class => 'btn' %>
-		     <%= link_to t('app.buttons.delete'), event_path(@event), :method => 'delete', :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-danger' %>
-				</p>
-			<% end %>
-		<% end %>
+	<% if is_html %>
+		<p>
+			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn btn-mini", :target => "_blank", :target => "_blank" %>
+		</p>
+		<p>
+			<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn btn-mini" %>
+		</p>
 
-	</div>
+		<% if user_signed_in? %>
+			<p>
+	    	<%= link_to t('app.buttons.list'), events_path, :class => 'btn' %>
+	     <%= link_to t('app.buttons.edit'), edit_event_path(@event), :class => 'btn' %>
+	     <%= link_to t('app.buttons.delete'), event_path(@event), :method => 'delete', :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-danger' %>
+			</p>
+		<% end %>
+	<% end %>
+</div>
 	<div class="clear">&nbsp;</div>
 </div>
 
-<%= simple_format(@event.description) %>
+
 
 <% if !@event.picture_file_name.nil? %>
 	<%= image_tag @event.picture.url, :id => "event_picture" ,:alt => @event.picture_text %>
 <% end %>
 
-<p>
-	<strong><%= t('.contact_header') %></strong>
-	<% if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0 %>
-		<br />
-	  <%= "#{@event.building_name}, #{@event.address}" %>
-	<% elsif !@event.building_name.nil? && @event.building_name.length > 0 %>
-		<br />
-	  <%= @event.building_name %>
-	<% elsif !@event.address.nil? && @event.address.length > 0 %>
-		<br />
-	  <%= @event.address %>
-	<% end %>
-	<% if !@event.phone.nil? && @event.phone.length > 0 %>
-		<br />
-		<%= @event.phone %>
-	<% end %>
-	<% if !@event.url.nil? && @event.url.length > 0 && !@event.url2.nil?  && @event.url2.length > 0 %>
-		<br />
-	  <%= link_to @event.url, @event.url %>
-		&nbsp;&nbsp;
-		<%= link_to @event.url2, @event.url2 %>
-	<% elsif !@event.url.nil? && @event.url.length > 0  %>
-		<br />
-		<%= link_to @event.url, @event.url %>
-	<% elsif !@event.url2.nil? && @event.url2.length > 0  %>
-		<br />
-		<%= link_to @event.url2, @event.url2 %>
-	<% end %>
+<%= simple_format(@event.description) %>
 
-</p>
-
-<% if !@event.categories.nil? && @event.categories.length > 0 %>
-<p>
-  <strong><%= t('.category_header') %></strong>
-	<br />
-	<% @event.categories.each_with_index do |c, i| %>
-  	<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
-  	<%= link_to c.title, category_events_path(c.title) %><%= separator %>
-	<% end %>
-</p>
-<% end %>
-
-<% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
-<p>
-  <strong><%= t('.sponsor_header') %></strong>
-	<br />
-	<% @event.sponsors.each do |s| %>
-		<% if !s.logo_file_name.nil? %>
-	  	<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
-		<% else %>
-	  	<%= link_to(s.title, sponsor_path(s)) %>
-		<% end %>
-
-	<% end %>
-</p>
-<% end %>
 <% if is_html %>
 	<div id='map'></div>
 <% end %>
-
 

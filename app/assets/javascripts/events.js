@@ -52,17 +52,17 @@ var map;
 var existing_marker;
 $(function(){
 
+
 	if(gon.edit_map){
-		map = new L.Map("control-map"), 
-							tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
+		var map = new L.Map("control-map"), tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
+
 				
 		map.attributionControl = false;
 		map.zoomControl = true;
 		map._container._leaflet = false;
 		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(tile_layer);
-
-		if (gon.lat && gon.lat.length > 0 && gon.lon && gon.lon.length > 0){
-			existing_marker = new L.Marker(new L.LatLng(gon.lat, gon.lon),{
+		if (gon.marker_lat && gon.marker_lat.toString().length > 0 && gon.marker_lon && gon.marker_lon.toString().length > 0){
+			existing_marker = new L.Marker(new L.LatLng(gon.marker_lat, gon.marker_lon),{
 				draggable: true
 			});
 			existing_marker.on("dragend",function(e){

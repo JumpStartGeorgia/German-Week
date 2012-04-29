@@ -122,6 +122,8 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+		gon.marker_lat = @event.lat
+		gon.marker_lon = @event.lon
 		gon.edit_map = true
   end
 

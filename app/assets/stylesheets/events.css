@@ -31,10 +31,12 @@
 /* show page styles */
 #time-container {	}
 #time-container #time-block {float: left; width: 60%;}
+#time-container #time-block #event_time {font-size: larger;}
 #time-container #button-block {float: right; width: 40%; text-align: center;}
 
 /* image caption styles */
 div.event_picture_container {
+	float: right;
 	margin: 0 10px 10px 10px;
 	border: 1px solid #ccc;
 	padding: 5px;
@@ -53,4 +55,5 @@ div.event_picture_container p {
 	font-size: .9em;
 	text-align: center;
 }
+
 
