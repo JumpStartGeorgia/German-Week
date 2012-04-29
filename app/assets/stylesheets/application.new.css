@@ -370,8 +370,20 @@ img {
         /*
         padding: 0px 26px 26px 26px;
         */
+				margin-left: 10px;
         float: none;
         background: #fff;
+      }
+
+      #content-board a
+      {
+				text-decoration: underline;
+				color: #000;
+      }
+
+      #content-board a:hover
+      {
+				background-color: #e1e1e1;
       }
 
       #content-board > table.grid
@@ -525,7 +537,7 @@ img {
         display: block;
         border-bottom: 1px solid #939393;
         padding-bottom: 9px;
-        margin-bottom: 8px;
+        padding-top: 9px;
         color: #3d3d3d;
       }
 
@@ -537,6 +549,7 @@ img {
       {
         color: #202020;
         cursor: pointer;
+				background-color: #fff;
       }
 
       #footer .menu > .item:last-child

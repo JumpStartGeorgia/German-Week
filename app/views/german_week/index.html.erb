@@ -3,6 +3,10 @@
 <% else %>
 <% title @page.title %>
 
-<%= simple_format(@page.description) %>
-
+<div id="img_ambassador">
+	<img src="/assets/images/ambassodor.jpg" />
+</div>
+<div>
+	<%= simple_format(@page.description) %>
+</div>
 <% end %>

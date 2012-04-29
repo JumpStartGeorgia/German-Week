@@ -9,7 +9,7 @@
           <div class="search_results_edr">
             <%= pretty_time(event.start, event.end) %>
           </div>
-          <% if !event.address.nil? %>
+					<% if (!event.building_name.nil? && event.building_name.length > 0) || (!event.address.nil? && event.address.length > 0) %>
           	<div class="search_results_sub_section">
           		<span><%= t('app.common.loction') %>:</span> 
 							<% if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0 %>
