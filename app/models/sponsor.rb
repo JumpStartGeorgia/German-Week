@@ -19,7 +19,7 @@ class Sponsor < ActiveRecord::Base
   
   scope :l10n , joins(:sponsor_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
-  
+
   def self.get_by_type(sponsor_type)
     if !sponsor_type.nil?
       includes(:sponsor_translations, {:sponsor_type => :sponsor_type_translations})
@@ -42,4 +42,5 @@ class Sponsor < ActiveRecord::Base
     end
   end
   
+
 end
