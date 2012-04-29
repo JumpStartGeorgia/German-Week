@@ -20,6 +20,7 @@ de:
       no_events_for_cat: No events exist for this category.
       delete_confirm: Are you sure?
       map_no_events: "Sorry, there are no events for the selected day and category.  Please select a different day or category."
+      loading: Loading...
     common:
       name: Name
       title: Title

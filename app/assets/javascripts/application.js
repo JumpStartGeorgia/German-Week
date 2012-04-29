@@ -16,13 +16,14 @@
 
 $(document).ready(function(){
 	// load the megamenu script
-	$(".mega-menu").dcVerticalMegaMenu({
-    rowItems: '4',
-    speed: 'slow',
-    effect: 'fade',
+	$("#main-menu").dcVerticalMegaMenu({
+    rowItems: '3',
+    speed: 'fast',
+    effect: 'show',
     direction: 'right',
     arrow: 'false'
 	});
+
 	// on mouseover, get the events for the date in the link and load it
 	// into megamenu
   $("a.event_menu_link").mouseover(submitWithAjax);

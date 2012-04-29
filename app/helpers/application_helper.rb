@@ -16,7 +16,7 @@ module ApplicationHelper
     time.strftime('%H:%M') if !time.nil?
   end
   
-  def pretty_time(dt_start, dt_end)
+  def pretty_time(dt_start, dt_end=nil)
     if !dt_start.nil?
       if dt_end.nil?
         # only have start date
