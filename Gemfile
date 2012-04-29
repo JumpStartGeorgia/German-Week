@@ -13,7 +13,7 @@ gem 'icalendar', '1.1.6' # icalendar for events export
 
 gem 'will_paginate', '3.0.3' # pagination
 gem 'gon', '2.2.2' # push data into js
-gem "wkhtmltopdf", "~> 0.1.2"
+#gem "wkhtmltopdf", "~> 0.1.2"
 gem 'wisepdf', "~> 1.1.3" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
@@ -35,9 +35,9 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
- # group :production do
- #   gem 'pg'
- # end
+ group :production do
+   gem 'pg'
+ end
 
 # for debugging
 # to get debugging to work, follow directions at:
