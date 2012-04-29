@@ -79,10 +79,10 @@
 
 	<% if is_html %>
 		<p>
-			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn btn-mini", :target => "_blank", :target => "_blank" %>
+			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn-export", :target => "_blank" %>
 		</p>
 		<p>
-			<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn btn-mini" %>
+			<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn-export" %>
 		</p>
 
 		<% if user_signed_in? %>

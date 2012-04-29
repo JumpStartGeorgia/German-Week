@@ -56,4 +56,16 @@ div.event_picture_container p {
 	text-align: center;
 }
 
+.btn-export {
+	padding: 0px 5px;
+	color: #000;
+	text-decoration:none !important;
+	border: 1px solid #000;
+	font-size: 11px;
+	line-height: 14px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
 

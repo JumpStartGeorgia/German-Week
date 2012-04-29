@@ -80,10 +80,11 @@
 						<% end %>
             <%= link_to t('.categories'), category_events_path, :class => "item" %>
             <%= link_to t('.map'), map_page_day_path, :class => "item" %>
-          </div>
+
 <% 
 =end
 %>
+          </div>
 
             </td><td class="white-bg">
 
@@ -109,7 +110,6 @@
       <div id="partners" class="clear">
 
         <div class="container">
-
 			    <% @organizations.each do |org| %>
 						<% if !org.logo_file_name.nil? %>
 		          <div class="partner">

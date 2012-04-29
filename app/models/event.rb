@@ -119,9 +119,7 @@ class Event < ActiveRecord::Base
     		when "event" 
     			find typespec
     		when "day" 
-#    			where("DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d')",
-    			where("cast(start as  date) <= ?",
-  				 typespec, typespec)  	  			
+    			where("cast(start as  date) <= ?", typespec)  	  			
     		when "category" 
     			joins(:event_translations, :categories => :category_translations)
   					.where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?", 

@@ -10,29 +10,14 @@ DESCRIPTION:Dies ist die Beschreibung des Ereignisses.Dies ist die Beschrei
  isses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschreibung d
  es Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist die Besch
  reibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist 
- die Beschreibung des Ereignisses.\n\nDies ist die Beschreibung des Ereignis
- ses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschreibung des
-  Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschre
- ibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist di
- e Beschreibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.Di
- es ist die Beschreibung des Ereignisses.Dies ist die Beschreibung des Ereig
- nisses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschreibung 
- des Ereignisses.Dies ist die Beschreibung des Ereignisses.\n\nDies ist die 
- Beschreibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies
-  ist die Beschreibung des Ereignisses.Dies ist die Beschreibung des Ereigni
- sses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschreibung de
- s Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist die Beschr
- eibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.Dies ist d
- ie Beschreibung des Ereignisses.Dies ist die Beschreibung des Ereignisses.D
- ies ist die Beschreibung des Ereignisses.Dies ist die Beschreibung des Erei
- gnisses.
+ die Beschreibung des Ereignisses.
 DTEND:20120531T180000Z
-DTSTAMP:20120429T163952
+DTSTAMP:20120429T181236
 DTSTART:20120514T130000Z
 CLASS:PUBLISH
-LOCATION:18 Shota Rustaveli Ave\, Tbilisi\, Georgia
+LOCATION:St Petersburg St\, Tbilisi 0102\, Georgia
 SEQUENCE:0
 SUMMARY:Deutsch Bierprobe
-UID:2012-04-29T16:39:52+04:00_783111912@JS-Jason
+UID:2012-04-29T18:12:36+04:00_69108363@utah
 END:VEVENT
 END:VCALENDAR
