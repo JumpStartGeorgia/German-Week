@@ -3,12 +3,8 @@ class MapController < ApplicationController
 	
 	def index
 		gon.map_page = true
-		gon.tile_url = 'http://tile.mapspot.ge/en/{z}/{x}/{y}.png'
 		gon.map_id = 'map_map_page'
-		gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
 		gon.zoom = 7
-		gon.lat = 41.699504919895
-		gon.lon = 44.797002757205		
 		gon.show_map = true		
 		
 		
@@ -43,9 +39,24 @@ class MapController < ApplicationController
   					gon.event_lats.push event.lat.to_s
   					gon.event_lons.push event.lon.to_s
   					gon.event_popups.push event.title.to_s
-  					gon.event_starts.push event.start.strftime("%d %B %Y %H:%M").to_s
-  					gon.event_ends.push event.end.strftime("%d %B %Y %H:%M").to_s
-  					gon.event_locations.push event.address.to_s
+						if !event.start.nil?
+							gon.event_starts.push event.start.strftime("%d %B %Y %H:%M").to_s 
+						else
+							gon.event_starts.push ""
+						end
+						if !event.end.nil?
+	  					gon.event_ends.push event.end.strftime("%d %B %Y %H:%M").to_s
+						else
+							gon.event_ends.push ""
+						end
+						if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0
+							gon.event_locations.push "#{event.building_name}, #{event.address}"
+						elsif !event.building_name.nil? && event.building_name.length > 0 
+							gon.event_locations.push event.building_name.to_s
+						elsif !event.address.nil? && event.address.length > 0 
+							gon.event_locations.push event.address.to_s
+						end
+
   					gon.event_paths.push event_path(event).to_s  									
   					begin						
   						if event.description.to_s.length > 100

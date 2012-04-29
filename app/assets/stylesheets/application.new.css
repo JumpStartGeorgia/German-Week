@@ -101,6 +101,11 @@ img {
         text-transform: uppercase;
       }
 
+      .white-bg
+      {
+        background: #fff;
+      }
+
       #header > div
       {
         float: left;
@@ -192,31 +197,85 @@ img {
       {
         width: 100%;
         position: relative;
+     /*
+        margin: 10px auto 0px;
+        background: #d0d0d0;
+        max-width: 100%;
+        position: relative;
+        text-align: left;
+    */
+        overflow: hidden;
+        height: 300px;
+        margin: 0 auto;
       }
 
-      #slider > .overlay
+      #slider .container
+      {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      #slider .container .loader
+      {
+        background: rgba(0, 0, 0, 1);
+        color: white;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        padding-top: 115px;
+      }
+
+      #slider .container .loader > div
+      {
+        /*
+        width: 32px;
+        height: 32px;
+        background: url('images/loader.gif');
+        */
+        margin: 0 auto;
+      }
+
+      #slider .container img
+      {
+        float: left;
+        position: absolute;
+        top: 0px;
+      }
+
+      #slider .container slider_img_0
+      {
+      }
+      #slider .container slider_img_1
+      {
+      }
+      #slider .container slider_img_2
+      {
+      }
+
+      #slider .overlay
       {
         position: absolute;
+        z-index: 200;
+        top: 0px;
+        left: 0px;
         background: url('images/slider-overlay.png');
         width: 100%;
         height: 100%;
-      }
-
-      #slider > img
-      {
-        height: 329px;
-        float: left;
       }
 
       h3.hidden
       {
         visibility: hidden;
         font-size: 0px;
+        width: 0px;
       }
 
       #content
       {
         position: relative;
+        z-index: 300;
         top: -44px;
         margin-bottom: -44px;
         padding: 10px;
@@ -267,10 +326,10 @@ img {
       #content .menu
       {
         width: 185px;
-        float: left;
+        float: none;
       }
 
-      #content .menu > .item
+      #content .menu  .item
       {
         margin-top: 3px;
         display: block;
@@ -283,32 +342,36 @@ img {
         padding: 12px 0 13px 12px;
       }
 
-      #content .menu > a:first-child
+      #content .menu  a:first-child
       {
         margin-top: 0px !important;
       }
 
-      #content .menu > .item:hover
+      #content .menu  .item:hover
       {
         background: #fff;
       }
 
-      #content .menu > .selected
+      #content .menu  .selected
       {
         background: #fff;
       }
 
       #content-board
       {
-        width: 663px;
+        width: 715px;
+        /*
         padding: 0px 26px 26px 26px;
-        float: left;
+        */
+        float: none;
         background: #fff;
       }
 
       #content-board > table.grid
       {
-        width: 100%;
+        width: 663px;
+        margin-left: 26px;
+        margin-right: 26px;
       }
 
       #content-board > table tr
@@ -409,7 +472,6 @@ img {
 
       #footer .r1 .c3
       {
-        margin-right: 70px;
         color: #3d3d3d;
       }
 

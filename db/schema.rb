@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425121109) do
+ActiveRecord::Schema.define(:version => 20120427073758) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -54,13 +54,15 @@ ActiveRecord::Schema.define(:version => 20120425121109) do
     t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "lat",        :precision => 15, :scale => 12
-    t.decimal  "lon",        :precision => 15, :scale => 12
+    t.decimal  "lat",           :precision => 15, :scale => 12
+    t.decimal  "lon",           :precision => 15, :scale => 12
     t.text     "address"
     t.string   "phone"
     t.string   "fax"
     t.string   "email"
     t.string   "url"
+    t.string   "url2"
+    t.string   "building_name"
   end
 
   create_table "locales", :force => true do |t|

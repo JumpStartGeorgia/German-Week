@@ -1,6 +1,11 @@
-<h1>Editing page</h1>
+<% title t('.title') %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+
+<% if user_signed_in? %>
+<div class="form-actions">
+	<%= link_to t('app.buttons.list'), pages_path, :class => "btn btn-mini"  %>
+</div>
+<% end %>
+

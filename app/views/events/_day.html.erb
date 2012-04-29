@@ -1,14 +1,12 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<% title "Events on #{params[:date]}" %>
+<% title t('.title', :date => params[:date]) %>
 
 <% if @events.length == 0 %>
-	<p>No events exist for this day.
+	<p><%= t('app.msgs.no_events_for_date') %></p>
 
 <% else %>
 
 	<%= render 'german_week/search_results', :is_html => is_html %>
-
-	<%= will_paginate @events %>
 
 <% end %>

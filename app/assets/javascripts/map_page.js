@@ -48,8 +48,10 @@ $(function(){
 					popup_content.__("<a href=\""+gon.event_paths[index]+"\"><center><font class=\"event-popup-title\">"+gon.event_popups[index]+"</font></center></a>");					
 					popup_content.__("<center>");
 					popup_content.__("<font class=\"event-popup-start\">"+gon.event_starts[index]+"</font>");
-					popup_content.__(" - ");
-					popup_content.__("<font class=\"event-popup-end\">"+gon.event_ends[index]+"</font>");							
+					if (gon.event_ends[index].length > 0){
+						popup_content.__(" - ");
+						popup_content.__("<font class=\"event-popup-end\">"+gon.event_ends[index]+"</font>");							
+					}
 					popup_content.__("</center>");
 					popup_content.__("<center>");
 					popup_content.__("<font class=\"event-popup-location\">"+gon.event_locations[index]+"</font>");
@@ -115,7 +117,7 @@ $(function(){
 					no_events_div.__("<div class=\"no-events-msgbox\">");
 							no_events_div.__("<center>");
 								no_events_div.__("<p>");
-									no_events_div.__("Sorry, there are no events for the selected day and category.  Please select a different day or category.");									
+									no_events_div.__(I18n.t("app.msgs.map_no_events"));									
 								no_events_div.__("</p>");
 								no_events_div.__("<button id=\"no-events-button\">");
 									no_events_div.__("<strong>Ok</strong>");

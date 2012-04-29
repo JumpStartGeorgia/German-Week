@@ -1,8 +1,17 @@
 
 <% if menu_item.nil? %>
-	<li>There are no events for this date.</li>
+	<li><br /><%= t('app.msgs.no_events_for_date') %><br /></li>
 <% else %>
-	
+	<li>
+		<p><%= link_to menu_item.title, event_path(menu_item) %></p>
+		<p><%= format_time(menu_item.start) %> - <%= format_time(menu_item.end) %></p>
+		<p><%= truncate(menu_item.description, :length => 100) %></p>
+		<p><%= menu_item.address %></p>
+		<p class="event_menu_popup_item_categories">
+			<% if menu_item.categories.count > 0 %>
+				<%= t('.categories') %> <% menu_item.categories.each do |cat| %><%= link_to "[#{cat.title}]", category_events_path(:cat => cat.title) %> <% end %>
+			<% else %>&nbsp;<% end %>
+		</p>
+		
+	</li>
 <% end %>
-
-

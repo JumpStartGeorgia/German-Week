@@ -18,6 +18,7 @@ gem 'wisepdf'
 gem "geocoder", "~> 1.1.1"
 gem "paperclip", "~> 3.0" # upload images
 gem "twitter-bootstrap-rails"
+gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 
 
 # Gems used only for assets and not required

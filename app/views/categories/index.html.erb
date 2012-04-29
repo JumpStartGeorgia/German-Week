@@ -1,11 +1,12 @@
-<h1>Categories</h1>
+<h1><%= t('.title') %></h1>
+
+<% if user_signed_in? %>
+	<div class="form-actions">
+		<%= link_to t('app.buttons.new_category'), new_category_path, :class => 'btn btn-primary' %>
+	</div>
+<% end %>
+
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
   <tbody>
     <% @categories.each do |category| %>
       <tr>
@@ -13,8 +14,8 @@
         <td>
 
 	  <% if user_signed_in? %>
-            <%= link_to 'Edit', edit_category_path(category), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', category_path(category), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+            <%= link_to t('app.buttons.edit'), edit_category_path(category), :class => 'btn btn-mini' %>
+            <%= link_to t('app.buttons.delete'), category_path(category), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
 	  <% end %>
 
         </td>
@@ -23,6 +24,3 @@
   </tbody>
 </table>
 
-<% if user_signed_in? %>
-<%= link_to 'New', new_category_path, :class => 'btn btn-primary' %>
-<% end %>

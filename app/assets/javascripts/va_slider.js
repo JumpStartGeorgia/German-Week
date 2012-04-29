@@ -81,6 +81,11 @@ function adjust_dimensions (e_w, e_h, vertical_limit, max_w, max_h)
   };
 }
 
+function get_slide (index)
+{
+  return slider.container.getElementsByClassName('slider_img_' + index)[0];
+}
+
 function change_slide (index)
 {
 
@@ -97,51 +102,73 @@ $.prototype.va_slider = function (options)
 
   slider = {
     width: window_dimensions().width,
-    height: options.height || 450,
-    smaller_width: 190,
+    height: options.height || 300,
+    middle_percent: options.middle_percent || 80,
     delay: options.delay || 1000,
     animation_timeout: options.animation_timeout || 1000,
     element: $(this)
   };
+  slider.middle_size = slider.width * slider.middle_percent / 100;
+  slider.element.height(slider.height);
+  slider.element.width(slider.width);
 
   var switcher_circles_html = '';
   for (i = 0; i < 3; i ++)
   {
     switcher_circles_html += '<div class="switcher_circle" index="' + i + '"></div>';
   }
-  slider_html = '</div><div id="switcher_circles">' + switcher_circles_html + '</div>' +
-		'<div id="slider_content_container"></div>';
+  slider_html = '<div class="overlay"></div>' +
+                '<div id="switcher_circles">' + switcher_circles_html + '</div>' +
+                '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
 
   slider.element.prepend(slider_html);
-  slider.element.css('width', slider.width);
-  slider.container = document.getElementById('slider_content_container');
+  slider.container = slider.element[0].getElementsByClassName('container')[0];
+  //slider.container.style.height = '100%';
+  //slider.container.style.width = slider.middle_size * 3 + PX;
 
   document.getElementsByClassName('switcher_circle')[0].setAttribute('class', 'switcher_circle_selected');
 
-  $.getJSON('en/slider_images.json', function (json)
+  $.getJSON('/en/slider_images.json', function (json)
   {
-    var images = [];
+    var images = [],
+        j = 0;
     for (i in json)
     {
+      if (typeof(json[i]) != 'string')
+      {
+        continue;
+      }
       images[i] = new Image();
       images[i].src = json[i];
+      images[i].style.display = "none";
+      slider.container.appendChild(images[i]);
       images[i].onload = function ()
       {
-	new_ds = adjust_dimensions(this.width, this.height, false, (slider.width - slider.smaller_width * 2));
-	this.width  = this.style.width  = new_ds.width;
-	this.height = this.style.height = new_ds.height;
-
-	slider.container.appendChild(images[i]);
-
-	if (i == (images.length - 1))
-	{
-	  slider.container.style.display = "block";
-	}
+        new_ds = adjust_dimensions(this.width, this.height, false, slider.middle_size, slider.height);
+        this.width  = this.style.width  = new_ds.width;
+        this.height = this.style.height = new_ds.height;
+        this.setAttribute('class', 'slider_img_' + j);
+        switch (j)
+        {
+          case 0:
+            left = 0 - (this.width - (slider.width - slider.middle_size) / 2);
+          break;
+          case 1:
+            left = (slider.width - slider.middle_size) / 2;
+          break;
+          case 2:
+            left = this.width + (slider.width - slider.middle_size) / 2;
+          break;
+        }
+        this.style.left = left + PX;
+        images[j].style.display = "block";
+        j ++;
+        if (j == 2)
+        {
+          slider.container.removeChild(slider.container.getElementsByClassName('loader')[0]);
+        }
       }
     }
-    slider.container.style.width = images[0].width * 3 + PX;
-
-    images[1].style.left = slider.smaller_width;
   });
 
   $('.switcher_circle, .switcher_circle_selected').click(function()
@@ -151,7 +178,9 @@ $.prototype.va_slider = function (options)
 
   timer = new Timer(change_slide_automatic, slider.delay);
   t2 = microtime();
+  /*
   console.log(t2 - t1);
+  */
 };
 
 
