@@ -22,9 +22,13 @@
           <li>
             <p><%= link_to cat.title, category_events_path(cat.title) %></p>
           </li>
+          <li>
+            <p><%= link_to cat.title, category_events_path(cat.title) %></p>
+          </li>
           <% end %>
         </ul>
     </li>		
 		<li><%= link_to t('.map'), map_page_day_path, :class => "item" %></li>
 
 	</ul>
+	

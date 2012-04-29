@@ -68,21 +68,10 @@
             <table><tr><td>
 
           <div class="menu def-font upcase">
-<% 
-=begin
- %>
-						<%= render "shared/menu" %>
-<% 
-=end
-%>
-						<%= link_to t('.home'), root_path, :class => "item" %>
-						<% (1..6).each do |i| %>
-								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
-											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
-											:class => "item" %>					
-						<% end %>
-            <%= link_to t('.categories'), category_events_path, :class => "item" %>
-            <%= link_to t('.map'), map_page_day_path, :class => "item" %>
+
+
+
+						<%= render "shared/menu" %>        
           </div>
 
             </td><td class="white-bg">
@@ -109,7 +98,6 @@
       <div id="partners" class="clear">
 
         <div class="container">
-
 			    <% @organizations.each do |org| %>
 						<% if !org.logo_file_name.nil? %>
 		          <div class="partner">

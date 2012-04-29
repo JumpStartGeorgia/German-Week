@@ -97,7 +97,7 @@ class EventsController < ApplicationController
       format.json { render :json => @event }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_show.html.erb',
+               :template		=> 'events/_show.pdf.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
                
       end
@@ -177,6 +177,7 @@ class EventsController < ApplicationController
   	
   	# get all event data from database
   	output_file_name = params[:typespec]
+  	
     data = Event.find_for_ics(params[:type], params[:typespec])
   	case params[:type]
   		when "event" 
