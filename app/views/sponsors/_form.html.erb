@@ -1,6 +1,17 @@
 <%= semantic_form_for @sponsor, :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
 	<%= f.semantic_errors %>
+
+	<%= f.inputs do %>
+
+		<div class="control-group">
+		  <%= f.label :sponsor_type, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :sponsor_type, :label => false %>
+		  </div>
+		</div>
+	<% end %>
+
 	<%= f.inputs :for => :sponsor_translations do |sponsor_translation, i| %>
 		
 		<% formLocale = @locales[i-1].language %>
@@ -25,13 +36,6 @@
   <% end %>
 
 	<%= f.inputs do %>
-
-		<div class="control-group">
-		  <%= f.label :sponsor_type, :class => 'control-label' %>
-		  <div class="controls">
-		    <%= f.input :sponsor_type, :label => false %>
-		  </div>
-		</div>
 
 		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>

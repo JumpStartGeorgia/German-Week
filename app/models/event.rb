@@ -1,8 +1,11 @@
 class Event < ActiveRecord::Base
   translates :title, :description, :picture_text
   has_attached_file :picture,
-        :path => ":rails_root/public/system/event/:attachment/:id/:style/:filename",
-        :url => "/system/event/:attachment/:id/:style/:filename"
+        :path => "/event/:attachment/:id/:style/:filename",
+        :storage => :s3,
+        :url => ":s3_domain_url",
+        :bucket => ENV['S3_BUCKET_NAME'],
+        :s3_credentials => S3_CREDENTIALS
 
   has_many :event_translations, :dependent => :destroy
   has_many :event_sponsors, :dependent => :destroy

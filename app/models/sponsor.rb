@@ -1,8 +1,11 @@
 class Sponsor < ActiveRecord::Base
   translates :title, :description
   has_attached_file :logo,
-        :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
-        :url => "/system/:attachment/:id/:style/:filename"
+        :path => "/sponsor/:attachment/:id/:style/:filename",
+        :storage => :s3,
+        :url => ":s3_domain_url",
+        :bucket => ENV['S3_BUCKET_NAME'],
+        :s3_credentials => S3_CREDENTIALS
 
   has_many :sponsor_translations, :dependent => :destroy
   belongs_to :sponsor_type

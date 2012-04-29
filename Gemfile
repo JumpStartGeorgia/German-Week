@@ -18,6 +18,8 @@ gem 'wisepdf', "~> 1.1.3" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
 gem "paperclip", "~> 3.0" # upload images
+gem 'aws-s3', "~> 0.6.2" # save uploaded images to amazon s3
+gem 'aws-sdk', "~> 1.4.1"
 gem "twitter-bootstrap-rails"
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 
@@ -36,7 +38,7 @@ group :assets do
 end
 
  group :production do
-#   gem 'pg'
+   gem 'pg'
  end
 
 # for debugging

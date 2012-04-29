@@ -17,6 +17,9 @@
 # ignore the database.yml file
 /config/database.yml
 
+#ignore s3 config
+/config/s3.yml
+
 # ignore folder with uploaded images
 /public/system
 
