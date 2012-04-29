@@ -65,6 +65,8 @@ img {
 
 /* END OF RESET CSS */
 
+      td { vertical-align: top !important; }
+
       @font-face
       {
         font-family: fightme;
@@ -160,6 +162,11 @@ img {
         text-decoration: none;
       }
 
+      #languages > a:last-child
+      {
+        margin-right: 0px;
+      }
+
       #languages > a:hover
       {
         color: #636363;
@@ -224,7 +231,7 @@ img {
         margin: 0 auto;
         width: 100%;
         height: 100%;
-        padding-top: 115px;
+        padding-top: 120px;
       }
 
       #slider .container .loader > div
@@ -363,8 +370,20 @@ img {
         /*
         padding: 0px 26px 26px 26px;
         */
+				margin-left: 10px;
         float: none;
         background: #fff;
+      }
+
+      #content-board a
+      {
+				text-decoration: underline;
+				color: #000;
+      }
+
+      #content-board a:hover
+      {
+				background-color: #e1e1e1;
       }
 
       #content-board > table.grid
@@ -465,7 +484,7 @@ img {
         padding-top: 20px;
       }
 
-      #footer .r1 .c1, #footer .r1 .c2
+      #footer .r1 .c1, #footer .r1 .c2, #footer .r1 .c3, #footer .r1 .c4 
       {
         width: 144px;
       }
@@ -518,7 +537,7 @@ img {
         display: block;
         border-bottom: 1px solid #939393;
         padding-bottom: 9px;
-        margin-bottom: 8px;
+        padding-top: 9px;
         color: #3d3d3d;
       }
 
@@ -530,6 +549,7 @@ img {
       {
         color: #202020;
         cursor: pointer;
+				background-color: #fff;
       }
 
       #footer .menu > .item:last-child

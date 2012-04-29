@@ -27,6 +27,13 @@
 	<%= f.inputs do %>
 
 		<div class="control-group">
+		  <%= f.label :sponsor_type, :class => 'control-label' %>
+		  <div class="controls">
+		    <%= f.input :sponsor_type, :label => false %>
+		  </div>
+		</div>
+
+		<div class="control-group">
 			<%= f.label :address, :class => "control-label" %>
 			<div class="controls">
 			  <%= f.text_field :address, :class => "text_field", :label => false %>
@@ -65,21 +72,15 @@
 		  <div class="controls">
 				<% if !@sponsor.logo_file_name.nil? %>
 				Current logo on file: <%= image_tag @sponsor.logo.url %> 
-<%
-=begin %>				
-				<%= label_tag "delete_logo", "Delete the Logo?", %> <%= check_box_tag "delete_logo" %>
-<%
-=end %>
 				<br />
 				<% end %>
 		    <%= f.input :logo, :as => :file, :label => false %>
 		  </div>
 		</div>
-		<%= f.hidden_field :locale , :value => I18n.locale %>
 	<% end %>
 
 	<div class="form-actions">
-	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-mini' %>
 	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
 	  <%= link_to t('app.buttons.cancel'), sponsors_path, :class => 'btn' %>
 	</div>

@@ -92,6 +92,8 @@ ka:
       title: New Sponsor
     show:
       contact_header: Sponsor Contact Information
-
+    view:
+      no_sponsor_by_type: There are no records on file for %{type}
+      
 
 

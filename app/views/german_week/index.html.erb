@@ -1,5 +1,12 @@
-<% title t('.title') %>
+<% if @page.nil? %>
+	<% title t('.title') %>
+<% else %>
+<% title @page.title %>
 
-<!-- commenting out till it's completed -->
-<!--<div id="slider"></div>-->
-
+<div id="img_ambassador">
+	<img src="/assets/images/ambassodor.jpg" />
+</div>
+<div>
+	<%= simple_format(@page.description) %>
+</div>
+<% end %>

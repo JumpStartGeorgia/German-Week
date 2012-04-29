@@ -88,12 +88,12 @@ function get_slide (index)
 
 function change_slide (index)
 {
+  for (i = 0; i < 3; i ++)
+  {
+    slider.slides[i].style.left = slider.offsets[slider.matrix[index][i]] + PX;
+  }
 
-}
-
-function change_slide_automatic ()
-{
-
+  slider.active = index;
 }
 
 $.prototype.va_slider = function (options)
@@ -106,7 +106,11 @@ $.prototype.va_slider = function (options)
     middle_percent: options.middle_percent || 80,
     delay: options.delay || 1000,
     animation_timeout: options.animation_timeout || 1000,
-    element: $(this)
+    element: $(this),
+    offsets: [],
+    active: 1,
+    slides: [],
+    matrix: [[1, 2, 0], [0, 1, 2], [2, 0, 1]]
   };
   slider.middle_size = slider.width * slider.middle_percent / 100;
   slider.element.height(slider.height);
@@ -115,7 +119,8 @@ $.prototype.va_slider = function (options)
   var switcher_circles_html = '';
   for (i = 0; i < 3; i ++)
   {
-    switcher_circles_html += '<div class="switcher_circle" index="' + i + '"></div>';
+    classname = (i == slider.active) ? 'switcher_circle_selected' : 'switcher_circle';
+    switcher_circles_html += '<div class="' + classname + '" index="' + i + '"></div>';
   }
   slider_html = '<div class="overlay"></div>' +
                 '<div id="switcher_circles">' + switcher_circles_html + '</div>' +
@@ -125,8 +130,6 @@ $.prototype.va_slider = function (options)
   slider.container = slider.element[0].getElementsByClassName('container')[0];
   //slider.container.style.height = '100%';
   //slider.container.style.width = slider.middle_size * 3 + PX;
-
-  document.getElementsByClassName('switcher_circle')[0].setAttribute('class', 'switcher_circle_selected');
 
   $.getJSON('/en/slider_images.json', function (json)
   {
@@ -148,19 +151,22 @@ $.prototype.va_slider = function (options)
         this.width  = this.style.width  = new_ds.width;
         this.height = this.style.height = new_ds.height;
         this.setAttribute('class', 'slider_img_' + j);
+        diff = (slider.width - slider.middle_size) / 2;
         switch (j)
         {
           case 0:
-            left = 0 - (this.width - (slider.width - slider.middle_size) / 2);
+            left = diff - this.width;
           break;
           case 1:
-            left = (slider.width - slider.middle_size) / 2;
+            left = diff;
           break;
           case 2:
-            left = this.width + (slider.width - slider.middle_size) / 2;
+            left = this.width + diff;
           break;
         }
         this.style.left = left + PX;
+        slider.offsets.push(left);
+        slider.slides.push(this);
         images[j].style.display = "block";
         j ++;
         if (j == 2)
@@ -173,10 +179,16 @@ $.prototype.va_slider = function (options)
 
   $('.switcher_circle, .switcher_circle_selected').click(function()
   {
-
+    if (this.getAttribute('class') == 'switcher_circle_selected')
+    {
+      return;
+    }
+    change_slide(this.getAttribute('index'));
+    document.getElementsByClassName('switcher_circle_selected')[0].setAttribute('class', 'switcher_circle');
+    this.setAttribute('class', 'switcher_circle_selected');
   });
 
-  timer = new Timer(change_slide_automatic, slider.delay);
+  //timer = new Timer(change_slide_automatic, slider.delay);
   t2 = microtime();
   /*
   console.log(t2 - t1);

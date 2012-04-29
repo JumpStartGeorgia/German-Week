@@ -1,5 +1,16 @@
 class SponsorsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:show, :view]
+
+  # GET /sponsors/view/:type
+  # GET /sponsors/view/:type.json
+  def view
+    @sponsors = Sponsor.get_by_type(params[:type])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @sponsors }
+    end
+  end
 
   # GET /sponsors
   # GET /sponsors.json

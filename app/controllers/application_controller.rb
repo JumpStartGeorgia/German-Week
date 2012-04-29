@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
   before_filter :init_gon
-  before_filter :set_categories_for_partial
+  before_filter :set_categories
+  before_filter :set_sponsor_types
+  before_filter :set_organisations
   
   def set_locale 	
     I18n.locale = params[:locale] if params[:locale]
@@ -23,8 +25,17 @@ class ApplicationController < ActionController::Base
     gon.locale = params[:locale]
   end
 
-  def set_categories_for_partial
-    @categories = Category.includes(:category_translations).order("category_translations.title")
+  def set_categories
+    @categories = Category.includes(:category_translations).order("category_translations.title asc")
+  end
+
+  def set_sponsor_types
+    @sponsor_types = SponsorType.includes(:sponsor_type_translations).order("sponsor_type_translations.title asc")
+  end
+
+  def set_organisations
+    # sponsor type of 1 = org; set in seed
+    @organizations = Sponsor.get_by_type_id(1)
   end
 
   def default_url_options(options={})

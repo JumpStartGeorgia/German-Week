@@ -19,6 +19,12 @@
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
 			</div>
+			<div class="control-group">
+			  <%= event_translation.label :picture_text, :class => 'control-label' %>
+			  <div class="controls">
+			    <%= event_translation.input :picture_text, :label => false %>
+			  </div>
+			</div>
 			<%= event_translation.hidden_field :locale , :value => formLocale %>
 		</div>
 
@@ -82,6 +88,17 @@
 		</div>
 		
 		<div class="control-group">
+		  <%= f.label :picture, :class => 'control-label' %>
+		  <div class="controls">
+				<% if !@event.picture_file_name.nil? %>
+				Current picture on file: <%= image_tag @event.picture.url %> 
+				<br />
+				<% end %>
+		    <%= f.input :picture, :as => :file, :label => false %>
+		  </div>
+		</div>
+
+		<div class="control-group">
 		  <%= f.label :Categories, :for => 'event_category_ids', :class => 'control-label' %>
 		  <div class="controls">
 		    <%= f.input :categories, :as => :check_boxes, :label => false %>
@@ -96,7 +113,7 @@
   <% end %>
 
 	<div class="form-actions">
-	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-mini' %>
 	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
 	  <%= link_to t('app.buttons.cancel'), events_path, :class => 'btn' %>
 	</div>

@@ -2,13 +2,19 @@
 
 <% if user_signed_in? %>
 	<div class="form-actions">
-		<%= link_to t('.app.buttons.new_sponsor'), new_sponsor_path, :class => 'btn btn-primary' %>
+		<%= link_to t('.app.buttons.new_sponsor'), new_sponsor_path, :class => 'btn btn-mini' %>
 	</div>
 <% end %>
 
 
 <% @sponsors.each do |sponsor| %>
-	<h3><%= link_to sponsor.title, sponsor_path(sponsor) %></h3>
+	<h3>
+		<% if sponsor.sponsor_type.nil? %>
+			<%= link_to "#{sponsor.title}", sponsor_path(sponsor) %>
+		<% else %>
+			<%= link_to "#{sponsor.sponsor_type.title} - #{sponsor.title}", sponsor_path(sponsor) %>
+		<% end %>
+	</h3>
 
 	<p>
 		<% if !sponsor.logo_file_name.nil? %>

@@ -9,4 +9,5 @@
 //= require jquery-ui-timepicker-addon
 //= require leaflet-src
 //= require jquery.countdown.min
+//= require jcaption.min
 
