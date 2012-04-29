@@ -13,15 +13,9 @@
 
 		<p>
 			<strong><%= t('.contact_header') %></strong>
-			<% if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0 %>
+			<% if !@event.event_address.nil? && @event.event_address.length > 0 %>
 				<br />
-				<%= "#{@event.building_name}, #{@event.address}" %>
-			<% elsif !@event.building_name.nil? && @event.building_name.length > 0 %>
-				<br />
-				<%= @event.building_name %>
-			<% elsif !@event.address.nil? && @event.address.length > 0 %>
-				<br />
-				<%= @event.address %>
+				<%= @event.event_address %>
 			<% end %>
 			<% if !@event.phone.nil? && @event.phone.length > 0 %>
 				<br />

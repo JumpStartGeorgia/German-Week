@@ -1,12 +1,9 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<% title t('.title', :date => params[:date]) %>
-
 <% if @events.length == 0 %>
 	<p><%= t('app.msgs.no_events_for_date') %></p>
-
 <% else %>
 
-	<%= render 'german_week/search_results', :is_html => is_html %>
+	<%= render 'shared/event_list', :is_html => is_html %>
 
 <% end %>

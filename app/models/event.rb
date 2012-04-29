@@ -23,13 +23,27 @@ class Event < ActiveRecord::Base
 #  before_save  :reverse_geocode
   
   # will_paginate will get this many records per page
-  self.per_page = 5
+  self.per_page = 10
 #TODO - need to get this function working
 #  validate :date_comparison_validator
   validates_associated :event_translations
   
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
+
+
+  def event_address
+		if !self.building_name.nil? && self.building_name.length > 0 && !self.address.nil? && self.address.length > 0
+			"#{self.building_name}, #{self.address}"
+		elsif !self.building_name.nil? && self.building_name.length > 0
+			self.building_name.to_s
+		elsif !self.address.nil? && self.address.length > 0
+			self.address.to_s
+		else 
+		  return nil
+		end
+  end
+
 
   # search 
   def self.search(search, category, page)

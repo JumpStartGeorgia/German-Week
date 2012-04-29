@@ -9,16 +9,10 @@
           <div class="search_results_edr">
             <%= pretty_time(event.start, event.end) %>
           </div>
-					<% if (!event.building_name.nil? && event.building_name.length > 0) || (!event.address.nil? && event.address.length > 0) %>
+					<% if !event.event_address.nil? && event.event_address.length > 0 %>
           	<div class="search_results_sub_section">
           		<span><%= t('app.common.loction') %>:</span> 
-							<% if !event.building_name.nil? && event.building_name.length > 0 && !event.address.nil? && event.address.length > 0 %>
-								<%= "#{event.building_name}, #{event.address}" %>
-							<% elsif !event.building_name.nil? && event.building_name.length > 0 %>
-								<%= event.building_name %>
-							<% elsif !event.address.nil? && event.address.length > 0 %>
-								<%= event.address %>
-							<% end %>
+								<%= event.event_address %>
 						</div>
           <% end %>
           <% ecc = event.categories.count; %>

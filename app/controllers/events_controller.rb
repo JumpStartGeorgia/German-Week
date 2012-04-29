@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.order("start asc")
+    @events = Event.paginate(:page => params[:page]).order("start ASC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,14 +30,13 @@ class EventsController < ApplicationController
 		else
 	    @events = Event.find_by_date(params[:date],true,params[:page])
 		end
-
     respond_to do |format|
       format.html # day.html.erb
       format.js
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'german_week/_search_results.html.erb',
+               :template		=> 'shared/_event_list.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
@@ -79,13 +78,7 @@ class EventsController < ApplicationController
     gon.end_minute = @event.start.strftime("%M")
     gon.end_second = @event.start.strftime("%S")
     gon.building_name = @event.building_name
-		if !@event.building_name.nil? && @event.building_name.length > 0 && !@event.address.nil? && @event.address.length > 0
-			gon.address = "#{@event.building_name}, #{@event.address}"
-		elsif !@event.building_name.nil? && @event.building_name.length > 0
-			gon.address = @event.building_name.to_s
-		elsif !@event.address.nil? && @event.address.length > 0
-			gon.address = @event.address.to_s
-		end
+    gon.address = @event.event_address
 		gon.show_map = true
 		gon.show_img_caption = true
 		gon.img_caption_id = "#event_picture"
@@ -200,7 +193,7 @@ class EventsController < ApplicationController
   			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ") if !event_each.end.nil?
   			event.description = event_each.description.to_s
   			event.summary = event_each.title.to_s
-  			event.location = event_each.address.to_s
+  			event.location = event_each.event_address.to_s
   			#event.categories = []
   			#event_each.categories.each do |event_each_category|
   			#	event.categories.push Icalendar::Component.new event_each_category.title

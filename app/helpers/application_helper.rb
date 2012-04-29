@@ -27,6 +27,7 @@ module ApplicationHelper
     end
   end
 
+=begin
   def multi_language_form(destination)
      destination = controller.controller_name.to_s + '/' + destination 
      html = ""
@@ -50,5 +51,5 @@ module ApplicationHelper
     html << "</ul>"
     html.html_safe
   end
-  
+=end  
 end

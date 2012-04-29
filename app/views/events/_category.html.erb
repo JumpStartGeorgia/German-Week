@@ -1,11 +1,9 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<% title t('.title') %>
-
 <% if is_html && @categories.count > 0 %>
-	<%= form_tag "/#{I18n.locale}/events/category", :method => :get, :html => { :class => 'form-horizontal' } do -%>
+	<%= form_tag category_events_path, :method => :get, :html => { :class => 'form-horizontal' } do -%>
 		<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title", params[:cat]), :include_blank => true%>
-		<%= submit_tag 'Search' %>
+		<%= submit_tag t('app.buttons.search') %>
 	<% end -%>
 <% end %>
 
@@ -16,6 +14,6 @@
 	<% end %>
 <% else %>
 
-     <%= render 'german_week/search_results', :is_html => is_html %>
+     <%= render 'shared/event_list', :is_html => is_html %>
 
 <% end %>

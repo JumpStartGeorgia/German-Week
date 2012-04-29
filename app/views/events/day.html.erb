@@ -1,7 +1,9 @@
+<% title t('.title', :date => params[:date]) %>
+
 <%= render 'day', :html => true %>
 
 <% if !@events.nil? && @events.length > 0 %>
-<div>
+<div class="form-actions">
 	<%= link_to t('app.buttons.pdf'), day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn btn-mini", :target => "_blank" %>
 	<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "day", :typespec => params[:date]), :class => "btn btn-mini" %>
 </div>
