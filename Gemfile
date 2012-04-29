@@ -11,9 +11,9 @@ gem 'psych', '1.2.2' # yaml parser - default psych in rails has issues
 
 gem 'icalendar', '1.1.6' # icalendar for events export
 
-gem 'will_paginate', '3.0.3'
+gem 'will_paginate', '3.0.3' # pagination
 gem 'gon', '2.2.2' # push data into js
-gem 'wisepdf'
+gem 'wisepdf', "~> 1.1.3" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
 gem "paperclip", "~> 3.0" # upload images

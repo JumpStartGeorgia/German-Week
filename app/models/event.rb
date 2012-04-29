@@ -56,22 +56,33 @@ class Event < ActiveRecord::Base
   end
 
   # get all events for a date
-  def self.find_by_date(date, page)
+  def self.find_by_date(date, use_pagination=false, page=nil)
     if date
-      where("date(start)=?", date).paginate(:page => page).order("start ASC")
+			if use_pagination
+	      where("date(start)=?", date).paginate(:page => page).order("start ASC")
+			else
+	      where("date(start)=?", date).order("start ASC")
+			end
     else
       nil
     end
   end
 
   # get all events for a category
-  def self.find_by_category(category_title, page)
+  def self.find_by_category(category_title, use_pagination=false, page=nil)
     if category_title
-      joins(:event_translations, :categories => :category_translations)
-        .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
-          category_title, I18n.locale, I18n.locale)
-        .paginate(:page => page)
-        .order('events.start asc, event_translations.title asc')
+			if use_pagination
+		    joins(:event_translations, :categories => :category_translations)
+		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+		        category_title, I18n.locale, I18n.locale)
+		      .paginate(:page => page)
+		      .order('events.start asc, event_translations.title asc')
+			else
+		    joins(:event_translations, :categories => :category_translations)
+		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+		        category_title, I18n.locale, I18n.locale)
+		      .order('events.start asc, event_translations.title asc')
+			end
     else
       nil
     end

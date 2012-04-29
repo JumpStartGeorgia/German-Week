@@ -150,7 +150,7 @@ GEM
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
-    wisepdf (1.0.1)
+    wisepdf (1.1.3)
       rails (>= 3.0.0)
 
 PLATFORMS
@@ -176,4 +176,4 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier
   will_paginate (= 3.0.3)
-  wisepdf
+  wisepdf (~> 1.1.3)

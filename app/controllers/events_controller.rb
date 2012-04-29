@@ -24,7 +24,12 @@ class EventsController < ApplicationController
   # GET /events/day.js/date  - called when loading the menu pop-up
   # GET /events/day.json/date
   def day
-    @events = Event.find_by_date(params[:date],params[:page])
+		# if making pdf, get all events
+		if params[:format] == "pdf"
+	    @events = Event.find_by_date(params[:date])
+		else
+	    @events = Event.find_by_date(params[:date],true,params[:page])
+		end
 
     respond_to do |format|
       format.html # day.html.erb
@@ -32,7 +37,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_day.html.erb',
+               :template		=> 'german_week/_search_results.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
@@ -41,8 +46,11 @@ class EventsController < ApplicationController
   # GET /events/category?cat
   # GET /events/category.json?cat
   def category
-    @events = Event.find_by_category(params[:cat], params[:page])
-    @categories = Category.all
+		if params[:format] == "pdf"
+	    @events = Event.find_by_category(params[:cat])
+		else
+	    @events = Event.find_by_category(params[:cat], true, params[:page])
+		end
 
     respond_to do |format|
       format.html # day.html.erb
@@ -186,7 +194,7 @@ class EventsController < ApplicationController
   		
   			# fill event with data
   			event.dtstart = event_each.start.strftime("%Y%m%dT%H%M%SZ")
-  			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ")
+  			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ") if !event_each.end.nil?
   			event.description = event_each.description.to_s
   			event.summary = event_each.title.to_s
   			event.location = event_each.address.to_s

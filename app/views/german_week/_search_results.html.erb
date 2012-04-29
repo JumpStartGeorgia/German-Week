@@ -1,3 +1,5 @@
+<% is_html = ((defined? html) && html) ? true : false %>
+
  <ul id="search_results">
   <% @events.each do |event| %>
     <li>
@@ -35,10 +37,12 @@
 						<%= truncate(event.description, :length => 100, :separator => ' ') %>
           </div>
 					<div>
+					<% if is_html %>
 						<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn btn-mini" %>
-					<% if user_signed_in? %>
-					        <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>
-					        <%= link_to t('app.buttons.delete'), event_path(event), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+						<% if user_signed_in? %>
+							      <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>
+							      <%= link_to t('app.buttons.delete'), event_path(event), :method => :delete, :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-mini btn-danger' %>
+						<% end %>
 					<% end %>
 					</div>
         </div>
@@ -47,4 +51,7 @@
   <% end %>
  </ul>
 
+<% if is_html %>
  <%= will_paginate @events %>
+<% end %>
+
