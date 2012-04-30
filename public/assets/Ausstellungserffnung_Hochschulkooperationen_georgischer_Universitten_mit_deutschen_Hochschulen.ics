@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID:iCalendar-Ruby
+VERSION:2.0
+BEGIN:VEVENT
+DESCRIPTION:Lernen Sie einige grundlegende Deutsch.
+DTEND:20120514T190000Z
+DTSTAMP:20120430T181619
+DTSTART:20120514T180000Z
+CLASS:PUBLISH
+LOCATION:Shota Rustaveli Ave\, Tbilisi\, Georgia
+SEQUENCE:0
+SUMMARY:Ausstellungseröffnung „Hochschulkooperationen georgischer Universit
+ äten mit deutschen Hochschulen“ 
+UID:2012-04-30T18:16:19+04:00_869697590@utah
+END:VEVENT
+END:VCALENDAR
