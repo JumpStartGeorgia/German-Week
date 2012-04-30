@@ -75,12 +75,12 @@ class EventsController < ApplicationController
     gon.lat = @event.lat
     gon.lon = @event.lon
     gon.popup = @event.title
-		gon.end_year = @event.start.strftime("%Y")
-    gon.end_month = @event.start.strftime("%m")
-    gon.end_day = @event.start.strftime("%d") 
-    gon.end_hour = @event.start.strftime("%H")
-    gon.end_minute = @event.start.strftime("%M")
-    gon.end_second = @event.start.strftime("%S")
+		gon.start_year = @event.start.strftime("%Y")
+    gon.start_month = @event.start.strftime("%m")
+    gon.start_day = @event.start.strftime("%d") 
+    gon.start_hour = @event.start.strftime("%H")
+    gon.start_minute = @event.start.strftime("%M")
+    gon.start_second = @event.start.strftime("%S")
     gon.building_name = @event.building_name
     gon.address = @event.event_address
 		gon.show_map = true
@@ -192,10 +192,10 @@ class EventsController < ApplicationController
     data = Event.find_for_ics(params[:type], params[:typespec])
   	case params[:type]
   		when "event" 
-  			output_file_name = data.title.split.join('_')
+  			output_file_name = data.title.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
   			data = [data]
 			when "sponsor"
-				output_file_name = Sponsor.find(params[:typespec]).title.split.join('_')
+				output_file_name = Sponsor.find(params[:typespec]).title.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
   	end
   									
 		# fill calendar with events and event data

@@ -2,8 +2,8 @@
 
 $(function(){	
 
-	if( gon.end_year !== '' ){
-		var abr = $("#time-abr"),time = $("#time"),ts = new Date(gon.end_year, gon.end_month-1, gon.end_day, gon.end_hour, gon.end_minute, gon.end_second),i=0;    						
+	if( gon.start_year !== '' ){
+		var abr = $("#time-abr"),time = $("#time"),ts = new Date(gon.start_year, gon.start_month-1, gon.start_day, gon.start_hour, gon.start_minute, gon.start_second),i=0;    						
 		time.countdown({
 				timestamp: ts
 			});
