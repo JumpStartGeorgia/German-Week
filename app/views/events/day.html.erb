@@ -4,7 +4,7 @@
 
 <% if !@events.nil? && @events.length > 0 %>
 <div class="form-actions">
-	<%= link_to t('app.buttons.pdf'), day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn btn-mini", :target => "_blank" %>
-	<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "day", :typespec => params[:date]), :class => "btn btn-mini" %>
+	<%= link_to t('app.buttons.pdf'), day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn-export", :target => "_blank" %>
+	<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "day", :typespec => params[:date]), :class => "btn-export" %>
 </div>
 <% end %>
