@@ -35,20 +35,25 @@
 #time-container #button-block {float: right; width: 40%; text-align: center;}
 
 /* image caption styles */
-div.event_picture_container {
-	float: right;
-	margin: 0 10px 10px 10px;
+div#event_picture_container {
+	margin: 0;
+	width: 100% !important;
+	text-align: center;
+	padding:0;
+}
+div#event_picture_container div.event_picture_container2 {
+	margin: 0 auto;
 	border: 1px solid #ccc;
 	padding: 5px;
 	background-color: #ddd;
 }
 
-div.event_picture_container img {
+div#event_picture_container div.event_picture_container img {
 	margin: 0;
 	padding:0;
 }
 
-div.event_picture_container p {
+div#event_picture_container div.event_picture_container p {
 	margin: 5px 0 0 0;
 	padding: 5px;
 	border-top: 1px #ddd dotted;

@@ -73,6 +73,7 @@
 
 	<% if is_html %>
 		<p>
+			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf', :debug => true), :class => "btn-export", :target => "_blank" %>
 			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn-export", :target => "_blank" %>
 		</p>
 		<p>
@@ -91,15 +92,15 @@
 	<div class="clear">&nbsp;</div>
 </div>
 
-
-
-<% if !@event.picture_file_name.nil? %>
-	<%= image_tag @event.picture.url, :id => "event_picture" ,:alt => @event.picture_text %>
-<% end %>
-
 <%= simple_format(@event.description) %>
 
-	<% if is_html %>
+<% if !@event.picture_file_name.nil? %>
+	<div id="event_picture_container">
+	<%= image_tag @event.picture.url, :id => "event_picture" ,:alt => @event.picture_text %>
+	</div>
+<% end %>
+
+<% if is_html %>
 <div id='map'></div>
 <% end %>
 
