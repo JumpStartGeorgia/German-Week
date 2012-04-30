@@ -109,7 +109,7 @@ class EventsController < ApplicationController
     # create the translation object for however many locales there are
     # so the form will properly create all of the nested form fields
     @locales.length.times {@event.event_translations.build}
-		gon.edit_map = true
+		gon.edit_event = true
 
     respond_to do |format|
       format.html # new.html.erb
@@ -129,7 +129,7 @@ class EventsController < ApplicationController
 		gon.end_date = @event.end.to_s.split('Z').join(' ')
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
-		gon.edit_map = true
+		gon.edit_event = true
   end
 
   # POST /events
@@ -145,7 +145,7 @@ class EventsController < ApplicationController
 				# reload the js so the map renders
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
-				gon.edit_map = true
+				gon.edit_event = true
         format.html { render :action => "new" }
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
       end
@@ -165,7 +165,7 @@ class EventsController < ApplicationController
 				# reload the js so the map renders
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
-				gon.edit_map = true
+				gon.edit_event = true
         format.html { render :action => "edit" }
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
       end
