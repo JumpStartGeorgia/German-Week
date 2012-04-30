@@ -7,4 +7,13 @@ class PageTranslation < ActiveRecord::Base
   # created while the page is created.  probably way to fix
 #  validates :page_id, :presence => true  
 
+	before_save :clean_text
+
+private
+	# look for tabs in strings and remove them
+	def clean_text
+		self.title.gsub! /\t/, ' '
+		self.description.gsub! /\t/, ' '
+	end
+  
 end

@@ -10,4 +10,13 @@ class CategoryTranslation < ActiveRecord::Base
   validates :title, :uniqueness => { :scope => :locale, :message => 'already exists'}
 
   default_scope order('locale ASC, title ASC')
+
+	before_save :clean_text
+
+private
+	# look for tabs in strings and remove them
+	def clean_text
+		self.title.gsub! /\t/, ' '
+	end
+  
 end
