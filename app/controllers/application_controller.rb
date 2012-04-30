@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   def set_locale 	
     I18n.locale = params[:locale] if params[:locale]
-    @locales = Locale.all
+    @locales = Locale.order("language asc")
   end
 
   # pre-load gon so js does not through errors on pages that do not use gon

@@ -73,6 +73,7 @@
 
 	<% if is_html %>
 		<p>
+			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf', :debug => true), :class => "btn-export", :target => "_blank" %>
 			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn-export", :target => "_blank" %>
 		</p>
 		<p>
@@ -99,7 +100,7 @@
 
 <%= simple_format(@event.description) %>
 
-<% if is_html %>
-	<div id='map'></div>
+	<% if is_html %>
+<div id='map'></div>
 <% end %>
 

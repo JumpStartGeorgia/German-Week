@@ -50,7 +50,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    @page = Page.find(params[:id])
+		@page = Page.find(params[:id])
   end
 
   # POST /pages

@@ -6,7 +6,7 @@ class EventTranslation < ActiveRecord::Base
   # this will always call validation to fail due to the translations being 
   # created while the event is created.  probably way to fix
 #  validates :event_id, :presence => true  
-  validates :title, :uniqueness => { :scope => :locale, :message => 'already exists'}
+#  validates :title, :uniqueness => { :scope => :locale, :message => 'already exists'}
 
   default_scope order('locale ASC, title ASC')
 

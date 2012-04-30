@@ -7,14 +7,18 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.paginate(:page => params[:page]).order("start ASC")
+		if params[:format] == "pdf"
+	    @events = Event.order("start ASC")
+		else
+	    @events = Event.paginate(:page => params[:page]).order("start ASC")
+		end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_index.html.erb',
+               :template		=> 'shared/_event_list.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
      end
@@ -56,7 +60,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'german_week/_search_results.html.erb',
+               :template		=> 'shared/_event_list.html.erb',
                :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
       end
     end
@@ -90,8 +94,9 @@ class EventsController < ApplicationController
       format.json { render :json => @event }
       format.pdf do
         render :pdf			=> 'events',
-               :template		=> 'events/_show.pdf.erb',
-               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
+               :template		=> 'events/_show.html.erb',
+               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
+							 :show_as_html => params[:debug].present?
                
       end
     end

@@ -167,6 +167,7 @@ GEM
     will_paginate (3.0.3)
     wisepdf (1.1.3)
       rails (>= 3.0.0)
+    wkhtmltopdf-binary (0.9.5.3)
     xml-simple (1.1.1)
 
 PLATFORMS
@@ -195,3 +196,4 @@ DEPENDENCIES
   uglifier
   will_paginate (= 3.0.3)
   wisepdf (~> 1.1.3)
+  wkhtmltopdf-binary (~> 0.9.5.3)

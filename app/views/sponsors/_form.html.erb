@@ -14,10 +14,18 @@
 
 	<%= f.inputs :for => :sponsor_translations do |sponsor_translation, i| %>
 		
-		<% formLocale = @locales[i-1].language %>
-		
+		<%  formLocale = nil
+				formLocaleName = nil
+			@locales.each do |locale| 
+			 if locale.language == @sponsor.sponsor_translations[i-1].locale 
+				 formLocale = locale.language 
+				 formLocaleName = locale.name
+					break
+			 end 
+		 end %>
+
 		<div id="form-<%= formLocale %>" class="multilanguage">
-			<h3><%= @locales[i-1].name %></h3>
+			<h3><%= formLocaleName %></h3>
 			<div class="control-group">
 			  <%= sponsor_translation.label :title, :class => 'control-label' %>
 			  <div class="controls">

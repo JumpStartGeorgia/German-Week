@@ -3,10 +3,18 @@
 	<%= f.semantic_errors %>
 	<%= f.inputs :for => :event_translations do |event_translation, i| %>
 
-		<% formLocale = @locales[i-1].language %>
+		<%  formLocale = nil
+				formLocaleName = nil
+			@locales.each do |locale| 
+			 if locale.language == @event.event_translations[i-1].locale 
+				 formLocale = locale.language 
+				 formLocaleName = locale.name
+					break
+			 end 
+		 end %>
 
-		<div id="form-<%= formLocale %>" class="multilanguage" >
-			<h3><%= @locales[i-1].name %></h3>
+		<div id="form-<%= formLocale %>" class="multilanguage">
+			<h3><%= formLocaleName %></h3>
 			<div class="control-group">
 			  <%= event_translation.label :title, :class => 'control-label' %>
 			  <div class="controls">

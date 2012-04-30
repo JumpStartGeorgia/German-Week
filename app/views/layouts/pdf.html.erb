@@ -3,25 +3,62 @@
 <head>
   <title>Deutsche Woche 2012 - <%= yield (:title) || "German Week" %></title>
 	<%= include_gon %>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
-  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
+  <%= wisepdf_stylesheet_tag    "application" %>
+  <%= wisepdf_javascript_tag "application" %>
+  <!--[if IE 6]><%= wisepdf_stylesheet_tag 'ie6' %><![endif]-->
+  <!--[if IE 7]><%= wisepdf_stylesheet_tag 'ie7' %><![endif]-->  
   <%= csrf_meta_tags %>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 <body>
 
-<div class="main">
-	<h2><%= yield(:title) %></h2>
+    <div id="container">
+
+      <div id="header" class="clear">
+
+        <div class="c1 def-font">
+          <img src="/assets/images/logo-german-week.png" />
+        </div><!--#header > .c1-->
+
+        <div class="c2">
+
+          <div class="logo">
+            <img src="/assets/images/other-logo.png" />
+          </div>
+
+          <h3 class="hidden">გერმანიასა და საქართველოს შორის დიპლომატიური ურთიერთობების აღდგენის 20 წლისთავი. 20 jahre diplomatische Beziehungen zwischen Deutschland und Georgien </h3>
+
+        </div><!--#header > .c2-->
+
+        <div class="c3">
+
+        </div><!--#header > .c3-->
+
+      </div><!--#header-->
+
+      <div id="content" class="clear">
+
+        <div class="container clear">
 
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+            <table><tr><td>
 
+            </td><td class="white-bg">
 
-  <%= yield %>
-</div>
+          <div id="content-board">
 
+						<h2><%= yield(:title) %></h2>
+
+						<%= yield %>
+
+          </div><!--#content-board-->
+
+            </td></tr></table>
+
+        </div><!--#content > .container-->
+
+      </div><!--#content-->
+
+    </div><!--#container-->
 </body>
 </html>
