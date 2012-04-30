@@ -60,8 +60,8 @@ $(function(){
 		map.attributionControl = false;
 		map.zoomControl = true;
 		map._container._leaflet = false;
-		map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(tile_layer);
 		if (gon.marker_lat && gon.marker_lat.toString().length > 0 && gon.marker_lon && gon.marker_lon.toString().length > 0){
+			map.setView(new L.LatLng(gon.marker_lat, gon.marker_lon), gon.zoom).addLayer(tile_layer);
 			existing_marker = new L.Marker(new L.LatLng(gon.marker_lat, gon.marker_lon),{
 				draggable: true
 			});
@@ -71,6 +71,8 @@ $(function(){
 				$("#event_lon").val(target._latlng.lng);						
 			});
 			map.addLayer(existing_marker);
+		} else {
+				map.setView(new L.LatLng(gon.lat, gon.lon), gon.zoom).addLayer(tile_layer);
 		}
 	
 		$("#btn-getaddr").live({
