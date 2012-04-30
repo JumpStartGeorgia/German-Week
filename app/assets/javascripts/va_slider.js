@@ -204,7 +204,7 @@ $(function ()
 
   var options =
   {
-    height: 250,
+    height: 220,
     delay : 5000,
     animation_timeout : 1000
   };
