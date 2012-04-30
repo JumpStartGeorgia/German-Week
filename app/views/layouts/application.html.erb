@@ -17,7 +17,10 @@
       <div id="header" class="clear">
 
         <div class="c1 def-font">
-          <img src="/assets/images/logo-german-week.png" />
+          <a href="/" class="clear" />
+            <img src="/assets/images/logo-german-week.png" />
+            <div class="logo-text">DEUTSCHE WOCHE 14.-20. Mai 2012</div>
+          </a>
         </div><!--#header > .c1-->
 
         <div class="c2">
@@ -88,7 +91,7 @@
 						<% map_active = " selected" if current_page?(map_page_day_path) %>
             <%= link_to t('.map'), map_page_day_path, :class => "item #{map_active}" %>
 
-          </div>
+          </div><!--#content .container .menu-->
 
             </td><td class="white-bg">
 

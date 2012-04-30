@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
 #  before_save  :reverse_geocode
   
   # will_paginate will get this many records per page
-  self.per_page = 10
+  self.per_page = 8
 #TODO - need to get this function working
 #  validate :date_comparison_validator
   validates_associated :event_translations
