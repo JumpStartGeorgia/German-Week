@@ -140,6 +140,10 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, :notice => 'Event was successfully created.' }
         format.json { render :json => @event, :status => :created, :location => @event }
       else
+				# reload the js so the map renders
+				gon.marker_lat = @event.lat
+				gon.marker_lon = @event.lon
+				gon.edit_map = true
         format.html { render :action => "new" }
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
       end
@@ -156,6 +160,10 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, :notice => 'Event was successfully updated.' }
         format.json { head :ok }
       else
+				# reload the js so the map renders
+				gon.marker_lat = @event.lat
+				gon.marker_lon = @event.lon
+				gon.edit_map = true
         format.html { render :action => "edit" }
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
       end
