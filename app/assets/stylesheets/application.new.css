@@ -633,12 +633,13 @@ img {
         text-decoration: underline;
       }
 
-      #footer > .r3 > .c1
+      #footer > .r3 > .c1, #footer > .r3 > .c2
       {
         float: left;
+				width: 40%;
       }
 
-      #footer > .r3 > .c2
+      #footer > .r3 > .c3
       {
         float: right;
       }

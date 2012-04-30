@@ -17,9 +17,9 @@
       <div id="header" class="clear">
 
         <div class="c1 def-font">
-          <a href="/" class="clear" />
+          <a href="<%= "/#{params[:locale]}" %>" class="clear" />
             <img src="/assets/images/logo-german-week.png" />
-            <div class="logo-text">DEUTSCHE WOCHE 14.-20. Mai 2012</div>
+            <div class="logo-text"><%= "#{t('.logo_text')} 14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %></div>
           </a>
         </div><!--#header > .c1-->
 
@@ -198,6 +198,9 @@
         <div class="r3 clear">
           <div class="c1"><%= t('.copyright') %></div>
           <div class="c2">
+            <%= link_to t('.disclaimer'), view_pages_path(:name => "disclaimer") %>
+          </div>
+          <div class="c3">
             <a href="#" href="http://jumpstart.ge/" target="_blank"><%= t('.jumpstart_link') %></a>
           </div>
         </div><!--#footer .r3-->
