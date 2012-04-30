@@ -75,14 +75,18 @@
 <% 
 =end
 %>
-						<%= link_to t('.home'), root_path, :class => "item" %>
+						<% home_active = " selected" if current_page?(root_path) %>
+						<%= link_to t('.home'), root_path, :class => "item #{home_active}" %>
 						<% (1..6).each do |i| %>
+								<% event_active = " selected" if current_page?(day_events_path(:date => "2012-05-#{i+13}", :menu_item => i)) %>
 								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
 											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
-											:class => "item" %>					
+											:class => "item #{event_active}" %>					
 						<% end %>
-            <%= link_to t('.categories'), category_events_path, :class => "item" %>
-            <%= link_to t('.map'), map_page_day_path, :class => "item" %>
+						<% cat_active = " selected" if current_page?(category_events_path) %>
+            <%= link_to t('.categories'), category_events_path, :class => "item #{cat_active}" %>
+						<% map_active = " selected" if current_page?(map_page_day_path) %>
+            <%= link_to t('.map'), map_page_day_path, :class => "item #{map_active}" %>
 
           </div>
 
