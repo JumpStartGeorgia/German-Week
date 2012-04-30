@@ -4,6 +4,6 @@
 
 <% if !@events.nil? && @events.length > 0 %>
 <div class="form-actions">
-	<%= link_to t('app.buttons.pdf'), events_path(:format => 'pdf'), :class => "btn-export", :target => "_blank" %>
+	<%= link_to t('app.buttons.pdf'), events_path(:format => 'pdf'), :class => "btn-export-hide", :target => "_blank" %>
 </div>
 <% end %>

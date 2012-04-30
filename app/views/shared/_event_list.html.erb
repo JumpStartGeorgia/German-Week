@@ -26,9 +26,7 @@
 						<br />
 					<% else %>
 						<%= event.event_address %>
-						<br />
 					<% end %>
-					<%= truncate(event.description, :length => 50, :separator => ' ') %>
         </div>
 				<div>
 					<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn-export" %>
