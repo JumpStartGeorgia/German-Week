@@ -1,6 +1,6 @@
 class SponsorTranslation < ActiveRecord::Base
 
-  attr_accessible :sponsor_id, :title, :description, :locale
+  attr_accessible :sponsor_id, :title, :description, :locale, :address
   belongs_to :sponsor
 
   validates :title, :description, :locale, :presence => true
@@ -17,8 +17,9 @@ class SponsorTranslation < ActiveRecord::Base
 private
 	# look for tabs in strings and remove them
 	def clean_text
-		self.title.gsub! /\t/, ' '
-		self.description.gsub! /\t/, ' '
+		self.title.gsub! /\t/, ' ' if !self.title.nil?
+		self.description.gsub! /\t/, ' ' if !self.description.nil?
+		self.address.gsub! /\t/, ' ' if !self.address.nil?
 	end
 
 end

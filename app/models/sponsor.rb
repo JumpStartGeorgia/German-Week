@@ -1,5 +1,5 @@
 class Sponsor < ActiveRecord::Base
-  translates :title, :description
+  translates :title, :description, :address
   has_attached_file :logo,
         :path => "/sponsor/:attachment/:id/:style/:filename",
         :storage => :s3,
@@ -10,7 +10,7 @@ class Sponsor < ActiveRecord::Base
   has_many :sponsor_translations, :dependent => :destroy
   belongs_to :sponsor_type
   accepts_nested_attributes_for :sponsor_translations
-  attr_accessible :sponsor_translations_attributes, :sponsor_type_id, :url, :logo, :event_ids, :email, :phone, :fax, :address
+  attr_accessible :sponsor_translations_attributes, :sponsor_type_id, :url, :logo, :event_ids, :email, :phone, :fax
   attr_accessor :locale
 
   has_many :event_sponsors

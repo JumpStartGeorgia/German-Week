@@ -15,6 +15,7 @@ de:
       new_event: Neue Veranstaltung
       new_page: Neue Seite
       new_sponsor: Neuer Sponsor
+      add_address_map: Add Address to Map
     msgs:
       no_events_for_date: Keine Einträge für dieses Datum.
       no_events_for_cat: Keine Einträge für diese Kategorie.

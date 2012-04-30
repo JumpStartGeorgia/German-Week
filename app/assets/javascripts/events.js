@@ -77,7 +77,17 @@ $(function(){
 	
 		$("#btn-getaddr").live({
 			'click': function(){
-				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
+				// look for an address
+				var frmAddress = "";
+				if ($("#event_event_translations_attributes_0_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_0_address").val();
+				}else if ($("#event_event_translations_attributes_1_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_1_address").val();
+				}else if ($("#event_event_translations_attributes_2_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_2_address").val();
+				}
+
+				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:frmAddress},function(data){								
 					data = data.split(',');
 																
 					map.setView(new L.LatLng(data[0], data[1]), gon.zoom);						

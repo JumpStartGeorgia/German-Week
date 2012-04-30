@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  translates :title, :description, :picture_text
+  translates :title, :description, :picture_text, :building_name, :address
   has_attached_file :picture,
         :path => "/event/:attachment/:id/:style/:filename",
         :storage => :s3,
@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :event_translations
   attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids, 
-      :lat, :lon, :building_name, :address, :event_translations_attributes, :picture
+      :lat, :lon, :event_translations_attributes, :picture
   attr_accessor :locale  
 
   validates :start, :presence => true

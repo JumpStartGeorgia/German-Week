@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428093057) do
+ActiveRecord::Schema.define(:version => 20120430135041) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 20120428093057) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture_text"
+    t.string   "building_name"
+    t.string   "address"
   end
 
   create_table "events", :force => true do |t|
@@ -57,13 +59,13 @@ ActiveRecord::Schema.define(:version => 20120428093057) do
     t.datetime "updated_at"
     t.decimal  "lat",                  :precision => 15, :scale => 12
     t.decimal  "lon",                  :precision => 15, :scale => 12
-    t.text     "address"
+    t.text     "address_old"
     t.string   "phone"
     t.string   "fax"
     t.string   "email"
     t.string   "url"
     t.string   "url2"
-    t.string   "building_name"
+    t.string   "building_name_old"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120428093057) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
   end
 
   create_table "sponsor_type_translations", :force => true do |t|
@@ -132,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20120428093057) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.string   "address"
+    t.string   "address_old"
     t.string   "phone"
     t.string   "fax"
     t.string   "email"

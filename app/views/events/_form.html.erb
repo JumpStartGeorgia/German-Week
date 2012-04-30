@@ -33,6 +33,21 @@
 			    <%= event_translation.input :description, :as => :text, :label => false %>
 			  </div>
 			</div>
+
+			<div class="control-group">
+				<%= event_translation.label :building_name, :class => "control-label" %>
+				<div class="controls">
+					<%= event_translation.text_field :building_name, :class => "text_field", :label => false %>
+				</div>
+			</div>
+		
+			<div class="control-group">
+				<%= event_translation.label :address, :class => "control-label" %>
+				<div class="controls">
+					<%= event_translation.text_field :address, :class => "text_field", :label => false %>
+				</div>
+			</div>
+		
 			<div class="control-group">
 			  <%= event_translation.label :picture_text, :class => 'control-label' %>
 			  <div class="controls">
@@ -59,18 +74,9 @@
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :building_name, :class => "control-label" %>
 			<div class="controls">
-			  <%= f.text_field :building_name, :class => "text_field", :label => false %>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<%= f.label :address, :class => "control-label" %>
-			<div class="controls">
-			  <%= f.text_field :address, :class => "text_field", :label => false %>
 			  <%= link_to "#", :id => "btn-getaddr", :class => "btn btn-getaddr" do %> 
-			  	 <div>Add to Map</div>
+			  	 <div><%= t('app.buttons.add_address_map') %></div>
 			  <% end%>
 				<%= f.hidden_field :lat %>
 				<%= f.hidden_field :lon %>
