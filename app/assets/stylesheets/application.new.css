@@ -345,7 +345,7 @@ img {
         background: #f4f4f4;
         cursor: pointer;
         width: 173px;
-        padding: 12px 0 13px 12px;
+        padding: 9px 0 9px 12px;
       }
 
       #content .menu  a:first-child
@@ -365,7 +365,7 @@ img {
 
       #content-board
       {
-        width: 715px;
+        width: 705px;
         /*
         padding: 0px 26px 26px 26px;
         */
