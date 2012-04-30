@@ -125,6 +125,8 @@ class EventsController < ApplicationController
 		else
 			@event = nil
 		end
+		gon.start_date = @event.start.to_s.split('Z').join(' ')
+		gon.end_date = @event.end.to_s.split('Z').join(' ')
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
 		gon.edit_map = true
