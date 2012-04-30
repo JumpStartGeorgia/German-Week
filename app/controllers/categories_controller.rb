@@ -38,7 +38,12 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
-    @category = Category.find(params[:id])
+		@category = Category.includes(:category_translations).where("categories.id = ?", params[:id]).order("category_translations.locale asc")
+		if !@category.nil? && @category.length == 1
+			@category = @category[0]
+		else
+			@category = nil
+		end
   end
 
   # POST /categories

@@ -50,7 +50,12 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors/1/edit
   def edit
-    @sponsor = Sponsor.find(params[:id])
+		@sponsor = Sponsor.includes(:sponsor_translations).where("sponsors.id = ?", params[:id]).order("sponsor_translations.locale asc")
+		if !@sponsor.nil? && @sponsor.length == 1
+			@sponsor = @sponsor[0]
+		else
+			@sponsor = nil
+		end
   end
 
   # POST /sponsors

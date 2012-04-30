@@ -119,7 +119,12 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+		@event = Event.includes(:event_translations).where("events.id = ?", params[:id]).order("event_translations.locale asc")
+		if !@event.nil? && @event.length == 1
+			@event = @event[0]
+		else
+			@event = nil
+		end
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
 		gon.edit_map = true

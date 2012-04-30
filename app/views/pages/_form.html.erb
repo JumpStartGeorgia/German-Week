@@ -20,6 +20,12 @@
 				 formLocaleName = locale.name
 					break
 			 end 
+			
+				if formLocale.nil?
+					formLocale = @locales[i-1].language
+					formLocaleName = @locales[i-1].name
+				end
+			
 		 end %>
 
 		<div id="form-<%= formLocale %>" class="multilanguage">

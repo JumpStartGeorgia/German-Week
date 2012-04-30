@@ -50,7 +50,12 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-		@page = Page.find(params[:id])
+		@page = Page.includes(:page_translations).where("pages.id = ?", params[:id]).order("page_translations.locale asc")
+		if !@page.nil? && @page.length == 1
+			@page = @page[0]
+		else
+			@page = nil
+		end
   end
 
   # POST /pages
