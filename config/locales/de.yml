@@ -20,12 +20,12 @@ de:
       no_events_for_cat: Keine Einträge für diese Kategorie.
       delete_confirm: Sind Sie sicher?
       map_no_events: "Sorry, für diesen Tag lassen sich keine Einträge finden. Sorry, für diese Kategorie lassen sich keine Einträge finden. Bitte wählen Sie einen anderen Tag. Bitte wählen Sie eine andere Kategorie."
-      loading: Loading... #
+      loading: Lädt...
     common:
       name: Name
       title: Titel
       description: Beschreibung
-      categories: Categories #
+      categories: Kategorien
       location: Ort
       fax: Fax
   layouts:
@@ -35,21 +35,22 @@ de:
       admin: Administrator
       home: Home
       map: Karte
-      categories: Categories #
-      events: Events #
-      sponsors: Sponsors #
+      categories: Kategorien
+      events: Veranstaltungen
+      sponsors: Sponsoren
+      pages: Seiten
       sign_out: Abmelden
       sign_in: Anmelden
       sign_up: Anmelden
-      copyright: Copyright © 2012  All Rights Reserved. #
-      jumpstart_link: Created by JumpStart Georgia #
+      copyright: Copyright © 2012  All Rights Reserved. 
+      jumpstart_link: Created by JumpStart Georgia 
   german_week:
     index:
       title: Deutsche Woche
     search:
-      title: Search for Events #
+      title: Search for Veranstaltungen
       location: Ort
-      categories: Categories #
+      categories: Kategorien
   map:
     index:
       category: Kategorie
@@ -61,7 +62,7 @@ de:
     edit:
       title: Veranstaltung hinzufügen
     index:
-      title: Events  #
+      title: Veranstaltungen
     new:
       title: Neue Veranstaltung
     show:
@@ -72,25 +73,25 @@ de:
     edit:
       title: Kategorie hinzufügen
     index:
-      title: Categories #
+      title: Kategorien
     new:
       title: Neue Kategorie
   pages:
     edit:
       title: Seite hinzufügen
     index:
-      title: Pages #
+      title: Seiten
     new:
       title: Neue Seite
   sponsors:
     edit:
       title: Sponsoren hinzufügen
     index:
-      title: Sponsors #
+      title: Sponsoren
     new:
       title: Neuer Sponsor
     show:
       contact_header: Kontaktinformationen über Sponsoren
     view:
-      no_sponsor_by_type: There are no records on file for %{type} #
+      no_sponsor_by_type: Für diese Datei liegen keine Infomationen vor %{type} #
 
