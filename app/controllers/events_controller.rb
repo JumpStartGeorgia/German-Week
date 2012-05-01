@@ -28,21 +28,25 @@ class EventsController < ApplicationController
   # GET /events/day.js/date  - called when loading the menu pop-up
   # GET /events/day.json/date
   def day
-		# if making pdf, get all events
-		if params[:format] == "pdf"
-	    @events = Event.find_by_date(params[:date])
-		else
-	    @events = Event.find_by_date(params[:date],true,params[:page])
+		@date = convert_to_date(params[:date])
+		if !@date.nil?
+			# if making pdf, get all events
+			if params[:format] == "pdf"
+			  @events = Event.find_by_date(params[:date])
+			else
+			  @events = Event.find_by_date(params[:date],true,params[:page])
+			end
 		end
-    respond_to do |format|
-      format.html # day.html.erb
-      format.js
-      format.json { render :json => @events }
-      format.pdf do
-        render :pdf			=> 'events',
-               :template		=> 'shared/_event_list.html.erb',
-               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
-      end
+
+	  respond_to do |format|
+	    format.html # day.html.erb
+	    format.js
+	    format.json { render :json => @events }
+	    format.pdf do
+	      render :pdf			=> 'events',
+	             :template		=> 'shared/_event_list.html.erb',
+	             :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
+	    end
     end
   end
 
@@ -262,6 +266,16 @@ class EventsController < ApplicationController
 		end
   end
 
+	private 
+
+	def convert_to_date(date)
+		begin
+			d = Date.parse(date)
+			return d
+		rescue
+			return nil
+		end
+	end
 end
 
 

@@ -22,12 +22,11 @@
 
 	<p>
 		<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
-			<br />
 		  <%= sponsor.address %>
+			<br />
 		<% end %>
 		<% if (!sponsor.phone.nil? && sponsor.phone.length > 0) || (!sponsor.fax.nil? && sponsor.fax.length > 0) ||
 				(!sponsor.email.nil? && sponsor.email.length > 0) || (!sponsor.url.nil?&& sponsor.url.length > 0) %>
-			<br />
 			<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
 			&nbsp;&nbsp;
 			<%= mail_to sponsor.email %>

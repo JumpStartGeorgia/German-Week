@@ -2,8 +2,16 @@
 de:
   app:
     buttons:
-      pdf: Download Veranstaltungsinformationen
+      pdf_all: Gesamtprogramm (Wochenübersicht) Downloaden
+      pdf_day: Tagesprogramm Downloaden
+      pdf_category: Programm Downloaden
+      pdf_event: Veranstaltungsinformationen Downloaden
+      print_all: Gesamtprogramm (Wochenübersicht) Drucken
+      print_day: Tagesprogramm Drucken
+      print_category: Programm Drucken
+      print_event: Veranstaltungsinformationen Drucken
       ics: Zum Kalender hinzufügen
+      map: View on Map
       reset: Zurücksetzen
       cancel: Abbrechen
       back: Zurück
@@ -59,9 +67,9 @@ de:
       category: Kategorie
   events:
     category:
-      title: Veranstaltung nach Kategorie
+      title: Veranstaltungskategorien
     day:
-      title: Veranstaltung nach %{date}
+      title: Veranstaltungen am %{date}
     edit:
       title: Veranstaltung hinzufügen
     index:
@@ -69,8 +77,10 @@ de:
     new:
       title: Neue Veranstaltung
     show:
-      contact_header: Kontakt zum Veranstalter
-      sponsor_header: Veranstalter
+      place_event: Veranstaltungsort
+      contact: Kontakt zum Veranstalter
+      sponsor_header_org: Veranstalter
+      sponsor_header_sponsor: Sponsoren
       category_header: Veranstaltungskategorie
   categories:
     edit:

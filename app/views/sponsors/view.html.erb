@@ -22,17 +22,21 @@
 		<h3><%= link_to "#{sponsor.title}", sponsor_path(sponsor) %></h3>
 
 		<p>
+			<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
+				<%= sponsor.address %>
+				<br />
+			<% end %>
 			<% if (!sponsor.phone.nil? && sponsor.phone.length > 0) || (!sponsor.fax.nil? && sponsor.fax.length > 0) ||
 					(!sponsor.email.nil? && sponsor.email.length > 0) || (!sponsor.url.nil?&& sponsor.url.length > 0) %>
-					<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
-					&nbsp;&nbsp;
-					<%= mail_to sponsor.email %>
-					&nbsp;&nbsp;
-					<%= sponsor.phone %>
-					&nbsp;&nbsp;
-					<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
-						<%= t('app.common.fax') %>: <%= sponsor.fax %>
-					<% end %>
+				<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
+				&nbsp;&nbsp;
+				<%= mail_to sponsor.email %>
+				&nbsp;&nbsp;
+				<%= sponsor.phone %>
+				&nbsp;&nbsp;
+				<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+					<%= t('app.common.fax') %>: <%= sponsor.fax %>
+				<% end %>
 			<% end %>
 		</p>
 		<div class="clear"></div>

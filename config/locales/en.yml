@@ -2,8 +2,16 @@
 en:
   app:
     buttons:
-      pdf: Download Event Info
+      pdf_all: Download All Events
+      pdf_day: Download Events on this Day
+      pdf_category: Download Events for this Category
+      pdf_event: Download Event Details
+      print_all: Print All Events
+      print_day: Print Events on this Day
+      print_category: Print Events for this Category
+      print_event: Print Event Details
       ics: Add to Your Calendar
+      map: View on Map
       reset: Reset
       cancel: Cancel
       back: Back
@@ -32,8 +40,6 @@ en:
   layouts:
     application:
       menu: Menu
-      about: About
-      comp: ???
       contact: Contact
       admin: Admin
       home: Home
@@ -71,8 +77,10 @@ en:
     new:
       title: New Event
     show:
-      contact_header: Event Contact Information
-      sponsor_header: Event Organizers
+      place_event: Place of Event
+      contact: Event Contact Information
+      sponsor_header_org: Event Organizers
+      sponsor_header_sponsor: Event Sponsors
       category_header: Event Categories 
   categories:
     edit:
