@@ -77,7 +77,8 @@ de:
     new:
       title: Neue Veranstaltung
     show:
-      contact_header: Veranstaltungsort
+      place_event: Veranstaltungsort
+      contact: Kontakt zum Veranstalter
       sponsor_header_org: Veranstalter
       sponsor_header_sponsor: Sponsoren
       category_header: Veranstaltungskategorie

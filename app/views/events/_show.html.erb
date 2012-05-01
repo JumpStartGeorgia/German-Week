@@ -10,26 +10,19 @@
 		</p>		
 
 		<p>
-			<strong><%= t('.contact_header') %></strong>
+			<strong><%= t('.place_event') %>:</strong>
 			<% if !@event.event_address.nil? && @event.event_address.length > 0 %>
-				<br />
 				<%= @event.event_address %>
 			<% end %>
-			<% if !@event.phone.nil? && @event.phone.length > 0 %>
-				<br />
-				<%= @event.phone %>
-			<% end %>
-			<% if !@event.url.nil? && @event.url.length > 0 && !@event.url2.nil?  && @event.url2.length > 0 %>
-				<br />
+		</p>
+		<p>
+			<strong><%= t('.contact') %>:</strong>
+			<% if (!@event.phone.nil? && @event.phone.length > 0) || (!@event.url.nil? && @event.url.length > 0) || (!@event.url2.nil? && @event.url2.length > 0) %>
 				<%= link_to @event.url, url_with_protocol(@event.url) %>
 				&nbsp;&nbsp;
 				<%= link_to @event.url2, url_with_protocol(@event.url2) %>
-			<% elsif !@event.url.nil? && @event.url.length > 0  %>
-				<br />
-				<%= link_to @event.url, url_with_protocol(@event.url) %>
-			<% elsif !@event.url2.nil? && @event.url2.length > 0  %>
-				<br />
-				<%= link_to @event.url2, url_with_protocol(@event.url2) %>
+				&nbsp;&nbsp;
+				<%= @event.phone %>
 			<% end %>
 		</p>
 

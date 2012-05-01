@@ -79,7 +79,8 @@ ka:
     new:
       title: New Event
     show:
-      contact_header: Event Contact Information
+      place_event: Place of Event
+      contact: Event Contact Information
       sponsor_header_org: Event Organizers
       sponsor_header_sponsor: Event Sponsors
       category_header: Event Categories 
