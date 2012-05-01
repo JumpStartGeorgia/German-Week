@@ -21,15 +21,15 @@
 			<% end %>
 			<% if !@event.url.nil? && @event.url.length > 0 && !@event.url2.nil?  && @event.url2.length > 0 %>
 				<br />
-				<%= link_to @event.url, @event.url %>
+				<%= link_to @event.url, url_with_protocol(@event.url) %>
 				&nbsp;&nbsp;
-				<%= link_to @event.url2, @event.url2 %>
+				<%= link_to @event.url2, url_with_protocol(@event.url2) %>
 			<% elsif !@event.url.nil? && @event.url.length > 0  %>
 				<br />
-				<%= link_to @event.url, @event.url %>
+				<%= link_to @event.url, url_with_protocol(@event.url) %>
 			<% elsif !@event.url2.nil? && @event.url2.length > 0  %>
 				<br />
-				<%= link_to @event.url2, @event.url2 %>
+				<%= link_to @event.url2, url_with_protocol(@event.url2) %>
 			<% end %>
 		</p>
 

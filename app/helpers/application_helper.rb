@@ -30,6 +30,11 @@ module ApplicationHelper
     end
   end
 
+	# add http to url if not present
+  def url_with_protocol(url)
+    /^http/.match(url) ? url : "http://#{url}"
+  end
+
 =begin
   def multi_language_form(destination)
      destination = controller.controller_name.to_s + '/' + destination 

@@ -27,11 +27,11 @@
 	<% end %>
 	<% if !@sponsor.email.nil? && @sponsor.email.length > 0  %>
 		<br />
-		<%= link_to @sponsor.email, @sponsor.email %>
+		<%= mail_to @sponsor.email %>
 	<% end %>
 	<% if !@sponsor.url.nil? && @sponsor.url.length > 0  %>
 		<br />
-		<%= link_to @sponsor.url, @sponsor.url %>
+		<%= link_to @sponsor.url, url_with_protocol(@sponsor.url) %>
 	<% end %>
 
 </p>
