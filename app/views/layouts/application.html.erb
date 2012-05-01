@@ -19,7 +19,11 @@
         <div class="c1 def-font">
           <a href="<%= "/#{params[:locale]}" %>" class="clear" />
             <img src="/assets/images/logo-german-week.png" />
-            <div class="logo-text"><%= "#{t('.logo_text')} 14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %></div>
+            <div class="logo-text">
+							<%= "#{t('.logo_text')}" %>
+							<br />
+							<%= "14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %>
+						</div>
           </a>
         </div><!--#header > .c1-->
 
@@ -100,8 +104,9 @@
 						<h2><%= yield(:title) %></h2>
 
 
-						<p class="notice"><%= notice %></p>
-						<p class="alert"><%= alert %></p>
+						<% flash.each do |key, msg| %>
+								<%= content_tag :div, msg, :class => [key, " message"], :id => "notice_ #{key}" %>
+						<% end %>
 
 
 						<%= yield %>

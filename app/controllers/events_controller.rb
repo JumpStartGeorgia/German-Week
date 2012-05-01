@@ -125,8 +125,9 @@ class EventsController < ApplicationController
 		else
 			@event = nil
 		end
-		gon.start_date = @event.start.to_s.split('Z').join(' ')
-		gon.end_date = @event.end.to_s.split('Z').join(' ')
+		# have to remove UTC for it causes the js datepicker to show the wrong time
+		gon.start_date = @event.start.to_s.gsub(" UTC", "")
+		gon.end_date = @event.end.to_s.gsub(" UTC", "")
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
 		gon.edit_event = true

@@ -31,7 +31,7 @@ $(document).ready(function(){
 				}
 		});
 
-		if (typeof(gon.start_date) !== undefined &&
+		if (gon.start_date !== undefined &&
 				gon.start_date.length > 0)
 		{
 			$("#event_start").datetimepicker("setDate", new Date(gon.start_date));
@@ -57,7 +57,7 @@ $(document).ready(function(){
 				    $('#event_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
 				}
 		});
-		if (typeof(gon.end_date) !== undefined &&
+		if (gon.end_date !== undefined &&
 				gon.end_date.length > 0)
 		{
 			$("#event_end").datetimepicker("setDate", new Date(gon.end_date));

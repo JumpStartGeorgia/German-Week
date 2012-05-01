@@ -4,8 +4,6 @@
 	<% title "#{@sponsor.sponsor_type.title} - #{@sponsor.title}" %>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 	<% if !@sponsor.logo_file_name.nil? %>
   	<%= image_tag @sponsor.logo.url, :class => "sponsor_logo" %>
 	<% end %>

@@ -36,7 +36,7 @@
 
 /* image caption styles */
 div#event_picture_container {
-	margin: 0;
+	margin: 20px 0;
 	width: 100% !important;
 	text-align: center;
 	padding:0;
@@ -61,4 +61,10 @@ div#event_picture_container div.event_picture_container p {
 	text-align: center;
 }
 
+div#map_container_show {
+	margin: 20px 0;
+}
 
+div#map_container_show > div {
+	margin: 0 auto;
+}
