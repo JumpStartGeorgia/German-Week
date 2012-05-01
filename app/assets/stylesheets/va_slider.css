@@ -16,7 +16,7 @@
     height: 100%;
     top: 0px;
     z-index: 210;
-    opacity: 0;
+    opacity: .15;
     -webkit-transition: opacity .25s;
     background-color: rgba(255, 255, 255, .45);
     background-repeat: no-repeat;
