@@ -1,21 +1,44 @@
-.switcher_circles, .slider_controls
+.switcher_circles
 {
     position: absolute;
+    display: none;
     width: 100%;
     bottom: 51px;
     text-align: center;
-    z-index: 1000;
+    z-index: 210;
 }
 
-.slider_controls
+
+.switcher_button
 {
     position: absolute;
-    width: 57px;
-    bottom: 51px;
-    left: 50%;
-    margin: 0 auto 0 -28px;
-    text-align: center;
-    z-index: 1000;
+    width: 110px;
+    height: 100%;
+    top: 0px;
+    z-index: 210;
+    opacity: 0;
+    -webkit-transition: opacity .25s;
+    background-color: rgba(255, 255, 255, .45);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+.switcher_button:hover
+{
+    opacity: 1;
+}
+
+.switcher_button[direction="left"]
+{
+    left: 0px;
+    background-image: url(images/slider-left.png);
+}
+
+.switcher_button[direction="right"]
+{
+    right: 0px;
+    background-image: url(images/slider-right.png);
 }
 
 .switcher_circles .circle, .switcher_circles .circle_selected

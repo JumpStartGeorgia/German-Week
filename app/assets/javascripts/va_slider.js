@@ -63,65 +63,79 @@ function window_dimensions ()
   };
 }
 
-var slider = {},
-    PX = 'px';
+var PX = 'px';
 
 function adjust_dimensions (e_w, e_h, max_w, max_h, vertical_limit)
 {
   vertical_limit = vertical_limit || false;
-  max_w = max_w || slider.width;
-  max_h = max_h || slider.height;
+  max_w = max_w;
+  max_h = max_h;
   var k = vertical_limit ? Math.max((e_h / max_h), (e_w / max_w)) : Math.min((e_h / max_h), (e_w / max_w));
   new_w = e_w / k;
   new_h = e_h / k;
 
   return {
-	'width'  : new_w,
-	'height' : new_h,
+	  'width'  : new_w,
+  	'height' : new_h,
   };
-}
-
-function get_slide (index)
-{
-  return slider.container.getElementsByClassName('slider_img_' + index)[0];
-}
-
-function change_slide (index)
-{
-  for (i = 0; i < 3; i ++)
-  {
-    slider.slides[i].style.left = slider.offsets[slider.matrix[index][i]] + PX;
-  }
-
-  slider.active = index;
 }
 
 $.prototype.va_slider = function (options)
 {
+  function change_slide (index)
+  {
+    slider.element.find('*').stop(true, true);
+    $(slider.slides[slider.active]).fadeOut(slider.timeout);
+    $(slider.slides[index]).fadeIn(slider.timeout);
+
+    slider.element.find('.circle_selected').attr('class', 'circle');
+    slider.element.find('.circle[index=' + index + ']')[0].setAttribute('class', 'circle_selected');
+
+    slider.active = index;
+  }
+
+  function change_slide_automatically (index)
+  {
+    index = (slider.slides.length <= (+ slider.active + 1)) ? 0 : + slider.active + 1;
+    change_slide(index);
+    slider.timer.restart();
+  }
+
   t1 = microtime();
 
   slider = {
-    width: options.width || 900,
-    height: options.height || 300,
-    middle_percent: options.middle_percent || 80,
-    delay: options.delay || 1000,
-    timeout: options.timeout || 1000,
-    element: $(this),
-    active: 1
+    width:        options.width        || 900,
+    height:       options.height       || 300,
+    max_circles:  options.max_circles  || 9,
+    delay:        options.delay        || 1000,
+    timeout:      options.timeout      || 1000,
+    timer:        null,
+    element:      $(this),
+    active:       0
   };
   slider.element.height(slider.height);
   slider.element.width(slider.width);
 
   image_paths = gon[options.name + '_slider_images']
 
-  var switcher_circles_html = '';
-  for (i = 0; i < image_paths.length; i ++)
+  var show_circles = (image_paths.length <= slider.max_circles) ? true : false,
+      circles_html = '';
+
+  if (show_circles)
   {
-    classname = (i == 0) ? 'circle_selected' : 'circle';
-    switcher_circles_html += '<div class="' + classname + '" index="' + i + '"></div>';
+    for (i = 0; i < image_paths.length; i ++)
+    {
+      classname = (i == 0) ? 'circle_selected' : 'circle';
+      circles_html += '<div class="' + classname + '" index="' + i + '"></div>';
+    }
+
+    circles_html = '<div class="switcher_circles">' + circles_html + '</div>';
   }
-  html = '<div class="overlay"></div>' +
-         '<div class="switcher_circles">' + switcher_circles_html + '</div>' +
+
+  html = '<div class="overlay"></div>' + circles_html +
+         '<div class="switcher_button" direction="left"></div>' +
+         '<div class="switcher_button" direction="right"></div>' +
+         '</div>' +
          '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
 
   slider.element.prepend(html);
@@ -138,42 +152,62 @@ $.prototype.va_slider = function (options)
     }
     images[i] = new Image();
     images[i].src = image_paths[i];
-    images[i].style.display = "none";
     slider.container.appendChild(images[i]);
+
     images[i].onload = function ()
     {
       new_ds = adjust_dimensions(this.width, this.height, slider.width, slider.height);
       this.width  = this.style.width  = new_ds.width;
       this.height = this.style.height = new_ds.height;
-      this.setAttribute('class', 'slider_img_' + j);
-      //images[j].style.display = "block";
-      j ++;
       if (j == (image_paths.length - 1))
       {
+        images[0].style.display = "block";
         slider.container.removeChild(slider.container.getElementsByClassName('loader')[0]);
+        if (show_circles)
+        {
+          slider.element.get(0).getElementsByClassName('switcher_circles')[0].style.display = "block";
+        }
+        slider.slides = slider.container.getElementsByTagName('img');
+        slider.timer = new Timer(change_slide_automatically, slider.delay);
       }
+      j ++;
     }
   }
 
-
-  $('.switcher_circle, .switcher_circle_selected').click(function()
+  if (show_circles)
   {
-    if (this.getAttribute('class') == 'switcher_circle_selected')
+    slider.element.find('.circle, .circle_selected').click(function()
     {
-      return;
+      if (this.getAttribute('class') == 'circle_selected')
+      {
+        return;
+      }
+      change_slide(this.getAttribute('index'));
+      slider.timer.restart();
+    });
+  }
+
+  slider.element.find('.switcher_button').click(function()
+  {
+    var direction = this.getAttribute('direction');
+    if (direction == 'left')
+    {
+      index = (slider.active == 0) ? + slider.slides.length - 1 : + slider.active - 1;
     }
-    change_slide(this.getAttribute('index'));
-    document.getElementsByClassName('switcher_circle_selected')[0].setAttribute('class', 'switcher_circle');
-    this.setAttribute('class', 'switcher_circle_selected');
+    else
+    {
+      index = (slider.slides.length <= (+ slider.active + 1)) ? 0 : + slider.active + 1;
+    }
+
+    change_slide(index);
+    slider.timer.restart();
   });
 
-  //timer = new Timer(change_slide_automatic, slider.delay);
   t2 = microtime();
   /*
   console.log(t2 - t1);
   */
 };
-
 
 
 
