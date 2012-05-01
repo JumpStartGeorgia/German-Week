@@ -19,7 +19,7 @@
 
       <td<%= attr %>>
         <div class="header">
-          <%= pretty_time(event.start) %>
+          <%= pretty_time(event.start, event.end) %>
         </div>
         <div class="body">
           <%= link_to event.title, event_path(event) %>

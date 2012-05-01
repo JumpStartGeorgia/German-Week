@@ -8,7 +8,7 @@ class SponsorTypeTranslation < ActiveRecord::Base
 #  validates :sponsor_type_id, :presence => true  
 
 	before_save :clean_text
-
+  
 private
 	# look for tabs in strings and remove them
 	def clean_text

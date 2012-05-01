@@ -21,10 +21,18 @@ module ApplicationHelper
       if dt_end.nil?
         # only have start date
         I18n.l dt_start, :format => :short
-      else
+      elsif format_date(dt_start) == format_date(dt_end)
+				# have same dates, different times
+        "#{I18n.l dt_start, :format => :short} - #{I18n.l dt_end, :format => :time_only}"
+			else
         "#{I18n.l dt_start, :format => :short} - #{I18n.l dt_end, :format => :short}"
       end
     end
+  end
+
+	# add http to url if not present
+  def url_with_protocol(url)
+    /^http/.match(url) ? url : "http://#{url}"
   end
 
 =begin

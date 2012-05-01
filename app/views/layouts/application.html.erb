@@ -17,9 +17,13 @@
       <div id="header" class="clear">
 
         <div class="c1 def-font">
-          <a href="/" class="clear" />
+          <a href="<%= "/#{params[:locale]}" %>" class="clear" />
             <img src="/assets/images/logo-german-week.png" />
-            <div class="logo-text def-font">DEUTSCHE WOCHE 14.-20. Mai 2012</div>
+            <div class="logo-text def-font upcase">
+							<%= "#{t('.logo_text')}" %>
+							<br />
+							<%= "14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %>
+						</div>
           </a>
         </div><!--#header > .c1-->
 
@@ -100,8 +104,9 @@
 						<h2><%= yield(:title) %></h2>
 
 
-						<p class="notice"><%= notice %></p>
-						<p class="alert"><%= alert %></p>
+						<% flash.each do |key, msg| %>
+								<%= content_tag :div, msg, :class => [key, " message"], :id => "notice_ #{key}" %>
+						<% end %>
 
 
 						<%= yield %>
@@ -120,7 +125,7 @@
 			    <% @organizations.each do |org| %>
 						<% if !org.logo_file_name.nil? %>
 		          <div class="partner">
-						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org)) %>
+						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org), :title => org.title) %>
 		          </div>
 						<% else %>
 		          <div class="partner">
@@ -198,6 +203,9 @@
         <div class="r3 clear">
           <div class="c1"><%= t('.copyright') %></div>
           <div class="c2">
+            <%= link_to t('.disclaimer'), view_pages_path(:name => "disclaimer") %>
+          </div>
+          <div class="c3">
             <a href="#" href="http://jumpstart.ge/" target="_blank"><%= t('.jumpstart_link') %></a>
           </div>
         </div><!--#footer .r3-->

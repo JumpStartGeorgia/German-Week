@@ -8,7 +8,7 @@ class GermanWeekController < ApplicationController
     category = params[:category].nil? ? false : params[:category]
 
     @events = Event.search(search, category, params[:page])
-
+=begin
     if search
       boldpart = "<span class=\"matched_term\">" + search + "</span>"
       if !@events.nil?
@@ -18,7 +18,7 @@ class GermanWeekController < ApplicationController
         }
       end
     end
-
+=end
   end
 
 end

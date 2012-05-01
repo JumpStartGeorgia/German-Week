@@ -2,61 +2,71 @@
 // All this logic will automatically be available in application.js.
 
 
-$(document).ready(function(){
-	$('#event_start').datetimepicker({
-			dateFormat: 'yy/mm/dd',
-			timeFormat: 'hh:mm',
-			separator: ' ',
-		  onClose: function(dateText, inst) {
-		      var endDateTextBox = $('#event_end');
-/*
-		      if (endDateTextBox.val() != '') {
-		          var testStartDate = new Date(dateText);
-		          var testEndDate = new Date(endDateTextBox.val());
-		          if (testStartDate > testEndDate)
-		              endDateTextBox.val(dateText);
-		      }
-		      else {
-		          endDateTextBox.val(dateText);
-		      }
-*/
-		  },
-		  onSelect: function (selectedDateTime){
-		      var start = $(this).datetimepicker('getDate');
-		      $('#event_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
-		  }
-	});
-	$('#event_end').datetimepicker({
-			dateFormat: 'yy/mm/dd',
-			timeFormat: 'hh:mm',
-			separator: ' ',
-		  onClose: function(dateText, inst) {
-		      var startDateTextBox = $('#event_start');
-		      if (startDateTextBox.val() != '') {
-		          var testStartDate = new Date(startDateTextBox.val());
-		          var testEndDate = new Date(dateText);
-		          if (testStartDate > testEndDate)
-		              startDateTextBox.val(dateText);
-		      }
-		      else {
-		          startDateTextBox.val(dateText);
-		      }
-		  },
-		  onSelect: function (selectedDateTime){
-		      var end = $(this).datetimepicker('getDate');
-		      $('#event_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
-		  }
-	});
-});
-var map;
 var existing_marker;
-$(function(){
+$(document).ready(function(){
+
+	if(gon.edit_event){
+		// load the date time pickers
+		$('#event_start').datetimepicker({
+				dateFormat: 'yy/mm/dd',
+				timeFormat: 'hh:mm',
+				separator: ' ',
+				onClose: function(dateText, inst) {
+				    var endDateTextBox = $('#event_end');
+	/*
+				    if (endDateTextBox.val() != '') {
+				        var testStartDate = new Date(dateText);
+				        var testEndDate = new Date(endDateTextBox.val());
+				        if (testStartDate > testEndDate)
+				            endDateTextBox.val(dateText);
+				    }
+				    else {
+				        endDateTextBox.val(dateText);
+				    }
+	*/
+				},
+				onSelect: function (selectedDateTime){
+				    var start = $(this).datetimepicker('getDate');
+				    $('#event_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
+				}
+		});
+
+		if (gon.start_date !== undefined &&
+				gon.start_date.length > 0)
+		{
+			$("#event_start").datetimepicker("setDate", new Date(gon.start_date));
+		}
+		$('#event_end').datetimepicker({
+				dateFormat: 'yy/mm/dd',
+				timeFormat: 'hh:mm',
+				separator: ' ',
+				onClose: function(dateText, inst) {
+				    var startDateTextBox = $('#event_start');
+				    if (startDateTextBox.val() != '') {
+				        var testStartDate = new Date(startDateTextBox.val());
+				        var testEndDate = new Date(dateText);
+				        if (testStartDate > testEndDate)
+				            startDateTextBox.val(dateText);
+				    }
+				    else {
+				        startDateTextBox.val(dateText);
+				    }
+				},
+				onSelect: function (selectedDateTime){
+				    var end = $(this).datetimepicker('getDate');
+				    $('#event_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				}
+		});
+		if (gon.end_date !== undefined &&
+				gon.end_date.length > 0)
+		{
+			$("#event_end").datetimepicker("setDate", new Date(gon.end_date));
+		}
 
 
-	if(gon.edit_map){
+
+		// load the map
 		var map = new L.Map("control-map"), tile_layer = new L.TileLayer(gon.tile_url, {maxZoom: gon.max_zoom, attribution: gon.attribution});
-
-				
 		map.attributionControl = false;
 		map.zoomControl = true;
 		map._container._leaflet = false;
@@ -77,7 +87,17 @@ $(function(){
 	
 		$("#btn-getaddr").live({
 			'click': function(){
-				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:$("#event_address").val()},function(data){								
+				// look for an address
+				var frmAddress = "";
+				if ($("#event_event_translations_attributes_0_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_0_address").val();
+				}else if ($("#event_event_translations_attributes_1_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_1_address").val();
+				}else if ($("#event_event_translations_attributes_2_address").val()) {
+					frmAddress = $("#event_event_translations_attributes_2_address").val();
+				}
+
+				$.post("/"+gon.locale+"/events/getLocation/latlng",{address:frmAddress},function(data){								
 					data = data.split(',');
 																
 					map.setView(new L.LatLng(data[0], data[1]), gon.zoom);						
