@@ -66,7 +66,7 @@ function window_dimensions ()
 var slider = {},
     PX = 'px';
 
-function adjust_dimensions (e_w, e_h, vertical_limit, max_w, max_h)
+function adjust_dimensions (e_w, e_h, max_w, max_h, vertical_limit)
 {
   vertical_limit = vertical_limit || false;
   max_w = max_w || slider.width;
@@ -101,81 +101,60 @@ $.prototype.va_slider = function (options)
   t1 = microtime();
 
   slider = {
-    width: window_dimensions().width,
+    width: options.width || 900,
     height: options.height || 300,
     middle_percent: options.middle_percent || 80,
     delay: options.delay || 1000,
-    animation_timeout: options.animation_timeout || 1000,
+    timeout: options.timeout || 1000,
     element: $(this),
-    offsets: [],
-    active: 1,
-    slides: [],
-    matrix: [[1, 2, 0], [0, 1, 2], [2, 0, 1]]
+    active: 1
   };
-  slider.middle_size = slider.width * slider.middle_percent / 100;
   slider.element.height(slider.height);
   slider.element.width(slider.width);
 
+  image_paths = gon[options.name + '_slider_images']
+
   var switcher_circles_html = '';
-  for (i = 0; i < 3; i ++)
+  for (i = 0; i < image_paths.length; i ++)
   {
-    classname = (i == slider.active) ? 'switcher_circle_selected' : 'switcher_circle';
+    classname = (i == 0) ? 'circle_selected' : 'circle';
     switcher_circles_html += '<div class="' + classname + '" index="' + i + '"></div>';
   }
-  slider_html = '<div class="overlay"></div>' +
-                '<div id="switcher_circles">' + switcher_circles_html + '</div>' +
-                '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
+  html = '<div class="overlay"></div>' +
+         '<div class="switcher_circles">' + switcher_circles_html + '</div>' +
+         '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
 
-  slider.element.prepend(slider_html);
+  slider.element.prepend(html);
   slider.container = slider.element[0].getElementsByClassName('container')[0];
-  //slider.container.style.height = '100%';
-  //slider.container.style.width = slider.middle_size * 3 + PX;
 
-  $.getJSON('/en/slider_images.json', function (json)
+  var images = [],
+      j = 0;
+
+  for (i in image_paths)
   {
-    var images = [],
-        j = 0;
-    for (i in json)
+    if (typeof(image_paths[i]) != 'string')
     {
-      if (typeof(json[i]) != 'string')
+      continue;
+    }
+    images[i] = new Image();
+    images[i].src = image_paths[i];
+    images[i].style.display = "none";
+    slider.container.appendChild(images[i]);
+    images[i].onload = function ()
+    {
+      new_ds = adjust_dimensions(this.width, this.height, slider.width, slider.height);
+      this.width  = this.style.width  = new_ds.width;
+      this.height = this.style.height = new_ds.height;
+      this.setAttribute('class', 'slider_img_' + j);
+      //images[j].style.display = "block";
+      j ++;
+      if (j == (image_paths.length - 1))
       {
-        continue;
-      }
-      images[i] = new Image();
-      images[i].src = json[i];
-      images[i].style.display = "none";
-      slider.container.appendChild(images[i]);
-      images[i].onload = function ()
-      {
-        new_ds = adjust_dimensions(this.width, this.height, false, slider.middle_size, slider.height);
-        this.width  = this.style.width  = new_ds.width;
-        this.height = this.style.height = new_ds.height;
-        this.setAttribute('class', 'slider_img_' + j);
-        diff = (slider.width - slider.middle_size) / 2;
-        switch (j)
-        {
-          case 0:
-            left = diff - this.width;
-          break;
-          case 1:
-            left = diff;
-          break;
-          case 2:
-            left = this.width + diff;
-          break;
-        }
-        this.style.left = left + PX;
-        slider.offsets.push(left);
-        slider.slides.push(this);
-        images[j].style.display = "block";
-        j ++;
-        if (j == 2)
-        {
-          slider.container.removeChild(slider.container.getElementsByClassName('loader')[0]);
-        }
+        slider.container.removeChild(slider.container.getElementsByClassName('loader')[0]);
       }
     }
-  });
+  }
+
 
   $('.switcher_circle, .switcher_circle_selected').click(function()
   {
@@ -204,9 +183,11 @@ $(function ()
 
   var options =
   {
+    width: window_dimensions().width,
     height: 220,
     delay : 5000,
-    animation_timeout : 1000
+    timeout : 1000,
+    name: 'header'
   };
 
   var element = $('#slider');
