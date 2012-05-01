@@ -80,10 +80,9 @@ img {
 
       @font-face
       {
-        font-family: fightme;
+        font-family: "Times New Roman";
         font-style: normal;
         font-weight: 400;
-        src: url(fonts/bpg_mrgvlovani_caps_2010.ttf);
       }
 
       #container
@@ -106,7 +105,7 @@ img {
 
       .def-font
       {
-        font-family: fightme;
+        font-family: "Times New Roman";
       }
 
       .upcase
@@ -461,7 +460,7 @@ img {
       #content-board > table tr > td
       {
         color: #4C4C4C;
-        font-family: Arial, Sans-serif;
+        font-family: "Times New Roman";
         font-size: 12px;
         padding: 12px 13px 8px 1px;
       }
@@ -628,7 +627,7 @@ img {
       {
         color: #fff;
         font-size: 12px;
-        font-family: Arial, Sans-serif;
+        font-family: "Times New Roman";
         text-shadow: 1px 1px rgba(0, 0, 0, .2);
         padding: 9px 0px 10px;
       }
