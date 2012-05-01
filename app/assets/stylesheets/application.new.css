@@ -423,6 +423,11 @@ img {
         background: #fff;
       }
 
+			#content-board h4{
+				border-bottom: solid thin #000;
+				text-align: center;
+			}
+
       #content-board a
       {
 				text-decoration: underline;

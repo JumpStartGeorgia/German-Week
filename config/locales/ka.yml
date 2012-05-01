@@ -2,7 +2,14 @@
 ka:
   app:
     buttons:
-      pdf: Download Event Info
+      pdf_complete: Download All Events
+      pdf_day: Download Events on this Day
+      pdf_category: Download Events for this Category
+      pdf_event: Download Event Details
+      print_complete: Print All Events
+      print_day: Print Events on this Day
+      print_category: Print Events for this Category
+      print_event: Print Event Details
       ics: Add to Your Calendar
       reset: Reset
       cancel: Cancel
@@ -72,7 +79,8 @@ ka:
       title: New Event
     show:
       contact_header: Event Contact Information
-      sponsor_header: Event Organizers
+      sponsor_header_org: Event Organizers
+      sponsor_header_sponsor: Event Sponsors
       category_header: Event Categories 
   categories:
     edit:

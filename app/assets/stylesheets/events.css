@@ -29,7 +29,9 @@
 }
 
 /* show page styles */
-#time-container {	}
+#time-container {	
+	margin-top: 15px;
+}
 #time-container #time-block {float: left; width: 60%;}
 #time-container #time-block #event_time {font-size: larger;}
 #time-container #button-block {float: right; width: 40%; text-align: center;}
@@ -67,4 +69,25 @@ div#map_container_show {
 
 div#map_container_show > div {
 	margin: 0 auto;
+}
+
+
+
+/* sponsor/organization block*/
+div#sponsor_container{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+div#sponsor_container div#organizations{
+	width: 48%;
+	margin: 10px 0;
+	float: left;
+	text-align: center;
+}
+div#sponsor_container  div#sponsors{
+	width: 48%;
+	margin: 10px 0;
+	float: right;
+	text-align: center;
 }

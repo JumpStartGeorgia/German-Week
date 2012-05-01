@@ -1,6 +1,6 @@
 <% is_html = ((defined? html) && html) ? true : false %>
 
-<% if @events.length == 0 %>
+<% if @events.nil? || @events.length == 0 %>
 	<p><%= t('app.msgs.no_events_for_date') %></p>
 <% else %>
 

@@ -9,8 +9,8 @@
       <%= pretty_time(@event.start, @event.end) %>
 		</p>		
 
+		<h4><%= t('.contact_header') %></h4>
 		<p>
-			<strong><%= t('.contact_header') %></strong>
 			<% if !@event.event_address.nil? && @event.event_address.length > 0 %>
 				<br />
 				<%= @event.event_address %>
@@ -73,34 +73,39 @@
 	</div>
 <% end %>
 
-		<% if !@event.categories.nil? && @event.categories.length > 0 %>
-		<p>
-			<strong><%= t('.category_header') %></strong>
-			<br />
-			<% @event.categories.each_with_index do |c, i| %>
-				<% separator = ((@event.categories.count - 1) != i) ? ', ' : '' %>
-				<%= link_to c.title, category_events_path(c.title) %><%= separator %>
-			<% end %>
-		</p>
-		<% end %>
-
-		<% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
-		<p>
-			<strong><%= t('.sponsor_header') %></strong>
-			<br />
-			<% @event.sponsors.each do |s| %>
+<div id="sponsor_container">
+	<div id="organizations">
+		<h4><%= t('.sponsor_header_org') %></h4>
+		<% @event.sponsors.each do |s| %>
+			<% if s.sponsor_type_id == 1 %>
 				<% if !s.logo_file_name.nil? %>
 					<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
 				<% else %>
 					<%= link_to(s.title, sponsor_path(s)) %>
 				<% end %>
 			<% end %>
-		</p>
 		<% end %>
+	</div>
+	<div id="sponsors">
+		<% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
+			<h4><%= t('.sponsor_header_sponsor') %></h4>
+			<% @event.sponsors.each do |s| %>
+				<% if s.sponsor_type_id == 2 %>
+					<% if !s.logo_file_name.nil? %>
+						<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
+					<% else %>
+						<%= link_to(s.title, sponsor_path(s)) %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
 
 <% if is_html %>
 	<div id="map_container_show">
 		<div id="map"></div>
 	</div>
 <% end %>
+
 

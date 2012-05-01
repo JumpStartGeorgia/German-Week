@@ -1,4 +1,6 @@
-<% title t('.title', :date => params[:date]) %>
+<% if !@date.nil? %>
+	<% title t('.title', :date => l(@date, :format => :short)) %>
+<% end %> 
 
 <%= render 'day', :html => true %>
 
