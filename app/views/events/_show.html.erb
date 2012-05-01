@@ -48,9 +48,16 @@
 		<p>
 			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf', :debug => true), :class => "btn-export-hide", :target => "_blank" %>
 			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn-export-hide", :target => "_blank" %>
+			
 		</p>
 		<p>
 			<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn-export" %>
+		</p>
+		<p>
+			<%= link_to t('app.buttons.print'), "", :id => "btn-print", :class => "btn-print" %>
+		</p>
+		<p>
+			<%= link_to t('app.buttons.see on map'), "#map", :id => "btn-map", :class => "btn-map" %>
 		</p>
 
 		<% if user_signed_in? %>

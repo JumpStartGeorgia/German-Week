@@ -188,13 +188,25 @@ img {
 
       #search_show_button
       {
+      	float: right;      	
         cursor: pointer;
+        width: 20px;
       }
 
       #search_form_container
       {
         display: none;
-        background: #ccc;
+        background: transparent;
+      }
+      
+      #search 
+      {
+      	width: 150px;
+      }
+      
+      #category 
+      {
+      	width: 100px;
       }
 
       #languages
@@ -644,7 +656,7 @@ img {
         float: right;
       }
 
-.btn-export {
+.btn-export, .btn-print, .btn-map {
 	padding: 0px 5px;
 	color: #000;
 	text-decoration:none !important;
@@ -654,6 +666,14 @@ img {
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.btn-print {
+	width:120px;
+}
+
+.btn-map {
+	width: 120px;
 }
 
 .btn-export-hide {
