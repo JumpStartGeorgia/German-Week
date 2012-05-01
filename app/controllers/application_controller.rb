@@ -26,11 +26,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_categories
-    @categories = Category.includes(:category_translations).order("category_translations.title asc")
+    @categories = Category.get_all
   end
 
   def set_sponsor_types
-    @sponsor_types = SponsorType.includes(:sponsor_type_translations).order("sponsor_type_translations.title asc")
+    @sponsor_types = SponsorType.get_all
   end
 
   def set_organisations

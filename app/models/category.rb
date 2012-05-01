@@ -15,4 +15,13 @@ class Category < ActiveRecord::Base
   
   scope :l10n , joins(:category_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
+
+
+  def self.get_all
+		includes(:category_translations)
+		  .where("category_translations.locale = :locale",
+		    :locale => I18n.locale)
+		  .order("category_translations.title ASC")
+  end
+  
 end
