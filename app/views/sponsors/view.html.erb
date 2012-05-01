@@ -15,12 +15,13 @@
 
 
 	<% @sponsors.each do |sponsor| %>
-		<h3><%= link_to "#{sponsor.title}", sponsor_path(sponsor) %></h3>
-
-		<p>
 			<% if !sponsor.logo_file_name.nil? %>
 				<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
 			<% end %>
+
+		<h3><%= link_to "#{sponsor.title}", sponsor_path(sponsor) %></h3>
+
+		<p>
 			<% if (!sponsor.phone.nil? && sponsor.phone.length > 0) || (!sponsor.fax.nil? && sponsor.fax.length > 0) ||
 					(!sponsor.email.nil? && sponsor.email.length > 0) || (!sponsor.url.nil?&& sponsor.url.length > 0) %>
 					<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
@@ -34,6 +35,7 @@
 					<% end %>
 			<% end %>
 		</p>
+		<div class="clear"></div>
 		<% if user_signed_in? %>
 		<p>
 		      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>

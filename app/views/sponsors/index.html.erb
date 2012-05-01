@@ -8,6 +8,10 @@
 
 
 <% @sponsors.each do |sponsor| %>
+		<% if !sponsor.logo_file_name.nil? %>
+			<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
+		<% end %>
+
 	<h3>
 		<% if sponsor.sponsor_type.nil? %>
 			<%= link_to "#{sponsor.title}", sponsor_path(sponsor) %>
@@ -17,9 +21,6 @@
 	</h3>
 
 	<p>
-		<% if !sponsor.logo_file_name.nil? %>
-			<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
-		<% end %>
 		<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
 			<br />
 		  <%= sponsor.address %>
@@ -38,7 +39,7 @@
 			<% end %>
 		<% end %>
 	</p>
-
+	<div class="clear"></div>
 <% if user_signed_in? %>
 <p>
       <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
