@@ -125,7 +125,7 @@
 			    <% @organizations.each do |org| %>
 						<% if !org.logo_file_name.nil? %>
 		          <div class="partner">
-						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org)) %>
+						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org), :title => org.title) %>
 		          </div>
 						<% else %>
 		          <div class="partner">
