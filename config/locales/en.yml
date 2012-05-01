@@ -40,8 +40,6 @@ en:
   layouts:
     application:
       menu: Menu
-      about: About
-      comp: ???
       contact: Contact
       admin: Admin
       home: Home
