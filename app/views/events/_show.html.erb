@@ -9,8 +9,8 @@
       <%= pretty_time(@event.start, @event.end) %>
 		</p>		
 
-		<h4><%= t('.contact_header') %></h4>
 		<p>
+			<strong><%= t('.contact_header') %></strong>
 			<% if !@event.event_address.nil? && @event.event_address.length > 0 %>
 				<br />
 				<%= @event.event_address %>
@@ -45,20 +45,21 @@
 	<% end %>
 
 	<% if is_html %>
-		<p>
-			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf', :debug => true), :class => "btn-export-hide", :target => "_blank" %>
-			<%= link_to t('app.buttons.pdf'), event_path(@event, :format => 'pdf'), :class => "btn-export-hide", :target => "_blank" %>
-		</p>
-		<p>
-			<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn-export" %>
-		</p>
+		<div>
+			<% if !@event.lat.nil? && !@event.lon.nil? %>
+				<%= link_to(image_tag("images/map-marker.png", :alt => t('app.buttons.map')), "#map", :id => "btn-map", :class => "btn-export", :title => t('app.buttons.map')) %>
+			<% end %>
+			<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn-export", :title => t('app.buttons.ics')) %>
+			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_event')), event_path(@event, :format => 'pdf'), :class => "btn-export-hide", :target => "_blank", :title => t('app.buttons.pdf_event')) %>
+			<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_event')), "", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_event')) %>
+		</div>
 
 		<% if user_signed_in? %>
-			<p>
+			<div>
 	    	<%= link_to t('app.buttons.list'), events_path, :class => 'btn' %>
 	     <%= link_to t('app.buttons.edit'), edit_event_path(@event), :class => 'btn' %>
 	     <%= link_to t('app.buttons.delete'), event_path(@event), :method => 'delete', :confirm => t('app.msgs.delete_confirm'), :class => 'btn btn-danger' %>
-			</p>
+			</div>
 		<% end %>
 	<% end %>
 </div>
@@ -87,15 +88,13 @@
 		<% end %>
 	</div>
 	<div id="sponsors">
-		<% if !@event.sponsors.nil? && @event.sponsors.length > 0 %>
-			<h4><%= t('.sponsor_header_sponsor') %></h4>
-			<% @event.sponsors.each do |s| %>
-				<% if s.sponsor_type_id == 2 %>
-					<% if !s.logo_file_name.nil? %>
-						<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
-					<% else %>
-						<%= link_to(s.title, sponsor_path(s)) %>
-					<% end %>
+		<h4><%= t('.sponsor_header_sponsor') %></h4>
+		<% @event.sponsors.each do |s| %>
+			<% if s.sponsor_type_id == 2 %>
+				<% if !s.logo_file_name.nil? %>
+					<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
+				<% else %>
+					<%= link_to(s.title, sponsor_path(s)) %>
 				<% end %>
 			<% end %>
 		<% end %>

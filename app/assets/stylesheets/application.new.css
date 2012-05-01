@@ -80,10 +80,9 @@ img {
 
       @font-face
       {
-        font-family: fightme;
+        font-family: "Times New Roman";
         font-style: normal;
         font-weight: 400;
-        src: url(fonts/bpg_mrgvlovani_caps_2010.ttf);
       }
 
       #container
@@ -106,7 +105,7 @@ img {
 
       .def-font
       {
-        font-family: fightme;
+        font-family: "Times New Roman";
       }
 
       .upcase
@@ -188,13 +187,25 @@ img {
 
       #search_show_button
       {
+      	float: right;      	
         cursor: pointer;
+        width: 20px;
       }
 
       #search_form_container
       {
         display: none;
-        background: #ccc;
+        background: transparent;
+      }
+      
+      #search 
+      {
+      	width: 150px;
+      }
+      
+      #category 
+      {
+      	width: 100px;
       }
 
       #languages
@@ -454,7 +465,7 @@ img {
       #content-board > table tr > td
       {
         color: #4C4C4C;
-        font-family: Arial, Sans-serif;
+        font-family: "Times New Roman";
         font-size: 12px;
         padding: 12px 13px 8px 1px;
       }
@@ -621,7 +632,7 @@ img {
       {
         color: #fff;
         font-size: 12px;
-        font-family: Arial, Sans-serif;
+        font-family: "Times New Roman";
         text-shadow: 1px 1px rgba(0, 0, 0, .2);
         padding: 9px 0px 10px;
       }
@@ -648,22 +659,6 @@ img {
       {
         float: right;
       }
-
-.btn-export {
-	padding: 0px 5px;
-	color: #000;
-	text-decoration:none !important;
-	border: 1px solid #000;
-	font-size: 11px;
-	line-height: 14px;
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.btn-export-hide {
-display: none;
-}
 
 
 /* error/notice message styles */

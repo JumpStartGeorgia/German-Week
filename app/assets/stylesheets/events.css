@@ -3,6 +3,41 @@
   They will automatically be included in application.css.
 */
 
+/* styles for export buttons */
+div#export_button_container{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+div#export_button_container div#left{
+	width: 50%; 
+	float: left; 
+}
+div#export_button_container div#right{
+	width: 40%; 
+	float: right; 
+	text-align: right; 
+	padding-right: 10px;
+}
+
+
+a.btn-export {
+	padding: 0px 5px;
+	color: #000;
+	text-decoration:none !important;
+	font-size: 11px;
+	line-height: 14px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+a.btn-export-hide {
+display: none;
+}
+
+
+
 
 .btn-getaddr {
 	height:10px;
@@ -32,9 +67,9 @@
 #time-container {	
 	margin-top: 15px;
 }
-#time-container #time-block {float: left; width: 60%;}
+#time-container #time-block {float: left; width: 50%;}
 #time-container #time-block #event_time {font-size: larger;}
-#time-container #button-block {float: right; width: 40%; text-align: center;}
+#time-container #button-block {float: right; width: 40%; text-align: right; padding-right: 10px;}
 
 /* image caption styles */
 div#event_picture_container {
@@ -65,6 +100,7 @@ div#event_picture_container div.event_picture_container p {
 
 div#map_container_show {
 	margin: 20px 0;
+	visibility: hidden;
 }
 
 div#map_container_show > div {

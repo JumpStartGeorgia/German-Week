@@ -6,6 +6,7 @@
  *= require formtastic
  *= require vendor
  *= require id_countdown
+ *= require fancybox
  *= require_tree . 
 */
 

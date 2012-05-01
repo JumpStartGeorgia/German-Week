@@ -22,7 +22,7 @@ gem 'aws-s3', "~> 0.6.2" # save uploaded images to amazon s3
 gem 'aws-sdk', "~> 1.4.1"
 gem "twitter-bootstrap-rails"
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
-
+gem "fancybox-rails", "~> 0.1.4"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,9 +37,9 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
- group :production do
-   gem 'pg'
- end
+ # group :production do
+ #   gem 'pg'
+ # end
 
 # for debugging
 # to get debugging to work, follow directions at:

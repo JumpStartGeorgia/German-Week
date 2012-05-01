@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
     gon.lat = 41.699504919895
 		gon.lon = 44.797002757205	
     gon.locale = params[:locale]
+    gon.header_slider_images = self.slider_images 'public/assets/images/header/'
+    gon.footer_slider_images = self.slider_images 'public/assets/images/footer/'
   end
 
   def set_categories
@@ -40,6 +42,46 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options={})
     { locale: I18n.locale }
+  end
+
+  def slider_images (pathname)
+  # pathname = 'public/assets/images/header/';
+    extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    images = [];
+
+    if !File.directory?(pathname)
+      return []
+    end
+
+    Dir.foreach(pathname) do |f|
+      if !extensions.include? File.extname(f)[1..4]
+        next
+      end
+      images.push '/assets/images/header/' + f
+    end
+
+    max = images.count
+    randoms = Set.new();
+    loop do
+      randoms << Random.rand(max)
+      if randoms.size == max
+        break
+      end
+    end
+
+    random_images = [];
+#    images.each_with_index do |img, i|
+#      if randoms.include? i
+#        random_images.push img
+#      end
+#    end
+
+    randoms.each_with_index do |rand, i|
+      random_images[rand] = images[i];
+    end
+
+    random_images
+
   end
 
 end

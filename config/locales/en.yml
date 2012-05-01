@@ -2,15 +2,16 @@
 en:
   app:
     buttons:
-      pdf_complete: Download All Events
+      pdf_all: Download All Events
       pdf_day: Download Events on this Day
       pdf_category: Download Events for this Category
       pdf_event: Download Event Details
-      print_complete: Print All Events
+      print_all: Print All Events
       print_day: Print Events on this Day
       print_category: Print Events for this Category
       print_event: Print Event Details
       ics: Add to Your Calendar
+      map: View on Map
       reset: Reset
       cancel: Cancel
       back: Back

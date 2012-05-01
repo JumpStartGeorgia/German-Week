@@ -1,4 +1,13 @@
-#switcher_circles, #slider_controls
+.switcher_circles, .slider_controls
+{
+    position: absolute;
+    width: 100%;
+    bottom: 51px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.slider_controls
 {
     position: absolute;
     width: 57px;
@@ -6,9 +15,10 @@
     left: 50%;
     margin: 0 auto 0 -28px;
     text-align: center;
-    z-index: 9999;
+    z-index: 1000;
 }
-.switcher_circle, .switcher_circle_selected
+
+.switcher_circles .circle, .switcher_circles .circle_selected
 {
     display: inline-block;
     cursor: pointer;
@@ -21,7 +31,7 @@
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
-.switcher_circle:hover { background: #5079cb; }
-.switcher_circle_selected { background: #5079cb !important; cursor: default; }
+.switcher_circles .circle:hover { background: #5079cb; }
+.switcher_circles .circle_selected { background: #5079cb !important; cursor: default; }
 
 .slider_content {  }
