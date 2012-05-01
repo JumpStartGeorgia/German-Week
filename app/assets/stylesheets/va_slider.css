@@ -6,7 +6,7 @@
     left: 50%;
     margin: 0 auto 0 -28px;
     text-align: center;
-    z-index: 9999;
+    z-index: 999;
 }
 .switcher_circle, .switcher_circle_selected
 {
