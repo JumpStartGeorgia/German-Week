@@ -4,7 +4,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors/view/:type
   # GET /sponsors/view/:type.json
   def view
-    @sponsors = Sponsor.get_by_type(params[:type])
+    @sponsors = Sponsor.get_by_type(params[:type], params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors
   # GET /sponsors.json
   def index
-    @sponsors = Sponsor.all
+    @sponsors = Sponsor.get_all(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

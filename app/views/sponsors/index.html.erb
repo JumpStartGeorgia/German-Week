@@ -20,27 +20,25 @@
 		<% if !sponsor.logo_file_name.nil? %>
 			<%= image_tag sponsor.logo.url, :class => "sponsor_logo" %>
 		<% end %>
-		<%= truncate(sponsor.description, :length => 50, :separator => ' ') %>
-	</p>
-	<p>
 		<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
+			<br />
 		  <%= sponsor.address %>
 		<% end %>
-		<br />
-		<% if !sponsor.phone.nil? && sponsor.phone.length > 0 %>
-			<%= sponsor.phone %>
-		<% end %>
-		<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
-			<%= t('app.common.fax') %>: <%= sponsor.fax %>
-		<% end %>
-		<br />
-		<% if !sponsor.email.nil? && sponsor.email.length > 0 %>
+		<% if (!sponsor.phone.nil? && sponsor.phone.length > 0) || (!sponsor.fax.nil? && sponsor.fax.length > 0) ||
+				(!sponsor.email.nil? && sponsor.email.length > 0) || (!sponsor.url.nil?&& sponsor.url.length > 0) %>
+			<br />
+			<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
+			&nbsp;&nbsp;
 			<%= mail_to sponsor.email %>
-		<% end %>
-		<% if !sponsor.url.nil? && sponsor.url.length > 0 %>
-				<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
+			&nbsp;&nbsp;
+			<%= sponsor.phone %>
+			&nbsp;&nbsp;
+			<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+				<%= t('app.common.fax') %>: <%= sponsor.fax %>
+			<% end %>
 		<% end %>
 	</p>
+
 <% if user_signed_in? %>
 <p>
       <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
@@ -49,5 +47,7 @@
 <% end %>
 
 <% end %>
+
+<%= will_paginate @sponsors %>
 
 

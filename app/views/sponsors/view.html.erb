@@ -1,6 +1,12 @@
 <% title params[:type] %>
 
 
+<% if user_signed_in? %>
+	<div class="form-actions">
+		<%= link_to t('.app.buttons.new_sponsor'), new_sponsor_path, :class => 'btn btn-mini' %>
+	</div>
+<% end %>
+
 <% if @sponsors.nil? || @sponsors.length == 0 %>
 	<p>
 		<%= t('.no_sponsor_by_type', :type => params[:type]) %>
@@ -17,25 +23,20 @@
 			<% end %>
 			<%= truncate(sponsor.description, :length => 50, :separator => ' ') %>
 		</p>
-		<p>
-			<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
-			  <%= sponsor.address %>
-			<% end %>
-			<br />
-			<% if !sponsor.phone.nil? && sponsor.phone.length > 0 %>
-				<%= sponsor.phone %>
-			<% end %>
-			<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
-				<%= t('app.common.fax') %>: <%= sponsor.fax %>
-			<% end %>
-			<br />
-			<% if !sponsor.email.nil? && sponsor.email.length > 0 %>
-				<%= mail_to sponsor.email %>
-			<% end %>
-			<% if !sponsor.url.nil? && sponsor.url.length > 0 %>
+		<% if (!sponsor.phone.nil? && sponsor.phone.length > 0) || (!sponsor.fax.nil? && sponsor.fax.length > 0) ||
+				(!sponsor.email.nil? && sponsor.email.length > 0) || (!sponsor.url.nil?&& sponsor.url.length > 0) %>
+			<p>
 				<%= link_to sponsor.url, url_with_protocol(sponsor.url) %>
-			<% end %>
-		</p>
+				&nbsp;&nbsp;
+				<%= mail_to sponsor.email %>
+				&nbsp;&nbsp;
+				<%= sponsor.phone %>
+				&nbsp;&nbsp;
+				<% if !sponsor.fax.nil? && sponsor.fax.length > 0 %>
+					<%= t('app.common.fax') %>: <%= sponsor.fax %>
+				<% end %>
+			</p>
+		<% end %>
 		<% if user_signed_in? %>
 		<p>
 		      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>
@@ -45,6 +46,8 @@
 
 	<% end %>
 <% end %>
+
+<%= will_paginate @sponsors %>
 
 <div class="form-actions">
 		<% @sponsor_types.each do |type| %>

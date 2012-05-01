@@ -23,17 +23,29 @@ class Sponsor < ActiveRecord::Base
   scope :l10n , joins(:sponsor_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
-  def self.get_by_type(sponsor_type)
+  # will_paginate will get this many records per page
+  self.per_page = 4
+
+  def self.get_by_type(sponsor_type, page)
     if !sponsor_type.nil?
       includes(:sponsor_translations, {:sponsor_type => :sponsor_type_translations})
         .where("sponsor_translations.locale = :locale and sponsor_type_translations.locale = :locale and sponsor_type_translations.title = :type",
           :locale => I18n.locale, :type => sponsor_type)
+				.paginate(:page => page)
         .order("sponsor_translations.title ASC")
     else
       return nil
     end
   end
 
+  def self.get_all(page)
+		includes(:sponsor_translations)
+		  .where("sponsor_translations.locale = :locale",
+		    :locale => I18n.locale)
+			.paginate(:page => page)
+		  .order("sponsor_translations.title ASC")
+  end
+  
   def self.get_by_type_id(sponsor_type_id)
     if !sponsor_type_id.nil?
       includes(:sponsor_translations)
