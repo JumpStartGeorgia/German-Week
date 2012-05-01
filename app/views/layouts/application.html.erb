@@ -5,7 +5,7 @@
     <link rel="icon" href="/assets/images/favicon.ico">
     <title>Deutsche Woche 2012 - <%= yield (:title) || "German Week" %></title>
     <%= include_gon %>
-    <%= stylesheet_link_tag  "application" %>
+    <%= stylesheet_link_tag  "application", :media => "all" %>
     <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
     <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
     <%= csrf_meta_tags %>
@@ -146,10 +146,11 @@
 
             <div class="menu">
               <span class="header"><%= t('.menu') %></span>
-							<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
+							<%= link_to t('.events'), events_path, :class => "item" %>
 					    <% @sponsor_types.each do |st| %>
 					      <%= link_to st.title, sponsor_by_type_path(st.title), :class => "item" %>
 					    <% end %>
+							<%= link_to t('.contact'), view_pages_path(:name => "contact"), :class => "item" %>
             </div><!--#footer .r1 .c1 .menu-->
 
           </div><!--#footer .r1 .c1-->

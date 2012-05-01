@@ -723,3 +723,21 @@ img {
 
 label.error { display: block; margin: 0 !important; }
 
+/* styles for printing */
+@media print {
+	#header .c3, #slider, .menu, #partners, #footer, div#export_button_container div#right, #time-container #button-block {
+		display: none;
+	}
+
+  #content
+  {
+    top: 0;
+    margin: 0;
+    padding: 10px;
+    padding-bottom: 0px;
+  }
+
+}
+
+
+
