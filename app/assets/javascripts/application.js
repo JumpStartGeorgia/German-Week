@@ -12,6 +12,7 @@
 //= require twitter/bootstrap
 //= require vendor
 //= require id_countdown
+//= require fancybox
 //= require_tree .
 
 $(document).ready(function(){
@@ -37,11 +38,11 @@ $(document).ready(function(){
 	});
 
   // search button click event
-  document.getElementById('search_show_button').onclick = function () {
-    var form_container = $('#search_form_container');
-    form_container.slideToggle();
-    form_container.find('input[type="text"]').focus();
-  }
+  $("#search_show_button").click(function(){
+  	var form_container = $('#search_form_container');
+				form_container.slideToggle();
+				form_container.find('input[type="text"]').focus();
+  });
 
   // show image caption
   if (gon.show_img_caption){

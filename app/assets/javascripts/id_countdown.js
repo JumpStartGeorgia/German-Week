@@ -1,5 +1,5 @@
 
-
+/*
 $(function(){	
 	if (gon.start_year !== undefined){
 		var abr = $("#time-abr"),time = $("#time"),ts = new Date(gon.start_year, gon.start_month-1, gon.start_day, gon.start_hour, gon.start_minute, gon.start_second).getTime(),i=0;    						
@@ -25,6 +25,6 @@ $(function(){
 			abr.append(html.join(''));
 		}
 	}
-});
+});*/
 
 

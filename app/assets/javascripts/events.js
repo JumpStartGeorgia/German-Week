@@ -130,3 +130,21 @@ $(document).ready(function(){
 		});
 	}
 });
+
+$(function(){
+	$("#btn-print").click(function(){
+		window.print();
+		return false;
+	});	
+});
+
+$(function(){
+	$("#btn-map").fancybox({
+		titleShow: false,
+		transitionIn: 'elastic',
+		transitionOut: 'elastic',
+		easingIn: 'easeOutBack',
+		easingOut: 'easeInBack'
+	});
+});
+

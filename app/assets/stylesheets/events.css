@@ -63,6 +63,7 @@ div#event_picture_container div.event_picture_container p {
 
 div#map_container_show {
 	margin: 20px 0;
+	visibility: hidden;
 }
 
 div#map_container_show > div {
