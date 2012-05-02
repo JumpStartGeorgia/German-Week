@@ -57,4 +57,19 @@ GermanWeek::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+	# this is to tell the pdf generate to use local files instead of
+	# trying to load as web requests
+	# - need this since heroku only has one dyno
+	# (http://jguimont.com/post/2627758108/pdfkit-and-its-middleware-on-heroku)	
+# this is for middleware and this is not using middleware
+=begin
+	ActionController::Base.asset_host = Proc.new { |source, request|
+		if request.env["REQUEST_PATH"].include? ".pdf"
+		  "file://#{Rails.root.join('public')}"
+		else
+		  "#{request.protocol}#{request.host_with_port}"
+		end
+	}
+=end	
 end
