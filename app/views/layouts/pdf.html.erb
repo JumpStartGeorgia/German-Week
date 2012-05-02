@@ -3,10 +3,9 @@
 <head>
   <title>Deutsche Woche 2012 - <%= yield (:title) || "German Week" %></title>
 	<%= include_gon %>
-  <%= wisepdf_stylesheet_tag    "application" %>
-  <%= wisepdf_javascript_tag "application" %>
-  <!--[if IE 6]><%= wisepdf_stylesheet_tag 'ie6' %><![endif]-->
-  <!--[if IE 7]><%= wisepdf_stylesheet_tag 'ie7' %><![endif]-->  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
   <%= csrf_meta_tags %>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
@@ -17,16 +16,19 @@
       <div id="header" class="clear">
 
         <div class="c1 def-font">
-          <img src="/assets/images/logo-german-week.png" />
+          <img src="<%= "#{host_url}/assets/images/logo-german-week.png"%>" />
+          <div class="logo-text def-font">
+						<%= "#{t('layouts.application.logo_text')}" %>
+						<br />
+						<%= "14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %>
+					</div>
         </div><!--#header > .c1-->
 
         <div class="c2">
 
           <div class="logo">
-            <img src="/assets/images/other-logo.png" />
+            <img src="<%= "#{host_url}/assets/images/other-logo.png"%>" />
           </div>
-
-          <h3 class="hidden">გერმანიასა და საქართველოს შორის დიპლომატიური ურთიერთობების აღდგენის 20 წლისთავი. 20 jahre diplomatische Beziehungen zwischen Deutschland und Georgien </h3>
 
         </div><!--#header > .c2-->
 
@@ -60,5 +62,7 @@
       </div><!--#content-->
 
     </div><!--#container-->
+
+	  <%= javascript_include_tag "application" %>
 </body>
 </html>

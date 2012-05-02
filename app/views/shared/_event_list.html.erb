@@ -1,5 +1,3 @@
-<% is_html = ((defined? html) && html) ? true : false %>
-
 <% if is_html && user_signed_in? %>
 <div class="form-actions">
   <%= link_to t('app.buttons.new_event'), new_event_path, :class => "btn btn-mini" %>
@@ -31,7 +29,7 @@
 					<% end %>
         </div>
 				<div>
-					<%= link_to t('app.buttons.ics'), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn-export" %>
+					<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn-export", :title => t('app.buttons.ics')) %>
 					
 				<% if user_signed_in? %>
 				        <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>

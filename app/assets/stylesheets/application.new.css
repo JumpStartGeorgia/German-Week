@@ -725,12 +725,13 @@ label.error { display: block; margin: 0 !important; }
 		display: none;
 	}
 
-  #content
+  #content, #content-board
   {
     top: 0;
     margin: 0;
     padding: 10px;
     padding-bottom: 0px;
+    width: 100%;
   }
 
 }

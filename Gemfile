@@ -14,7 +14,7 @@ gem 'icalendar', '1.1.6' # icalendar for events export
 gem 'will_paginate', '3.0.3' # pagination
 gem 'gon', '2.2.2' # push data into js
 gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
-gem 'wisepdf', "~> 1.1.3" # generate pdfs
+gem "pdfkit", "~> 0.5.2" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
 gem "paperclip", "~> 3.0" # upload images

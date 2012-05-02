@@ -62,6 +62,5 @@ module GermanWeek
     # add path to jquery-ui theme css and images
     config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets", "jquery-ui", "redmond")
     config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets", "leaflet")
-   
   end
 end

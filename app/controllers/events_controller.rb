@@ -16,11 +16,14 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @events }
-      format.pdf do
-        render :pdf			=> 'events',
-               :template		=> 'shared/_event_list.html.erb',
-               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
-      end
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html.erb" , :action => "index.html.erb", :formats => [:html], :handler => [:erb])
+        kit = PDFKit.new(html, :print_media_type => true)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+        filename = clean_string("#{I18n.t('events.index.title')}")
+        send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
      end
   end
 
@@ -42,11 +45,14 @@ class EventsController < ApplicationController
 	    format.html # day.html.erb
 	    format.js
 	    format.json { render :json => @events }
-	    format.pdf do
-	      render :pdf			=> 'events',
-	             :template		=> 'shared/_event_list.html.erb',
-	             :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
-	    end
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html.erb" , :action => "day.html.erb", :formats => [:html], :handler => [:erb])
+        kit = PDFKit.new(html, :print_media_type => true)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+        filename = clean_string("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}")
+        send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
     end
   end
 
@@ -62,11 +68,14 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # day.html.erb
       format.json { render :json => @events }
-      format.pdf do
-        render :pdf			=> 'events',
-               :template		=> 'shared/_event_list.html.erb',
-               :layout			=> 'pdf.html'			# use 'pdf.html' for a pdf.html.erb file
-      end
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html.erb" , :action => "category.html.erb", :formats => [:html], :handler => [:erb])
+        kit = PDFKit.new(html, :print_media_type => true)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+        filename = clean_string("#{I18n.t('events.category.title')} #{params[:cat]}")
+        send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
     end
   end
 
@@ -96,13 +105,13 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }
-      format.pdf do
-        render :pdf			=> 'events',
-               :template		=> 'events/_show.html.erb',
-               :layout			=> 'pdf.html',			# use 'pdf.html' for a pdf.html.erb file
-							 :show_as_html => params[:debug].present?
-               
-      end
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
+        kit = PDFKit.new(html, :print_media_type => true)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+        send_data(kit.to_pdf, :filename => "#{clean_string(@event.title)}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
     end
   end
 
@@ -199,10 +208,10 @@ class EventsController < ApplicationController
     data = Event.find_for_ics(params[:type], params[:typespec])
   	case params[:type]
   		when "event" 
-  			output_file_name = data.title.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
+  			output_file_name = clean_string(data.title)
   			data = [data]
 			when "sponsor"
-				output_file_name = Sponsor.find(params[:typespec]).title.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
+				output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
   	end
   									
 		# fill calendar with events and event data
@@ -275,6 +284,10 @@ class EventsController < ApplicationController
 		rescue
 			return nil
 		end
+	end
+	
+	def clean_string(s)
+	  s.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
 	end
 end
 

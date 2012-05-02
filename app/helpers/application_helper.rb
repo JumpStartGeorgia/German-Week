@@ -1,5 +1,16 @@
 module ApplicationHelper
   
+  # determine if the current request is html (i.e., not pdf)
+  def is_html
+    !params[:format].nil? && params[:format] == "pdf" ? false : true
+  end
+
+  # get the host url
+  def host_url
+    proto = request.env['SERVER_PROTOCOL'].downcase.index("https").nil? ? "http" : "https"
+    return "#{proto}://#{request.env['HTTP_HOST']}"
+  end
+
   def title(page_title)
     content_for(:title) { page_title }
   end
