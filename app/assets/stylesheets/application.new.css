@@ -533,6 +533,13 @@ img {
         background: rgba(0, 0, 0, .27);
       }
 
+      #footer a:hover
+      {
+        text-decoration: underline;
+				font-weight: bold;
+				background-color: transparent !important;
+      }
+
       #footer .r1 > div
       {
         float: left;

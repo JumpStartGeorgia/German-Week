@@ -2,54 +2,54 @@
 ka:
   app:
     buttons:
-      pdf_all: Download All Events
-      pdf_day: Download Events on this Day
-      pdf_category: Download Events for this Category
-      pdf_event: Download Event Details
-      print_all: Print All Events
-      print_day: Print Events on this Day
-      print_category: Print Events for this Category
-      print_event: Print Event Details
-      ics: Add to Your Calendar
-      map: View on Map
-      reset: Reset
-      cancel: Cancel
-      back: Back
-      edit: Edit
-      delete: Delete
-      list: View All
-      search: Search
-      new_category: New Category
-      new_event: New Event
-      new_page: New Page
-      new_sponsor: New Sponsor
-      add_address_map: Add Address to Map
+      pdf_all: ჩამოტვირთე ყველა ღონისძიება
+      pdf_day: ჩამოტვირთე დღევანდელი ღონისძიებები
+      pdf_category: ჩამოტვირთე ამ კატეგორიის ღონისძიებები
+      pdf_event: ჩამოტვირთე ღონისძიების დეტალები
+      print_all: ყველა ღონისძიების ბეჭდვა
+      print_day: დღევანდელი ღონისძიებების ბეჭდვა
+      print_category: ამ კატეგორიის ღონისძიებათა ბეჭდვა
+      print_event: ღონისძიებათა დეტალების ბეჭდვა
+      ics: კალენდარში დამატება
+      map: იხილე რუკაზე
+      reset: გაუქმება
+      cancel: შეწყვეტა
+      back: უკან დაბრუნება
+      edit: დამუშავება
+      delete: წაშლა
+      list: ყველას ნახვა
+      search: ძებნა
+      new_category: ახალი კატეგორია
+      new_event: ახალი ღონისძიება
+      new_page: ახალი გვერდი
+      new_sponsor: ახალი სპონსორი
+      add_address_map: დაამატე მისამართი რუკაზე
     msgs:
-      no_events_for_date: There are no events for this date.
-      no_events_for_cat: No events exist for this category.
-      delete_confirm: Are you sure?
+      no_events_for_date: ამ თარიღისათვის ჩანაწერი არ მოიძებნა.
+      no_events_for_cat: ამ კატეგორიისათვის ჩანაწერი არ მოიძებნა.
+      delete_confirm: დარწმუნებული ხართ?
       map_no_events: "Sorry, there are no events for the selected day and category.  Please select a different day or category."
-      loading: Loading...
+      loading: იტვირთება...
     common:
-      name: Name
-      title: Title
-      description: Description
+      name: სახელი
+      title: სათაური
+      description: აღწერა
       categories: Categories
-      location: Location
-      fax: Fax
+      location: ადგილი
+      fax: ფაქსი
   layouts:
     application:
-      menu: Menu
-      contact: Contact
-      admin: Admin
-      home: Home
-      map: Map
+      menu: მენიუ
+      contact: კონტაქტი
+      admin: ადმინისტრატორი
+      home: მთავარი
+      map: რუკა
       categories: Categories
-      events: Events
-      sponsors: Sponsors
-      pages: Pages
-      sign_out: Sign Out
-      sign_in: Sign In
+      events: ღონისძიებები
+      sponsors: სპონსორები
+      pages: გვერდები
+      sign_out: გამოსვლა
+      sign_in: შესვლა
       sign_up: Sign Up
       copyright: Copyright © 2012  All Rights Reserved.
       jumpstart_link: Created by JumpStart Georgia
@@ -57,27 +57,27 @@ ka:
       logo_text: German Week
   german_week:
     index:
-      title: German Week
+      title: გერმანული კვირეული
     search:
-      title: Search for Events
-      location: Location
+      title: ღონისძიებათა ძიება
+      location: ადგილი
       categories: Categories
   map:
     index:
-      category: Category
+      category: კატეგორიები
   events:
     category:
-      title: Events by Category
+      title: ღონისძიება კატეგორიის მიხედვით
     day:
-      title: Events on %{date}
+      title: ღონისძიებები %{date}
     edit:
-      title: Edit Event
+      title: ღონისძიების დამატება
     index:
-      title: Events 
+      title: ღონისძიებები 
     new:
       title: New Event
     show:
-      place_event: Place of Event
+      place_event: ღონისძიების ადგილი
       contact: Event Contact Information
       sponsor_header_org: Event Organizers
       sponsor_header_sponsor: Event Sponsors
@@ -88,25 +88,25 @@ ka:
     index:
       title: Categories 
     new:
-      title: New Category
+      title: კატეგორიის დამატება
   pages:
     edit:
       title: Edit Page
     index:
-      title: Pages 
+      title: გვერდები 
     new:
-      title: New Page
+      title: გვერდის დამატება
   sponsors:
     edit:
       title: Edit Sponsor
     index:
-      title: Sponsors
+      title: სპონსორები
     new:
-      title: New Sponsor
+      title: სპონსორების დამატება
     show:
-      contact_header: Sponsor Contact Information
+      contact_header: სპონსორების საკონტაქტო ინფორმაცია
     view:
-      no_sponsor_by_type: There are no records on file for %{type}
+      no_sponsor_by_type: ინფორმაცია ამ მონაცემის შესახებ არ მოიძებნა %{type}
       
 
 
