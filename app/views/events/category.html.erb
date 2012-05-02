@@ -2,7 +2,7 @@
 
 <div id="export_button_container">
 	<div id="left">
-		<% if is_html && @categories.count > 0 %>
+		<% if @categories.count > 0 %>
 			<%= form_tag category_events_path, :method => :get, :html => { :class => 'form-horizontal' } do -%>
 				<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title", params[:cat]), :include_blank => true%>
 				<%= submit_tag t('app.buttons.search') %>
