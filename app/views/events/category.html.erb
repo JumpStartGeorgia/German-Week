@@ -2,7 +2,7 @@
 
 <div id="export_button_container">
 	<div id="left">
-		<% if is_html && @categories.count > 0 %>
+		<% if @categories.count > 0 %>
 			<%= form_tag category_events_path, :method => :get, :html => { :class => 'form-horizontal' } do -%>
 				<%= select_tag :cat, options_from_collection_for_select(@categories, "title", "title", params[:cat]), :include_blank => true%>
 				<%= submit_tag t('app.buttons.search') %>
@@ -12,7 +12,7 @@
 	<div id="right">
 		<% if !@events.nil? && @events.length > 0 && is_html %>
 					<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "category", :typespec => params[:cat]), :class => "btn-export", :title => t('app.buttons.ics')) %>
-					<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_category')), category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_category')) %>
+					<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_category')), category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf'), :class => "btn-export-hide", :title => t('app.buttons.pdf_category')) %>
 					<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_category')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_category')) %>
 		<% end %>
 	</div>

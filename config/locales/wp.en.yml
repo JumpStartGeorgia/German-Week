@@ -1,3 +1,4 @@
+# encoding: utf-8
 en:
   will_paginate:
     next_label: Next &#8594;

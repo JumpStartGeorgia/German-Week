@@ -8,7 +8,7 @@ $(document).ready(function(){
 	if(gon.edit_event){
 		// load the date time pickers
 		$('#event_start').datetimepicker({
-				dateFormat: 'yy/mm/dd',
+				dateFormat: 'dd.mm.yy',
 				timeFormat: 'hh:mm',
 				separator: ' ',
 				onClose: function(dateText, inst) {
@@ -27,17 +27,20 @@ $(document).ready(function(){
 				},
 				onSelect: function (selectedDateTime){
 				    var start = $(this).datetimepicker('getDate');
+//						if ($('#event_end').val() != '') { $('#event_end').datetimepicker('setDate', ($('#event_end').val())); }
 				    $('#event_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
 				}
 		});
+
 
 		if (gon.start_date !== undefined &&
 				gon.start_date.length > 0)
 		{
 			$("#event_start").datetimepicker("setDate", new Date(gon.start_date));
 		}
+
 		$('#event_end').datetimepicker({
-				dateFormat: 'yy/mm/dd',
+				dateFormat: 'dd.mm.yy',
 				timeFormat: 'hh:mm',
 				separator: ' ',
 				onClose: function(dateText, inst) {
@@ -54,15 +57,16 @@ $(document).ready(function(){
 				},
 				onSelect: function (selectedDateTime){
 				    var end = $(this).datetimepicker('getDate');
+//						if ($('#event_start').val() != '') { $('#event_start').datetimepicker('setDate', ($('#event_start').val())); }
 				    $('#event_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
 				}
 		});
+
 		if (gon.end_date !== undefined &&
 				gon.end_date.length > 0)
 		{
 			$("#event_end").datetimepicker("setDate", new Date(gon.end_date));
 		}
-
 
 
 		// load the map

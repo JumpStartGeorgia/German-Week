@@ -13,7 +13,6 @@ gem 'icalendar', '1.1.6' # icalendar for events export
 
 gem 'will_paginate', '3.0.3' # pagination
 gem 'gon', '2.2.2' # push data into js
-gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 gem "pdfkit", "~> 0.5.2" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
@@ -37,9 +36,14 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
- group :production do
-   gem 'pg'
- end
+group :development do
+	# only need this in dev, on production we use the file in the bin folder
+	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs	
+end
+
+group :production do
+	gem 'pg'
+end
 
 # for debugging
 # to get debugging to work, follow directions at:

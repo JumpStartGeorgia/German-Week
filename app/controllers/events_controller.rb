@@ -19,7 +19,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "index.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.index.title')}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "day.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -71,7 +71,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "category.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.category.title')} #{params[:cat]}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -107,7 +107,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
+      	kit.stylesheets << get_stylesheet
         send_data(kit.to_pdf, :filename => "#{clean_string(@event.title)}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
@@ -137,9 +137,9 @@ class EventsController < ApplicationController
 		else
 			@event = nil
 		end
-		# have to remove UTC for it causes the js datepicker to show the wrong time
-		gon.start_date = @event.start.to_s.gsub(" UTC", "")
-		gon.end_date = @event.end.to_s.gsub(" UTC", "")
+		# have to format dates this way so js datetime picker read them properly
+		gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+		gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
 		gon.edit_event = true
@@ -156,6 +156,9 @@ class EventsController < ApplicationController
         format.json { render :json => @event, :status => :created, :location => @event }
       else
 				# reload the js so the map renders
+				# have to format dates this way so js datetime picker read them properly
+				gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+				gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
 				gon.edit_event = true
@@ -176,6 +179,9 @@ class EventsController < ApplicationController
         format.json { head :ok }
       else
 				# reload the js so the map renders
+				# have to format dates this way so js datetime picker read them properly
+				gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+				gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
 				gon.edit_event = true
@@ -205,18 +211,21 @@ class EventsController < ApplicationController
   	output_file_name = params[:typespec]
   	
     data = Event.find_for_ics(params[:type], params[:typespec])
-  	case params[:type]
-  		when "event" 
-  			output_file_name = clean_string(data.title)
-  			data = [data]
-			when "sponsor"
-				output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
-  	end
-  									
-		# fill calendar with events and event data
-		if data.nil? || data.length == 0
+    
+    if data.nil? || data.length == 0
 		  redirect_to "/"
-	  else
+    else 
+			case params[:type]
+				when "all"	
+					output_file_name = "events"
+				when "event" 
+					output_file_name = clean_string(data.title)
+					data = [data]
+				when "sponsor"
+					output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
+			end
+  									
+			# fill calendar with events and event data
   		data.each do |event_each|
   			# create calendar event
     		event = Icalendar::Event.new
@@ -275,6 +284,14 @@ class EventsController < ApplicationController
 	
 	def clean_string(s)
 	  s.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
+	end
+
+	def get_stylesheet
+		if Rails.env.production?
+			"#{Rails.root}/public/assets/application.css"
+		else
+			"#{Rails.root}/app/assets/stylesheets/application.new.css"
+		end
 	end
 end
 
