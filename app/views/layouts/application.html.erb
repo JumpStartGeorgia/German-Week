@@ -14,7 +14,7 @@
 
     <div id="container">
 
-      <div id="header" class="clear">
+      <div id="header" class="clear def-width">
 
         <div class="c1 def-font">
           <a href="<%= "/#{params[:locale]}" %>" class="clear" />
@@ -64,10 +64,10 @@
 
       </div><!--#header-->
 
-      <div id="slider" class="clear">
-      </div><!--#slider-->
+      <div id="s1" class="slider clear">
+      </div><!--#s1 .slider-->
 
-      <div id="content" class="clear">
+      <div id="content" class="clear def-width">
 
         <div class="container clear">
 
@@ -114,26 +114,14 @@
 
       <div id="partners" class="clear">
 
-        <div class="container">
-			    <% @organizations.each do |org| %>
-						<% if !org.logo_file_name.nil? %>
-		          <div class="partner">
-						  	<%= link_to(image_tag(org.logo.url, :alt => org.title), sponsor_path(org), :title => org.title) %>
-		          </div>
-						<% else %>
-		          <div class="partner">
-						  	<%= link_to org.title, sponsor_path(org) %>
-		          </div>
-						<% end %>
-			    <% end %>
-
+        <div class="container slider def-width">
         </div>
 
       </div><!--#partners-->
 
       <div id="footer">
 
-        <div class="r1 clear">
+        <div class="r1 clear def-width">
 
           <div class="c1 def-font upcase">
 
@@ -194,7 +182,7 @@
 
         <div class="r2 clear"></div><!--#footer .r2-->
 
-        <div class="r3 clear">
+        <div class="r3 clear def-width">
           <div class="c1"><%= t('.copyright') %></div>
           <div class="c2">
             <%= link_to t('.disclaimer'), view_pages_path(:name => "disclaimer") %>

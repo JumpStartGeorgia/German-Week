@@ -24,6 +24,12 @@
     cursor: pointer;
 }
 
+#partners .switcher_button
+{
+    background-color: rgba(0, 0, 0, .05);
+    width: 50px;
+}
+
 .switcher_button:hover
 {
     opacity: 1;

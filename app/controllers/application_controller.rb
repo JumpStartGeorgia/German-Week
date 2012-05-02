@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :set_locale
+  before_filter :set_organisations
   before_filter :init_gon
   before_filter :set_categories
   before_filter :set_sponsor_types
-  before_filter :set_organisations
   
   def set_locale 	
     I18n.locale = params[:locale] if params[:locale]
@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
     gon.lat = 41.699504919895
 		gon.lon = 44.797002757205	
     gon.locale = params[:locale]
-    gon.header_slider_images = self.slider_images 'public/assets/images/header/'
-    gon.footer_slider_images = self.slider_images 'public/assets/images/footer/'
+    gon.header_slider_data = self.slider_data 'public/assets/images/header/'
+    gon.footer_slider_data = self.footer_slider_data
   end
 
   def set_categories
@@ -44,7 +44,17 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
-  def slider_images (pathname)
+  def footer_slider_data
+    data = [];
+    @organizations.each do |org|
+      if !org.logo_file_name.nil?
+        data << {'image_url' => '/assets/images/sponsors/' + org.logo_file_name, 'url' => sponsor_path(org), 'title' => org.title}
+			end
+		end
+		data
+  end
+
+  def slider_data (pathname)
   # pathname = 'public/assets/images/header/';
     extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
     images = [];
@@ -77,7 +87,7 @@ class ApplicationController < ActionController::Base
 #    end
 
     randoms.each_with_index do |rand, i|
-      random_images[rand] = images[i];
+      random_images[rand] = {'image_url' => images[i], 'url' => false};
     end
 
     random_images
