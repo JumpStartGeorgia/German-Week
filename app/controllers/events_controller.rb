@@ -285,7 +285,7 @@ class EventsController < ApplicationController
 
 	def get_stylesheet
 		if Rails.env.production?
-			"#{Rails.root}/assets/application.css"
+			"#{Rails.root}/public/assets/application.css"
 		else
 			"#{Rails.root}/app/assets/stylesheets/application.new.css"
 		end
