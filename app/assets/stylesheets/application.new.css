@@ -430,9 +430,9 @@ img {
         background: #fff;
       }
 
-			#content-board h4{
-				border-bottom: solid thin #000;
-				text-align: center;
+			#content-board h2{
+				margin: 0.5em 0 1em 0;
+				line-height: 100%;
 			}
 
       #content-board a
@@ -734,6 +734,11 @@ label.error { display: block; margin: 0 !important; }
     width: 100%;
   }
 
+	div#map_container_show {
+		margin: 0 auto;
+		page-break-before: always;
+		visibility: visible !important;
+	}
 }
 
 

@@ -75,13 +75,6 @@
             <table><tr><td>
 
           <div class="menu def-font upcase">
-<% 
-=begin
- %>
-						<%= render "shared/menu" %>
-<% 
-=end
-%>
 						<% home_active = " selected" if current_page?(root_path) %>
 						<%= link_to t('.home'), root_path, :class => "item #{home_active}" %>
 						<% (1..6).each do |i| %>

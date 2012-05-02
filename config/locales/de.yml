@@ -11,7 +11,7 @@ de:
       print_category: Programm Drucken
       print_event: Veranstaltungsinformationen Drucken
       ics: Zum Kalender hinzufügen
-      map: View on Map
+      map: Kartenansicht
       reset: Zurücksetzen
       cancel: Abbrechen
       back: Zurück
@@ -39,7 +39,7 @@ de:
       fax: Fax
   layouts:
     application:
-      menu: Menu
+      menu: Menü
       contact: Kontakt
       admin: Administrator
       home: Home

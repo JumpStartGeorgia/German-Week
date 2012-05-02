@@ -32,11 +32,11 @@ SponsorTypeTranslation.destroy_all
 SponsorType.destroy_all
 
 sponsor_type = SponsorType.create(:id => 1)
-sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Organisations')
+sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Organisationen')
 sponsor_type.sponsor_type_translations.create(:locale => 'ka', :title => 'ორგანიზაციები')
 sponsor_type.sponsor_type_translations.create(:locale => 'en', :title => 'Organizations')
 sponsor_type = SponsorType.create(:id => 2)
-sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Sponsors')
+sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Sponsoren')
 sponsor_type.sponsor_type_translations.create(:locale => 'ka', :title => 'სპონსორები')
 sponsor_type.sponsor_type_translations.create(:locale => 'en', :title => 'Sponsors')
 sponsor_type = SponsorType.create(:id => 3)

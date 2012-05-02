@@ -16,27 +16,6 @@
 //= require_tree .
 
 $(document).ready(function(){
-	// load the megamenu script
-	$("#main-menu").dcVerticalMegaMenu({
-    rowItems: '3',
-    speed: 'fast',
-    effect: 'show',
-    direction: 'right',
-    arrow: 'false'
-	});
-
-	// on mouseover, get the events for the date in the link and load it
-	// into megamenu
-  $("a.event_menu_link").mouseover(submitWithAjax);
-
-	function submitWithAjax() {
-    $.get(this.href, $(this).serialize(), null, "script");
-	};
-
-	$.ajaxSetup({
-	  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-	});
-
   // search button click event
   $("#search_show_button").click(function(){
   	var form_container = $('#search_form_container');
@@ -52,12 +31,5 @@ $(document).ready(function(){
     });
   }
   
-
-  // hide the alert and notice containers if they are empty
-  $('p.notice, p.alert').each(function(){ ($.trim($(this).html()).length == 0) && $(this).hide(); });
 });
-
-
-
-
 

@@ -1,9 +1,0 @@
-<% if event_menu_item.nil? %>
-	<li><br /><%= t('app.msgs.loading') %><br /></li>
-<% else %>
-	<li>
-		<p class="event_menu_item_time"><%= pretty_time(event_menu_item.start) %></p>
-		<p class="event_menu_item_title"><%= link_to event_menu_item.title, event_path(event_menu_item) %></p>
-		<p class="event_menu_item_address"><%= event_menu_item.address %></p>
-	</li>
-<% end %>

@@ -94,7 +94,6 @@ class EventsController < ApplicationController
     gon.start_hour = @event.start.strftime("%H")
     gon.start_minute = @event.start.strftime("%M")
     gon.start_second = @event.start.strftime("%S")
-    gon.building_name = @event.building_name
     gon.address = @event.event_address
 		gon.show_map = true
 		gon.show_img_caption = true

@@ -65,36 +65,22 @@
 <% end %>
 
 <div id="sponsor_container">
-	<div id="organizations">
-		<h4><%= t('events.show.sponsor_header_org') %></h4>
-		<% @event.sponsors.each do |s| %>
-			<% if s.sponsor_type_id == 1 %>
-				<% if !s.logo_file_name.nil? %>
-					<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
-				<% else %>
-					<%= link_to(s.title, sponsor_path(s)) %>
-				<% end %>
+	<% @event.sponsors.each do |s| %>
+		<div style="float: left;padding: 0 3px;">
+			<% if !s.logo_file_name.nil? %>
+				<%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %>
+			<% else %>
+				<%= link_to(s.title, sponsor_path(s)) %>
 			<% end %>
-		<% end %>
-	</div>
-	<div id="sponsors">
-		<h4><%= t('events.show.sponsor_header_sponsor') %></h4>
-		<% @event.sponsors.each do |s| %>
-			<% if s.sponsor_type_id == 2 %>
-				<% if !s.logo_file_name.nil? %>
-					<%= link_to(image_tag(s.logo.url), sponsor_path(s)) %>
-				<% else %>
-					<%= link_to(s.title, sponsor_path(s)) %>
-				<% end %>
-			<% end %>
-		<% end %>
-	</div>
+			<p style="text-align: center; font-size: smaller; border-top: solid 1px #ccc;"><%= s.sponsor_type.title %></p>
+		</div>
+	<% end %>
+	<div class="clear"></div>
 </div>
 
-<% if is_html %>
-	<div id="map_container_show">
-		<div id="map"></div>
-	</div>
-<% end %>
+<div id="map_container_show">
+this is the map
+	<div id="map"></div>
+</div>
 
 
