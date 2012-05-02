@@ -137,9 +137,9 @@ class EventsController < ApplicationController
 		else
 			@event = nil
 		end
-		# have to remove UTC for it causes the js datepicker to show the wrong time
-		gon.start_date = @event.start.to_s.gsub(" UTC", "")
-		gon.end_date = @event.end.to_s.gsub(" UTC", "")
+		# have to format dates this way so js datetime picker read them properly
+		gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+		gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 		gon.marker_lat = @event.lat
 		gon.marker_lon = @event.lon
 		gon.edit_event = true
@@ -156,6 +156,9 @@ class EventsController < ApplicationController
         format.json { render :json => @event, :status => :created, :location => @event }
       else
 				# reload the js so the map renders
+				# have to format dates this way so js datetime picker read them properly
+				gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+				gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
 				gon.edit_event = true
@@ -176,6 +179,9 @@ class EventsController < ApplicationController
         format.json { head :ok }
       else
 				# reload the js so the map renders
+				# have to format dates this way so js datetime picker read them properly
+				gon.start_date = @event.start.strftime('%m/%d/%Y %H:%M') if !@event.start.nil?
+				gon.end_date = @event.end.strftime('%m/%d/%Y %H:%M') if !@event.end.nil?
 				gon.marker_lat = @event.lat
 				gon.marker_lon = @event.lon
 				gon.edit_event = true
