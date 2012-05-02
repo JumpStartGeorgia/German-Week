@@ -18,7 +18,7 @@ GermanWeek::Application.routes.draw do
   match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
 
   # create route to export events to ICS By ID
-  match '/:locale/events/exportICS/:type/:typespec', :to => 'events#exportICS', :as => :events_exportICS, :via => 'get'
+  match '/:locale/events/exportICS/:type(/:typespec)', :to => 'events#exportICS', :as => :events_exportICS, :via => 'get'
   
   # create route to load events for a particular date
   match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
@@ -56,7 +56,6 @@ GermanWeek::Application.routes.draw do
 
   # gets images from slider_image folder, because javascript cannot access a directory
   match '/:locale/slider_images', :to => 'events#slider_images', :as => :slider_image_files, :via => 'get'
-
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

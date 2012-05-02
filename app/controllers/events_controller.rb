@@ -205,18 +205,21 @@ class EventsController < ApplicationController
   	output_file_name = params[:typespec]
   	
     data = Event.find_for_ics(params[:type], params[:typespec])
-  	case params[:type]
-  		when "event" 
-  			output_file_name = clean_string(data.title)
-  			data = [data]
-			when "sponsor"
-				output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
-  	end
-  									
-		# fill calendar with events and event data
-		if data.nil? || data.length == 0
+    
+    if data.nil? || data.length == 0
 		  redirect_to "/"
-	  else
+    else 
+			case params[:type]
+				when "all"	
+					output_file_name = "events"
+				when "event" 
+					output_file_name = clean_string(data.title)
+					data = [data]
+				when "sponsor"
+					output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
+			end
+  									
+			# fill calendar with events and event data
   		data.each do |event_each|
   			# create calendar event
     		event = Icalendar::Event.new

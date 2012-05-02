@@ -107,23 +107,31 @@ class Event < ActiveRecord::Base
 
   # get events for map
   def self.find_for_map(type, dayorcategory, day)
-    if !type.nil? && !dayorcategory.nil?
-  		if type == "day"	
-#  			where("(DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))",
-  			where("cast(start as date) <= ?",
-  			  dayorcategory)
-  		elsif type == "category" 		
-  			joins(:event_translations, :categories => :category_translations)
-  			  .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
-  			    dayorcategory, I18n.locale, I18n.locale)				        
-  		elsif type == "daycategory" && !day.nil?
-  			joins(:event_translations, :categories => :category_translations)
-  			  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) <= ?", 
-  			    dayorcategory, I18n.locale, I18n.locale, day)
-#  			  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and (DATE_FORMAT(start,'%Y-%m-%d') <= DATE_FORMAT(?,'%Y-%m-%d'))", 
-      else
-        return nil
-  		end
+  	if type.nil?
+  		all
+		elsif type == "day"	
+			if !dayorcategory.nil?
+				where("cast(start as date) <= ?",
+				  dayorcategory)
+			else 
+				return nil
+			end
+		elsif type == "category" 		
+			if !dayorcategory.nil?
+				joins(:event_translations, :categories => :category_translations)
+				  .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+				    dayorcategory, I18n.locale, I18n.locale)				        
+			else 
+				return nil
+			end
+		elsif type == "daycategory" && !day.nil?
+			if !dayorcategory.nil?
+				joins(:event_translations, :categories => :category_translations)
+				  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) <= ?", 
+				    dayorcategory, I18n.locale, I18n.locale, day)
+			else 
+				return nil
+			end
     else
       return nil
 		end
@@ -131,20 +139,38 @@ class Event < ActiveRecord::Base
 
   # get events for ics download
   def self.find_for_ics(type, typespec)
-    if !type.nil? && !typespec.nil?
+    if !type.nil?
     	case type
-    		when "event" 
-    			find typespec
+    		when "all"
+    			all
+    		when "event"     	
+    			if !typespec.nil?		
+	    			find typespec
+	    		else
+	    			return nil 
+	    		end
     		when "day" 
-    			where("cast(start as  date) <= ?", typespec)  	  			
+    			if !typespec.nil?
+	    			where("cast(start as  date) <= ?", typespec)  	  			
+	    		else 
+	    			return nil
+	    		end
     		when "category" 
-    			joins(:event_translations, :categories => :category_translations)
-  					.where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?", 
-  					  typespec, I18n.locale, I18n.locale)				
+    			if !typespec.nil?
+	    			joins(:event_translations, :categories => :category_translations)
+  						.where("category_translations.title = ? and event_translations.locale = ? and ca	tegory_translations.locale = ?", 
+  						  typespec, I18n.locale, I18n.locale)
+  				else 
+  					return nil
+  				end
   			when "sponsor"
-  				joins(:event_translations, :sponsors => :sponsor_translations)
-  					.where("sponsor_translations.sponsor_id = ? and event_translations.locale = ? and sponsor_translations.locale = ?", 
-  					  typespec, I18n.locale, I18n.locale)
+  				if !typespec.nil?
+						joins(:event_translations, :sponsors => :sponsor_translations)
+							.where("sponsor_translations.sponsor_id = ? and event_translations.locale = ? and sponsor_translations.locale = ?", 
+							  typespec, I18n.locale, I18n.locale)
+					else 
+						return nil 
+					end
     		else 
     		  return nil
     	end

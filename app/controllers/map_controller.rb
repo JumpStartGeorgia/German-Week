@@ -17,14 +17,17 @@ class MapController < ApplicationController
 		gon.event_descriptions = []
 		gon.event_paths = []
 		gon.events_day_exists = false
+		gon.all = false
 		gon.only_day = false
 		gon.only_category = false
 		gon.day_and_category = false
-		if !params[:dayorcategory].nil?	
+		
 			gon.events_day_exists = true		
 			data = []
 			data = Event.find_for_map(params[:type], params[:dayorcategory], params[:day])
-			if params[:type] == "day"	
+			if params[:type].nil?
+				gon.all = true
+			elsif params[:type] == "day"	
 				gon.only_day = true		
 			elsif params[:type] == "category" 		
 				gon.only_category = true
@@ -70,7 +73,6 @@ class MapController < ApplicationController
 			end  
 			# end process data from	sql to gon js
 		
-		end	
 		
 		respond_to do |format|
 			format.html
