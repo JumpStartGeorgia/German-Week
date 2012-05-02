@@ -19,11 +19,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "index.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-				if Rails.env.production?
-        	kit.stylesheets << "#{Rails.root}/assets/application.css"
-				else
-        	kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
-				end
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.index.title')}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -52,11 +48,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "day.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-				if Rails.env.production?
-        	kit.stylesheets << "#{Rails.root}/assets/application.css"
-				else
-        	kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
-				end
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -79,11 +71,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "category.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-				if Rails.env.production?
-        	kit.stylesheets << "#{Rails.root}/assets/application.css"
-				else
-        	kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
-				end
+      	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.category.title')} #{params[:cat]}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
@@ -119,11 +107,7 @@ class EventsController < ApplicationController
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html, :print_media_type => true)
-				if Rails.env.production?
-        	kit.stylesheets << "#{Rails.root}/assets/application.css"
-				else
-        	kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/application.new.css"
-				end
+      	kit.stylesheets << get_stylesheet
         send_data(kit.to_pdf, :filename => "#{clean_string(@event.title)}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
@@ -297,6 +281,14 @@ class EventsController < ApplicationController
 	
 	def clean_string(s)
 	  s.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
+	end
+
+	def get_stylesheet
+		if Rails.env.production?
+			"#{Rails.root}/assets/application.css"
+		else
+			"#{Rails.root}/app/assets/stylesheets/application.new.css"
+		end
 	end
 end
 
