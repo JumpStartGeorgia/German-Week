@@ -240,19 +240,7 @@ class EventsController < ApplicationController
 		
   		# final calendar data output
   		data = calendar.to_ical			
-  		# delete all tmp iCalendar files in assets dir
-  		Dir.entries(File.dirname(__FILE__)+"/../../public/assets").each do |entry|
-    		if entry[(entry.length-4)..(entry.length)] == ".ics"
-  				File.delete(File.dirname(__FILE__)+"/../../public/assets/#{entry}")  			
-    		end
-    	end
-    	# create new ics export file
-  		ics_file = File.new(File.dirname(__FILE__)+"/../../public/assets/#{output_file_name}.ics","w")
-  			ics_file.puts(data)
-  		ics_file.close
-  		# the respond 
-  		# render :file => url, :content_type => "text/calendar; charset=UTF-8" 	
-  		redirect_to "/assets/#{output_file_name}.ics"
+      send_data(data, :filename => "#{output_file_name}.ics", :type => 'text/calendar')
     end
   end
   

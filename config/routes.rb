@@ -12,11 +12,6 @@ GermanWeek::Application.routes.draw do
   # event day with day param
   match '/:locale/events/day/:date(/:menu_item)', :to => 'events#day', :as => :day_events, :via => 'get'
 	
-  # create route to export events to ICS By ID
-#  match '/:locale/events/exportICS/event/:id', :to => 'events#exportICSById', :as => :events_exportICSById, :via => 'get'
-  # create route to export events to ICS By Date
-#  match '/:locale/events/exportICS/day/:date', :to => 'events#exportICSByDate', :as => :events_exportICSByDate, :via => 'get'
-  
 	# map page routes
 	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
 
