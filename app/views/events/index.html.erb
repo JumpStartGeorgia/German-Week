@@ -3,7 +3,7 @@
 <% if !@events.nil? && @events.length > 0 %>
 	<div id="export_button_container">
 		<div id="right">
-			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_all')), events_path(:format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_all')) %>
+			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_all')), events_path(:format => 'pdf'), :class => "btn-export-hide", :title => t('app.buttons.pdf_all')) %>
 			<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_all')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_all')) %>
 		</div>
 		<div class="clear"></div>

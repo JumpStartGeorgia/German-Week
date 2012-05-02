@@ -36,10 +36,10 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-#group :development do
+group :development do
 	# only need this in dev, on production we use the file in the bin folder
 	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs	
-#end
+end
 
 group :production do
 	gem 'pg'
