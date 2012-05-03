@@ -1,7 +1,9 @@
 <%= form_tag search_path, :method => 'get' do %>
-  <p style="margin: 0px;">
+  <div class="container">
     <%= text_field_tag :search, params[:search] %>
-    <%= select_tag :category, options_for_select([['all','all']] + @categories.map {|c| [c.title, c.title]}, params[:category]) %>
+    <% if !(defined? template) %>
+      <%= select_tag :category, options_for_select([['all','all']] + @categories.map {|c| [c.title, c.title]}, params[:category]) %>
+    <% end %>
     <%= submit_tag t('app.buttons.search'), :name => nil %>
-  </p>
+  </div>
 <% end %>

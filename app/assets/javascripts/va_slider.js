@@ -1,3 +1,29 @@
+function getScrollBarWidth () {  
+    var inner = document.createElement('p');  
+    inner.style.width = "100%";  
+    inner.style.height = "200px";  
+  
+    var outer = document.createElement('div');  
+    outer.style.position = "absolute";  
+    outer.style.top = "0px";  
+    outer.style.left = "0px";  
+    outer.style.visibility = "hidden";  
+    outer.style.width = "200px";  
+    outer.style.height = "150px";  
+    outer.style.overflow = "hidden";  
+    outer.appendChild (inner);  
+  
+    document.body.appendChild (outer);  
+    var w1 = inner.offsetWidth;  
+    outer.style.overflow = 'scroll';  
+    var w2 = inner.offsetWidth;  
+    if (w1 == w2) w2 = outer.clientWidth;  
+  
+    document.body.removeChild (outer);  
+  
+    return (w1 - w2);  
+};
+
 function microtime (get_as_float)
 {
     get_as_float = get_as_float || true;
@@ -42,7 +68,12 @@ function Timer (callback, delay)
 function window_dimensions ()
 {
   var winW, winH;
-  if (document.body && document.body.offsetWidth)
+  if (screen && screen.width)
+  {
+    winW = ($(window).height() < $(document).height()) ? (screen.width - getScrollBarWidth()) : screen.width;
+    winH = screen.height;
+  }
+  else if (document.body && document.body.offsetWidth)
   {
     winW = document.body.offsetWidth;
     winH = document.body.offsetHeight;
@@ -139,7 +170,8 @@ function Va_slider (options)
       parent = [],
       group = null,
       innercont = null,
-      gwidth = 0;
+      gwidth = 0,
+      math = Math;
 
   this.proc_images_rec = function (data, i)
   {
@@ -225,14 +257,13 @@ function Va_slider (options)
         $(group).css('padding', p + 'px 0px');
       }
 
+      $(instance.slider.container).find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
+
       if (i == (data.length - 1))
       {
-        if (instance.slider.show == 'many')
-        {
-          
-        }
         $(instance.slider.container.find('.' + slide_name)).fadeIn('fast');
         $(instance.slider.container.find('.loader')).fadeOut('fast');
+
 
         if (instance.slider.show == 'one')
         {
@@ -248,8 +279,7 @@ function Va_slider (options)
 
         instance.slider.timer = new Timer(instance.change_slide_automatically, instance.slider.delay);
       }
-
-      if ((i + 1) < data.length)
+      else if ((i + 1) < data.length)
       {
         instance.proc_images_rec(data, i + 1);
       }
@@ -290,7 +320,7 @@ function Va_slider (options)
   html = '<div class="overlay"></div>' + circles_html +
          '<div class="switcher_button" direction="left"></div>' +
          '<div class="switcher_button" direction="right"></div>' +
-         '<div class="container"><div class="loader"></div>';
+         '<div class="container"><div class="loader"><div></div></div>';
 
   instance.slider.element.prepend(html);
   instance.slider.container = instance.slider.element[0].find('.container');

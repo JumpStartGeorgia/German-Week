@@ -18,9 +18,20 @@
 $(document).ready(function(){
   // search button click event
   $("#search_show_button").click(function(){
-  	var form_container = $('#search_form_container');
-				form_container.slideToggle();
-				form_container.find('input[type="text"]').focus();
+  	var form_container = $('#search_form_container .container');
+				//form_container.slideToggle();
+				form_container.show();
+        form_container.animate({
+          marginLeft: parseInt(form_container.css('marginLeft'),10) == 0 ? form_container.outerWidth() : 0
+        }, 'fast');
+        if (parseInt(form_container.css('marginLeft'),10) == 0)
+        {
+				  form_container.find('input[type="text"]').blur();
+				}
+				else
+				{
+				  form_container.find('input[type="text"]').focus();
+				}
   });
 
   // show image caption
