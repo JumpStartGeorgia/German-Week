@@ -320,7 +320,7 @@ $(function ()
   {
     width: 900,
     height: 134,
-    delay : 5000,
+    delay : 8000,
     timeout : 1000,
     name: 'footer',
     show: 'many',

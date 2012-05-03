@@ -111,7 +111,7 @@ class Event < ActiveRecord::Base
   		all
 		elsif type == "day"	
 			if !dayorcategory.nil?
-				where("cast(start as date) <= ?",
+				where("cast(start as date) = ?",
 				  dayorcategory)
 			else 
 				return nil
@@ -124,14 +124,10 @@ class Event < ActiveRecord::Base
 			else 
 				return nil
 			end
-		elsif type == "daycategory" && !day.nil?
-			if !dayorcategory.nil?
+		elsif type == "daycategory" && !day.nil? && !dayorcategory.nil?
 				joins(:event_translations, :categories => :category_translations)
-				  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) <= ?", 
+				  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) = ?", 
 				    dayorcategory, I18n.locale, I18n.locale, day)
-			else 
-				return nil
-			end
     else
       return nil
 		end
