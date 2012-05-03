@@ -446,6 +446,7 @@ img {
 				margin-left: 10px;
         float: none;
         background: #fff;
+        font-size: 14px !important;
       }
 
 			#content-board h2{
