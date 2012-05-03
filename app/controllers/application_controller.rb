@@ -9,8 +9,23 @@ class ApplicationController < ActionController::Base
   before_filter :init_gon
   
   def set_locale 	
-    I18n.locale = params[:locale] if params[:locale]
     @locales = Locale.order("language asc")
+		# see if locale is valid
+		valid = false
+		if !params[:locale].nil?
+			@locales.each do |l|
+				if l.language.downcase == params[:locale].downcase
+					valid = true
+					break
+				end
+			end
+			if valid
+			  I18n.locale = params[:locale] if params[:locale]
+			else
+			  I18n.locale = I18n.default_locale
+			  params[:locale] = I18n.default_locale
+			end
+		end
   end
 
   # pre-load gon so js does not through errors on pages that do not use gon

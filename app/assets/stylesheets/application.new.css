@@ -766,7 +766,7 @@ label.error { display: block; margin: 0 !important; }
 
 /* styles for printing */
 @media print {
-	#header .c3, #slider, .menu, #partners, #footer, div#export_button_container div#right, #time-container #button-block {
+	#header .c3, #s1, .menu, #partners, #footer, div#export_button_container div#right, #time-container #button-block {
 		display: none;
 	}
 

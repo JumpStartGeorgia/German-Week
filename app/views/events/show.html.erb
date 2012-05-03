@@ -40,7 +40,7 @@
 				<%= link_to(image_tag("images/map-marker.png", :alt => t('app.buttons.map')), "#map", :id => "btn-map", :class => "btn-export", :title => t('app.buttons.map')) %>
 			<% end %>
 			<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "event", :typespec => @event.id), :class => "btn-export", :title => t('app.buttons.ics')) %>
-			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_event')), event_path(@event, :format => 'pdf'), :class => "btn-export-hide", :title => t('app.buttons.pdf_event')) %>
+			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_event')), event_path(@event, :format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_event')) %>
 			<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_event')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_event')) %>
 		</div>
 
@@ -67,9 +67,9 @@
 <div id="sponsor_container">
 	<% @event.sponsors.each do |s| %>
 		<% if !s.logo_file_name.nil? %>
-			<%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %>
+			<div><%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %></div>
 		<% else %>
-			<%= link_to(s.title, sponsor_path(s)) %>
+			<div><%= link_to(s.title, sponsor_path(s)) %></div>
 		<% end %>
 	<% end %>
 	<div class="clear"></div>
