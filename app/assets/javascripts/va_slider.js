@@ -135,6 +135,116 @@ function Va_slider (options)
     instance.slider.timer.restart();
   }
 
+  var images = [],
+      parent = [],
+      group = null,
+      innercont = null,
+      gwidth = 0;
+
+  this.proc_images_rec = function (data, i)
+  {
+    if (typeof(data[i].image_url) != 'string')
+    {
+      if ((i + 1) < data.length)
+      {
+        instance.proc_images_rec(data, i + 1);
+      }
+      else
+      {
+        return;
+      }
+    }
+
+    images[i] = new Image();
+    images[i].src = data[i].image_url;
+
+    if (typeof (data[i].url) == 'string' && data[i].url.length > 1)
+    {
+      parent[i] = document.createElement('a');
+      parent[i].setAttribute('href', data[i].url);
+    }
+    else
+    {
+      parent[i] = document.createElement('div');
+    }
+    if (typeof (data[i].title) == 'string' && data[i].title.length > 0)
+    {
+      parent[i].setAttribute('title', data[i].title);
+      images[i].setAttribute('alt', data[i].title);
+    }
+    parent[i].setAttribute('class', 'slide');
+
+    if (instance.slider.show == 'one')
+    {
+      parent[i] = instance.slider.container.appendChild(parent[i]);
+      parent[i].appendChild(images[i]);
+    }
+
+    if (instance.slider.show == 'many' && i == 0)
+    {
+      group = document.createElement('div');
+      group.setAttribute('class', 'group');
+      group = instance.slider.container.appendChild(group);
+      gwidth = 0;
+      innercont = document.createElement('div');
+      innercont.setAttribute('class', 'inner-cont');
+      innercont = group.appendChild(innercont);
+    }
+
+    images[i].onload = function ()
+    {
+      if (instance.slider.show == 'one')
+      {
+        new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height);
+        this.width  = this.style.width  = new_ds.width;
+        this.height = this.style.height = new_ds.height;
+
+        slide_name = 'slide';
+      }
+      else
+      {
+        if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
+        {
+          gwidth += this.width + instance.slider.margin;
+        }
+        else
+        {
+          gwidth = this.width + instance.slider.margin;
+          group = document.createElement('div');
+          group.setAttribute('class', 'group');
+          group = instance.slider.container.appendChild(group);
+          innercont = document.createElement('div');
+          innercont.setAttribute('class', 'inner-cont');
+          innercont = group.appendChild(innercont);
+        }
+        parent[i] = innercont.appendChild(parent[i]);
+        parent[i].appendChild(images[i]);
+
+        slide_name = 'group';
+      }
+
+      if (i == (data.length - 1))
+      {
+        $(instance.slider.container.find('.' + slide_name)).fadeIn('fast');
+        $(instance.slider.container.find('.loader')).fadeOut('fast');
+        
+        if (show_circles)
+        {
+          instance.slider.element[0].find('.switcher_circles').style.display = "block";
+        }
+
+        instance.slider.slides = instance.slider.container.getElementsByClassName(slide_name);
+
+        instance.slider.timer = new Timer(instance.change_slide_automatically, instance.slider.delay);
+      }
+
+      if ((i + 1) < data.length)
+      {
+        instance.proc_images_rec(data, i + 1);
+      }
+    }
+  }
+
   instance.slider = {
     width:        options.width        || 900,
     height:       options.height       || 300,
@@ -169,99 +279,12 @@ function Va_slider (options)
   html = '<div class="overlay"></div>' + circles_html +
          '<div class="switcher_button" direction="left"></div>' +
          '<div class="switcher_button" direction="right"></div>' +
-         '<div class="container"><div class="loader"><div>LOADING</div></div></div>';
+         '<div class="container"><div class="loader"></div>';
 
   instance.slider.element.prepend(html);
   instance.slider.container = instance.slider.element[0].find('.container');
 
-  var images = [],
-      parent = [],
-      group = null,
-      j = 0;
-
-  for (i in data)
-  {
-    if (typeof(data[i].image_url) != 'string')
-    {
-      continue;
-    }
-    images[i] = new Image();
-    images[i].src = data[i].image_url;
-
-    if (typeof (data[i].url) == 'string' && data[i].url.length > 1)
-    {
-      parent[i] = document.createElement('a');
-      parent[i].setAttribute('href', data[i].url);
-    }
-    else
-    {
-      parent[i] = document.createElement('div');
-    }
-    if (typeof (data[i].title) == 'string' && data[i].title.length > 0)
-    {
-      parent[i].setAttribute('title', data[i].title);
-      images[i].setAttribute('alt', data[i].title);
-    }
-    parent[i].setAttribute('class', 'slide');
-
-    parent[i] = instance.slider.container.appendChild(parent[i]);
-    parent[i].appendChild(images[i]);
-
-    if (instance.slider.show == 'many' && i == 0)
-    {
-      group = document.createElement('div');
-      group.setAttribute('class', 'group');
-      group = instance.slider.container.appendChild(group);
-      var gwidth = 0;
-    }
-
-    images[i].onload = function ()
-    {
-      if (instance.slider.show == 'one')
-      {
-        new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height);
-        this.width  = this.style.width  = new_ds.width;
-        this.height = this.style.height = new_ds.height;
-
-        slide_name = 'slide';
-      }
-      else
-      {
-        if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
-        {
-          gwidth += this.width + instance.slider.margin;
-        }
-        else
-        {
-          gwidth = this.width + instance.slider.margin;
-          group = document.createElement('div');
-          group.setAttribute('class', 'group');
-          group = instance.slider.container.appendChild(group);
-        }
-        group.appendChild(parent[j]);
-        parent[j].appendChild(images[j]);
-        $(group).css('left', (instance.slider.width - gwidth) / 2);
-
-        slide_name = 'group';
-      }
-
-      if (j == (data.length - 1))
-      {
-        instance.slider.container.find('.' + slide_name).style.display = "block";
-        instance.slider.container.find('.loader').remove();
-        
-        if (show_circles)
-        {
-          instance.slider.element[0].find('.switcher_circles').style.display = "block";
-        }
-
-        instance.slider.slides = instance.slider.container.getElementsByClassName(slide_name);
-
-        instance.slider.timer = new Timer(instance.change_slide_automatically, instance.slider.delay);
-      }
-      j ++;
-    }
-  }
+  instance.proc_images_rec(data, 0);
 
   if (show_circles)
   {
