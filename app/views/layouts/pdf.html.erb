@@ -16,7 +16,7 @@
       <div id="header" class="clear">
 
         <div class="c1 def-font">
-          <img src="http://js-germanweek-images.s3.amazonaws.com/pdf/logo-german-week.png" />
+          <img src="<%= "#{@s3_url}/pdf/logo-german-week.png"%>" />
           <div class="logo-text def-font">
 						<%= "#{t('layouts.application.logo_text')}" %>
 						<br />
@@ -27,7 +27,7 @@
         <div class="c2">
 
           <div class="logo">
-            <img src="http://js-germanweek-images.s3.amazonaws.com/pdf/other-logo.png" />
+            <img src="<%= "#{@s3_url}/pdf/other-logo.png"%>" />
           </div>
 
         </div><!--#header > .c2-->

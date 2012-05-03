@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
   before_filter :set_organisations
-  before_filter :init_gon
   before_filter :set_categories
   before_filter :set_sponsor_types
+	before_filter :set_s3_url
+  before_filter :init_gon
   
   def set_locale 	
     I18n.locale = params[:locale] if params[:locale]
@@ -26,6 +27,17 @@ class ApplicationController < ActionController::Base
     gon.header_slider_data = self.slider_data 'public/assets/images/header/'
     gon.footer_slider_data = self.footer_slider_data
   end
+
+	def set_s3_url
+		bucket = ""
+		if Rails.env.production? 
+			bucket = S3_CREDENTIALS[:bucket]
+		else
+			y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
+			bucket = y["development"]["bucket"]
+		end
+		@s3_url = "http://#{bucket}.s3.amazonaws.com"
+	end
 
   def set_categories
     @categories = Category.get_all
@@ -48,7 +60,7 @@ class ApplicationController < ActionController::Base
     data = [];
     @organizations.each do |org|
       if !org.logo_file_name.nil?
-        data << {'image_url' => '/assets/images/sponsors/' + org.logo_file_name, 'url' => sponsor_path(org), 'title' => org.title}
+        data << {'image_url' => org.logo.url, 'url' => sponsor_path(org), 'title' => org.title}
 			end
 		end
 		data
