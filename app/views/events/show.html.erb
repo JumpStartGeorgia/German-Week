@@ -66,14 +66,11 @@
 
 <div id="sponsor_container">
 	<% @event.sponsors.each do |s| %>
-		<div style="float: left;padding: 0 3px;">
-			<% if !s.logo_file_name.nil? %>
-				<%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %>
-			<% else %>
-				<%= link_to(s.title, sponsor_path(s)) %>
-			<% end %>
-			<p style="text-align: center; font-size: smaller; border-top: solid 1px #ccc;"><%= s.sponsor_type.title %></p>
-		</div>
+		<% if !s.logo_file_name.nil? %>
+			<%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %>
+		<% else %>
+			<%= link_to(s.title, sponsor_path(s)) %>
+		<% end %>
 	<% end %>
 	<div class="clear"></div>
 </div>

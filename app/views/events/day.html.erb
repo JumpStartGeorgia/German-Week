@@ -1,5 +1,5 @@
 <% if !@date.nil? %>
-	<% title t('events.day.title', :date => l(@date, :format => :short)) %>
+	<% title t('events.day.title', :date => l(@date, :format => :with_day)) %>
 <% end %> 
 
 <% if @events.nil? || @events.length == 0 %>

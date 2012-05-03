@@ -69,7 +69,7 @@ de:
     category:
       title: Veranstaltungskategorien
     day:
-      title: Veranstaltungen am %{date}
+      title: "Veranstaltungen, am %{date}"
     edit:
       title: Veranstaltung hinzufügen
     index:
@@ -78,7 +78,7 @@ de:
       title: Neue Veranstaltung
     show:
       place_event: Veranstaltungsort
-      contact: Kontakt zum Veranstalter
+      contact: Kontakt
       sponsor_header_org: Veranstalter
       sponsor_header_sponsor: Sponsoren
       category_header: Veranstaltungskategorie
