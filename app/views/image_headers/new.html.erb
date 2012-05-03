@@ -1,0 +1,10 @@
+<% title t('.title') %>
+
+<%= render 'form' %>
+
+<% if user_signed_in? %>
+<div class="form-actions">
+<%= link_to t('app.buttons.list'), image_headers_path, :class => "btn btn-mini"  %>
+</div>
+<% end %>
+

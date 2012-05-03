@@ -1,0 +1,2 @@
+module ImageHeadersHelper
+end
