@@ -9,7 +9,7 @@
 	<div id="export_button_container">
 		<div id="right">
 			<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "day", :typespec => params[:date]), :class => "btn-export", :title => t('app.buttons.ics')) %>
-			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_category')), day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn-export-hide", :title => t('app.buttons.pdf_category')) %>
+			<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_category')), day_events_path(:date => params[:date], :menu_item => params[:menu_item], :format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_category')) %>
 			<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_category')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_category')) %>
 		</div>
 		<div class="clear"></div>
