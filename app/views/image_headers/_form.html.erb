@@ -1,0 +1,24 @@
+<%= semantic_form_for @image_header do |f| %>
+  <fieldset>
+	<%= f.semantic_errors %>
+
+  <%= f.inputs do %>
+		<div class="control-group">
+		  <%= f.label :image, :class => 'control-label' %>
+		  <div class="controls">
+				<% if !@image_header.image_file_name.nil? %>
+				Current image on file: <%= image_tag @image_header.image.url, :width => "60%" %> 
+				<br />
+				<% end %>
+		    <%= f.input :image, :as => :file, :label => false %>
+		  </div>
+		</div>
+  <% end %>
+
+	<div class="form-actions">
+	  <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-danger', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), sponsors_path, :class => 'btn' %>
+	</div>
+  </fieldset>
+<% end %>

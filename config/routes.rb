@@ -40,6 +40,10 @@ GermanWeek::Application.routes.draw do
   end
   
   scope "/:locale" do
+	  resources :image_headers
+  end
+
+  scope "/:locale" do
     resources :locales
   end
   

@@ -23,6 +23,7 @@ de:
       new_event: Neue Veranstaltung
       new_page: Neue Seite
       new_sponsor: Neuer Sponsor
+      new_image_header: New Image Header
       add_address_map: Adresse in die Karte eintragen
     msgs:
       no_events_for_date: Keine Einträge für dieses Datum.
@@ -48,6 +49,7 @@ de:
       events: Veranstaltungen
       sponsors: Sponsoren
       pages: Seiten
+      image_headers: Image Headers
       sign_out: Abmelden
       sign_in: Anmelden
       sign_up: Registrieren
@@ -107,4 +109,13 @@ de:
       contact_header: Kontaktinformationen über Sponsoren
     view:
       no_sponsor_by_type: Für diese Datei liegen keine Infomationen vor %{type} #
+  image_headers:
+    edit:
+      title: Edit Image Header
+    index:
+      title: Image Headers
+    new:
+      title: New Image Header
+    show:
+      title: Image Header
 

@@ -23,6 +23,7 @@ en:
       new_event: New Event
       new_page: New Page
       new_sponsor: New Sponsor
+      new_image_header: New Image Header
       add_address_map: Add Address to Map
     msgs:
       no_events_for_date: There are no events for this date.
@@ -48,6 +49,7 @@ en:
       events: Events
       sponsors: Sponsors
       pages: Pages
+      image_headers: Image Headers
       sign_out: Sign Out
       sign_in: Sign In
       sign_up: Sign Up
@@ -107,6 +109,15 @@ en:
       contact_header: Sponsor Contact Information
     view:
       no_sponsor_by_type: There are no records on file for %{type}
+  image_headers:
+    edit:
+      title: Edit Image Header
+    index:
+      title: Image Headers
+    new:
+      title: New Image Header
+    show:
+      title: Image Header
 
 
 

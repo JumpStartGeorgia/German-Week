@@ -1,0 +1,15 @@
+<% title t('.title') %>
+
+	<% if !@image_header.image_file_name.nil? %>
+  	<%= image_tag @image_header.image.url, :width => "60%" %>
+	<% end %>
+
+<div class="form-actions">
+	<% if user_signed_in? %>
+  	<%= link_to t('app.buttons.list'), image_headers_path, :class => 'btn btn-mini' %>
+		<%= link_to t('app.buttons.new_image_header'), new_image_header_path, :class => 'btn btn-mini' %>
+    <%= link_to t('app.buttons.edit'), edit_image_header_path(@image_header), :class => 'btn btn-mini' %>
+    <%= link_to t('app.buttons.delete'), image_header_path(@image_header), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+	<% end %>
+</div>
+
