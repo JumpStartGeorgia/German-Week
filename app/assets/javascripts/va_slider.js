@@ -221,13 +221,24 @@ function Va_slider (options)
         parent[i].appendChild(images[i]);
 
         slide_name = 'group';
+        var p = (instance.slider.height - this.height) / 2;
+        $(group).css('padding', p + 'px 0px');
       }
 
       if (i == (data.length - 1))
       {
+        if (instance.slider.show == 'many')
+        {
+          
+        }
         $(instance.slider.container.find('.' + slide_name)).fadeIn('fast');
         $(instance.slider.container.find('.loader')).fadeOut('fast');
-        
+
+        if (instance.slider.show == 'one')
+        {
+          instance.slider.element.find('.overlay').show();
+        }
+
         if (show_circles)
         {
           instance.slider.element[0].find('.switcher_circles').style.display = "block";
@@ -342,7 +353,7 @@ $(function ()
   var ops =
   {
     width: 900,
-    height: 134,
+    height: 90,
     delay : 8000,
     timeout : 1000,
     name: 'footer',
