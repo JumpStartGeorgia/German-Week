@@ -113,17 +113,14 @@ div#map_container_show > div {
 div#sponsor_container{
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 20px 0;
 }
-div#sponsor_container div#organizations{
-	width: 48%;
-	margin: 10px 0;
+div#sponsor_container > div{
 	float: left;
-	text-align: center;
+	margin: 0 10px;
 }
-div#sponsor_container  div#sponsors{
-	width: 48%;
-	margin: 10px 0;
-	float: right;
-	text-align: center;
+div#sponsor_container a {
+	padding: 5px;
+	display: block;
 }
+
