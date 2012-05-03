@@ -28,13 +28,13 @@ ka:
       no_events_for_date: ამ თარიღისათვის ჩანაწერი არ მოიძებნა.
       no_events_for_cat: ამ კატეგორიისათვის ჩანაწერი არ მოიძებნა.
       delete_confirm: დარწმუნებული ხართ?
-      map_no_events: "Sorry, there are no events for the selected day and category.  Please select a different day or category."
+      map_no_events: სამწუხაროდ არჩეული დღისა და კატეგორიისათვის ჩანაწერი არ მოიძებნა. გთხოვთ აირჩიოთ სხვა დღე ან კატეგორია.
       loading: იტვირთება...
     common:
       name: სახელი
       title: სათაური
       description: აღწერა
-      categories: Categories
+      categories: კატეგორიები
       location: ადგილი
       fax: ფაქსი
   layouts:
@@ -44,7 +44,7 @@ ka:
       admin: ადმინისტრატორი
       home: მთავარი
       map: რუკა
-      categories: Categories
+      categories: კატეგორიები
       events: ღონისძიებები
       sponsors: სპონსორები
       pages: გვერდები
@@ -54,14 +54,14 @@ ka:
       copyright: Copyright © 2012  All Rights Reserved.
       jumpstart_link: Created by JumpStart Georgia
       disclaimer: Disclaimer
-      logo_text: German Week
+      logo_text: გერმანული კვირეული
   german_week:
     index:
       title: გერმანული კვირეული
     search:
       title: ღონისძიებათა ძიება
       location: ადგილი
-      categories: Categories
+      categories: კატეგორიები
   map:
     index:
       category: კატეგორიები
@@ -75,30 +75,30 @@ ka:
     index:
       title: ღონისძიებები 
     new:
-      title: New Event
+      title: ახალი ღონისძიება
     show:
       place_event: ღონისძიების ადგილი
-      contact: Event Contact Information
-      sponsor_header_org: Event Organizers
-      sponsor_header_sponsor: Event Sponsors
-      category_header: Event Categories 
+      contact: ღონისძიების საკონტაქტო ინფორმაცია
+      sponsor_header_org: ღონისძიების ორგანიზატორებიEvent Organizers
+      sponsor_header_sponsor: ღონისძიების სპონსორები
+      category_header: ღონისძიების კატეგორიები
   categories:
     edit:
-      title: Edit Category
+      title: კატეგორიის დამუშავება
     index:
-      title: Categories 
+      title: კატეგორიები 
     new:
       title: კატეგორიის დამატება
   pages:
     edit:
-      title: Edit Page
+      title: გვერდის დამუშავება
     index:
       title: გვერდები 
     new:
       title: გვერდის დამატება
   sponsors:
     edit:
-      title: Edit Sponsor
+      title: სპონსორის დამუშავება
     index:
       title: სპონსორები
     new:
