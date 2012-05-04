@@ -18,7 +18,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "index.html.erb", :formats => [:html], :handler => [:erb])
-        kit = PDFKit.new(html, :print_media_type => true)
+        kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.index.title')}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
 	    format.json { render :json => @events }
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "day.html.erb", :formats => [:html], :handler => [:erb])
-        kit = PDFKit.new(html, :print_media_type => true)
+        kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
@@ -70,7 +70,7 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "category.html.erb", :formats => [:html], :handler => [:erb])
-        kit = PDFKit.new(html, :print_media_type => true)
+        kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
         filename = clean_string("#{I18n.t('events.category.title')} #{params[:cat]}")
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
@@ -106,7 +106,7 @@ class EventsController < ApplicationController
       format.json { render :json => @event }
       format.pdf {
         html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
-        kit = PDFKit.new(html, :print_media_type => true)
+        kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
         send_data(kit.to_pdf, :filename => "#{clean_string(@event.title)}.pdf", :type => 'application/pdf')
         return # to avoid double render call
