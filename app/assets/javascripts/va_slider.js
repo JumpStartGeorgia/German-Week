@@ -24,15 +24,6 @@ function getScrollBarWidth () {
     return (w1 - w2);  
 };
 
-function microtime (get_as_float)
-{
-    get_as_float = get_as_float || true;
-    var now = new Date().getTime() / 1000;
-    var s = parseInt(now, 10);
-
-    return (get_as_float) ? now : (Math.round((now - s) * 1000) / 1000) + ' ' + s;
-}
-
 function Timer (callback, delay)
 {
   var timerId, start, remaining = delay;
@@ -181,51 +172,76 @@ function Va_slider (options)
       gwidth = 0,
       math = Math;
 
-  this.proc_images_rec = function (data, i)
+  // process images; this function processes data[i] at a time
+  this.proc_images = function (data, i)
   {
+    // if there is no image url
     if (typeof(data[i].image_url) != 'string')
     {
       if ((i + 1) < data.length)
       {
-        instance.proc_images_rec(data, i + 1);
+        // continue with i+1 if i is less than length of data
+        instance.proc_images(data, i + 1);
       }
       else
       {
+        // return as there is nothing left
         return;
       }
     }
 
+    // create a image object for each data[i] and set it's src
     images[i] = new Image();
     images[i].src = data[i].image_url;
 
+    // check if data[i] contains url to go to (not the image src)
+    // create a parent element for each slide
     if (typeof (data[i].url) == 'string' && data[i].url.length > 1)
     {
+      // create 'a' tag
       parent[i] = document.createElement('a');
+      // set it's href attribute
       parent[i].setAttribute('href', data[i].url);
     }
     else
     {
+      // create simple 'div' tag as data[i] has no url but image src
       parent[i] = document.createElement('div');
     }
+
+    // check if data[i] has a title and use it as a title attribute for slides
     if (typeof (data[i].title) == 'string' && data[i].title.length > 0)
     {
       parent[i].setAttribute('title', data[i].title);
       images[i].setAttribute('alt', data[i].title);
     }
+
+    // the parent is given the classname of slide
     parent[i].setAttribute('class', 'slide');
 
+    // if slider shows one slide at a time, append parent to the container of slides and append image to the parent
+    // if slider shows many slides at a time, parent and image tags will be added afterwards in 'image.onload' function
+    // it's because many slides need to be in groups and group widths are depending on each of image widths
+    // we can't get the width of image befote it's loaded so they cannot be added yet
     if (instance.slider.show == 'one')
     {
       parent[i] = instance.slider.container.appendChild(parent[i]);
       parent[i].appendChild(images[i]);
     }
 
+
+    // create a first group in case of viewing many slides at a time
+    // set its current width to 0
+    // also create an inner container for the group
+    // groups have css position property of absolute in order for the animation to work properly
+    // it means they cannot be centered with css in slider container
+    // so the inner containers are needed to center the content of each group
     if (instance.slider.show == 'many' && i == 0)
     {
+      gwidth = 0;
       group = document.createElement('div');
       group.setAttribute('class', 'group');
       group = instance.slider.container.appendChild(group);
-      gwidth = 0;
       innercont = document.createElement('div');
       innercont.setAttribute('class', 'inner-cont');
       innercont = group.appendChild(innercont);
@@ -235,74 +251,101 @@ function Va_slider (options)
     {
       if (instance.slider.show == 'one')
       {
+        // if showing one slide at a time,
+        // it's needed to resize each image to match the 100% of container's width
         new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height);
         this.width  = this.style.width  = new_ds.width;
         this.height = this.style.height = new_ds.height;
 
-        slide_name = 'slide';
+        // this variable will be needed later to start the slideshow and
+        // to collect all the slides with the classname in one array
+        slide_classname = 'slide';
       }
       else
       {
+        // it checks if current width of a group is less than the container's width
         if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
         {
+          // add the total width (inner width + margin) to the current width if so
           gwidth += this.width + instance.slider.margin;
         }
         else
         {
-          gwidth = this.width + instance.slider.margin;
+          // create a new group and its inner container
           group = document.createElement('div');
           group.setAttribute('class', 'group');
           group = instance.slider.container.appendChild(group);
           innercont = document.createElement('div');
           innercont.setAttribute('class', 'inner-cont');
           innercont = group.appendChild(innercont);
+
+          // set its current width to the total width of current image
+          gwidth = this.width + instance.slider.margin;
         }
+
+        // append the image to its parent and parent to the inner container
         parent[i] = innercont.appendChild(parent[i]);
         parent[i].appendChild(images[i]);
 
-        slide_name = 'group';
+        // vertically center each group in the main container
         var p = (instance.slider.height - this.height) / 2;
         $(group).css('padding', p + 'px 0px');
+
+        // set the classname in this variable as before
+        slide_classname = 'group';
       }
 
+      // calculate how many percents of images are already loaded and add the text to the loader div
       $(instance.slider.container).find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
 
+      // do this stuff if it's the last image
       if (i == (data.length - 1))
       {
-        $(instance.slider.container.find('.' + slide_name)).fadeIn('fast');
+        // fade in the first one with the class of slide_classname
+        $(instance.slider.container.find('.' + slide_classname)).fadeIn('fast');
+
+        // fade out the loader div tag
         $(instance.slider.container.find('.loader')).fadeOut('fast');
 
-
+        // overlay div tag has a default css display property of 'none'
+        // show it if viewing one slide at a time
         if (instance.slider.show == 'one')
         {
           instance.slider.element.find('.overlay').show();
         }
 
+        // if showing switcher circles, show their container, as its default css display property is 'none'
         if (show_circles)
         {
           instance.slider.element[0].find('.switcher_circles').style.display = "block";
         }
 
-        instance.slider.slides = instance.slider.container.getElementsByClassName(slide_name);
+        // set all the slides with classname of slide_classname in an instance variable
+        // which later will be used to switch between slides easily,
+        // not having to search for the slides each time
+        instance.slider.slides = instance.slider.container.getElementsByClassName(slide_classname);
 
+        // start a timer for slideshow
         instance.slider.timer = new Timer(instance.change_slide_automatically, instance.slider.delay);
       }
-      else if ((i + 1) < data.length)
+      else
       {
-        instance.proc_images_rec(data, i + 1);
+        // run the same function again but for the next image
+        instance.proc_images(data, i + 1);
       }
     }
   }
 
+  // set the options and variables for the instance
   instance.slider = {
     width:        options.width        || 900,
     height:       options.height       || 300,    // it's the minimum height
-    delay:        options.delay        || 1000,   // the time each slide will stay visible
-    timeout:      options.timeout      || 1000,   // the time the process of changing the slide will take
-    margin:       options.margin       || 10,     // if there are many slides visible at the same time, margin between them
+    delay:        options.delay        || 1000,   // time each slide will stay visible
+    timeout:      options.timeout      || 1000,   // time the process of changing a slide will take
+    margin:       options.margin       || 10,     // if there are many slides visible at a time, margin between them
     max_circles:  options.max_circles  || 9,
-    show:         options.show         || 'one',  // show one or many slides at each time
-    element:      options.element,                // element where everything will be added
+    show:         options.show         || 'one',  // show one or many slides at a time
+    element:      options.element,                // jquery element selector where everything will be added
     timer:        null,
     active:       0                               // index of the current (active) visible slide
   };
@@ -316,63 +359,80 @@ function Va_slider (options)
   // so the options.name would be 'header' or 'footer'
   data = gon[options.name + '_slider_data']
 
+  // check if the number of slides exceed the maximum quantity of circles and set it to show_circles variable
   var show_circles = (data.length <= instance.slider.max_circles && options.name != 'footer') ? true : false,
       circles_html = '';
 
+  // generate html for circles
   if (show_circles)
   {
+    // make the same quantity of switcher circles as data.length
     for (i = 0; i < data.length; i ++)
     {
+      // make the first one selected
       classname = (i == 0) ? 'circle_selected' : 'circle';
+      // add an index attribute to each, which later will be used to switch between circles
       circles_html += '<div class="' + classname + '" index="' + i + '"></div>';
     }
 
     circles_html = '<div class="switcher_circles">' + circles_html + '</div>';
   }
 
+  // html for slider overlay, loader, switcher buttons and circles and container
   html = '<div class="overlay"></div>' + circles_html +
          '<div class="switcher_button" direction="left"></div>' +
          '<div class="switcher_button" direction="right"></div>' +
          '<div class="container"><div class="loader"><div></div></div>';
 
   instance.slider.element.prepend(html);
+  // set the container to an instance variable which later will be used to add slides to
   instance.slider.container = instance.slider.element[0].find('.container');
 
-  instance.proc_images_rec(data, 0);
+  // start processing images and adding them to the slider
+  instance.proc_images(data, 0);
 
   if (show_circles)
   {
+    // make a click event for switcher circles if they exist
     instance.slider.element.find('.circle, .circle_selected').click(function()
     {
       if (this.getAttribute('class') == 'circle_selected')
       {
+        // return if clicked circle is already selected
         return;
       }
+      // change slide according to the clicked circle's index attribute
+      // e.g. if circle with index="3" is clicked, 4th (as the indexes start from 0) slide will show up
       instance.change_slide(this.getAttribute('index'));
+
+      // restart timer so the slideshow doesn't stop
       instance.slider.timer.restart();
     });
   }
 
+  // click event for left and right buttons
   instance.slider.element.find('.switcher_button').click(function()
   {
+    // get which one was clicked, left or right
     var direction = this.getAttribute('direction');
+
     if (direction == 'left')
     {
+      // if the current (active) one is the first one, move to the last, otherwise decrease index by 1
       index = (instance.slider.active == 0) ? + instance.slider.slides.length - 1 : + instance.slider.active - 1;
     }
     else
     {
+      // if the current (active) one is the last one, move to the first, otherwise increase index by 1
       index = (instance.slider.slides.length <= (+ instance.slider.active + 1)) ? 0 : + instance.slider.active + 1;
     }
 
+    // change slide according to calculated index
     instance.change_slide(index);
+
+    // restart timer so the slideshow doesn't stop
     instance.slider.timer.restart();
   });
-
-  t2 = microtime();
-  /*
-  console.log(t2 - t1);
-  */
 };
 
 
@@ -383,12 +443,15 @@ $(function ()
 
   var options =
   {
-    width: window_dimensions().width,
-    height: 220,
-    delay : 5000,
-    timeout : 1000,
-    name: 'header',
-    element: $('#s1')
+    width:        window_dimensions().width,
+    height:       220,                        // it's the minimum height
+    delay:        5000,                       // time each slide will stay visible
+    timeout:      1000,                       // time the process of changing a slide will take
+    margin:       10,                         // if there are many slides visible at a time, margin between them
+    max_circles:  9,                          // maximum number of slides to show circles
+    show:         'one',                      // show one or many slides at a time
+    element:      $('#s1'),                   // jquery element selector where everything will be added
+    name: 'header',                           // name of gon data. gon[options.name + '_slider_data'] will be used as data source
   };
 
   var header = new Va_slider(options);
