@@ -1,6 +1,6 @@
 <% title t('events.category.title') %>
 
-<div id="export_button_container">
+<div id="export_button_container" class="clear">
 	<div id="left">
 		<% if @categories.count > 0 %>
 			<%= form_tag category_events_path, :method => :get, :html => { :class => 'form-horizontal' } do -%>
@@ -16,7 +16,6 @@
 					<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_category')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_category')) %>
 		<% end %>
 	</div>
-	<div class="clear"></div>
 </div>
 
 

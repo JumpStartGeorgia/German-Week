@@ -1,6 +1,6 @@
 <% title @event.title %>
 
-<div id="time-container">
+<div id="time-container" class="clear">
 	<div id="time-block">
 		<p id="event_time">
       <%= pretty_time(@event.start, @event.end) %>
@@ -24,7 +24,7 @@
 		</p>
 
 </div>
-<div id="button-block">
+<div id="button-block" class="clear">
 		<% if @event.start > DateTime.now && is_html %>
 		<p>
 			<div id="countdown" class="countdown">
@@ -53,7 +53,6 @@
 		<% end %>
 	<% end %>
 </div>
-	<div class="clear">&nbsp;</div>
 </div>
 
 <%= simple_format(@event.description) %>
@@ -64,7 +63,7 @@
 	</div>
 <% end %>
 
-<div id="sponsor_container">
+<div id="sponsor_container" class="clear">
 	<% @event.sponsors.each do |s| %>
 		<% if !s.logo_file_name.nil? %>
 			<div><%= link_to(image_tag(s.logo.url), sponsor_path(s), :title => s.title) %></div>
@@ -72,7 +71,6 @@
 			<div><%= link_to(s.title, sponsor_path(s)) %></div>
 		<% end %>
 	<% end %>
-	<div class="clear">&nbsp;</div>
 </div>
 
 <% if is_html %>

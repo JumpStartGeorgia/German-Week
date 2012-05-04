@@ -21,7 +21,7 @@
 
 		<h3><%= link_to "#{sponsor.title}", sponsor_path(sponsor) %></h3>
 
-		<p>
+		<p class="clear">
 			<% if !sponsor.address.nil? && sponsor.address.length > 0 %>
 				<%= sponsor.address %>
 				<br />
@@ -39,7 +39,6 @@
 				<% end %>
 			<% end %>
 		</p>
-		<div class="clear"></div>
 		<% if user_signed_in? %>
 		<p>
 		      <%= link_to t('app.buttons.edit'), edit_sponsor_path(sponsor), :class => 'btn btn-mini' %>

@@ -130,39 +130,47 @@ Element.prototype.find = function (term)
   return element;
 }
 
-Element.prototype.remove = function ()
-{
-  this.parentNode.removeChild(this);
-}
-
 function Va_slider (options)
 {
   if (options.element.length == 0)
   {
+    // return if the element doesn't exist
     return;
   }
 
+  // save the current instance of a function in a variable
   var instance = this;
 
   this.change_slide = function (index)
   {
+    // stop all animations
     instance.slider.element.find('*').stop(true, true);
+
+    // fade out the current slide
     $(instance.slider.slides[instance.slider.active]).fadeOut(instance.slider.timeout);
+    // fade in the 'index'-th one
     $(instance.slider.slides[index]).fadeIn(instance.slider.timeout);
 
+    // if the switcher circles are shown
     if (show_circles)
     {
+      // find the current selected circle and deselect it
       instance.slider.element.find('.circle_selected').attr('class', 'circle');
+      // select the one with attribute index equal to index argument
       instance.slider.element.find('.circle[index=' + index + ']')[0].setAttribute('class', 'circle_selected');
     }
 
+    // save the index of current slide so then we can fade it out
     instance.slider.active = index;
   }
 
   this.change_slide_automatically = function (index)
   {
+    // calculate index of a next slide
+    // if the current one is the last one, start from 0, otherwise increase it by 1
     index = (instance.slider.slides.length <= (+ instance.slider.active + 1)) ? 0 : + instance.slider.active + 1;
     instance.change_slide(index);
+    // restart timer so slideshow doesn't stop
     instance.slider.timer.restart();
   }
 
@@ -288,19 +296,24 @@ function Va_slider (options)
 
   instance.slider = {
     width:        options.width        || 900,
-    height:       options.height       || 300,
-    delay:        options.delay        || 1000,
-    timeout:      options.timeout      || 1000,
-    margin:       options.margin       || 10,
+    height:       options.height       || 300,    // it's the minimum height
+    delay:        options.delay        || 1000,   // the time each slide will stay visible
+    timeout:      options.timeout      || 1000,   // the time the process of changing the slide will take
+    margin:       options.margin       || 10,     // if there are many slides visible at the same time, margin between them
     max_circles:  options.max_circles  || 9,
-    show:         options.show         || 'one',
-    element:      options.element,
+    show:         options.show         || 'one',  // show one or many slides at each time
+    element:      options.element,                // element where everything will be added
     timer:        null,
-    active:       0
+    active:       0                               // index of the current (active) visible slide
   };
+
+  // resize the element according to options
   instance.slider.element.height(instance.slider.height);
   instance.slider.element.width(instance.slider.width);
 
+  // get the data from gon
+  // for now there are 2 of them - 'header_slider_data' and 'footer_slider_data'
+  // so the options.name would be 'header' or 'footer'
   data = gon[options.name + '_slider_data']
 
   var show_circles = (data.length <= instance.slider.max_circles && options.name != 'footer') ? true : false,
