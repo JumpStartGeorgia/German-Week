@@ -71,7 +71,7 @@ de:
     category:
       title: Veranstaltungskategorien
     day:
-      title: "Veranstaltungen, am %{date}"
+      title: "Veranstaltungen am %{date}"
     edit:
       title: Veranstaltung hinzufügen
     index:

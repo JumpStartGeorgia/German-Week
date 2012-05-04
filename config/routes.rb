@@ -4,32 +4,32 @@ GermanWeek::Application.routes.draw do
 
   devise_for :users
     
-  match '/:locale' => 'german_week#index', via: :get
+  match '/:locale' => 'german_week#index', :via => :get, :as => :root
 
   # event category with optional cat param
-  match '/:locale/events/category(/:cat)', :to => 'events#category', :as => :category_events, :via => 'get'
+  match '/:locale/events/category(/:cat)', :to => 'events#category', :as => :category_events, :via => :get
 
   # event day with day param
-  match '/:locale/events/day/:date(/:menu_item)', :to => 'events#day', :as => :day_events, :via => 'get'
+  match '/:locale/events/day/:date(/:menu_item)', :to => 'events#day', :as => :day_events, :via => :get
 	
 	# map page routes
-	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
+	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => :get
 
-  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
+  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => :get
 
   # create route to export events to ICS By ID
-  match '/:locale/events/exportICS/:type(/:typespec)', :to => 'events#exportICS', :as => :events_exportICS, :via => 'get'
+  match '/:locale/events/exportICS/:type(/:typespec)', :to => 'events#exportICS', :as => :events_exportICS, :via => :get
   
   # create route to load events for a particular date
-  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => 'get'
+  match '/:locale/events/day/:date', :to => 'events#day', :as => :events_day, :via => :get
 
 	# map page routes
-	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => 'get'
+	match '/:locale/map(/:type(/:dayorcategory(/:day)))', :to => 'map#index', :as => :map_page_day, :via => :get
 
-  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => 'get'
+  match '/:locale/search', :to => 'german_week#search', :as => :search, :via => :get
 	
 	# Get address by lat && lon route
-	match '/:locale/events/getLocation(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => 'post'
+	match '/:locale/events/getLocation(/:addrorlatlng)', :to => 'events#getLocation', :as => :events_get_location, :via => :post
 
   scope "/:locale" do
     resources :categories
@@ -50,7 +50,7 @@ GermanWeek::Application.routes.draw do
   scope "/:locale" do
     resources :sponsors
   end
-	match '/:locale/sponsors/view/:type', :to => 'sponsors#view', :as => :sponsor_by_type, :via => 'get'
+	match '/:locale/sponsors/view/:type', :to => 'sponsors#view', :as => :sponsor_by_type, :via => :get
   
   scope "/:locale" do
     resources :pages
@@ -59,7 +59,7 @@ GermanWeek::Application.routes.draw do
 
 
   # gets images from slider_image folder, because javascript cannot access a directory
-  match '/:locale/slider_images', :to => 'events#slider_images', :as => :slider_image_files, :via => 'get'
+  match '/:locale/slider_images', :to => 'events#slider_images', :as => :slider_image_files, :via => :get
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -71,7 +71,7 @@ ka:
     category:
       title: ღონისძიება კატეგორიის მიხედვით
     day:
-      title: ღონისძიებები %{date}
+      title: ღონისძიებები-%{date}
     edit:
       title: ღონისძიების დამატება
     index:
