@@ -85,20 +85,17 @@ function window_dimensions ()
   };
 }
 
-var PX = 'px';
+var PX = 'px',
+    math = Math;
 
 function adjust_dimensions (e_w, e_h, max_w, max_h, vertical_limit)
 {
   vertical_limit = vertical_limit || false;
-  max_w = max_w;
-  max_h = max_h;
-  var k = vertical_limit ? Math.max((e_h / max_h), (e_w / max_w)) : Math.min((e_h / max_h), (e_w / max_w));
-  new_w = e_w / k;
-  new_h = e_h / k;
+  var k = vertical_limit ? math.max((e_h / max_h), (e_w / max_w)) : math.min((e_h / max_h), (e_w / max_w));
 
   return {
-	  'width'  : new_w,
-  	'height' : new_h,
+	  'width'  : e_w / k,
+  	'height' : e_h / k
   };
 }
 
@@ -169,8 +166,7 @@ function Va_slider (options)
       parent = [],
       group = null,
       innercont = null,
-      gwidth = 0,
-      math = Math;
+      gwidth = 0;
 
   // process images; this function processes data[i] at a time
   this.proc_images = function (data, i)
@@ -205,7 +201,7 @@ function Va_slider (options)
     }
     else
     {
-      // create simple 'div' tag as data[i] has no url but image src
+      // create simple 'div' tag as data[i] has no url except for image src
       parent[i] = document.createElement('div');
     }
 
@@ -263,7 +259,7 @@ function Va_slider (options)
       }
       else
       {
-        // it checks if current width of a group is less than the container's width
+        // check if current width of a group is less than the container's width
         if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
         {
           // add the total width (inner width + margin) to the current width if so
@@ -291,7 +287,7 @@ function Va_slider (options)
         var p = (instance.slider.height - this.height) / 2;
         $(group).css('padding', p + 'px 0px');
 
-        // set the classname in this variable as before
+        // set the classname in the variable as before
         slide_classname = 'group';
       }
 
@@ -350,17 +346,23 @@ function Va_slider (options)
     active:       0                               // index of the current (active) visible slide
   };
 
+  // add some height to the minimum height
+  if (screen.height && instance.slider.show == 'one')
+  {
+    instance.slider.height += screen.height / 15.9;
+  }
+
   // resize the element according to options
   instance.slider.element.height(instance.slider.height);
   instance.slider.element.width(instance.slider.width);
 
   // get the data from gon
   // for now there are 2 of them - 'header_slider_data' and 'footer_slider_data'
-  // so the options.name would be 'header' or 'footer'
-  data = gon[options.name + '_slider_data']
+  // so the options.name would be 'header_slider_data' or 'footer_slider_data'
+  data = gon[options.name]
 
   // check if the number of slides exceed the maximum quantity of circles and set it to show_circles variable
-  var show_circles = (data.length <= instance.slider.max_circles && options.name != 'footer') ? true : false,
+  var show_circles = (data.length <= instance.slider.max_circles && options.name != 'footer_slider_data') ? true : false,
       circles_html = '';
 
   // generate html for circles
@@ -444,14 +446,14 @@ $(function ()
   var options =
   {
     width:        window_dimensions().width,
-    height:       220,                        // it's the minimum height
+    height:       210,                        // it's the minimum height
     delay:        5000,                       // time each slide will stay visible
     timeout:      1000,                       // time the process of changing a slide will take
     margin:       10,                         // if there are many slides visible at a time, margin between them
     max_circles:  9,                          // maximum number of slides to show circles
     show:         'one',                      // show one or many slides at a time
     element:      $('#s1'),                   // jquery element selector where everything will be added
-    name: 'header',                           // name of gon data. gon[options.name + '_slider_data'] will be used as data source
+    name:         'header_slider_data',       // name of gon data. gon[options.name] will be used as data source
   };
 
   var header = new Va_slider(options);
@@ -462,7 +464,7 @@ $(function ()
     height: 90,
     delay : 8000,
     timeout : 1000,
-    name: 'footer',
+    name: 'footer_slider_data',
     show: 'many',
     margin: 20,
     element: $('#partners .slider')
