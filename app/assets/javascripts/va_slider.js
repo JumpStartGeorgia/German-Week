@@ -59,12 +59,12 @@ function Timer (callback, delay)
 function window_dimensions ()
 {
   var winW, winH;
-  if (screen && screen.width)
+  /*if (screen && screen.width)
   {
     winW = ($(window).height() < $(document).height()) ? (screen.width - getScrollBarWidth()) : screen.width;
     winH = screen.height;
   }
-  else if (document.body && document.body.offsetWidth)
+  else */if (document.body && document.body.offsetWidth)
   {
     winW = document.body.offsetWidth;
     winH = document.body.offsetHeight;
@@ -343,7 +343,7 @@ function Va_slider (options)
     delay:        options.delay        || 1000,   // time each slide will stay visible
     timeout:      options.timeout      || 1000,   // time the process of changing a slide will take
     margin:       options.margin       || 10,     // if there are many slides visible at a time, margin between them
-    max_circles:  options.max_circles  || 9,
+    max_circles:  options.max_circles  || 9,      // maximum number of slides to show circles
     show:         options.show         || 'one',  // show one or many slides at a time
     element:      options.element,                // jquery element selector where everything will be added
     timer:        null,
