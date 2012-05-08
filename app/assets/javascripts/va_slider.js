@@ -215,24 +215,24 @@ function Va_slider (options)
     // the parent is given the classname of slide
     parent[i].setAttribute('class', 'slide');
 
-    // if slider shows one slide at a time, append parent to the container of slides and append image to the parent
-    // if slider shows many slides at a time, parent and image tags will be added afterwards in 'image.onload' function
+    // if not veiwing slides in groups, append parent to the container of slides and append image to the parent
+    // if slider shows slides in groups, parent and image tags will be added afterwards in 'image.onload' function
     // it's because many slides need to be in groups and group widths are depending on each of image widths
     // we can't get the width of image befote it's loaded so they cannot be added yet
-    if (instance.slider.show == 'one')
+    if (instance.slider.view_groups == 'no')
     {
       parent[i] = instance.slider.container.appendChild(parent[i]);
       parent[i].appendChild(images[i]);
     }
 
 
-    // create a first group in case of viewing many slides at a time
+    // create a first group in case of viewing slides in groups
     // set its current width to 0
     // also create an inner container for the group
     // groups have css position property of absolute in order for the animation to work properly
     // it means they cannot be centered with css in slider container
     // so the inner containers are needed to center the content of each group
-    if (instance.slider.show == 'many' && i == 0)
+    if (instance.slider.view_groups == 'yes' && i == 0)
     {
       gwidth = 0;
       group = document.createElement('div');
@@ -245,9 +245,9 @@ function Va_slider (options)
 
     images[i].onload = function ()
     {
-      if (instance.slider.show == 'one')
+      if (instance.slider.view_groups == 'no')
       {
-        // if showing one slide at a time,
+        // if not viewing slides in groups,
         // it's needed to resize each image to match the 100% of container's width
         new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height);
         this.width  = this.style.width  = new_ds.width;
@@ -259,6 +259,15 @@ function Va_slider (options)
       }
       else
       {
+        // if we want to resize images in case of viewing them in groups too,
+        // it's needed to resize each image to match the (100% - paddintTop - paddingBottom) of container's height
+        if (instance.slider.resize_if_many)
+        {
+          new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height - 2 * instance.slider.vPadding, true);
+          this.width  = this.style.width  = new_ds.width;
+          this.height = this.style.height = new_ds.height;
+        }
+
         // check if current width of a group is less than the container's width
         if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
         {
@@ -304,8 +313,8 @@ function Va_slider (options)
         $(instance.slider.container.find('.loader')).fadeOut('fast');
 
         // overlay div tag has a default css display property of 'none'
-        // show it if viewing one slide at a time
-        if (instance.slider.show == 'one')
+        // show it if not viewing slides in groups
+        if (instance.slider.view_groups == 'no' && instance.slider.show_overlay)
         {
           instance.slider.element.find('.overlay').show();
         }
@@ -334,20 +343,47 @@ function Va_slider (options)
 
   // set the options and variables for the instance
   instance.slider = {
-    width:        options.width        || 900,
-    height:       options.height       || 300,    // it's the minimum height
-    delay:        options.delay        || 1000,   // time each slide will stay visible
-    timeout:      options.timeout      || 1000,   // time the process of changing a slide will take
-    margin:       options.margin       || 10,     // if there are many slides visible at a time, margin between them
-    max_circles:  options.max_circles  || 9,      // maximum number of slides to show circles
-    show:         options.show         || 'one',  // show one or many slides at a time
-    element:      options.element,                // jquery element selector where everything will be added
-    timer:        null,
-    active:       0                               // index of the current (active) visible slide
+    width:         options.width         || 900,
+    height:        options.height        || 300,    // it's the minimum height
+    vPadding:      options.vPadding      || 0,      // vertical padding (this only works if you're viewing images in groups and resize_if_many == true)
+    delay:         options.delay         || 1000,   // time each slide will stay visible
+    timeout:       options.timeout       || 1000,   // time the process of changing a slide will take
+    margin:        options.margin        || 10,     // if viewing slides in groups, margin between the slides in each group
+    max_circles:   options.max_circles   || 9,      // maximum number of slides to show circles
+    view_groups:   options.view_groups   || 'yes',  // view slides in groups or not
+    data:          options.data,                    // data
+    element:       options.element,                 // jquery element selector where everything will be added
+    timer:         null,
+    active:        0                                // index of the current (active) visible slide
   };
 
+  // show overlay property
+  if (typeof options.show_overlay != 'undefined')
+  {
+    instance.slider.show_overlay = options.show_overlay ? true : false;
+  }
+  else
+  {
+    instance.slider.show_overlay = true;
+  }
+
+  // resize images if viewing them in groups.
+  if (typeof options.resize_if_many != 'undefined')
+  {
+    instance.slider.resize_if_many = options.resize_if_many ? true : false;
+  }
+  else
+  {
+    instance.slider.resize_if_many = false;
+  }
+
+  if (!instance.slider.element.hasClass('slider'))
+  {
+    instance.slider.element.addClass('slider');
+  }
+
   // add some height to the minimum height
-  if (screen.height && instance.slider.show == 'one')
+  if (screen.height && instance.slider.view_groups == 'no')
   {
     instance.slider.height += screen.height / 15.9;
   }
@@ -356,13 +392,10 @@ function Va_slider (options)
   instance.slider.element.height(instance.slider.height);
   instance.slider.element.width(instance.slider.width);
 
-  // get the data from gon
-  // for now there are 2 of them - 'header_slider_data' and 'footer_slider_data'
-  // so the options.name would be 'header_slider_data' or 'footer_slider_data'
-  data = gon[options.name]
+  data = instance.slider.data
 
   // check if the number of slides exceed the maximum quantity of circles and set it to show_circles variable
-  var show_circles = (data.length <= instance.slider.max_circles && options.name != 'footer_slider_data') ? true : false,
+  var show_circles = (data.length <= instance.slider.max_circles && instance.slider.view_groups != 'yes') ? true : false,
       circles_html = '';
 
   // generate html for circles
@@ -449,11 +482,11 @@ $(function ()
     height:       210,                        // it's the minimum height
     delay:        5000,                       // time each slide will stay visible
     timeout:      1000,                       // time the process of changing a slide will take
-    margin:       10,                         // if there are many slides visible at a time, margin between them
+    margin:       10,                         // if viewing slides in groups, margin between the slides in each group
     max_circles:  9,                          // maximum number of slides to show circles
-    show:         'one',                      // show one or many slides at a time
+    view_groups:  'no',                       // view slides in groups or not
     element:      $('#s1'),                   // jquery element selector where everything will be added
-    name:         'header_slider_data',       // name of gon data. gon[options.name] will be used as data source
+    data:         gon.header_slider_data,     // data
   };
 
   var header = new Va_slider(options);
@@ -464,8 +497,8 @@ $(function ()
     height: 90,
     delay : 8000,
     timeout : 1000,
-    name: 'footer_slider_data',
-    show: 'many',
+    data: gon.footer_slider_data,
+    view_groups: 'yes',
     margin: 20,
     element: $('#partners .slider')
   };
