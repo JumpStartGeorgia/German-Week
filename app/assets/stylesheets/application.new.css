@@ -374,6 +374,16 @@ img {
         margin: 0px 10px;
       }
 
+      .slider .container .group .slide:first-child
+      {
+        margin-left: 0 !important;
+      }
+
+      .slider .container .group .slide:last-child
+      {
+        margin-right: 0 !important;
+      }
+
       .slider .container .group .slide a:hover
       {
         box-shadow: 2px 2px 1px rgba(0, 0, 0, .08); 

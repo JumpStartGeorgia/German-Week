@@ -129,6 +129,14 @@ function Va_slider (options)
   // save the current instance of a function in a variable
   var instance = this;
 
+  this.switch_circle = function (index)
+  {
+    // find the current selected circle and deselect it
+    instance.slider.element.find('.circle_selected').attr('class', 'circle');
+    // select the one with attribute index equal to index argument
+    instance.slider.element.find('.circle[index=' + index + ']')[0].setAttribute('class', 'circle_selected');
+  }
+
   this.change_slide = function (index)
   {
     // stop all animations
@@ -142,10 +150,7 @@ function Va_slider (options)
     // if the switcher circles are shown
     if (show_circles)
     {
-      // find the current selected circle and deselect it
-      instance.slider.element.find('.circle_selected').attr('class', 'circle');
-      // select the one with attribute index equal to index argument
-      instance.slider.element.find('.circle[index=' + index + ']')[0].setAttribute('class', 'circle_selected');
+      window.setTimeout(function (){ instance.switch_circle(index); }, instance.slider.timeout / 2);
     }
 
     // save the index of current slide so then we can fade it out
@@ -219,7 +224,7 @@ function Va_slider (options)
     // if slider shows slides in groups, parent and image tags will be added afterwards in 'image.onload' function
     // it's because many slides need to be in groups and group widths are depending on each of image widths
     // we can't get the width of image befote it's loaded so they cannot be added yet
-    if (instance.slider.view_groups == 'no')
+    if (!instance.slider.view_groups)
     {
       parent[i] = instance.slider.container.appendChild(parent[i]);
       parent[i].appendChild(images[i]);
@@ -232,7 +237,7 @@ function Va_slider (options)
     // groups have css position property of absolute in order for the animation to work properly
     // it means they cannot be centered with css in slider container
     // so the inner containers are needed to center the content of each group
-    if (instance.slider.view_groups == 'yes' && i == 0)
+    if (instance.slider.view_groups && i == 0)
     {
       gwidth = 0;
       group = document.createElement('div');
@@ -243,9 +248,18 @@ function Va_slider (options)
       innercont = group.appendChild(innercont);
     }
 
+    images[i].onerror = function ()
+    {
+      console('error loading one or more slider images');
+      if (i < (data.length - 1))
+      {
+        instance.proc_images(data, i + 1);
+      }
+    }
+
     images[i].onload = function ()
     {
-      if (instance.slider.view_groups == 'no')
+      if (!instance.slider.view_groups)
       {
         // if not viewing slides in groups,
         // it's needed to resize each image to match the 100% of container's width
@@ -269,10 +283,10 @@ function Va_slider (options)
         }
 
         // check if current width of a group is less than the container's width
-        if (instance.slider.width >= (gwidth + this.width + instance.slider.margin))
+        if (instance.slider.width >= (gwidth + this.width + instance.slider.hMargin))
         {
           // add the total width (inner width + margin) to the current width if so
-          gwidth += this.width + instance.slider.margin;
+          gwidth += this.width + instance.slider.hMargin;
         }
         else
         {
@@ -285,16 +299,19 @@ function Va_slider (options)
           innercont = group.appendChild(innercont);
 
           // set its current width to the total width of current image
-          gwidth = this.width + instance.slider.margin;
+          gwidth = this.width + instance.slider.hMargin;
         }
 
         // append the image to its parent and parent to the inner container
         parent[i] = innercont.appendChild(parent[i]);
         parent[i].appendChild(images[i]);
+        $(parent).css('margin-right', instance.slider.hMargin + 'px');
+        $(parent).css('margin-left', instance.slider.hMargin + 'px');
 
         // vertically center each group in the main container
         var p = (instance.slider.height - this.height) / 2;
-        $(group).css('padding', p + 'px 0px');
+        $(group).css('padding-top', p + 'px');
+        $(group).css('padding-bottom', p + 'px');
 
         // set the classname in the variable as before
         slide_classname = 'group';
@@ -310,11 +327,11 @@ function Va_slider (options)
         $(instance.slider.container.find('.' + slide_classname)).fadeIn('fast');
 
         // fade out the loader div tag
-        $(instance.slider.container.find('.loader')).fadeOut('fast');
+        $(instance.slider.container.find('.loader')).fadeOut('fast', function (){ $(this).remove(); });
 
         // overlay div tag has a default css display property of 'none'
         // show it if not viewing slides in groups
-        if (instance.slider.view_groups == 'no' && instance.slider.show_overlay)
+        if (!instance.slider.view_groups && instance.slider.show_overlay)
         {
           instance.slider.element.find('.overlay').show();
         }
@@ -346,36 +363,21 @@ function Va_slider (options)
     width:         options.width         || 900,
     height:        options.height        || 300,    // it's the minimum height
     vPadding:      options.vPadding      || 0,      // vertical padding (this only works if you're viewing images in groups and resize_if_many == true)
-    delay:         options.delay         || 1000,   // time each slide will stay visible
+    hMargin:       options.hMargin       || 10,     // if viewing slides in groups, margin between the slides in each group
+    delay:         options.delay         || 5000,   // time each slide will stay visible
     timeout:       options.timeout       || 1000,   // time the process of changing a slide will take
-    margin:        options.margin        || 10,     // if viewing slides in groups, margin between the slides in each group
-    max_circles:   options.max_circles   || 9,      // maximum number of slides to show circles
-    view_groups:   options.view_groups   || 'yes',  // view slides in groups or not
+    max_circles:   options.max_circles   || 9999,   // maximum number of slides to show circles
     data:          options.data,                    // data
     element:       options.element,                 // jquery element selector where everything will be added
     timer:         null,
     active:        0                                // index of the current (active) visible slide
   };
 
-  // show overlay property
-  if (typeof options.show_overlay != 'undefined')
-  {
-    instance.slider.show_overlay = options.show_overlay ? true : false;
-  }
-  else
-  {
-    instance.slider.show_overlay = true;
-  }
+  instance.slider.show_overlay = (typeof options.show_overlay == 'undefined') ? true : options.show_overlay;
+  instance.slider.resize_if_many = (typeof options.resize_if_many == 'undefined') ? false : options.resize_if_many;
+  instance.slider.view_groups = (typeof options.view_groups == 'undefined') ? false : options.view_groups;
+  instance.slider.vertical_stretch = (typeof options.vertical_stretch == 'undefined') ? false : options.vertical_stretch;
 
-  // resize images if viewing them in groups.
-  if (typeof options.resize_if_many != 'undefined')
-  {
-    instance.slider.resize_if_many = options.resize_if_many ? true : false;
-  }
-  else
-  {
-    instance.slider.resize_if_many = false;
-  }
 
   if (!instance.slider.element.hasClass('slider'))
   {
@@ -383,7 +385,7 @@ function Va_slider (options)
   }
 
   // add some height to the minimum height
-  if (screen.height && instance.slider.view_groups == 'no')
+  if (instance.slider.vertical_stretch && screen.height && !instance.slider.view_groups)
   {
     instance.slider.height += screen.height / 15.9;
   }
@@ -395,7 +397,7 @@ function Va_slider (options)
   data = instance.slider.data
 
   // check if the number of slides exceed the maximum quantity of circles and set it to show_circles variable
-  var show_circles = (data.length <= instance.slider.max_circles && instance.slider.view_groups != 'yes') ? true : false,
+  var show_circles = (data.length <= instance.slider.max_circles && !instance.slider.view_groups) ? true : false,
       circles_html = '';
 
   // generate html for circles
@@ -482,9 +484,9 @@ $(function ()
     height:       210,                        // it's the minimum height
     delay:        5000,                       // time each slide will stay visible
     timeout:      1000,                       // time the process of changing a slide will take
-    margin:       10,                         // if viewing slides in groups, margin between the slides in each group
+    hMargin:      10,                         // if viewing slides in groups, margin between the slides in each group
     max_circles:  9,                          // maximum number of slides to show circles
-    view_groups:  'no',                       // view slides in groups or not
+    view_groups:  false,                      // view slides in groups or not
     element:      $('#s1'),                   // jquery element selector where everything will be added
     data:         gon.header_slider_data,     // data
   };
@@ -498,8 +500,8 @@ $(function ()
     delay : 8000,
     timeout : 1000,
     data: gon.footer_slider_data,
-    view_groups: 'yes',
-    margin: 20,
+    view_groups: true,
+    hMargin: 20,
     element: $('#partners .slider')
   };
   
