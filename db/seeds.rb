@@ -40,10 +40,10 @@ sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Sponso
 sponsor_type.sponsor_type_translations.create(:locale => 'ka', :title => 'სპონსორები')
 sponsor_type.sponsor_type_translations.create(:locale => 'en', :title => 'Sponsors')
 sponsor_type = SponsorType.create(:id => 3)
-sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Partners')
+sponsor_type.sponsor_type_translations.create(:locale => 'de', :title => 'Partner')
 sponsor_type.sponsor_type_translations.create(:locale => 'ka', :title => 'პარტნიორები')
 sponsor_type.sponsor_type_translations.create(:locale => 'en', :title => 'Partners')
-
+=begin
 
 # Image Headers **************************************************************************
 
@@ -70,4 +70,4 @@ ImageHeader.create(:id => 19, :image_file_name => '19.jpg', :image_file_size => 
 ImageHeader.create(:id => 20, :image_file_name => '44.jpg', :image_file_size => 126781, :image_content_type => 'image/jpeg')
 
 
-
+=end
