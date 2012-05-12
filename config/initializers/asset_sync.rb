@@ -1,13 +1,14 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    config.fog_provider = 'AWS'
 
     if Rails.env.production? 
+      config.fog_provider = ENV['FOG_PROVIDER']
       config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
       config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
       config.fog_directory = ENV['FOG_DIRECTORY']
     else
 			y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
+      config.fog_provider = y["development"]["fog_provider"]
       config.aws_access_key_id = y["development"]["access_key_id"]
       config.aws_secret_access_key = y["development"]["secret_access_key"]
       config.fog_directory = y["development"]["fog_directory"]
@@ -23,7 +24,7 @@ if defined?(AssetSync)
     #
     # Use the Rails generated 'manifest.yml' file to produce the list of files to 
     # upload instead of searching the assets directory.
-    config.manifest = true
+    # config.manifest = true
     #
     # Fail silently.  Useful for environments such as Heroku
     # config.fail_silently = true
