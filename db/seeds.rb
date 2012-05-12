@@ -1,5 +1,4 @@
 # encoding: utf-8
-=begin
 # Locales **************************************************************************
 
 Locale.destroy_all
@@ -25,7 +24,6 @@ page = Page.create(:name => 'ambassador')
 page.page_translations.create(:locale => 'de', :title => 'Haftungsausschluss', :description => '...')
 page.page_translations.create(:locale => 'ka', :title => 'პასუხისმგებლობის შეზღუდვის განაცხადი', :description => '...')
 page.page_translations.create(:locale => 'en', :title => 'Disclaimer', :description => '...')
-=end
 # Sponsor Types **************************************************************************
 
 SponsorTypeTranslation.destroy_all
