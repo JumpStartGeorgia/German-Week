@@ -101,7 +101,7 @@ img {
       #container
       {
         width: 100%;
-        background: url('images/bg.jpg');
+        background: url('bg.jpg');
       }
 
       #header
@@ -163,7 +163,7 @@ img {
 
       #header > .c2
       {
-        margin-left: 150px;
+        margin-left: 175px;
         position: relative;
         height: 67px;
       }
@@ -325,7 +325,7 @@ img {
 
       .slider .container .loader
       {
-        background-image: url(images/loader.gif);
+        background-image: url(loader.gif);
         background-color: transparent;
         background-position: center 40%;
         background-repeat: no-repeat;
@@ -396,7 +396,7 @@ img {
         z-index: 200;
         top: 0px;
         left: 0px;
-        background: url('images/slider-overlay.png');
+        background: url('slider-overlay.png');
         width: 100%;
         height: 100%;
       }

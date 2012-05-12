@@ -11,7 +11,6 @@
 //= require jquery-ui
 //= require twitter/bootstrap
 //= require vendor
-//= require id_countdown
 //= require fancybox
 //= require_tree .
 

@@ -30,7 +30,7 @@
         </div>
 				<% if is_html %>
 					<div>
-						<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn-export", :title => t('app.buttons.ics')) %>
+						<%= link_to(image_tag("Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "event", :typespec => event.id), :class => "btn-export", :title => t('app.buttons.ics')) %>
 					
 					<% if user_signed_in? %>
 						      <%= link_to t('app.buttons.edit'), edit_event_path(event), :class => 'btn btn-mini' %>

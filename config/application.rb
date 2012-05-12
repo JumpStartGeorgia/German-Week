@@ -59,10 +59,5 @@ module GermanWeek
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    # add path to jquery-ui theme css and images
-    config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets", "jquery-ui", "redmond")
-    config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets", "leaflet")
-
-#		config.middleware.use PDFKit::Middleware
   end
 end

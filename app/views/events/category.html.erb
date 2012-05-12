@@ -11,9 +11,9 @@
 	</div>
 	<div id="right">
 		<% if !@events.nil? && @events.length > 0 && is_html %>
-					<%= link_to(image_tag("images/Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "category", :typespec => params[:cat]), :class => "btn-export", :title => t('app.buttons.ics')) %>
-					<%= link_to(image_tag("images/PDF.png", :alt => t('app.buttons.pdf_category')), category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_category')) %>
-					<%= link_to(image_tag("images/Print.png", :alt => t('app.buttons.print_category')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_category')) %>
+					<%= link_to(image_tag("Calendar.png", :alt => t('app.buttons.ics')), events_exportICS_path(:type => "category", :typespec => params[:cat]), :class => "btn-export", :title => t('app.buttons.ics')) %>
+					<%= link_to(image_tag("PDF.png", :alt => t('app.buttons.pdf_category')), category_events_path(:cat => params[:cat], :page => params[:page], :format => 'pdf'), :class => "btn-export", :title => t('app.buttons.pdf_category')) %>
+					<%= link_to(image_tag("Print.png", :alt => t('app.buttons.print_category')), "#", :id => "btn-print", :class => "btn-export", :title => t('app.buttons.print_category')) %>
 		<% end %>
 	</div>
 </div>

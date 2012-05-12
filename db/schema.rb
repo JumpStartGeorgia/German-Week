@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(:version => 20120503120928) do
 
   create_table "event_sponsors", :force => true do |t|
     t.integer  "event_id"
-    t.integer  "sponsor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sponsor_id"
   end
 
   create_table "event_translations", :force => true do |t|
@@ -118,6 +118,9 @@ ActiveRecord::Schema.define(:version => 20120503120928) do
     t.string   "address"
   end
 
+  add_index "sponsor_translations", ["locale"], :name => "index_sponsor_translations_on_locale"
+  add_index "sponsor_translations", ["sponsor_id"], :name => "index_sponsor_translations_on_sponsor_id"
+
   create_table "sponsor_type_translations", :force => true do |t|
     t.integer  "sponsor_type_id"
     t.string   "locale"
@@ -138,8 +141,6 @@ ActiveRecord::Schema.define(:version => 20120503120928) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "lat",               :precision => 15, :scale => 12
-    t.decimal  "lon",               :precision => 15, :scale => 12
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"

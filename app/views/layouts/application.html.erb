@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="/assets/images/favicon3.ico">
+    <link rel="shortcut icon" href="<%= image_path "favicon3.ico" %>">
     <title>Deutsche Woche 2012 - <%= yield (:title) || "German Week" %></title>
     <%= include_gon %>
     <%= stylesheet_link_tag  "application", :media => "all" %>
@@ -23,7 +23,7 @@
 
         <div class="c1 def-font">
           <a href="<%= "/#{params[:locale]}" %>" class="clear" />
-            <img src="/assets/images/logo-german-week.png" />
+            <%= image_tag "logo-german-week.png" %>
             <div class="logo-text def-font">
 							<%= "#{t('.logo_text')}" %>
 							<br />
@@ -35,7 +35,7 @@
         <div class="c2">
 
           <div class="logo">
-            <img src="/assets/images/other-logo.png" />
+            <%= image_tag "other-logo.png" %>
           </div>
 
           <h3 class="hidden">გერმანიასა და საქართველოს შორის დიპლომატიური ურთიერთობების აღდგენის 20 წლისთავი. 20 jahre diplomatische Beziehungen zwischen Deutschland und Georgien </h3>
@@ -51,7 +51,7 @@
                 <%= render 'german_week/search_form.html.erb', :template => 'application' %>
               </div>
               <div id="search_show_button">
-                <img src="/assets/images/search.png" />
+                <%= image_tag "search.png" %>
               </div>
             </div><!--#search_button-->
 
@@ -172,7 +172,7 @@
 
           <div class="c4">
 						<!-- facebook -->
-						<div><%= link_to(image_tag("images/find_fb.jpg", :size => '100x30'), "https://www.facebook.com/DeutscheBotschaftTiflis", :target => "_blank") %></div>
+						<div><%= link_to(image_tag("find_fb.jpg", :size => '100x30'), "https://www.facebook.com/DeutscheBotschaftTiflis", :target => "_blank") %></div>
 						
 <div class="fb-like" data-href="http://www.deutschewoche.ge/" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
 
