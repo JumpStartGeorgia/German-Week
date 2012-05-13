@@ -72,13 +72,28 @@ class ApplicationController < ActionController::Base
   end
 
   def footer_slider_data
-    data = []
+		orgs = []	# some organizations may not have logos, so need this array to track those with
+    random_images = []
+
     @organizations.each do |org|
       if !org.logo_file_name.nil?
-        data << {'image_url' => org.logo.url, 'url' => sponsor_path(org), 'title' => org.title}
+        orgs << org
 			end
 		end
-		data
+
+
+    if !orgs.nil? && orgs.length > 0
+      randoms = Set.new()
+      while randoms.length < orgs.length
+        randoms << Random.rand(orgs.length)
+      end
+
+      randoms.each_with_index do |rand, i|
+        random_images[rand] = {'image_url' => orgs[i].logo.url, 'url' => sponsor_path(orgs[i]), 'title' => orgs[i].title}
+      end
+    end 
+
+    random_images
   end
 
   def slider_data

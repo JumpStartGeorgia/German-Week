@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+=begin
 # Locales **************************************************************************
 
 Locale.destroy_all
@@ -25,6 +25,7 @@ page = Page.create(:name => 'ambassador')
 page.page_translations.create(:locale => 'de', :title => 'Haftungsausschluss', :description => '...')
 page.page_translations.create(:locale => 'ka', :title => 'პასუხისმგებლობის შეზღუდვის განაცხადი', :description => '...')
 page.page_translations.create(:locale => 'en', :title => 'Disclaimer', :description => '...')
+=end
 # Sponsor Types **************************************************************************
 
 SponsorTypeTranslation.destroy_all
@@ -44,7 +45,7 @@ sponsor_type.sponsor_type_translations.create(:locale => 'ka', :title => 'პა
 sponsor_type.sponsor_type_translations.create(:locale => 'en', :title => 'Partners')
 
 # Image Headers **************************************************************************
-
+=begin
 ImageHeader.destroy_all
 ImageHeader.create(:id => 1, :image_file_name => '1.jpg', :image_file_size => 156380, :image_content_type => 'image/jpeg')
 ImageHeader.create(:id => 2, :image_file_name => '2.jpg', :image_file_size => 222949, :image_content_type => 'image/jpeg')
@@ -67,4 +68,4 @@ ImageHeader.create(:id => 18, :image_file_name => '18.jpg', :image_file_size => 
 ImageHeader.create(:id => 19, :image_file_name => '19.jpg', :image_file_size => 194964, :image_content_type => 'image/jpeg')
 ImageHeader.create(:id => 20, :image_file_name => '44.jpg', :image_file_size => 126781, :image_content_type => 'image/jpeg')
 
-
+=end
