@@ -251,7 +251,7 @@ function Va_slider (options)
 
 		  images[i].onerror = function ()
 		  {
-		    console('error loading one or more slider images');
+		    console.log('error loading one or more slider images');
 		    if (i < (data.length - 1))
 		    {
 		      instance.proc_images(data, i + 1);
