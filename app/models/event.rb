@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
         :path => "/event/:attachment/:id/:style/:filename",
         :storage => :s3,
         :url => ":s3_domain_url",
-        :bucket => ENV['S3_BUCKET_NAME'],
+        :bucket => ENV['S3_BUCKET'],
         :s3_credentials => S3_CREDENTIALS
 
   has_many :event_translations, :dependent => :destroy
