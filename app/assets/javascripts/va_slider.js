@@ -1,28 +1,31 @@
-function getScrollBarWidth () {  
-    var inner = document.createElement('p');  
-    inner.style.width = "100%";  
-    inner.style.height = "200px";  
+/*
+function getScrollBarWidth ()
+{
+    var inner = document.createElement('p');
+    inner.style.width = "100%";
+    inner.style.height = "200px";
+
+    var outer = document.createElement('div');
+    outer.style.position = "absolute";
+    outer.style.top = "0px";
+    outer.style.left = "0px";
+    outer.style.visibility = "hidden";
+    outer.style.width = "200px";
+    outer.style.height = "150px";
+    outer.style.overflow = "hidden";
+    outer.appendChild (inner);
   
-    var outer = document.createElement('div');  
-    outer.style.position = "absolute";  
-    outer.style.top = "0px";  
-    outer.style.left = "0px";  
-    outer.style.visibility = "hidden";  
-    outer.style.width = "200px";  
-    outer.style.height = "150px";  
-    outer.style.overflow = "hidden";  
-    outer.appendChild (inner);  
-  
-    document.body.appendChild (outer);  
-    var w1 = inner.offsetWidth;  
-    outer.style.overflow = 'scroll';  
-    var w2 = inner.offsetWidth;  
-    if (w1 == w2) w2 = outer.clientWidth;  
-  
-    document.body.removeChild (outer);  
-  
-    return (w1 - w2);  
+    document.body.appendChild (outer);
+    var w1 = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    var w2 = inner.offsetWidth;
+    if (w1 == w2) w2 = outer.clientWidth;
+
+    document.body.removeChild (outer);
+
+    return (w1 - w2);
 };
+*/
 
 function Timer (callback, delay)
 {
@@ -209,28 +212,28 @@ function Va_slider (options)
 	  if (typeof (data[i].url) == 'string' && data[i].url.length > 1)
 	  {
 	    // create 'a' tag
-	    parent[i] = document.createElement('a');
+	    parent[i] = $(document.createElement('a'));
 	    // set it's href attribute
-	    $(parent[i]).attr('href', data[i].url);
+	    parent[i].attr('href', data[i].url);
 	    // parent[i].setAttribute('href', data[i].url);
 	  }
 	  else
 	  {
 	    // create simple 'div' tag as data[i] has no url except for image src
-	    parent[i] = document.createElement('div');
+	    parent[i] = $(document.createElement('div'));
 	  }
 
 	  // check if data[i] has a title and use it as a title attribute for slides
 	  if (typeof (data[i].title) == 'string' && data[i].title.length > 0)
 	  {
-	    $(parent[i]).attr('title', data[i].title);
+	    parent[i].attr('title', data[i].title);
 	    $(images[i]).attr('alt', data[i].title);
 	    // parent[i].setAttribute('title', data[i].title);
 	    // images[i].setAttribute('alt', data[i].title);
 	  }
 
 	  // the parent is given the classname of slide
-	  $(parent[i]).attr('class', 'slide');
+	  parent[i].attr('class', 'slide');
 	  // parent[i].setAttribute('class', 'slide');
 
 	  // if not veiwing slides in groups, append parent to the container of slides and append image to the parent
@@ -239,8 +242,10 @@ function Va_slider (options)
 	  // we can't get the width of image befote it's loaded so they cannot be added yet
 	  if (!instance.slider.view_groups)
 	  {
-	    parent[i] = instance.slider.container.appendChild(parent[i]);
-	    parent[i].appendChild(images[i]);
+	    instance.slider.container.append(parent[i]);
+	    parent[i].append($(images[i]));
+	    // parent[i] = instance.slider.container.appendChild(parent[i]);
+	    // parent[i].appendChild(images[i]);
 	  }
 
 
@@ -253,14 +258,16 @@ function Va_slider (options)
 	  if (instance.slider.view_groups && i == 0)
 	  {
 	    gwidth = 0;
-	    group = document.createElement('div');
+	    group = $(document.createElement('div'));
 	    // group.setAttribute('class', 'group');
-	    $(group).attr('class', 'group');
-	    group = instance.slider.container.appendChild(group);
-	    innercont = document.createElement('div');
-	    innercont.setAttribute('class', 'inner-cont');
-	    $(innercont).attr('class', 'inner-cont');
-	    innercont = group.appendChild(innercont);
+	    group.attr('class', 'group');
+	    instance.slider.container.append(group);
+	    // group = instance.slider.container.appendChild(group);
+	    innercont = $(document.createElement('div'));
+	    innercont.attr('class', 'inner-cont');
+	    // innercont.setAttribute('class', 'inner-cont');
+	    group.append(innercont);
+	    // innercont = group.appendChild(innercont);
 	  }
 
 	  images[i].onerror = function ()
@@ -306,22 +313,26 @@ function Va_slider (options)
 	      else
 	      {
 	        // create a new group and its inner container
-	        group = document.createElement('div');
-	        $(group).attr('class', 'group');
+	        group = $(document.createElement('div'));
+	        group.attr('class', 'group');
 	        // group.setAttribute('class', 'group');
-	        group = instance.slider.container.appendChild(group);
-	        innercont = document.createElement('div');
-	        $(innercont).attr('class', 'inner-cont');
+	        instance.slider.container.append(group);
+	        // group = instance.slider.container.appendChild(group);
+	        innercont = $(document.createElement('div'));
+	        innercont.attr('class', 'inner-cont');
 	        // innercont.setAttribute('class', 'inner-cont');
-	        innercont = group.appendChild(innercont);
+	        group.append(innercont);
+	        // innercont = group.appendChild(innercont);
 
 	        // set its current width to the total width of current image
 	        gwidth = this.width + instance.slider.hMargin;
 	      }
 
 	      // append the image to its parent and parent to the inner container
-	      parent[i] = innercont.appendChild(parent[i]);
-	      parent[i].appendChild(images[i]);
+	      innercont.append(parent[i]);
+	      parent[i].append(images[i]);
+	      // parent[i] = innercont.appendChild(parent[i]);
+	      // parent[i].appendChild(images[i]);
 	      $(parent).css('margin-right', instance.slider.hMargin + 'px');
 	      $(parent).css('margin-left', instance.slider.hMargin + 'px');
 
@@ -335,17 +346,17 @@ function Va_slider (options)
 	    }
 
 	    // calculate how many percents of images are already loaded and add the text to the loader div
-	    $(instance.slider.container).find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
+	    instance.slider.container.find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
 
 	    // do this stuff if it's the last image
 	    if (i == (data.length - 1))
 	    {
 	      // fade in the first one with the class of slide_classname
-	      $(instance.slider.container).find('.' + slide_classname).first().fadeIn('fast');
+	      instance.slider.container.find('.' + slide_classname).first().fadeIn('fast');
 	      // $(instance.slider.container.find('.' + slide_classname)).fadeIn('fast');
 
 	      // fade out the loader div tag
-	      $(instance.slider.container).find('.loader').first().fadeOut('fast', function (){ $(this).remove(); });
+	      instance.slider.container.find('.loader').first().fadeOut('fast', function (){ $(this).remove(); });
 	      // $(instance.slider.container.find('.loader')).fadeOut('fast', function (){ $(this).remove(); });
 
 	      // overlay div tag has a default css display property of 'none'
@@ -364,7 +375,7 @@ function Va_slider (options)
 	      // set all the slides with classname of slide_classname in an instance variable
 	      // which later will be used to switch between slides easily,
 	      // not having to search for the slides each time
-	      instance.slider.slides = instance.slider.container.getElementsByClassName(slide_classname);
+	      instance.slider.slides = instance.slider.container[0].getElementsByClassName(slide_classname);
 
 	      // start a timer for slideshow
 	      instance.slider.timer = new Timer(instance.change_slide_automatically, instance.slider.delay);
@@ -446,7 +457,7 @@ function Va_slider (options)
 
   instance.slider.element.prepend(html);
   // set the container to an instance variable which later will be used to add slides to
-  instance.slider.container = instance.slider.element.find('.container')[0];
+  instance.slider.container = instance.slider.element.find('.container');
 
   // start processing images and adding them to the slider
   instance.proc_images(data, 0);
