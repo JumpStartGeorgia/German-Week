@@ -100,16 +100,19 @@ class ApplicationController < ActionController::Base
     images = ImageHeader.all
     random_images = []
 
-    if !images.nil? && images.length > 0
-      randoms = Set.new()
-      while randoms.length < images.length
-        randoms << Random.rand(images.length)
-      end
+    if images.nil? || images.length == 0
+      return
+    end
 
-      randoms.each_with_index do |rand, i|
-        random_images[rand] = {'image_url' => images[i].image.url, 'url' => false};
-      end
-    end 
+    randoms = Set.new()
+    while randoms.length < images.length
+      randoms << Random.rand(images.length)
+    end
+
+    randoms.each_with_index do |rand, i|
+      random_images[rand] = {'image_url' => images[i].image.url, 'url' => false};
+    end
+
     random_images
   end
 

@@ -36,6 +36,7 @@ GermanWeek::Application.configure do
 	y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
   config.action_controller.asset_host = "http://#{y["development"]["fog_directory"]}.s3.amazonaws.com"
   config.assets.debug = false
+  config.assets.digest = true
 =end
 
 end
