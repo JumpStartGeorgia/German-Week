@@ -24,7 +24,7 @@
         <div class="c1 def-font">
           <a href="<%= "/#{params[:locale]}" %>" class="clear" />
             <%= image_tag "logo-german-week.png" %>
-            <div class="logo-text def-font">
+            <div class="logo-text def-font upcase">
 							<%= "#{t('.logo_text')}" %>
 							<br />
 							<%= "14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %>
@@ -81,17 +81,18 @@
 
           <div class="menu def-font upcase">
 						<% home_active = " selected" if current_page?(root_path) %>
-						<%= link_to t('.home'), root_path, :class => "item #{home_active}" %>
+						<div class="item<%= home_active %>"><%= link_to t('.home'), root_path %></div>
 						<% (1..6).each do |i| %>
 								<% event_active = " selected" if current_page?(day_events_path(:date => "2012-05-#{i+13}", :menu_item => i)) %>
+						   <div class="item<%= event_active %>">
 								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
-											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i),
-											:class => "item #{event_active}" %>					
+											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i) %>					
+						   </div>
 						<% end %>
 						<% cat_active = " selected" if current_page?(category_events_path) %>
-            <%= link_to t('.categories'), category_events_path, :class => "item #{cat_active}" %>
+            <div class="item<%= cat_active %>"><%= link_to t('.categories'), category_events_path %></div>
 						<% map_active = " selected" if current_page?(map_page_day_path) %>
-            <%= link_to t('.map'), map_page_day_path, :class => "item #{map_active}" %>
+            <div class="item<%= map_active %>"><%= link_to t('.map'), map_page_day_path %></div>
 
           </div><!--#content .container .menu-->
 

@@ -5,7 +5,7 @@ div#export_button_container{
 	padding: 0;
 }
 div#export_button_container div#left{
-	width: 65%; 
+	width: 65%;
 	float: left; 
 }
 div#export_button_container div#right{
@@ -13,6 +13,12 @@ div#export_button_container div#right{
 	float: right; 
 	text-align: right; 
 	padding-right: 10px;
+}
+div#export_button_container div#right .btn-export{
+	padding: 0px 1px;
+}
+div#export_button_container div#right .btn-export img{
+	width: 28px;
 }
 
 
@@ -62,9 +68,11 @@ display: none;
 #time-container {	
 	margin-top: 15px;
 }
-#time-container #time-block {float: left; width: 65%;}
+#time-container #time-block {float: left; width: 65%; padding-left: 5px; }
 #time-container #time-block #event_time {font-size: larger;}
 #time-container #button-block {float: right; width: 30%; text-align: right; padding-right: 10px;}
+#time-container .btn-export { padding: 0px 1px; }
+#time-container .btn-export img { width: 28px; }
 
 /* image caption styles */
 div#event_picture_container {

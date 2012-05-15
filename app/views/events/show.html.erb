@@ -55,7 +55,9 @@
 </div>
 </div>
 
-<%= simple_format(@event.description) %>
+<div class="description">
+  <%= simple_format(@event.description) %>
+</div>
 
 <% if !@event.picture_file_name.nil? %>
 	<div id="event_picture_container">

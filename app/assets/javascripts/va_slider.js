@@ -305,7 +305,7 @@ function Va_slider (options)
 	      }
 
 	      // check if current width of a group is less than the container's width
-	      if (instance.slider.width >= (gwidth + this.width + instance.slider.hMargin))
+	      if (instance.slider.width >= (gwidth + this.width + instance.slider.hMargin + 5))
 	      {
 	        // add the total width (inner width + margin) to the current width if so
 	        gwidth += this.width + instance.slider.hMargin;
