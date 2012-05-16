@@ -212,7 +212,7 @@ class EventsController < ApplicationController
   	
     data = Event.find_for_ics(params[:type], params[:typespec])
     
-    if data.nil? || data.length == 0
+    if data.nil?
 		  redirect_to "/"
     else 
 			case params[:type]
