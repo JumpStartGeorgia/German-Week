@@ -14,4 +14,4 @@ ul#search_results h3 > a:visited { color: #3F448C; }
 .search_results_sub_section span { color: #0033FF; } /* color the headings of the sub sections */
 
 #img_ambassador{ float: right; margin: 0 10px 5px 15px; }
-#img_signature { margin-left: 6px; }
+#img_signature { margin-left: 6px; margin-bottom: 20px; }

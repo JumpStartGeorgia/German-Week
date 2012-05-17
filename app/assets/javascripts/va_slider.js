@@ -259,7 +259,7 @@ function Va_slider (options)
 	  // so the inner containers are needed to center the content of each group
 	  if (instance.slider.view_groups && i == 0)
 	  {
-	    gwidth = 0;
+	    gwidth = - 2 * instance.slider.hMargin;
 	    group = $(document.createElement('div'));
 	    // group.setAttribute('class', 'group');
 	    group.attr('class', 'group');
@@ -301,16 +301,23 @@ function Va_slider (options)
 	      // it's needed to resize each image to match the (100% - paddintTop - paddingBottom) of container's height
 	      if (instance.slider.resize_if_many)
 	      {
-	        new_ds = adjust_dimensions(this.width, this.height, instance.slider.width, instance.slider.height - 2 * instance.slider.vPadding, true);
+	        new_ds = adjust_dimensions
+	                 (
+	                   this.width,
+	                   this.height,
+	                   instance.slider.width,
+	                   instance.slider.height - 2 * instance.slider.vPadding,
+	                   true
+	                 );
 	        this.width  = this.style.width  = new_ds.width;
 	        this.height = this.style.height = new_ds.height;
 	      }
 
 	      // check if current width of a group is less than the container's width
-	      if (instance.slider.width >= (gwidth + this.width + instance.slider.hMargin + 5))
+	      if (instance.slider.width >= (gwidth + this.width + 2 * instance.slider.hMargin + 3))
 	      {
 	        // add the total width (inner width + margin) to the current width if so
-	        gwidth += this.width + instance.slider.hMargin;
+	        gwidth += this.width + 2 * instance.slider.hMargin;
 	      }
 	      else
 	      {
@@ -326,8 +333,8 @@ function Va_slider (options)
 	        group.append(innercont);
 	        // innercont = group.appendChild(innercont);
 
-	        // set its current width to the total width of current image
-	        gwidth = this.width + instance.slider.hMargin;
+	        // set its current width to the width of current image
+	        gwidth = this.width;
 	      }
 
 	      // append the image to its parent and parent to the inner container
@@ -335,24 +342,28 @@ function Va_slider (options)
 	      parent[i].append(img_obj);
 	      // parent[i] = innercont.appendChild(parent[i]);
 	      // parent[i].appendChild(images[i]);
-	      $(parent).css('margin-right', instance.slider.hMargin + 'px');
-	      $(parent).css('margin-left', instance.slider.hMargin + 'px');
+	      parent[i].css('margin-right', instance.slider.hMargin + 'px');
+	      parent[i].css('margin-left', instance.slider.hMargin + 'px');
 
 	      // vertically center each group in the main container
 	      var p = (instance.slider.height - this.height) / 2;
-	      $(group).css('padding-top', p + 'px');
-	      $(group).css('padding-bottom', p + 'px');
+	      group.css('padding-top', p + 'px');
+	      group.css('padding-bottom', p + 'px');
 
 	      // set the classname in the variable as before
 	      slide_classname = 'group';
 	    }
 
 	    // calculate how many percents of images are already loaded and add the text to the loader div
-	    instance.slider.container.find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
+	    if (instance.slider.load_all)
+	    {
+	      instance.slider.container.find('.loader div').html(math.round((+ i + 1) / data.length * 100) + '%');
+	    }
 
 	    // do this stuff if it's the last image
-	    if (i == (data.length - 1))
+	    if ((i == (data.length - 1) || (!instance.slider.load_all && i == 0)) && (typeof instance.fsa == 'undefined' || !instance.fsa))
 	    {
+	      instance.fsa = true;
 	      // fade in the first one with the class of slide_classname
 	      instance.slider.container.find('.' + slide_classname).first().fadeIn('fast');
 	      // $(instance.slider.container.find('.' + slide_classname)).fadeIn('fast');
@@ -373,7 +384,15 @@ function Va_slider (options)
 	      {
 	        instance.slider.element.find('.switcher_circles').show();
 	      }
+	    }
 
+      if (!instance.slider.load_all)
+      {
+        instance.slider.slides = instance.slider.container[0].getElementsByClassName(slide_classname);
+      }
+
+	    if (i == (data.length - 1))
+	    {
 	      // set all the slides with classname of slide_classname in an instance variable
 	      // which later will be used to switch between slides easily,
 	      // not having to search for the slides each time
@@ -410,6 +429,7 @@ function Va_slider (options)
   instance.slider.show_overlay = (typeof options.show_overlay == 'undefined') ? true : options.show_overlay;
   instance.slider.resize_if_many = (typeof options.resize_if_many == 'undefined') ? false : options.resize_if_many;
   instance.slider.view_groups = (typeof options.view_groups == 'undefined') ? false : options.view_groups;
+  instance.slider.load_all = (typeof options.load_all == 'undefined') ? true : options.load_all;
   instance.slider.vertical_stretch = (typeof options.vertical_stretch == 'undefined') ? false : options.vertical_stretch;
 
 
@@ -483,7 +503,10 @@ function Va_slider (options)
       // instance.change_slide(this.getAttribute('index'));
 
       // restart timer so the slideshow doesn't stop
-      instance.slider.timer.restart();
+      if (typeof instance.slider.timer != 'undefined' && instance.slider.timer != null)
+      {
+        instance.slider.timer.restart();
+      }
     });
   }
 
@@ -509,7 +532,10 @@ function Va_slider (options)
     instance.change_slide(index);
 
     // restart timer so the slideshow doesn't stop
-    instance.slider.timer.restart();
+    if (typeof instance.slider.timer != 'undefined' && instance.slider.timer != null)
+    {
+      instance.slider.timer.restart();
+    }
   });
 };
 
@@ -529,6 +555,7 @@ $(function ()
     max_circles:  9,                          // maximum number of slides to show circles
     view_groups:  false,                      // view slides in groups or not
     element:      $('#s1'),                   // jquery element selector where everything will be added
+    load_all:     false,                      // wait before all images are loaded. strongly recommended to use if viewing in groups
     data:         gon.header_slider_data,     // data
     vertical_stretch: true,
   };
@@ -543,6 +570,7 @@ $(function ()
     timeout : 1000,
     data: gon.footer_slider_data,
     view_groups: true,
+    load_all: true,
     hMargin: 20,
     element: $('#partners .slider')
   };
