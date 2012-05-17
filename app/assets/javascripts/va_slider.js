@@ -156,7 +156,7 @@ function Va_slider (options)
     // if the switcher circles are shown
     if (show_circles)
     {
-      window.setTimeout(function (){ instance.switch_circle(index); }, instance.slider.timeout / 2);
+      window.setTimeout(function (){ instance.switch_circle(index); }, instance.slider.timeout / 4);
     }
 
     // save the index of current slide so then we can fade it out
@@ -177,7 +177,8 @@ function Va_slider (options)
       parent = [],
       group = null,
       innercont = null,
-      gwidth = 0;
+      gwidth = 0,
+      img_obj = null;
 
   // process images; this function processes data[i] at a time
   this.proc_images = function (data, i)
@@ -203,9 +204,10 @@ function Va_slider (options)
 	    }
 	  }
 
-	  // create a image object for each data[i] and set it's src
+	  // create a image object for each data[i]
+	  // src attribute will be set at the end because otherwise it doesn't trigger onload event in IE
 	  images[i] = new Image();
-	  images[i].src = data[i].image_url;
+	  img_obj = $(images[i]);
 
 	  // check if data[i] contains url to go to (not the image src)
 	  // create a parent element for each slide
@@ -227,7 +229,7 @@ function Va_slider (options)
 	  if (typeof (data[i].title) == 'string' && data[i].title.length > 0)
 	  {
 	    parent[i].attr('title', data[i].title);
-	    $(images[i]).attr('alt', data[i].title);
+	    img_obj.attr('alt', data[i].title);
 	    // parent[i].setAttribute('title', data[i].title);
 	    // images[i].setAttribute('alt', data[i].title);
 	  }
@@ -243,7 +245,7 @@ function Va_slider (options)
 	  if (!instance.slider.view_groups)
 	  {
 	    instance.slider.container.append(parent[i]);
-	    parent[i].append($(images[i]));
+	    parent[i].append(img_obj);
 	    // parent[i] = instance.slider.container.appendChild(parent[i]);
 	    // parent[i].appendChild(images[i]);
 	  }
@@ -330,7 +332,7 @@ function Va_slider (options)
 
 	      // append the image to its parent and parent to the inner container
 	      innercont.append(parent[i]);
-	      parent[i].append(images[i]);
+	      parent[i].append(img_obj);
 	      // parent[i] = innercont.appendChild(parent[i]);
 	      // parent[i].appendChild(images[i]);
 	      $(parent).css('margin-right', instance.slider.hMargin + 'px');
@@ -386,6 +388,8 @@ function Va_slider (options)
 	      instance.proc_images(data, i + 1);
 	    }
 	  }
+
+	  images[i].src = data[i].image_url;
   }
 
   // set the options and variables for the instance
