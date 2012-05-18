@@ -1,9 +1,9 @@
-
+var map;
 $(function(){
 
 	if (gon.map_page && gon.show_map){
 			
-		var map = new L.Map(gon.map_id);				
+		map = new L.Map(gon.map_id);				
 				map.addLayer(new L.TileLayer(gon.tile_url,{
 					attribution: gon.attribution
 				})).setView(new L.LatLng(gon.lat, gon.lon), gon.zoom);				
@@ -108,8 +108,21 @@ $(function(){
 					
 			});	
 						
-			map.setView(new L.LatLng(gon.event_lats[gon.event_lats.length-1], gon.event_lons[gon.event_lons.length-1]),12);
-			
+			// get lat/long of all markers to set bounds
+			var latlngs = [];
+		  for (var k in map._layers) {
+				if (typeof(map._layers[k]._latlng) !== 'undefined')
+				{
+			    latlngs.push(map._layers[k]._latlng);
+				}
+			}
+			if (latlngs.length == 0){
+				// no marker bounds found, use default				
+				map.setView(new L.LatLng(gon.event_lats[gon.event_lats.length-1], gon.event_lons[gon.event_lons.length-1]),12);
+			} else {
+				// set bounds on markers
+				map.fitBounds(new L.LatLngBounds(latlngs));
+			}
 		}
 		else if(gon.events_day_exists){
 			var no_events_div = new Array;
