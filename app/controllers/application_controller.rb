@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
       end
 
       randoms.each_with_index do |rand, i|
-        random_images[rand] = {'image_url' => orgs[i].logo.url, 'url' => sponsor_path(orgs[i]), 'title' => orgs[i].title}
+        random_images[rand] = {'img_src' => orgs[i].logo.url, 'url' => sponsor_path(orgs[i]), 'title' => orgs[i].title}
       end
     end 
 
@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
     end
 
     randoms.each_with_index do |rand, i|
-      random_images[rand] = {'image_url' => images[i].image.url, 'url' => false};
+      random_images[rand] = {'img_src' => images[i].image.url}#, 'url' => false};
     end
 
     random_images
