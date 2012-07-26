@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   before_filter :set_locale
   before_filter :set_organisations
   before_filter :set_categories
   before_filter :set_sponsor_types
 	before_filter :set_s3_url
   before_filter :init_gon
-  
-  def set_locale 	
+
+  def set_locale
     @locales = Locale.order("language asc")
 		# see if locale is valid
 		valid = false
@@ -34,18 +34,18 @@ class ApplicationController < ActionController::Base
     gon.tile_url = "http://tile.mapspot.ge/#{lang}/{z}/{x}/{y}.png"
     gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
     gon.map_id = 'map'
-    gon.zoom = 16
+    gon.zoom = 14
     gon.max_zoom = 18
-    gon.lat = 42.083278671742
-		gon.lon = 43.869205165667
+    gon.lat = 41.643455883245
+		gon.lon = 41.640045213257
     gon.locale = params[:locale]
-    gon.header_slider_data = self.slider_data 
+    gon.header_slider_data = self.slider_data
     gon.footer_slider_data = self.footer_slider_data
   end
 
 	def set_s3_url
 		bucket = ""
-		if Rails.env.production? 
+		if Rails.env.production?
 			bucket = S3_CREDENTIALS[:bucket]
 		else
 			y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
       randoms.each_with_index do |rand, i|
         random_images[rand] = {'img_src' => orgs[i].logo.url, 'url' => sponsor_path(orgs[i]), 'title' => orgs[i].title}
       end
-    end 
+    end
 
     random_images
   end

@@ -4,11 +4,11 @@
 			<%= t('datetime.prompts.day') %>
 			<select id="event-day">
 				<option></option>
-				<% (1..6).each do |i| %>
-					<option value="<%= "2012-05-#{i+13}" %>" 
-						<% if params[:dayorcategory] == "2012-05-#{i+13}" || params[:day] == "2012-05-#{i+13}" %>
+				<% (4..5).each do |i| %>
+					<option value="<%= "2012-05-#{i+23}" %>"
+						<% if params[:dayorcategory] == "2012-05-#{i+23}" || params[:day] == "2012-05-#{i+23}" %>
 						<%= "selected=\"selected\"" %>
-						<% end %>><%= "#{i+13} #{t('date.day_names').to_a[i]}" %></option>
+						<% end %>><%= "#{i+23} #{t('date.day_names').to_a[i]}" %></option>
 				<% end %>
 			</select>
 			&nbsp;&nbsp;
@@ -27,5 +27,3 @@
 	<div id="map_container">
 		<div id="map_map_page"></div>
 	</div>
-	
-	

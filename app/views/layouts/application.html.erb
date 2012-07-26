@@ -7,7 +7,7 @@
     <%= include_gon %>
     <%= stylesheet_link_tag  "application", :media => "all" %>
     <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
-    <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->  
+    <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
     <%= csrf_meta_tags %>
 		<meta property="og:title" content="Deutsche Woche 2012" />
 		<meta property="og:type" content="activity" />
@@ -27,7 +27,7 @@
             <div class="logo-text def-font upcase">
 							<%= "#{t('.logo_text')}" %>
 							<br />
-							<%= "14.-20. #{t('date.abbr_month_names').to_a[5]} 2012" %>
+							<%= "27.-28. #{t('date.abbr_month_names').to_a[9]} 2012" %>
 						</div>
           </a>
         </div><!--#header > .c1-->
@@ -59,7 +59,7 @@
 
           <div id="languages" class="def-font upcase menu">
             <% @locales.each do |locale| %>
-              <% unless locale.language.to_s == I18n.locale.to_s %> 
+              <% unless locale.language.to_s == I18n.locale.to_s %>
                 <%= link_to locale.name, params.merge(:locale => locale.language) %>
               <% end %>
             <% end %>
@@ -82,11 +82,11 @@
           <div class="menu def-font upcase">
 						<% home_active = " selected" if current_page?(root_path) %>
 						<div class="item<%= home_active %>"><%= link_to t('.home'), root_path %></div>
-						<% (1..6).each do |i| %>
-								<% event_active = " selected" if current_page?(day_events_path(:date => "2012-05-#{i+13}", :menu_item => i)) %>
+						<% (4..5).each do |i| %>
+								<% event_active = " selected" if current_page?(day_events_path(:date => "2012-09-#{i+23}", :menu_item => i)) %>
 						   <div class="item<%= event_active %>">
-								<%= link_to "#{i+13} #{t('date.day_names').to_a[i]}", 
-											day_events_path(:date => "2012-05-#{i+13}", :menu_item => i) %>					
+								<%= link_to "#{i+23} #{t('date.day_names').to_a[i]}",
+											day_events_path(:date => "2012-09-#{i+23}", :menu_item => i) %>
 						   </div>
 						<% end %>
 						<% cat_active = " selected" if current_page?(category_events_path) %>
@@ -157,16 +157,16 @@
 
             <div class="menu">
               <span class="header"><%= t('.admin') %></span>
-								<% if user_signed_in? %>  
+								<% if user_signed_in? %>
 									<%= link_to t('.events'), events_path, :class => "item" %>
 									<%= link_to t('.categories'), categories_path, :class => "item" %>
 									<%= link_to t('.sponsors'), sponsors_path, :class => "item" %>
 									<%= link_to t('.pages'), pages_path, :class => "item" %>
 									<%= link_to t('.image_headers'), image_headers_path, :class => "item" %>
-									<%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete, :class => "item" %>  
-								<% else %>  
-									<%= link_to t('.sign_in'), new_user_session_path, :class => "item" %>  
-								<% end %>  
+									<%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete, :class => "item" %>
+								<% else %>
+									<%= link_to t('.sign_in'), new_user_session_path, :class => "item" %>
+								<% end %>
             </div><!--#footer .r1 .c3 .menu-->
 
           </div><!--#footer .r1 .c3-->
@@ -174,7 +174,7 @@
           <div class="c4">
 						<!-- facebook -->
 						<div><%= link_to(image_tag("find_fb.jpg", :size => '100x30'), "https://www.facebook.com/DeutscheBotschaftTiflis", :target => "_blank") %></div>
-						
+
 <div class="fb-like" data-href="http://www.deutschewoche.ge/" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
 
 						<!-- twitter -->
@@ -219,7 +219,7 @@
 		}(document, 'script', 'facebook-jssdk'));</script>
 
 		<!-- twitter -->
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<!-- google+ -->
 		<script type="text/javascript">
 		  (function() {
@@ -227,7 +227,7 @@
 		    po.src = 'https://apis.google.com/js/plusone.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 		  })();
-		</script>		
+		</script>
 
 <% if Rails.env.production? %>
 	<!-- google analytics -->
