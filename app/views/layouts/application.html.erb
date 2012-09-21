@@ -27,7 +27,7 @@
             <div class="logo-text def-font upcase">
 							<%= "#{t('.logo_text')}" %>
 							<br />
-							<%= "27.-28. #{t('date.abbr_month_names').to_a[9]} 2012" %>
+							<%= "26.-28. #{t('date.abbr_month_names').to_a[9]} 2012" %>
 						</div>
           </a>
         </div><!--#header > .c1-->
@@ -82,7 +82,7 @@
           <div class="menu def-font upcase">
 						<% home_active = " selected" if current_page?(root_path) %>
 						<div class="item<%= home_active %>"><%= link_to t('.home'), root_path %></div>
-						<% (4..5).each do |i| %>
+						<% (3..5).each do |i| %>
 								<% event_active = " selected" if current_page?(day_events_path(:date => "2012-09-#{i+23}", :menu_item => i)) %>
 						   <div class="item<%= event_active %>">
 								<%= link_to "#{i+23} #{t('date.day_names').to_a[i]}",

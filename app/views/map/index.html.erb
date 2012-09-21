@@ -4,7 +4,7 @@
 			<%= t('datetime.prompts.day') %>
 			<select id="event-day">
 				<option></option>
-				<% (4..5).each do |i| %>
+				<% (3..5).each do |i| %>
 					<option value="<%= "2012-05-#{i+23}" %>"
 						<% if params[:dayorcategory] == "2012-05-#{i+23}" || params[:day] == "2012-05-#{i+23}" %>
 						<%= "selected=\"selected\"" %>
