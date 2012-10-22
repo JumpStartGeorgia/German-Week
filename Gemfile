@@ -27,7 +27,7 @@ gem "fancybox-rails", "~> 0.1.4"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-	gem "asset_sync", "~> 0.4.1"
+#	gem "asset_sync", "~> 0.4.1"
   gem 'sass-rails', '3.1.4'
   gem 'coffee-rails'
   gem 'execjs'
