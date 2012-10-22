@@ -1,8 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-# gem 'mysql', '2.8.1'
-gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 gem 'jquery-rails', '1.0.19'
 gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
@@ -38,12 +36,14 @@ group :assets do
 end
 
 group :development do
+	gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 	# only need this in dev, on production we use the file in the bin folder
-	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs	
+	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 end
 
 group :production do
 	gem 'pg'
+	gem 'taps'
 end
 
 # for debugging
