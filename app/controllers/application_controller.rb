@@ -7,6 +7,23 @@ class ApplicationController < ActionController::Base
   before_filter :set_sponsor_types
   before_filter :init_gon
 
+	unless Rails.application.config.consider_all_requests_local
+		rescue_from Exception,
+		            :with => :render_error
+		rescue_from ActiveRecord::RecordNotFound,
+		            :with => :render_not_found
+		rescue_from ActionController::RoutingError,
+		            :with => :render_not_found
+		rescue_from ActionController::UnknownController,
+		            :with => :render_not_found
+		rescue_from ActionController::UnknownAction,
+		            :with => :render_not_found
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to root_url, :alert => exception.message
+    end
+	end
+
   def set_locale
     @locales = Locale.order("language asc")
 		# see if locale is valid
@@ -104,4 +121,19 @@ class ApplicationController < ActionController::Base
     random_images
   end
 
+
+  #######################
+	def render_not_found(exception)
+		ExceptionNotifier::Notifier
+		  .exception_notification(request.env, exception)
+		  .deliver
+		render :file => "#{Rails.root}/public/404.html", :status => 404
+	end
+
+	def render_error(exception)
+		ExceptionNotifier::Notifier
+		  .exception_notification(request.env, exception)
+		  .deliver
+		render :file => "#{Rails.root}/public/500.html", :status => 500
+	end
 end

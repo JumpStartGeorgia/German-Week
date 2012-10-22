@@ -22,6 +22,8 @@ gem "twitter-bootstrap-rails"
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 gem "fancybox-rails", "~> 0.1.4"
 
+gem "exception_notification", "2.5.2" # send an email when exception occurs
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -36,6 +38,7 @@ group :assets do
 end
 
 group :development do
+#	gem "mailcatcher", "0.5.5" # small smtp server for dev, http://mailcatcher.me/
 	# only need this in dev, on production we use the file in the bin folder
 	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 end

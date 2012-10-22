@@ -58,4 +58,10 @@ GermanWeek::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+	# options for exception notification gem
+	config.middleware.use ExceptionNotifier,
+		:email_prefix => "[German Week App Error (#{Rails.env})] ",
+		:sender_address => ENV['APPLICATION_ERROR_FROM_EMAIL'],
+		:exception_recipients => [ENV['APPLICATION_ERROR_TO_EMAIL']]
+
 end
