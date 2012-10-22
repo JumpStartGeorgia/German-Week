@@ -2,10 +2,7 @@ class Event < ActiveRecord::Base
   translates :title, :description, :picture_text, :building_name, :address
   has_attached_file :picture,
         :path => "/event/:attachment/:id/:style/:filename",
-        :storage => :s3,
-        :url => ":s3_domain_url",
-        :bucket => ENV['S3_BUCKET'],
-        :s3_credentials => S3_CREDENTIALS
+        :url => "/event/:attachment/:id/:style/:filename"
 
   has_many :event_translations, :dependent => :destroy
   has_many :event_sponsors, :dependent => :destroy
@@ -14,9 +11,9 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_categories
 
   accepts_nested_attributes_for :event_translations
-  attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids, 
+  attr_accessible :start, :end, :email, :url, :url2, :phone, :fax, :sponsor_ids, :category_ids,
       :lat, :lon, :event_translations_attributes, :picture
-  attr_accessor :locale  
+  attr_accessor :locale
 
   validates :start, :presence => true
 
@@ -24,13 +21,13 @@ class Event < ActiveRecord::Base
 #  geocoded_by :address
 #  reverse_geocoded_by :lat, :lon
 #  before_save  :reverse_geocode
-  
+
   # will_paginate will get this many records per page
   self.per_page = 8
 #TODO - need to get this function working
 #  validate :date_comparison_validator
   validates_associated :event_translations
-  
+
   scope :l10n , joins(:event_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
@@ -42,13 +39,13 @@ class Event < ActiveRecord::Base
 			self.building_name.to_s
 		elsif !self.address.nil? && self.address.length > 0
 			self.address.to_s
-		else 
+		else
 		  return nil
 		end
   end
 
 
-  # search 
+  # search
   def self.search(search, category, page)
     if search && search.length > 0
       if category && category.length > 0 && category != 'all'
@@ -57,7 +54,7 @@ class Event < ActiveRecord::Base
           .paginate(:page => page).order("start ASC")
       elsif !category || category == 'all'
         joins(:event_translations)
-          .where("event_translations.locale = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)", 
+          .where("event_translations.locale = ? AND (event_translations.title LIKE ? OR event_translations.description LIKE ?)",
             I18n.locale, '%' + search + '%', '%' + search + '%')
           .paginate(:page => page).order("start ASC")
       end
@@ -90,13 +87,13 @@ class Event < ActiveRecord::Base
     if category_title
 			if use_pagination
 		    joins(:event_translations, :categories => :category_translations)
-		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?',
 		        category_title, I18n.locale, I18n.locale)
 		      .paginate(:page => page)
 		      .order('events.start asc, event_translations.title asc')
 			else
 		    joins(:event_translations, :categories => :category_translations)
-		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
+		      .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?',
 		        category_title, I18n.locale, I18n.locale)
 		      .order('events.start asc, event_translations.title asc')
 			end
@@ -109,24 +106,24 @@ class Event < ActiveRecord::Base
   def self.find_for_map(type, dayorcategory, day)
   	if type.nil?
   		all
-		elsif type == "day"	
+		elsif type == "day"
 			if !dayorcategory.nil?
 				where("cast(start as date) = ?",
 				  dayorcategory)
-			else 
+			else
 				return nil
 			end
-		elsif type == "category" 		
+		elsif type == "category"
 			if !dayorcategory.nil?
 				joins(:event_translations, :categories => :category_translations)
-				  .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?', 
-				    dayorcategory, I18n.locale, I18n.locale)				        
-			else 
+				  .where('category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?',
+				    dayorcategory, I18n.locale, I18n.locale)
+			else
 				return nil
 			end
 		elsif type == "daycategory" && !day.nil? && !dayorcategory.nil?
 				joins(:event_translations, :categories => :category_translations)
-				  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) = ?", 
+				  .where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ? and cast(start as date) = ?",
 				    dayorcategory, I18n.locale, I18n.locale, day)
     else
       return nil
@@ -139,35 +136,35 @@ class Event < ActiveRecord::Base
     	case type
     		when "all"
     			all
-    		when "event"     	
-    			if !typespec.nil?		
+    		when "event"
+    			if !typespec.nil?
 	    			find typespec
 	    		else
-	    			return nil 
-	    		end
-    		when "day" 
-    			if !typespec.nil?
-	    			where("cast(start as  date) <= ?", typespec)  	  			
-	    		else 
 	    			return nil
 	    		end
-    		when "category" 
+    		when "day"
+    			if !typespec.nil?
+	    			where("cast(start as  date) <= ?", typespec)
+	    		else
+	    			return nil
+	    		end
+    		when "category"
     			if !typespec.nil?
 	    			joins(:event_translations, :categories => :category_translations)
-  						.where("category_translations.title = ? and event_translations.locale = ? and ca	tegory_translations.locale = ?", 
+  						.where("category_translations.title = ? and event_translations.locale = ? and ca	tegory_translations.locale = ?",
   						  typespec, I18n.locale, I18n.locale)
-  				else 
+  				else
   					return nil
   				end
   			when "sponsor"
   				if !typespec.nil?
 						joins(:event_translations, :sponsors => :sponsor_translations)
-							.where("sponsor_translations.sponsor_id = ? and event_translations.locale = ? and sponsor_translations.locale = ?", 
+							.where("sponsor_translations.sponsor_id = ? and event_translations.locale = ? and sponsor_translations.locale = ?",
 							  typespec, I18n.locale, I18n.locale)
-					else 
-						return nil 
+					else
+						return nil
 					end
-    		else 
+    		else
     		  return nil
     	end
     else
@@ -177,7 +174,7 @@ class Event < ActiveRecord::Base
 
  private
 
-  # make sure the start date is < end date  
+  # make sure the start date is < end date
   def date_comparison_validator
     if (!self.start.blank?) then
       errors.add(:start, 'is not a valid date/time') if ((DateTime.parse(self.start) rescue ArgumentError) == ArgumentError)
@@ -187,11 +184,6 @@ class Event < ActiveRecord::Base
       errors.add(:end, 'must be after the Start date/time') if (DateTime.parse(self.start) >= DateTime.parse(self.end))
     end
   end
-  
-  
+
+
 end
-
-
-
-
-

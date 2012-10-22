@@ -28,15 +28,7 @@ GermanWeek::Application.configure do
   # Expands the lines which load the assets
 #  config.assets.debug = false
   config.assets.logger = nil
-  
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }  
 
-=begin
-  # pull assets from s3
-	y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
-  config.action_controller.asset_host = "http://#{y["development"]["fog_directory"]}.s3.amazonaws.com"
-  config.assets.debug = false
-  config.assets.digest = true
-=end
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
 end
