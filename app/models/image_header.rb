@@ -1,7 +1,7 @@
 class ImageHeader < ActiveRecord::Base
   has_attached_file :image,
-        :path => "/header/:attachment/:id/:style/:filename",
-        :url => "/header/:attachment/:id/:style/:filename"
+        :path => "/system/header/:attachment/:id/:style/:filename",
+        :url => "/system/header/:attachment/:id/:style/:filename"
 
   attr_accessible :image, :image_file_name, :image_file_size, :image_content_type, :id
 

@@ -1,8 +1,8 @@
 class Event < ActiveRecord::Base
   translates :title, :description, :picture_text, :building_name, :address
   has_attached_file :picture,
-        :path => "/event/:attachment/:id/:style/:filename",
-        :url => "/event/:attachment/:id/:style/:filename"
+        :path => "/system/event/:attachment/:id/:style/:filename",
+        :url => "/system/event/:attachment/:id/:style/:filename"
 
   has_many :event_translations, :dependent => :destroy
   has_many :event_sponsors, :dependent => :destroy

@@ -90,7 +90,7 @@ class EventsController < ApplicationController
     gon.popup = @event.title
 		gon.start_year = @event.start.strftime("%Y")
     gon.start_month = @event.start.strftime("%m")
-    gon.start_day = @event.start.strftime("%d") 
+    gon.start_day = @event.start.strftime("%d")
     gon.start_hour = @event.start.strftime("%H")
     gon.start_minute = @event.start.strftime("%M")
     gon.start_second = @event.start.strftime("%S")
@@ -202,34 +202,34 @@ class EventsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
   def exportICS
   	# define calendar
-  	calendar = Icalendar::Calendar.new  	
-  	
+  	calendar = Icalendar::Calendar.new
+
   	# get all event data from database
   	output_file_name = params[:typespec]
-  	
+
     data = Event.find_for_ics(params[:type], params[:typespec])
-    
+
     if data.nil?
 		  redirect_to "/"
-    else 
+    else
 			case params[:type]
-				when "all"	
+				when "all"
 					output_file_name = "events"
-				when "event" 
+				when "event"
 					output_file_name = clean_string(data.title)
 					data = [data]
 				when "sponsor"
 					output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
 			end
-  									
+
 			# fill calendar with events and event data
   		data.each do |event_each|
   			# create calendar event
     		event = Icalendar::Event.new
-  		
+
   			# fill event with data
   			event.dtstart = event_each.start.strftime("%Y%m%dT%H%M%SZ")
   			event.dtend = event_each.end.strftime("%Y%m%dT%H%M%SZ") if !event_each.end.nil?
@@ -241,18 +241,18 @@ class EventsController < ApplicationController
   			#	event.categories.push Icalendar::Component.new event_each_category.title
   			#end
   			event.klass = "PUBLISH"
-		
+
   			# add event to calendar
-  			calendar.add event								
+  			calendar.add event
   		end
-		
+
   		# final calendar data output
-  		data = calendar.to_ical			
+  		data = calendar.to_ical
       send_data(data, :filename => "#{output_file_name}.ics", :type => 'text/calendar')
     end
   end
-  
-  def getLocation  	
+
+  def getLocation
   	case params[:addrorlatlng]
   		when "latlng"
 				begin
@@ -271,7 +271,7 @@ class EventsController < ApplicationController
 		end
   end
 
-	private 
+	private
 
 	def convert_to_date(date)
 		begin
@@ -281,7 +281,7 @@ class EventsController < ApplicationController
 			return nil
 		end
 	end
-	
+
 	def clean_string(s)
 	  s.gsub(/[^0-9A-Za-z ]/,'').split.join('_')
 	end
@@ -290,10 +290,7 @@ class EventsController < ApplicationController
 		if Rails.env.production?
 			"#{Rails.root}/public/assets/application.css"
 		else
-			"#{Rails.root}/app/assets/stylesheets/application.new.css"
+			"#{Rails.root}/app/assets/stylesheets/application.new.css.erb"
 		end
 	end
 end
-
-
-

@@ -21,7 +21,7 @@
 /config/s3.yml
 
 # ignore folder with uploaded images
-/public/system
+#/public/system
 
 # ignore folder with all documents from embassy
 /embassy
