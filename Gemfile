@@ -37,6 +37,7 @@ end
 
 group :development do
 	gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
+	gem 'sqlite3'
 	# only need this in dev, on production we use the file in the bin folder
 	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 end
