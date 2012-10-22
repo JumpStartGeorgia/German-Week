@@ -43,3 +43,11 @@ group :development do
 	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 	gem "taps"
 end
+
+group :staging do
+	gem "unicorn", "4.2.1" # http server
+end
+
+group :production do
+	gem "unicorn", "4.2.1" # http server
+end
