@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-
+	require 'utf8_converter'
 
   before_filter :authenticate_user!, :except => [:index, :show, :day, :category, :exportICS, :getEventsByDay, :slider_images]
 
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
         html = render_to_string(:layout => "pdf.html.erb" , :action => "index.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
-        filename = clean_string("#{I18n.t('events.index.title')}")
+        filename = clean_string(Utf8Converter.convert_ka_to_en("#{I18n.t('events.index.title')}"))
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
         html = render_to_string(:layout => "pdf.html.erb" , :action => "day.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
-        filename = clean_string("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}")
+        filename = clean_string(Utf8Converter.convert_ka_to_en("#{I18n.t('events.day.title', :date => l(@date, :format => :short))}"))
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
         html = render_to_string(:layout => "pdf.html.erb" , :action => "category.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
-        filename = clean_string("#{I18n.t('events.category.title')} #{params[:cat]}")
+        filename = clean_string(Utf8Converter.convert_ka_to_en("#{I18n.t('events.category.title')} #{params[:cat]}"))
         send_data(kit.to_pdf, :filename => "#{filename}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
@@ -108,7 +108,7 @@ class EventsController < ApplicationController
         html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
         kit = PDFKit.new(html)
       	kit.stylesheets << get_stylesheet
-        send_data(kit.to_pdf, :filename => "#{clean_string(@event.title)}.pdf", :type => 'application/pdf')
+        send_data(kit.to_pdf, :filename => "#{clean_string(Utf8Converter.convert_ka_to_en(@event.title))}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
     end
@@ -219,10 +219,10 @@ class EventsController < ApplicationController
 				when "all"
 					output_file_name = "events"
 				when "event"
-					output_file_name = clean_string(data.title)
+					output_file_name = clean_string(Utf8Converter.convert_ka_to_en(data.title))
 					data = [data]
 				when "sponsor"
-					output_file_name = clean_string(Sponsor.find(params[:typespec]).title)
+					output_file_name = clean_string(Utf8Converter.convert_ka_to_en(Sponsor.find(params[:typespec]).title))
 			end
 
 			# fill calendar with events and event data
