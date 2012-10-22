@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-# gem 'mysql', '2.8.1'
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
+gem "capistrano", "~> 2.12.0" # to deploy to server
+
 gem 'jquery-rails', '1.0.19'
 gem 'devise', '2.0.4'
 gem 'formtastic', '2.1.1'
@@ -17,8 +18,8 @@ gem "pdfkit", "~> 0.5.2" # generate pdfs
 
 gem "geocoder", "~> 1.1.1"
 gem "paperclip", "~> 3.0" # upload images
-gem 'aws-s3', "~> 0.6.2" # save uploaded images to amazon s3
-gem 'aws-sdk', "~> 1.4.1"
+#gem 'aws-s3', "~> 0.6.2" # save uploaded images to amazon s3
+#gem 'aws-sdk', "~> 1.4.1"
 gem "twitter-bootstrap-rails"
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 gem "fancybox-rails", "~> 0.1.4"
@@ -39,17 +40,5 @@ end
 
 group :development do
 	# only need this in dev, on production we use the file in the bin folder
-	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs	
+	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # generate pdfs
 end
-
-group :production do
-	gem 'pg'
-end
-
-# for debugging
-# to get debugging to work, follow directions at:
-#  http://rails.vandenabeele.com/blog/2011/12/21/installing-ruby-debug19-with-ruby-1-dot-9-3-on-rvm/
-#gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/linecache19-0.5.13/"
-#gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p125@germanweek/gems/ruby-debug-base19-0.11.26/"
-#gem 'ruby-debug19', :require => 'ruby-debug'
-#gem 'columnize', '0.3.6'
