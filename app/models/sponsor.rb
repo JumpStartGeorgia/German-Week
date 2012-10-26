@@ -1,11 +1,8 @@
 class Sponsor < ActiveRecord::Base
   translates :title, :description, :address
   has_attached_file :logo,
-        :path => "/sponsor/:attachment/:id/:style/:filename",
-        :storage => :s3,
-        :url => ":s3_domain_url",
-        :bucket => ENV['S3_BUCKET'],
-        :s3_credentials => S3_CREDENTIALS
+        :path => "/system/sponsor/:attachment/:id/:style/:filename",
+        :url => "/system/sponsor/:attachment/:id/:style/:filename"
 
   has_many :sponsor_translations, :dependent => :destroy
   belongs_to :sponsor_type
@@ -16,10 +13,10 @@ class Sponsor < ActiveRecord::Base
   has_many :event_sponsors
   has_many :events, :through => :event_sponsors
 
-  validates :url, :sponsor_type_id, :presence => true 
+  validates :url, :sponsor_type_id, :presence => true
   validates_associated :sponsor_translations
 
-  
+
   scope :l10n , joins(:sponsor_translations).where('locale = ?',I18n.locale)
   scope :by_title , order('title').l10n
 
@@ -45,7 +42,7 @@ class Sponsor < ActiveRecord::Base
 			.paginate(:page => page)
 		  .order("sponsor_translations.title ASC")
   end
-  
+
   def self.get_by_type_id(sponsor_type_id)
     if !sponsor_type_id.nil?
       includes(:sponsor_translations)
@@ -56,6 +53,6 @@ class Sponsor < ActiveRecord::Base
       return nil
     end
   end
-  
+
 
 end

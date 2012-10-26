@@ -5,8 +5,20 @@ class ApplicationController < ActionController::Base
   before_filter :set_organisations
   before_filter :set_categories
   before_filter :set_sponsor_types
-	before_filter :set_s3_url
   before_filter :init_gon
+
+	unless Rails.application.config.consider_all_requests_local
+		rescue_from Exception,
+		            :with => :render_error
+		rescue_from ActiveRecord::RecordNotFound,
+		            :with => :render_not_found
+		rescue_from ActionController::RoutingError,
+		            :with => :render_not_found
+		rescue_from ActionController::UnknownController,
+		            :with => :render_not_found
+		rescue_from ActionController::UnknownAction,
+		            :with => :render_not_found
+	end
 
   def set_locale
     @locales = Locale.order("language asc")
@@ -31,8 +43,9 @@ class ApplicationController < ActionController::Base
   # pre-load gon so js does not through errors on pages that do not use gon
   def init_gon
     lang = I18n.locale.to_s == 'ka' ? 'ka' : 'en'
-    gon.tile_url = "http://tile.mapspot.ge/#{lang}/{z}/{x}/{y}.png"
-    gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
+#    gon.tile_url = "http://tile.mapspot.ge/#{lang}/{z}/{x}/{y}.png"
+		gon.tile_url = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+#    gon.attribution = 'Map data &copy; <a href="http://jumpstart.ge" target="_blank">JumpStart Georgia</a>'
     gon.map_id = 'map'
     gon.zoom = 14
     gon.max_zoom = 18
@@ -42,17 +55,6 @@ class ApplicationController < ActionController::Base
     gon.header_slider_data = self.slider_data
     gon.footer_slider_data = self.footer_slider_data
   end
-
-	def set_s3_url
-		bucket = ""
-		if Rails.env.production?
-			bucket = S3_CREDENTIALS[:bucket]
-		else
-			y = YAML.load_file(File.open(Rails.root.join("config", "s3.yml")))
-			bucket = y["development"]["bucket"]
-		end
-		@s3_url = "http://#{bucket}.s3.amazonaws.com"
-	end
 
   def set_categories
     @categories = Category.get_all
@@ -116,4 +118,19 @@ class ApplicationController < ActionController::Base
     random_images
   end
 
+
+  #######################
+	def render_not_found(exception)
+		ExceptionNotifier::Notifier
+		  .exception_notification(request.env, exception)
+		  .deliver
+		render :file => "#{Rails.root}/public/404.html", :status => 404
+	end
+
+	def render_error(exception)
+		ExceptionNotifier::Notifier
+		  .exception_notification(request.env, exception)
+		  .deliver
+		render :file => "#{Rails.root}/public/500.html", :status => 500
+	end
 end
