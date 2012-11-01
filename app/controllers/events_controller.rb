@@ -82,36 +82,41 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by_id(params[:id])
 
-    # load the lat and lon so the map shows
-    gon.lat = @event.lat
-    gon.lon = @event.lon
-    gon.popup = @event.title
-		gon.start_year = @event.start.strftime("%Y")
-    gon.start_month = @event.start.strftime("%m")
-    gon.start_day = @event.start.strftime("%d")
-    gon.start_hour = @event.start.strftime("%H")
-    gon.start_minute = @event.start.strftime("%M")
-    gon.start_second = @event.start.strftime("%S")
-    gon.address = @event.event_address
-		gon.show_map = true
-		gon.show_img_caption = true
-		gon.img_caption_id = "#event_picture"
-		gon.img_caption_class = "event_picture_container2"
+		if @event
+		  # load the lat and lon so the map shows
+		  gon.lat = @event.lat
+		  gon.lon = @event.lon
+		  gon.popup = @event.title
+			gon.start_year = @event.start.strftime("%Y")
+		  gon.start_month = @event.start.strftime("%m")
+		  gon.start_day = @event.start.strftime("%d")
+		  gon.start_hour = @event.start.strftime("%H")
+		  gon.start_minute = @event.start.strftime("%M")
+		  gon.start_second = @event.start.strftime("%S")
+		  gon.address = @event.event_address
+			gon.show_map = true
+			gon.show_img_caption = true
+			gon.img_caption_id = "#event_picture"
+			gon.img_caption_class = "event_picture_container2"
 
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @event }
-      format.pdf {
-        html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
-        kit = PDFKit.new(html)
-      	kit.stylesheets << get_stylesheet
-        send_data(kit.to_pdf, :filename => "#{clean_string(Utf8Converter.convert_ka_to_en(@event.title))}.pdf", :type => 'application/pdf')
-        return # to avoid double render call
-      }
-    end
+		  respond_to do |format|
+		    format.html # show.html.erb
+		    format.json { render :json => @event }
+		    format.pdf {
+		      html = render_to_string(:layout => "pdf.html.erb" , :action => "show.html.erb", :formats => [:html], :handler => [:erb])
+		      kit = PDFKit.new(html)
+		    	kit.stylesheets << get_stylesheet
+		      send_data(kit.to_pdf, :filename => "#{clean_string(Utf8Converter.convert_ka_to_en(@event.title))}.pdf", :type => 'application/pdf')
+		      return # to avoid double render call
+		    }
+		  end
+		else
+			# event record does not exist
+			redirect_to root_path
+		end
   end
 
   # GET /events/new
