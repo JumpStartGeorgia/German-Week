@@ -216,7 +216,6 @@ class EventsController < ApplicationController
   	output_file_name = params[:typespec]
 
     data = Event.find_for_ics(params[:type], params[:typespec])
-
     if data.nil?
 		  redirect_to "/"
     else

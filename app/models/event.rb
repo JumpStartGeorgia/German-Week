@@ -151,7 +151,7 @@ class Event < ActiveRecord::Base
     		when "category"
     			if !typespec.nil?
 	    			joins(:event_translations, :categories => :category_translations)
-  						.where("category_translations.title = ? and event_translations.locale = ? and ca	tegory_translations.locale = ?",
+  						.where("category_translations.title = ? and event_translations.locale = ? and category_translations.locale = ?",
   						  typespec, I18n.locale, I18n.locale)
   				else
   					return nil
