@@ -138,7 +138,7 @@ class Event < ActiveRecord::Base
     			all
     		when "event"
     			if !typespec.nil?
-	    			find typespec
+	    			find_by_id typespec
 	    		else
 	    			return nil
 	    		end
